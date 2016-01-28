@@ -4,29 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>WebUploader使用 | 学习是一种信仰</title>
+    <title>hexo上传源文件 | 学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="木木熊">
     
 
     
-    <meta name="description" content="最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考WebUploader的官网，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。
-
-使用flash上传时，给上">
+    <meta name="description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。
+二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WebUploader使用">
-<meta property="og:url" content="http://xchb.work/2015/08/14/WebUploader使用/index.html">
+<meta property="og:title" content="hexo上传源文件">
+<meta property="og:url" content="http://xchb.work/2016/01/28/hexo上传源文件/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考WebUploader的官网，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。
-
-使用flash上传时，给上">
-<meta property="og:updated_time" content="2016-01-28T09:13:31.000Z">
+<meta property="og:description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。
+二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
+<meta property="og:updated_time" content="2016-01-28T10:26:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WebUploader使用">
-<meta name="twitter:description" content="最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考WebUploader的官网，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。
-
-使用flash上传时，给上">
+<meta name="twitter:title" content="hexo上传源文件">
+<meta name="twitter:description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。
+二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -86,34 +83,49 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/14/WebUploader使用/" title="WebUploader使用" itemprop="url">WebUploader使用</a>
+      <a href="/2016/01/28/hexo上传源文件/" title="hexo上传源文件" itemprop="url">hexo上传源文件</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-14T12:44:04.000Z" itemprop="datePublished"> Published 2015-08-14</time>
+    <time datetime="2016-01-28T09:57:15.000Z" itemprop="datePublished"> Published 2016-01-28</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考<a href="http://fex.baidu.com/webuploader" target="_blank" rel="external">WebUploader的官网</a>，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。</p>
-<ul>
-<li>使用flash上传时，给上传按钮绑定 <em>click</em> 事件时，点击按钮不会触发事件，因而只能退而求其次，绑定<em>mouseup</em>事件，当然绑定<em>mousedown</em>事件也是可以的。鼠标按下是触发<em>mousedown</em>， 释放鼠标时触发<em>mouseup</em>事件，而当<em>mousedown</em>和<em>mouseup</em>同时作用于同一个dom元素时就会触发<em>click</em>事件。</li>
-<li><p>使用flash上传，如果在上传完成之前隐藏上传按钮，会中断上传。而使用官网提供的解决方案，即给上传按钮添加以下class：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.webuploader-element-invisible</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute <span class="important">!important</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span>)</span></span>; <span class="comment">/* IE6, IE7 */</span></span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>发现还是不行，试了试直接给上传按钮设置 <code>visibility</code> 为 hidden，对于chrome可以正常上传，但对于IE9，还是不行。因而只好将<code>position</code>设置为absolute，然后设置一个较大的<code>left</code>属性，同时将父元素的<code>overflow</code>设置为hidden、<code>position</code>设置为relative。这样就可以啦。</p>
+		<h1 id="一、背景">一、背景</h1><p>之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。</p>
+<h1 id="二、实现">二、实现</h1><p>上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源，而hexo分支用来管理hexo的源码，即一些markdown文件和主题等，需要设置这个分支为默认分支，以便拷贝仓库代码到本地时更方便。</p>
+<ol>
+<li>把代码仓库拷贝到本地  <code>git clone https://github.com/swxy/swxy.github.io.git</code>, 因为我之前本地已经用了，所以可以忽视这个;</li>
+<li>查看分支 <code>git branch</code>, 如果没有分支则新建一个<code>git remote add origin https://github.com/swxy/swxy.github.io.git</code>, 此时应该会有一个 <strong>master</strong> 分支了。</li>
+<li>新建一个 <strong>hexo</strong> 分支<code>git branch hexo</code> 。</li>
+<li>切换到 <strong>hexo</strong> 分支<code>git checkout hexo</code> 。</li>
+<li>添加源文件<code>git add *</code>, 因为 <code>.gitignore</code> 默认已经把 hexo 编译的文件忽略了，所以可以可以用 <code>git add *</code>。</li>
+<li>然后提交文件的变更 <code>git commit -m &quot;xxx&quot;</code>。</li>
+<li>push变更到远程仓库中<code>git push origin hexo</code> (用hexo分支来管理源码）。</li>
+</ol>
+<h1 id="三、附录">三、附录</h1><h3 id="常见问题收集：">常见问题收集：</h3><ol>
+<li><code>hexo g</code>编译时，出现错误：<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Release/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/default/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Debug/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li>获取图片的大小和尺寸，WebUploader中的file对象，自带有size属性，因而可以直接获取上传文件的大小。但上传图片时，有时需要判断上传图片的尺寸是否满足要求。大概看了一下源码，发现在给图片生成缩略图时，WebUploader对给每一个file对象附加一个<code>_info</code>属性，这个属性包含了图片的宽度和高度，虽然直接属于私有属性，但能用就直接用吧，成大事不要拘泥于小节。file对象还有一个私有属性也很好用——<code>_refer</code>，这个属性记录了file是由那个上传按钮上传的，有多个上传按钮时，这个属性就可能减少不少代码量了。</li>
-</ul>
-<p>总的来说，WebUploader很不错，毕竟是百度FEX团队发布的，质量还是有保证的，而且反馈问题，也能比较及时的收到回复。</p>
+</ol>
+<p>解决方案，安装hexo加上 <code>--no-optional</code>;</p>
+<blockquote>
+<p>npm install hexo –no-optional</p>
+</blockquote>
+<p>解决方案来源<a href="http://www.jianshu.com/p/98e993305653" target="_blank" rel="external">hexo安装问题解决方法</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hexo/">hexo</a>
+  </div>
 
 </div>
 
@@ -121,7 +133,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xchb.work/2015/08/14/WebUploader使用/" data-title="WebUploader使用 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xchb.work/2016/01/28/hexo上传源文件/" data-title="hexo上传源文件 | 学习是一种信仰" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -134,19 +146,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/08/24/CSS居中显示/" title="CSS居中显示">
-  <strong>上一篇：</strong><br/>
-  <span>
-  CSS居中显示</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/08/13/nodejs中的exports和module-exports/"  title="nodejs中的exports和module.exports">
+<a href="/2015/12/11/代码片段（JS）/"  title="代码片段（JS）">
  <strong>下一篇：</strong><br/> 
- <span>nodejs中的exports和module.exports
+ <span>代码片段（JS）
 </span>
 </a>
 </div>
@@ -161,7 +165,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、背景"><span class="toc-number">1.</span> <span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、实现"><span class="toc-number">2.</span> <span class="toc-text">二、实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、附录"><span class="toc-number">3.</span> <span class="toc-text">三、附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见问题收集："><span class="toc-number">3.0.1.</span> <span class="toc-text">常见问题收集：</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
