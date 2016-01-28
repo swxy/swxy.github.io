@@ -1,0 +1,436 @@
+
+ <!DOCTYPE HTML>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>WebUploader使用 | 学习是一种信仰</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="木木熊">
+    
+
+    
+    <meta name="description" content="最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考WebUploader的官网，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。
+
+使用flash上传时，给上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebUploader使用">
+<meta property="og:url" content="http://xchb.work/2015/08/14/WebUploader使用/index.html">
+<meta property="og:site_name" content="学习是一种信仰">
+<meta property="og:description" content="最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考WebUploader的官网，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。
+
+使用flash上传时，给上">
+<meta property="og:updated_time" content="2016-01-28T09:13:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebUploader使用">
+<meta name="twitter:description" content="最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考WebUploader的官网，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。
+
+使用flash上传时，给上">
+
+    
+    <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/piggy.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/piggy.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/piggy.png" alt="学习是一种信仰" title="学习是一种信仰"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="学习是一种信仰">学习是一种信仰</a></h1>
+				<h2 class="blog-motto">我们终其一生都在摆脱他人的期待，追求自由。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:xchb.work">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/14/WebUploader使用/" title="WebUploader使用" itemprop="url">WebUploader使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-14T12:44:04.000Z" itemprop="datePublished"> Published 2015-08-14</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考<a href="http://fex.baidu.com/webuploader" target="_blank" rel="external">WebUploader的官网</a>，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。</p>
+<ul>
+<li>使用flash上传时，给上传按钮绑定 <em>click</em> 事件时，点击按钮不会触发事件，因而只能退而求其次，绑定<em>mouseup</em>事件，当然绑定<em>mousedown</em>事件也是可以的。鼠标按下是触发<em>mousedown</em>， 释放鼠标时触发<em>mouseup</em>事件，而当<em>mousedown</em>和<em>mouseup</em>同时作用于同一个dom元素时就会触发<em>click</em>事件。</li>
+<li><p>使用flash上传，如果在上传完成之前隐藏上传按钮，会中断上传。而使用官网提供的解决方案，即给上传按钮添加以下class：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.webuploader-element-invisible</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute <span class="important">!important</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span>)</span></span>; <span class="comment">/* IE6, IE7 */</span></span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>发现还是不行，试了试直接给上传按钮设置 <code>visibility</code> 为 hidden，对于chrome可以正常上传，但对于IE9，还是不行。因而只好将<code>position</code>设置为absolute，然后设置一个较大的<code>left</code>属性，同时将父元素的<code>overflow</code>设置为hidden、<code>position</code>设置为relative。这样就可以啦。</p>
+</li>
+<li>获取图片的大小和尺寸，WebUploader中的file对象，自带有size属性，因而可以直接获取上传文件的大小。但上传图片时，有时需要判断上传图片的尺寸是否满足要求。大概看了一下源码，发现在给图片生成缩略图时，WebUploader对给每一个file对象附加一个<code>_info</code>属性，这个属性包含了图片的宽度和高度，虽然直接属于私有属性，但能用就直接用吧，成大事不要拘泥于小节。file对象还有一个私有属性也很好用——<code>_refer</code>，这个属性记录了file是由那个上传按钮上传的，有多个上传按钮时，这个属性就可能减少不少代码量了。</li>
+</ul>
+<p>总的来说，WebUploader很不错，毕竟是百度FEX团队发布的，质量还是有保证的，而且反馈问题，也能比较及时的收到回复。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xchb.work/2015/08/14/WebUploader使用/" data-title="WebUploader使用 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/08/24/CSS居中显示/" title="CSS居中显示">
+  <strong>上一篇：</strong><br/>
+  <span>
+  CSS居中显示</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/08/13/nodejs中的exports和module-exports/"  title="nodejs中的exports和module.exports">
+ <strong>下一篇：</strong><br/> 
+ <span>nodejs中的exports和module.exports
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/snippet/" title="snippet">snippet<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 随性而走. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="木木熊">木木熊</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
