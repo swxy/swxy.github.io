@@ -12,42 +12,18 @@
 
     
     <meta name="description" content="添加新用户adduser username
-修改新用户密码passwd username
-添加sudo权限修改权限相关的配置文件
-visudo
-找到以下内容
- ## Allow root to run any commands anywhere
-root ALL=(ALL) ALL
-新增一行，增加一下内容
-username ALL=(ALL) ALL
-按下esc退出编辑模式，执行以下命令，保存退出">
+修改新用户密码passwd username">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS添加新用户">
 <meta property="og:url" content="http://xchb.work/2015/11/09/CentOS添加新用户/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
 <meta property="og:description" content="添加新用户adduser username
-修改新用户密码passwd username
-添加sudo权限修改权限相关的配置文件
-visudo
-找到以下内容
- ## Allow root to run any commands anywhere
-root ALL=(ALL) ALL
-新增一行，增加一下内容
-username ALL=(ALL) ALL
-按下esc退出编辑模式，执行以下命令，保存退出">
-<meta property="og:updated_time" content="2016-01-28T09:13:31.000Z">
+修改新用户密码passwd username">
+<meta property="og:updated_time" content="2016-02-23T02:50:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS添加新用户">
 <meta name="twitter:description" content="添加新用户adduser username
-修改新用户密码passwd username
-添加sudo权限修改权限相关的配置文件
-visudo
-找到以下内容
- ## Allow root to run any commands anywhere
-root ALL=(ALL) ALL
-新增一行，增加一下内容
-username ALL=(ALL) ALL
-按下esc退出编辑模式，执行以下命令，保存退出">
+修改新用户密码passwd username">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -122,8 +98,9 @@ username ALL=(ALL) ALL
 		
 		<h3 id="添加新用户">添加新用户</h3><pre><code><span class="keyword">adduser </span>username
 </code></pre><h3 id="修改新用户密码">修改新用户密码</h3><pre><code><span class="title">passwd</span> username
-</code></pre><h3 id="添加sudo权限">添加sudo权限</h3><p>修改权限相关的配置文件</p>
-<pre><code>visudo
+</code></pre><a id="more"></a>
+<h3 id="添加sudo权限">添加sudo权限</h3><p>修改权限相关的配置文件，进入<code>/etc</code></p>
+<pre><code><span class="title">vi</span> sudoers
 </code></pre><p>找到以下内容</p>
 <pre><code> <span class="comment">## Allow root to run any commands anywhere</span>
 <span class="keyword">root</span> <span class="literal">ALL</span>=(<span class="literal">ALL</span>) <span class="literal">ALL</span>
@@ -220,11 +197,9 @@ username ALL=(ALL) ALL
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
-			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 		</ul>

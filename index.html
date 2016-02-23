@@ -96,28 +96,11 @@
         
         <h1 id="一、背景">一、背景</h1><p>之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。</p>
 <h1 id="二、实现">二、实现</h1><p>上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源，而hexo分支用来管理hexo的源码，即一些markdown文件和主题等，需要设置这个分支为默认分支，以便拷贝仓库代码到本地时更方便。</p>
-<ol>
-<li>把代码仓库拷贝到本地  <code>git clone https://github.com/swxy/swxy.github.io.git</code>, 因为我之前本地已经用了，所以可以忽视这个;</li>
-<li>查看分支 <code>git branch</code>, 如果没有分支则新建一个<code>git remote add origin https://github.com/swxy/swxy.github.io.git</code>, 此时应该会有一个 <strong>master</strong> 分支了。</li>
-<li>新建一个 <strong>hexo</strong> 分支<code>git branch hexo</code> 。</li>
-<li>切换到 <strong>hexo</strong> 分支<code>git checkout hexo</code> 。</li>
-<li>添加源文件<code>git add *</code>, 因为 <code>.gitignore</code> 默认已经把 hexo 编译的文件忽略了，所以可以可以用 <code>git add *</code>。</li>
-<li>然后提交文件的变更 <code>git commit -m &quot;xxx&quot;</code>。</li>
-<li>push变更到远程仓库中<code>git push origin hexo</code> (用hexo分支来管理源码）。</li>
-</ol>
-<h1 id="三、附录">三、附录</h1><h3 id="常见问题收集：">常见问题收集：</h3><ol>
-<li><code>hexo g</code>编译时，出现错误：<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Release/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/default/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Debug/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>解决方案，安装hexo加上 <code>--no-optional</code>;</p>
-<blockquote>
-<p>npm install hexo –no-optional</p>
-</blockquote>
-<p>解决方案来源<a href="http://www.jianshu.com/p/98e993305653" target="_blank" rel="external">hexo安装问题解决方法</a></p>
-
         
         
         <p class="article-more-link">
+          
+            <a href="/2016/01/28/hexo上传源文件/#more">Read More</a>
           
        </p>
     </div>
@@ -242,12 +225,11 @@
 <blockquote>
 <p>source ~/.bash_profile</p>
 </blockquote>
-<p>附录：<br><code>$PS1</code>符号对应的含义，<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">\a</span>    ASCII 响铃字符（也可以键入 <span class="string">\007）</span>  </span><br><span class="line"><span class="string">\d</span>    <span class="string">"Wed Sep 06"</span> 格式的日期  </span><br><span class="line"><span class="string">\e</span>    ASCII 转义字符（也可以键入 <span class="string">\033）</span></span><br><span class="line"><span class="string">\h</span>    主机名的第一部分（如 <span class="string">"mybox"</span>）</span><br><span class="line"><span class="string">\H</span>    主机的全称（如 <span class="string">"mybox.mydomain.com"</span>）</span><br><span class="line"><span class="string">\j</span>    在此 shell 中通过按 ^Z 挂起的进程数</span><br><span class="line"><span class="string">\l</span>    此 shell 的终端设备名（如 <span class="string">"ttyp4"</span>）</span><br><span class="line"><span class="string">\n</span>    换行符</span><br><span class="line"><span class="string">\r</span>    回车符</span><br><span class="line"><span class="string">\s</span>    shell 的名称（如 <span class="string">"bash"</span>）</span><br><span class="line"><span class="string">\t</span>    <span class="number">24</span> 小时制时间（如 <span class="string">"23:01:01"</span>）</span><br><span class="line"><span class="string">\T</span>    <span class="number">12</span> 小时制时间（如 <span class="string">"11:01:01"</span>）</span><br><span class="line"><span class="string">\@</span>    带有 am/pm 的 <span class="number">12</span> 小时制时间</span><br><span class="line"><span class="string">\u</span>    用户名</span><br><span class="line"><span class="string">\v</span>    bash 的版本（如 <span class="number">2.04</span>）</span><br><span class="line"><span class="string">\V</span>    Bash 版本（包括补丁级别） ?/td&gt;</span><br><span class="line"><span class="string">\w</span>    当前工作目录（如 <span class="string">"/home/drobbins"</span>）</span><br><span class="line"><span class="string">\W</span>    当前工作目录的“基名 (basename)”（如 <span class="string">"drobbins"</span>）</span><br><span class="line"><span class="string">\!</span>    当前命令在历史缓冲区中的位置</span><br><span class="line"><span class="string">\#</span>    命令编号（只要您键入内容，它就会在每次提示时累加）</span><br><span class="line"><span class="string">\$</span>    如果您不是超级用户 (root)，则插入一个 <span class="string">"$"</span>；如果您是超级用户，则显示一个 <span class="string">"#"</span></span><br><span class="line"><span class="string">\xxx</span>  插入一个用三位数 xxx（用零代替未使用的数字，如 <span class="string">"\007"</span>）表示的 ASCII 字符</span><br><span class="line"><span class="string">\\</span>    反斜杠</span><br><span class="line"><span class="string">\[</span>    这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。</span><br><span class="line"><span class="string">\]</span>    这个序列应该出现在非打印字符序列之后。</span><br></pre></td></tr></table></figure></p>
-<p>颜色的表示方法，<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'\e[0m'</span>      no <span class="built_in">color</span></span><br><span class="line"><span class="string">'\e[1;37m'</span>   white</span><br><span class="line"><span class="string">'\e[0;30m'</span>   black</span><br><span class="line"><span class="string">'\e[0;34m'</span>   <span class="built_in">blue</span></span><br><span class="line"><span class="string">'\e[1;34m'</span>   light <span class="built_in">blue</span></span><br><span class="line"><span class="string">'\e[0;32m'</span>   <span class="built_in">green</span></span><br><span class="line"><span class="string">'\e[1;32m'</span>   light <span class="built_in">green</span></span><br><span class="line"><span class="string">'\e[0;36m'</span>   cyan</span><br><span class="line"><span class="string">'\e[1;36m'</span>   light cyan</span><br><span class="line"><span class="string">'\e[0;31m'</span>   <span class="built_in">red</span></span><br><span class="line"><span class="string">'\e[1;31m'</span>   light <span class="built_in">red</span></span><br><span class="line"><span class="string">'\e[0;35m'</span>   purple</span><br><span class="line"><span class="string">'\e[1;35m'</span>   light purple</span><br><span class="line"><span class="string">'\e[0;33m'</span>   brown</span><br><span class="line"><span class="string">'\e[1;33m'</span>   yellow</span><br><span class="line"><span class="string">'\e[0;30m'</span>   gray</span><br><span class="line"><span class="string">'\e[0;37m'</span>   light gray</span><br></pre></td></tr></table></figure></p>
-
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/12/01/Terminal-路径显示/#more">Read More</a>
           
        </p>
     </div>
@@ -300,22 +282,12 @@
         
         <h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
 </code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
-</code></pre><h3 id="nginx常用操作">nginx常用操作</h3><p>启动</p>
-<pre><code>sudo /etc/init.d/nginx <span class="literal">start</span>
-</code></pre><p>关闭</p>
-<pre><code>sudo /etc/init.d/nginx <span class="built_in">stop</span><span class="comment">
-//或者</span>
-nginx -s <span class="built_in">stop</span><span class="comment">
-//或者</span>
-nginx -s quit
-</code></pre><p>重启</p>
-<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx restart</span>
-</code></pre><p>重新载入（修改配置文件之后）</p>
-<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx reload</span>
 </code></pre>
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/11/10/CentOS-安装nginx/#more">Read More</a>
           
        </p>
     </div>
@@ -368,20 +340,12 @@ nginx -s quit
         
         <h3 id="添加新用户">添加新用户</h3><pre><code><span class="keyword">adduser </span>username
 </code></pre><h3 id="修改新用户密码">修改新用户密码</h3><pre><code><span class="title">passwd</span> username
-</code></pre><h3 id="添加sudo权限">添加sudo权限</h3><p>修改权限相关的配置文件</p>
-<pre><code>visudo
-</code></pre><p>找到以下内容</p>
-<pre><code> <span class="comment">## Allow root to run any commands anywhere</span>
-<span class="keyword">root</span> <span class="literal">ALL</span>=(<span class="literal">ALL</span>) <span class="literal">ALL</span>
-</code></pre><p>新增一行，增加一下内容</p>
-<pre><code><span class="keyword">username</span> <span class="literal">ALL</span>=(<span class="literal">ALL</span>) <span class="literal">ALL</span>
-</code></pre><p>按下<code>esc</code>退出编辑模式，执行以下命令，保存退出</p>
-<pre><code><span class="attribute">:wq</span>
-</code></pre><h3 id="切换到新用户">切换到新用户</h3><pre><code><span class="title">su</span> username
 </code></pre>
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/11/09/CentOS添加新用户/#more">Read More</a>
           
        </p>
     </div>
@@ -434,13 +398,11 @@ nginx -s quit
         
         <h2 id="CSS3实现后退按钮，从此告别后退图标">CSS3实现后退按钮，从此告别后退图标</h2><p>用CSS3实现的原理是利用伪元素生成一个只有两条边的正方形，然后通过旋转一定角度实现各个方向的箭头图形。</p>
 <h3 id="90度角的箭头图形实现">90度角的箭头图形实现</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.back1</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.back1</span><span class="pseudo">:before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-top</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-left</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">rotate</span>(-<span class="number">45deg</span>)</span></span>;</span><br><span class="line">            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">rotate</span>(-<span class="number">45deg</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<h3 id="任意角度的箭头图形">任意角度的箭头图形</h3><p>利用伪元素before和after，根据需要可以将旋转角度适当调整，从而实现任意角度的箭头图形<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.back2</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.back2</span><span class="pseudo">:before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-top</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#0f0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>) <span class="function">rotate</span>(-<span class="number">60deg</span>)</span></span>;</span><br><span class="line">            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>) <span class="function">rotate</span>(-<span class="number">60deg</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.back2</span><span class="pseudo">:after</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-left</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#0f0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translate</span>(<span class="number">0</span>, <span class="number">20%</span>) <span class="function">rotate</span>(-<span class="number">30deg</span>)</span></span>;</span><br><span class="line">            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(<span class="number">0</span>, <span class="number">20%</span>) <span class="function">rotate</span>(-<span class="number">30deg</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>当然另一种实现方式还是给border设置不同的值来实现角度的不一样。</p>
-<p>ps: 上述的<a href="/back.html">Demo地址</a></p>
-
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/10/22/CSS3图标收集和整理/#more">Read More</a>
           
        </p>
     </div>
@@ -494,16 +456,11 @@ nginx -s quit
         <p>使用CSS3实现垂直左右居中显示<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">200px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#FDFDFD</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
 <p>对应的html为<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"container"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <p>最主要是随着浏览器窗口变化，左右上下边距也会自动调整，因而再也不需要通过js来监听windonw的resize事件了。</p>
-<p>当然还有一种更加简单粗暴的方法，css代码如下<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">200px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">200px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">background</span>:<span class="value"> orange</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>这种方法利用的原理是</p>
-<blockquote>
-<p>‘margin-left’ + ‘border-left-width’ + ‘padding-left’ + ‘width’ + ‘padding-right’ + ‘border-right-width’ + ‘margin-right’ = width of containing block</p>
-</blockquote>
-<p>详细请参考<a href="http://www.w3.org/TR/CSS2/visudet.html#Computing_widths_and_margins" target="_blank" rel="external">w3c标准</a></p>
-
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/08/24/CSS居中显示/#more">Read More</a>
           
        </p>
     </div>
@@ -554,101 +511,18 @@ nginx -s quit
 </header>
     <div class="article-content">
         
-        <p>最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考<a href="http://fex.baidu.com/webuploader" target="_blank" rel="external">WebUploader的官网</a>，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。</p>
-<ul>
-<li>使用flash上传时，给上传按钮绑定 <em>click</em> 事件时，点击按钮不会触发事件，因而只能退而求其次，绑定<em>mouseup</em>事件，当然绑定<em>mousedown</em>事件也是可以的。鼠标按下是触发<em>mousedown</em>， 释放鼠标时触发<em>mouseup</em>事件，而当<em>mousedown</em>和<em>mouseup</em>同时作用于同一个dom元素时就会触发<em>click</em>事件。</li>
-<li><p>使用flash上传，如果在上传完成之前隐藏上传按钮，会中断上传。而使用官网提供的解决方案，即给上传按钮添加以下class：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.webuploader-element-invisible</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute <span class="important">!important</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span>)</span></span>; <span class="comment">/* IE6, IE7 */</span></span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>发现还是不行，试了试直接给上传按钮设置 <code>visibility</code> 为 hidden，对于chrome可以正常上传，但对于IE9，还是不行。因而只好将<code>position</code>设置为absolute，然后设置一个较大的<code>left</code>属性，同时将父元素的<code>overflow</code>设置为hidden、<code>position</code>设置为relative。这样就可以啦。</p>
-</li>
-<li>获取图片的大小和尺寸，WebUploader中的file对象，自带有size属性，因而可以直接获取上传文件的大小。但上传图片时，有时需要判断上传图片的尺寸是否满足要求。大概看了一下源码，发现在给图片生成缩略图时，WebUploader对给每一个file对象附加一个<code>_info</code>属性，这个属性包含了图片的宽度和高度，虽然直接属于私有属性，但能用就直接用吧，成大事不要拘泥于小节。file对象还有一个私有属性也很好用——<code>_refer</code>，这个属性记录了file是由那个上传按钮上传的，有多个上传按钮时，这个属性就可能减少不少代码量了。</li>
-</ul>
-<p>总的来说，WebUploader很不错，毕竟是百度FEX团队发布的，质量还是有保证的，而且反馈问题，也能比较及时的收到回复。</p>
-
+        <p>最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考<a href="http://fex.baidu.com/webuploader">WebUploader的官网</a>，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。</p>
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/08/14/WebUploader使用/#more">Read More</a>
           
        </p>
     </div>
     <footer class="article-footer clearfix">
 <div class="article-catetags">
 
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/13/nodejs中的exports和module-exports/" title="nodejs中的exports和module.exports" itemprop="url">nodejs中的exports和module.exports</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-13T06:02:51.000Z" itemprop="datePublished"> Published 2015-08-13</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="exports用法">exports用法</h2><p>在a.js中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exports.sayHello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello, exports....'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>然后在main.js中使用a.js<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="literal">a</span> = require('./<span class="literal">a</span>')<span class="comment">;</span></span><br><span class="line"><span class="literal">a</span>.sayHello()<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
-<p>结果是<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello, <span class="keyword">exports</span>....</span><br></pre></td></tr></table></figure></p>
-<p>如果a.js是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exports = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello, exports....'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>修改main.js以调用新的a.js<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="literal">a</span> = require('./<span class="literal">a</span>')<span class="comment">;</span></span><br><span class="line"><span class="literal">a</span>()<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
-<p>结果是<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: object is <span class="operator">not</span> <span class="operator">a</span> <span class="function"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure></p>
-<h2 id="module-exports用法">module.exports用法</h2><p>在b.js中<br><figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">module</span>.<span class="title">exports</span> =</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> &#123;</span></span><br><span class="line">    console.<span class="built_in">log</span>('hello, <span class="function"><span class="keyword">module</span>.<span class="title">exports</span>.....')</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>修改main.js以使用b.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="built_in">require</span>(<span class="string">'./b'</span>);</span><br><span class="line">b();</span><br></pre></td></tr></table></figure></p>
-<p>结果是<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello, <span class="class"><span class="keyword">module</span>.<span class="title">exports</span>.....</span></span><br></pre></td></tr></table></figure></p>
-<p>改造一下b.js<br><figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">module</span>.<span class="title">exports</span>.<span class="title">sayHello</span> =</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> &#123;</span></span><br><span class="line">    console.<span class="built_in">log</span>('hello, <span class="function"><span class="keyword">module</span>.<span class="title">exports</span>.....')</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>修改main.js以使用b.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="built_in">require</span>(<span class="string">'./b'</span>);</span><br><span class="line">b.sayHello();</span><br></pre></td></tr></table></figure></p>
-<p>结果是<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello, <span class="class"><span class="keyword">module</span>.<span class="title">exports</span>.....</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="exports_和_module-exports_并存">exports 和 module.exports 并存</h2><p>在c.js中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">exports.sayHello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello, exports....'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello, module.exports.....'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>修改main.js<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">c</span> = require('./<span class="built_in">c</span>');</span><br><span class="line"><span class="built_in">c</span>.sayHello();</span><br></pre></td></tr></table></figure></p>
-<p>结果是<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: undefined is <span class="operator">not</span> <span class="operator">a</span> <span class="function"><span class="keyword">function</span></span></span><br></pre></td></tr></table></figure></p>
-<p>修改main.js为<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">c</span> = require('./<span class="built_in">c</span>');</span><br><span class="line"><span class="built_in">c</span>();</span><br></pre></td></tr></table></figure></p>
-<p>结果是<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello, <span class="class"><span class="keyword">module</span>.<span class="title">exports</span>.....</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="结论">结论</h2><ul>
-<li>exports是module.exports的一个引用，exports不是真实存在，而module.exports是真实存在的，因而模块导出的是module.exports。</li>
-<li>exports用于模块中收集属性，然后挂载在module.exports下。直接赋值给exports时，exports不再是module.exports的引用，所以访问不到exports对象极其属性了，当然如果将module.exports赋值给exports是可行的。</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/nodejs/">nodejs</a>
-  </div>
 
 </div>
 
@@ -700,11 +574,9 @@ nginx -s quit
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
-			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 		</ul>
