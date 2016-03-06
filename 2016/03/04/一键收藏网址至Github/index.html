@@ -1,0 +1,460 @@
+
+ <!DOCTYPE HTML>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>一键收藏网址至Github | 学习是一种信仰</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="木木熊">
+    
+
+    
+    <meta name="description" content="在网上看见一个用Ruby On Rail写了一个一键收藏网页文章至github上的文章（点我查看）,觉得很想法，于是乎，我也想用nodejs写一个。
+功能描述
+chrome扩展，发送当前标签页的标题和网址
+nodejs后端服务器，获取chrome发送的数据，保存至markdown文件中
+定时提交数据至github上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一键收藏网址至Github">
+<meta property="og:url" content="http://xchb.work/2016/03/04/一键收藏网址至Github/index.html">
+<meta property="og:site_name" content="学习是一种信仰">
+<meta property="og:description" content="在网上看见一个用Ruby On Rail写了一个一键收藏网页文章至github上的文章（点我查看）,觉得很想法，于是乎，我也想用nodejs写一个。
+功能描述
+chrome扩展，发送当前标签页的标题和网址
+nodejs后端服务器，获取chrome发送的数据，保存至markdown文件中
+定时提交数据至github上">
+<meta property="og:updated_time" content="2016-03-06T00:23:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一键收藏网址至Github">
+<meta name="twitter:description" content="在网上看见一个用Ruby On Rail写了一个一键收藏网页文章至github上的文章（点我查看）,觉得很想法，于是乎，我也想用nodejs写一个。
+功能描述
+chrome扩展，发送当前标签页的标题和网址
+nodejs后端服务器，获取chrome发送的数据，保存至markdown文件中
+定时提交数据至github上">
+
+    
+    <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/piggy.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/piggy.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/piggy.png" alt="学习是一种信仰" title="学习是一种信仰"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="学习是一种信仰">学习是一种信仰</a></h1>
+				<h2 class="blog-motto">我们终其一生都在摆脱他人的期待，追求自由。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:xchb.work">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/04/一键收藏网址至Github/" title="一键收藏网址至Github" itemprop="url">一键收藏网址至Github</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		
+  <p class="article-time">
+    <time datetime="2016-03-04T12:18:22.000Z" itemprop="datePublished"> Published 2016-03-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>在网上看见一个用Ruby On Rail写了一个一键收藏网页文章至github上的文章（<a href="http://www.jianshu.com/p/19d2f3a3b5d8" target="_blank" rel="external">点我查看</a>）,觉得很想法，于是乎，我也想用nodejs写一个。</p>
+<h3 id="功能描述">功能描述</h3><ol>
+<li>chrome扩展，发送当前标签页的标题和网址</li>
+<li>nodejs后端服务器，获取chrome发送的数据，保存至markdown文件中</li>
+<li>定时提交数据至github上</li>
+</ol>
+<a id="more"></a>
+<h3 id="chrome扩展实现">chrome扩展实现</h3><p>chrome扩展实现：</p>
+<ol>
+<li>点击扩展图标时，获取当前标签页的标题和网址，然后将其发送至后端。</li>
+<li>映射该功能至标签页面右键菜单，即生成右键菜单的快捷方式。</li>
+<li>将发送成功的数据保存至本地，防止多次重复提交。</li>
+<li>定时清理保存至浏览器的本地数据，因而chrome的storage是有大小限制的。</li>
+<li>在图标上显示badge，来标识是否发送成功或者发送失败。</li>
+</ol>
+<p>具体实现见(<a href="https://github.com/swxy/bookmarks" target="_blank" rel="external">github源码中markToGithub目录</a>)。</p>
+<h3 id="nodej后端实现">nodej后端实现</h3><p>后端主要实现：</p>
+<ol>
+<li>获取扩展发送的网页标题和网址。</li>
+<li>保存标题和网址至markdown文件中。</li>
+<li>定时提交数据至github上。</li>
+</ol>
+<p>为了可以提交数据至github上，首先需要在github上先建一个项目专门用于存放书签，然后将其复制一份到本地，为了省事，直接在该目录下执行后端代码。</p>
+<p>在保存书签至markdown文件时，按照每月共用一个文件的方式组织，文件名类似于2016-3.md，然后每个文件中，又按照具体的日期倒序排列收藏。这就要求我们在读取文件时，需要一行一行的读取，以便在正确的位置插入数据。</p>
+<p>具体实现见(<a href="https://github.com/swxy/bookmarks" target="_blank" rel="external">github源码中的bookmark.js</a>), 或者见附录。</p>
+<h3 id="附录">附录</h3><p>chrome 扩展的配置文件：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">manifest_version</span>": <span class="value"><span class="number">2</span></span>,</span><br><span class="line">  "<span class="attribute">name</span>": <span class="value"><span class="string">"markToGithub"</span></span>,</span><br><span class="line">  "<span class="attribute">description</span>": <span class="value"><span class="string">"保存书签到github上"</span></span>,</span><br><span class="line">  "<span class="attribute">version</span>": <span class="value"><span class="string">"1.0"</span></span>,</span><br><span class="line">  "<span class="attribute">browser_action</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">default_icon</span>": <span class="value"><span class="string">"book.png"</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">icons</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">16</span>": <span class="value"><span class="string">"book.png"</span></span>,</span><br><span class="line">    "<span class="attribute">24</span>": <span class="value"><span class="string">"book_24.png"</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">background</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">scripts</span>": <span class="value">[<span class="string">"tab.js"</span>]</span>,</span><br><span class="line">    "<span class="attribute">persistent</span>": <span class="value"><span class="literal">false</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">permissions</span>": <span class="value">[</span><br><span class="line">    <span class="string">"activeTab"</span>,</span><br><span class="line">    <span class="string">"contextMenus"</span>,</span><br><span class="line">    <span class="string">"tabs"</span>,</span><br><span class="line">    <span class="string">"http://*/"</span>,</span><br><span class="line">    <span class="string">"storage"</span></span><br><span class="line">  ]</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后端代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">"use strict"</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>);</span><br><span class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">'querystring'</span>);</span><br><span class="line"><span class="keyword">const</span> spawnSync = <span class="built_in">require</span>(<span class="string">'child_process'</span>).spawnSync;</span><br><span class="line"></span><br><span class="line">http.createServer((req, res) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> urlData = url.parse(req.url);</span><br><span class="line">    <span class="comment">//console.dir(urlData);</span></span><br><span class="line">    <span class="keyword">let</span> queryObj = querystring.parse(urlData.query);</span><br><span class="line">    <span class="built_in">console</span>.dir(queryObj);</span><br><span class="line">    queryObj.title &amp;&amp; queryObj.url &amp;&amp; writeToMarKdownDoc(queryObj);</span><br><span class="line">    res.writeHead(<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>&#125;);</span><br><span class="line">    res.end(<span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">        code: <span class="number">0</span>,</span><br><span class="line">        msg : <span class="string">'success'</span></span><br><span class="line">    &#125;));</span><br><span class="line">&#125;).listen(<span class="number">3175</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeFilename</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fileName = <span class="string">'README.md'</span>;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">if</span> (date.getDate() === <span class="number">1</span>) &#123;</span><br><span class="line">        name = data.getFullYear() + <span class="string">'_'</span> + data.getMonth() + <span class="string">'.md'</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> state = fs.state(name);</span><br><span class="line">            !state.isFile() &amp;&amp; fs.renameSync(fileName, name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (e)&#123;</span><br><span class="line">            fs.renameSync(fileName, name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNewFile</span>(<span class="params">filename</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> fileState = fs.statSync(filename);</span><br><span class="line">        <span class="keyword">let</span> result = fileState.isFile();</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(e);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">writeToFile</span>(<span class="params">filename, data, title</span>) </span>&#123;</span><br><span class="line">    fs.writeFile(filename, data, (err) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="built_in">console</span>.err(err);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'saved '</span> + filename);</span><br><span class="line">        <span class="comment">//pushToGit(title);</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">writeToMarKdownDoc</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fileName = changeFilename();</span><br><span class="line">    <span class="keyword">let</span> data = [];</span><br><span class="line">    <span class="keyword">let</span> inserted = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">if</span> (!isNewFile(fileName)) &#123;</span><br><span class="line">        data.push(<span class="string">`### <span class="subst">$&#123;date.getFullYear()&#125;</span>-<span class="subst">$&#123;date.getMonth()+1&#125;</span>-<span class="subst">$&#123;date.getDate()&#125;</span>&lt;br /&gt;`</span>)</span><br><span class="line">        data.push(<span class="string">`+ [<span class="subst">$&#123;obj.title&#125;</span>](<span class="subst">$&#123;obj.url&#125;</span>)&lt;br /&gt;\n`</span>);</span><br><span class="line">        writeToFile(fileName, data.join(<span class="string">'\n'</span>), obj.title);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> rl = readline.createInterface(&#123;</span><br><span class="line">        input: fs.createReadStream(fileName)</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    rl.on(<span class="string">'line'</span>, (line) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (!inserted &amp;&amp; line.startsWith(<span class="string">'###'</span>)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> data_str = line.match(<span class="regexp">/\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;/</span>)[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">if</span> (date_str &amp;&amp; (<span class="keyword">new</span> <span class="built_in">Date</span>(data_str).getDate() === date.getDate())) &#123;</span><br><span class="line">                data.push(line);</span><br><span class="line">                data.push(<span class="string">`+ [<span class="subst">$&#123;obj.title&#125;</span>](<span class="subst">$&#123;obj.url&#125;</span>)&lt;br /&gt;`</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                data.push(<span class="string">`### <span class="subst">$&#123;date.getFullYear()&#125;</span>-<span class="subst">$&#123;date.getMonth()+1&#125;</span>-<span class="subst">$&#123;date.getDate()&#125;</span>&lt;br /&gt;`</span>)</span><br><span class="line">                data.push(<span class="string">`+ [<span class="subst">$&#123;obj.title&#125;</span>](<span class="subst">$&#123;obj.url&#125;</span>)&lt;br /&gt;\n`</span>);</span><br><span class="line">                data.push(line);</span><br><span class="line">            &#125;</span><br><span class="line">            inserted = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            data.push(line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    rl.on(<span class="string">'close'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (!inserted) &#123; <span class="comment">//新建的文件</span></span><br><span class="line">            data.push(<span class="string">`### <span class="subst">$&#123;date.getFullYear()&#125;</span>-<span class="subst">$&#123;date.getMonth()+1&#125;</span>-<span class="subst">$&#123;date.getDate()&#125;</span>&lt;br /&gt;`</span>)</span><br><span class="line">            data.push(<span class="string">`+ [<span class="subst">$&#123;obj.title&#125;</span>](<span class="subst">$&#123;obj.url&#125;</span>)&lt;br /&gt;\n`</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        writeToFile(fileName, data.join(<span class="string">'\n'</span>), obj.title);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pushToGit</span>(<span class="params">title</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> title = title || <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> cmds = [</span><br><span class="line">        [<span class="string">'git'</span>, [<span class="string">'add'</span>, <span class="string">'.'</span>]],</span><br><span class="line">        [<span class="string">'git'</span>, [<span class="string">'commit'</span>, <span class="string">'-am'</span>, <span class="string">`"add <span class="subst">$&#123;title&#125;</span>"`</span>]],</span><br><span class="line">        [<span class="string">'git'</span>, [<span class="string">'pull'</span>, <span class="string">'--rebase'</span>]],</span><br><span class="line">        [<span class="string">'git'</span>, [<span class="string">'push'</span>, <span class="string">'origin'</span>, <span class="string">'master'</span>]]</span><br><span class="line">    ];</span><br><span class="line">    cmds.forEach((cmd) =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> result = spawnSync(cmd[<span class="number">0</span>], cmd[<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">console</span>.log(result.output.join(<span class="string">'\n'</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'push to github'</span>);</span><br><span class="line">    pushToGit(<span class="keyword">new</span> <span class="built_in">Date</span>().toString());</span><br><span class="line">&#125;, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'server start at 3175'</span>);</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/nodejs/">nodejs</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xchb.work/2016/03/04/一键收藏网址至Github/" data-title="一键收藏网址至Github | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/01/28/hexo上传源文件/"  title="hexo上传源文件">
+ <strong>下一篇：</strong><br/> 
+ <span>hexo上传源文件
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#功能描述"><span class="toc-number">1.</span> <span class="toc-text">功能描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chrome扩展实现"><span class="toc-number">2.</span> <span class="toc-text">chrome扩展实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nodej后端实现"><span class="toc-number">3.</span> <span class="toc-text">nodej后端实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附录"><span class="toc-number">4.</span> <span class="toc-text">附录</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/snippet/" title="snippet">snippet<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 随性而走. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="木木熊">木木熊</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
