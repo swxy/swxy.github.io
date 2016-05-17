@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-03-06T00:23:11.000Z</updated>
+  <updated>2016-05-17T06:10:10.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -15,11 +15,86 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Meta 整理]]></title>
+    <link href="http://xchb.work/2016/05/17/Meta-%E6%95%B4%E7%90%86/"/>
+    <id>http://xchb.work/2016/05/17/Meta-整理/</id>
+    <published>2016-05-17T04:28:47.000Z</published>
+    <updated>2016-05-17T06:10:10.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="基本属性值">基本属性值</h1><p>meta的意义取决其属性：</p>
+<ol>
+<li>name： 文档级别的元数据，作用于整个页面。</li>
+<li>http-equiv： 程序指令，一般用于告诉服务器页面的一些特殊要求。</li>
+<li>charset： 设置页面的字符</li>
+<li>itemprop: 自定义的元数据</li>
+</ol>
+<p>如果设置了 <code>name</code> 或者 <code>http-equiv</code>，可以用<code>content</code>指定相关的内容</p>
+<a id="more"></a>
+<h1 id="一_name">一 name</h1><ol>
+<li><p>author: 定义页面的作者</p>
+ <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="property">name</span>=<span class="string">"author"</span> content=<span class="string">"author name"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>description: 页面简短精确的描述，有些浏览器会以此作为收藏时的描述，不超过150字</p>
+ <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="property">name</span>=<span class="string">"description"</span> content=<span class="string">"descriptions"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>keywords：描述页面的关键字, 多个关键字用 逗号分割</p>
+ <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="property">name</span>=<span class="string">"keywords"</span> content=<span class="string">"page keyword"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>viewport: 窗口视图大小设置，适用于移动端开发。</p>
+<p>content可以包含的属性：</p>
+<ul>
+<li>width: 设置视图大小，数值/device-width</li>
+<li>height： 设置视图高度，数值/device-height</li>
+<li>initial-scale：初始缩放，值在0.0~10.0间</li>
+<li>maximum-scale: 最大缩放比例，值在0.0~10.0间</li>
+<li>minimum-scale: 最小缩放比例，值在0.0~10.0间</li>
+<li>user-scalable: 布尔值，是否允许缩放页面</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="property">name</span>=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>format-detection: 格式检测</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta  <span class="property">name</span>=<span class="string">"format-detection"</span> content=<span class="string">"telephone=no"</span> /&gt;</span><br><span class="line">&lt;meta  <span class="property">name</span>=<span class="string">"format-detection"</span> content=<span class="string">"email=no"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="二_http-equiv">二 http-equiv</h1><ol>
+<li><p>refresh: 页面重新加载或者重定向</p>
+<ul>
+<li>如果content只有一个数值，表示隔多少秒重新加载页面</li>
+<li><p>如果content格式是<code>3;url=http://www.baidu.com</code>表示隔3s重定向到百度</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"refresh"</span> <span class="attribute">content</span>=<span class="value">"4"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"refresh"</span> <span class="attribute">content</span>=<span class="value">"3;url=http://www.baidu.com"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>default-style: 页面默认样式，content是css的链接，同<code>&lt;link&gt;</code>的<code>href</code>保持一致</p>
+</li>
+</ol>
+<h1 id="三_其他一下meta头">三 其他一下meta头</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--隐藏状态栏/设置状态栏颜色, content的值为default | black | black-translucent--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-mobile-web-app-status-bar-style"</span> <span class="attribute">content</span>=<span class="value">"black-translucent"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"apple-mobile-web-app-title"</span> <span class="attribute">content</span>=<span class="value">"标题"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"HandheldFriendly"</span> <span class="attribute">content</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 微软的老式浏览器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"MobileOptimized"</span> <span class="attribute">content</span>=<span class="value">"320"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- uc强制竖屏 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"screen-orientation"</span> <span class="attribute">content</span>=<span class="value">"portrait"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- QQ强制竖屏 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"x5-orientation"</span> <span class="attribute">content</span>=<span class="value">"portrait"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- UC强制全屏 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"full-screen"</span> <span class="attribute">content</span>=<span class="value">"yes"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- QQ强制全屏 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"x5-fullscreen"</span> <span class="attribute">content</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- UC应用模式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"browsermode"</span> <span class="attribute">content</span>=<span class="value">"application"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- QQ应用模式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"x5-page-mode"</span> <span class="attribute">content</span>=<span class="value">"app"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- windows phone 点击无高光 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"msapplication-tap-highlight"</span> <span class="attribute">content</span>=<span class="value">"no"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=edge,chrome=1"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 关于X-UA-Compatible --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=6"</span> &gt;</span><span class="comment">&lt;!-- 使用IE6 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=7"</span> &gt;</span><span class="comment">&lt;!-- 使用IE7 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=8"</span> &gt;</span><span class="comment">&lt;!-- 使用IE8 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 转码申明：用百度打开网页可能会对其进行转码（比如贴广告），避免转码可添加如下meta --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Cache-Control"</span> <span class="attribute">content</span>=<span class="value">"no-siteapp"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="四_参考">四 参考</h1><ol>
+<li><a href="http://get.ftqq.com/6483.get" target="_blank" rel="external">常用meta整理</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-content" target="_blank" rel="external">MDN <meta></a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="基本属性值">基本属性值</h1><p>meta的意义取决其属性：</p>
+<ol>
+<li>name： 文档级别的元数据，作用于整个页面。</li>
+<li>http-equiv： 程序指令，一般用于告诉服务器页面的一些特殊要求。</li>
+<li>charset： 设置页面的字符</li>
+<li>itemprop: 自定义的元数据</li>
+</ol>
+<p>如果设置了 <code>name</code> 或者 <code>http-equiv</code>，可以用<code>content</code>指定相关的内容</p>]]>
+    
+    </summary>
+    
+      <category term="HTML" scheme="http://xchb.work/tags/HTML/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[一键收藏网址至Github]]></title>
     <link href="http://xchb.work/2016/03/04/%E4%B8%80%E9%94%AE%E6%94%B6%E8%97%8F%E7%BD%91%E5%9D%80%E8%87%B3Github/"/>
     <id>http://xchb.work/2016/03/04/一键收藏网址至Github/</id>
     <published>2016-03-04T12:18:22.000Z</published>
-    <updated>2016-03-06T00:23:11.000Z</updated>
+    <updated>2016-03-06T00:43:57.000Z</updated>
     <content type="html"><![CDATA[<p>在网上看见一个用Ruby On Rail写了一个一键收藏网页文章至github上的文章（<a href="http://www.jianshu.com/p/19d2f3a3b5d8" target="_blank" rel="external">点我查看</a>）,觉得很想法，于是乎，我也想用nodejs写一个。</p>
 <h3 id="功能描述">功能描述</h3><ol>
 <li>chrome扩展，发送当前标签页的标题和网址</li>
@@ -290,23 +365,34 @@ nginx -s quit
     <link href="http://xchb.work/2015/08/14/WebUploader%E4%BD%BF%E7%94%A8/"/>
     <id>http://xchb.work/2015/08/14/WebUploader使用/</id>
     <published>2015-08-14T12:44:04.000Z</published>
-    <updated>2016-02-23T02:54:34.000Z</updated>
-    <content type="html"><![CDATA[<p>最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考<a href="http://fex.baidu.com/webuploader" target="_blank" rel="external">WebUploader的官网</a>，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。</p>
+    <updated>2016-05-17T06:10:17.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="背景">背景</h1><p>最近需要封装一个图片上传组件，需要支持单文件，多文件，LOGO上传等功能，<br>其中LOGO上传需要检测上传图片的尺寸，并且需要支持图片裁切。改组件需要提供统一的UI样式，并有统一的错误提示。<br>该组件基于Webuploader封装。</p>
 <a id="more"></a>
-<ul>
-<li>使用flash上传时，给上传按钮绑定 <em>click</em> 事件时，点击按钮不会触发事件，因而只能退而求其次，绑定<em>mouseup</em>事件，当然绑定<em>mousedown</em>事件也是可以的。鼠标按下是触发<em>mousedown</em>， 释放鼠标时触发<em>mouseup</em>事件，而当<em>mousedown</em>和<em>mouseup</em>同时作用于同一个dom元素时就会触发<em>click</em>事件。</li>
-<li><p>使用flash上传，如果在上传完成之前隐藏上传按钮，会中断上传。而使用官网提供的解决方案，即给上传按钮添加以下class：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.webuploader-element-invisible</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute <span class="important">!important</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span>)</span></span>; <span class="comment">/* IE6, IE7 */</span></span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>发现还是不行，试了试直接给上传按钮设置 <code>visibility</code> 为 hidden，对于chrome可以正常上传，但对于IE9，还是不行。因而只好将<code>position</code>设置为absolute，然后设置一个较大的<code>left</code>属性，同时将父元素的<code>overflow</code>设置为hidden、<code>position</code>设置为relative。这样就可以啦。</p>
+<h1 id="遇坑&amp;填坑">遇坑&amp;填坑</h1><ul>
+<li><p>由于需要兼容IE9，故需要混合使用flash和H5上传方式，使用flash上传时，给上传按钮绑定 <em>click</em> 事件时，点击按钮不会触发事件 =&gt; 绑定<em>mouseup</em>事件。</p>
 </li>
-<li>获取图片的大小和尺寸，WebUploader中的file对象，自带有size属性，因而可以直接获取上传文件的大小。但上传图片时，有时需要判断上传图片的尺寸是否满足要求。大概看了一下源码，发现在给图片生成缩略图时，WebUploader对给每一个file对象附加一个<code>_info</code>属性，这个属性包含了图片的宽度和高度，虽然直接属于私有属性，但能用就直接用吧，成大事不要拘泥于小节。file对象还有一个私有属性也很好用——<code>_refer</code>，这个属性记录了file是由那个上传按钮上传的，有多个上传按钮时，这个属性就可能减少不少代码量了。</li>
+<li><p>使用flash上传，如果在上传完成之前隐藏上传按钮，会中断上传。而使用官网提供的解决方案，即给上传按钮添加以下class：</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.webuploader-element-invisible</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute <span class="important">!important</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span>)</span></span>; <span class="comment">/* IE6, IE7 */</span></span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p> 发现IE9不好使 =&gt; 将按钮的<code>position</code>设置为absolute，然后设置一个较大的<code>left</code>属性，同时将父元素的<code>overflow</code>设置为hidden、<code>position</code>设置为relative。</p>
+</li>
+<li><p>由于可以一个上传实例绑定多个上传按钮，当上传时，需要区分是重新上传或直接上传新图片 =&gt; <code>file</code>对象的<code>source</code>属性中有个<code>_refer</code>表示该文件是哪个dom上传的。</p>
+</li>
+<li><p>LOGO上传需要裁切 =&gt; 新注册一个裁切的方法，<a href="https://github.com/fex-team/webuploader/tree/master/examples/cropper" target="_blank" rel="external">Webuploader裁切示例</a></p>
+</li>
+<li><p>虽然WebUploader提供了文件队列管理，但不满足实际要求 =&gt; 自己再造轮子, 源码中检测文件数量的代码</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> uploader = <span class="keyword">this</span>,</span><br><span class="line">    opts = uploader.options,</span><br><span class="line">    count = uploader.count,</span><br><span class="line">    max = <span class="built_in">parseInt</span>( opts.fileNumLimit, <span class="number">10</span> ),</span><br><span class="line">    flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ( !max ) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'beforeFileQueued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> file </span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( count &gt;= max &amp;&amp; flag ) &#123;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.trigger( <span class="string">'error'</span>, <span class="string">'Q_EXCEED_NUM_LIMIT'</span>, max, file );</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">        &#125;, <span class="number">1</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count &gt;= max ? <span class="literal">false</span> : <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'fileQueued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count++;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'fileDequeued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count--;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'reset'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>总的来说，WebUploader很不错，毕竟是百度FEX团队发布的，质量还是有保证的，而且反馈问题，也能比较及时的收到回复。</p>
+<h1 id="参考">参考</h1><ol>
+<li><a href="http://fex.baidu.com/webuploader" target="_blank" rel="external">WebUploader的官网</a></li>
+</ol>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>最近需要上传文件，要求使用WebUploader作为上传组件。WebUploader以h5上传，同时以flash为辅，因而可以很好兼容IE系列的浏览器。同时WebUploader的支持动态添加多个上传按钮的特性表示很赞。当然还有很多其他很赞的特性，详细可以参考<a href="http://fex.baidu.com/webuploader">WebUploader的官网</a>，官网api比较详细，但还是踩了不少的坑，主要是使用flash上传有比较多的问题。</p>]]>
+    <![CDATA[<h1 id="背景">背景</h1><p>最近需要封装一个图片上传组件，需要支持单文件，多文件，LOGO上传等功能，<br>其中LOGO上传需要检测上传图片的尺寸，并且需要支持图片裁切。改组件需要提供统一的UI样式，并有统一的错误提示。<br>该组件基于Webuploader封装。</p>]]>
     
     </summary>
+    
+      <category term="JS" scheme="http://xchb.work/tags/JS/"/>
     
   </entry>
   
