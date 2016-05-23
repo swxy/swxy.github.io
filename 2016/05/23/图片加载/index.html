@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://xchb.work/2016/05/23/图片加载/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
 <meta property="og:description" content="随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。">
-<meta property="og:updated_time" content="2016-05-23T04:27:07.000Z">
+<meta property="og:updated_time" content="2016-05-23T05:46:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图片加载">
 <meta name="twitter:description" content="随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。">
@@ -95,21 +95,21 @@
 		
 		<p>随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。</p>
 <a id="more"></a>
-<h1 id="图片预加载">图片预加载</h1><h2 id="背景">背景</h2><p>图片的加载速度往往影响着网站整体的用户体验，尤其对于包含大量图片的网站。对图片进行预加载，不失为一个高效的解决方案。</p>
-<h2 id="解决方案">解决方案</h2><p>使用CSS3、JavaScript、Ajax实现图片预加载</p>
-<h2 id="具体实现">具体实现</h2><ol>
+<h2 id="图片预加载">图片预加载</h2><h3 id="背景">背景</h3><p>图片的加载速度往往影响着网站整体的用户体验，尤其对于包含大量图片的网站。对图片进行预加载，不失为一个高效的解决方案。</p>
+<h3 id="解决方案">解决方案</h3><p>使用CSS3、JavaScript、Ajax实现图片预加载</p>
+<h3 id="具体实现">具体实现</h3><ol>
 <li><a href="https://perishablepress.com/3-ways-preload-images-css-javascript-ajax/" target="_blank" rel="external">3 Ways to Preload Images with CSS, JavaScript, or Ajax</a></li>
 <li><a href="http://www.csdn.net/article/2013-10-15/2817187-3-ways-preload-images-css-javascript-ajax" target="_blank" rel="external">利用CSS、JavaScript及Ajax实现图片预加载的三大方法</a></li>
 </ol>
-<h1 id="图片惰性加载">图片惰性加载</h1><h2 id="背景-1">背景</h2><p>页面图片较多，影响加载速度，而且很多时候，页面加载完了，用户却不会滑动到页面最下面，也就是说加载出来的图片，用户更本就没去看，造成资源浪费的同时也使得页面加载变慢。</p>
-<h2 id="解决方案-1">解决方案</h2><p>按需加载图片，如果用户滚动到图片位置，则加载图片。</p>
-<h2 id="实现原理">实现原理</h2><ol>
+<h2 id="图片惰性加载">图片惰性加载</h2><h3 id="背景-1">背景</h3><p>页面图片较多，影响加载速度，而且很多时候，页面加载完了，用户却不会滑动到页面最下面，也就是说加载出来的图片，用户更本就没去看，造成资源浪费的同时也使得页面加载变慢。</p>
+<h3 id="解决方案-1">解决方案</h3><p>按需加载图片，如果用户滚动到图片位置，则加载图片。</p>
+<h3 id="实现原理">实现原理</h3><ol>
 <li>给<code>img</code>标签设置src为一个loading图标，然后把实际的图片地址存储到其他自定义属性中；</li>
 <li>监听页面滚动事件，如果页面滚动到图片区域，则替换src为图片的视觉地址。</li>
 </ol>
 <p>示例：</p>
 <figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img data-original=<span class="symbol">'actual</span>.jpg' src=<span class="symbol">'loading</span>.gif'/&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="具体实现-1">具体实现</h2><ol>
+<h3 id="具体实现-1">具体实现</h3><ol>
 <li>参考<a href="http://www.cnblogs.com/zichi/p/5021697.html" target="_blank" rel="external">教你实现图片的惰性加载</a></li>
 <li>使用jQuery的<a href="https://plugins.jquery.com/lazyload/" target="_blank" rel="external">惰性加载库（lazyload）</a>, <a href="https://github.com/tuupola/jquery_lazyload" target="_blank" rel="external">github地址</a></li>
 </ol>
@@ -162,7 +162,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#图片预加载"><span class="toc-number">1.</span> <span class="toc-text">图片预加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案"><span class="toc-number">1.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体实现"><span class="toc-number">1.3.</span> <span class="toc-text">具体实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图片惰性加载"><span class="toc-number">2.</span> <span class="toc-text">图片惰性加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景-1"><span class="toc-number">2.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案-1"><span class="toc-number">2.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现原理"><span class="toc-number">2.3.</span> <span class="toc-text">实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体实现-1"><span class="toc-number">2.4.</span> <span class="toc-text">具体实现</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#图片预加载"><span class="toc-number">1.</span> <span class="toc-text">图片预加载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-number">1.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体实现"><span class="toc-number">1.3.</span> <span class="toc-text">具体实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片惰性加载"><span class="toc-number">2.</span> <span class="toc-text">图片惰性加载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景-1"><span class="toc-number">2.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-1"><span class="toc-number">2.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现原理"><span class="toc-number">2.3.</span> <span class="toc-text">实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体实现-1"><span class="toc-number">2.4.</span> <span class="toc-text">具体实现</span></a></li></ol></li></ol>
  
   </div>
 
