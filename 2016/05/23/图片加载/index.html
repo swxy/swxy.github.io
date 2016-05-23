@@ -4,29 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>代码片段（JS） | 学习是一种信仰</title>
+    <title>图片加载 | 学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="木木熊">
     
 
     
-    <meta name="description" content="#获取随机字符
-###获取26个字母与10个数字之间的随机字符方法123var randstr = Math.random().toString(36).slice(2);var len = randstr.length;var r = randstr.charAt(~~(len*Math.random()))
-###获取某一个区间中的随机字符，利用unicode实现1String.fromCha">
+    <meta name="description" content="随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代码片段（JS）">
-<meta property="og:url" content="http://xchb.work/2015/12/11/代码片段（JS）/index.html">
+<meta property="og:title" content="图片加载">
+<meta property="og:url" content="http://xchb.work/2016/05/23/图片加载/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="#获取随机字符
-###获取26个字母与10个数字之间的随机字符方法123var randstr = Math.random().toString(36).slice(2);var len = randstr.length;var r = randstr.charAt(~~(len*Math.random()))
-###获取某一个区间中的随机字符，利用unicode实现1String.fromCha">
-<meta property="og:updated_time" content="2016-01-28T09:13:31.000Z">
+<meta property="og:description" content="随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。">
+<meta property="og:updated_time" content="2016-05-23T04:27:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="代码片段（JS）">
-<meta name="twitter:description" content="#获取随机字符
-###获取26个字母与10个数字之间的随机字符方法123var randstr = Math.random().toString(36).slice(2);var len = randstr.length;var r = randstr.charAt(~~(len*Math.random()))
-###获取某一个区间中的随机字符，利用unicode实现1String.fromCha">
+<meta name="twitter:title" content="图片加载">
+<meta name="twitter:description" content="随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -86,23 +80,39 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/11/代码片段（JS）/" title="代码片段（JS）" itemprop="url">代码片段（JS）</a>
+      <a href="/2016/05/23/图片加载/" title="图片加载" itemprop="url">图片加载</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-11T09:31:08.000Z" itemprop="datePublished"> Published 2015-12-11</time>
+    <time datetime="2016-05-23T03:55:34.000Z" itemprop="datePublished"> Published 2016-05-23</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>#获取随机字符</p>
-<p>###获取26个字母与10个数字之间的随机字符方法<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> randstr</span> = Math.random().toString(<span class="number">36</span>).slice(<span class="number">2</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> len</span> = randstr.length;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> r</span> = randstr.charAt(~~(len*Math.random()))</span><br></pre></td></tr></table></figure></p>
-<p>###获取某一个区间中的随机字符，利用unicode实现<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(<span class="number">0x2200</span> + (<span class="number">0x220f</span> - <span class="number">0x2200</span> + <span class="number">1</span>) * Math.random());</span><br></pre></td></tr></table></figure></p>
-<p>PS: 数字的unicode范围为 0030–0039；英文小写字母的范围为，0061–007a</p>
+		<p>随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。</p>
+<a id="more"></a>
+<h1 id="图片预加载">图片预加载</h1><h2 id="背景">背景</h2><p>图片的加载速度往往影响着网站整体的用户体验，尤其对于包含大量图片的网站。对图片进行预加载，不失为一个高效的解决方案。</p>
+<h2 id="解决方案">解决方案</h2><p>使用CSS3、JavaScript、Ajax实现图片预加载</p>
+<h2 id="具体实现">具体实现</h2><ol>
+<li><a href="https://perishablepress.com/3-ways-preload-images-css-javascript-ajax/" target="_blank" rel="external">3 Ways to Preload Images with CSS, JavaScript, or Ajax</a></li>
+<li><a href="http://www.csdn.net/article/2013-10-15/2817187-3-ways-preload-images-css-javascript-ajax" target="_blank" rel="external">利用CSS、JavaScript及Ajax实现图片预加载的三大方法</a></li>
+</ol>
+<h1 id="图片惰性加载">图片惰性加载</h1><h2 id="背景-1">背景</h2><p>页面图片较多，影响加载速度，而且很多时候，页面加载完了，用户却不会滑动到页面最下面，也就是说加载出来的图片，用户更本就没去看，造成资源浪费的同时也使得页面加载变慢。</p>
+<h2 id="解决方案-1">解决方案</h2><p>按需加载图片，如果用户滚动到图片位置，则加载图片。</p>
+<h2 id="实现原理">实现原理</h2><ol>
+<li>给<code>img</code>标签设置src为一个loading图标，然后把实际的图片地址存储到其他自定义属性中；</li>
+<li>监听页面滚动事件，如果页面滚动到图片区域，则替换src为图片的视觉地址。</li>
+</ol>
+<p>示例：</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img data-original=<span class="symbol">'actual</span>.jpg' src=<span class="symbol">'loading</span>.gif'/&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="具体实现-1">具体实现</h2><ol>
+<li>参考<a href="http://www.cnblogs.com/zichi/p/5021697.html" target="_blank" rel="external">教你实现图片的惰性加载</a></li>
+<li>使用jQuery的<a href="https://plugins.jquery.com/lazyload/" target="_blank" rel="external">惰性加载库（lazyload）</a>, <a href="https://github.com/tuupola/jquery_lazyload" target="_blank" rel="external">github地址</a></li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -111,7 +121,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/snippet/">snippet</a>
+  <span></span> <a href="/tags/HTML/">HTML</a>
   </div>
 
 </div>
@@ -120,7 +130,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xchb.work/2015/12/11/代码片段（JS）/" data-title="代码片段（JS） | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xchb.work/2016/05/23/图片加载/" data-title="图片加载 | 学习是一种信仰" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -133,19 +143,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/01/28/hexo上传源文件/" title="hexo上传源文件">
-  <strong>上一篇：</strong><br/>
-  <span>
-  hexo上传源文件</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/12/01/Terminal-路径显示/"  title="Terminal 路径显示">
+<a href="/2016/05/17/Meta-整理/"  title="Meta 整理">
  <strong>下一篇：</strong><br/> 
- <span>Terminal 路径显示
+ <span>Meta 整理
 </span>
 </a>
 </div>
@@ -160,7 +162,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#图片预加载"><span class="toc-number">1.</span> <span class="toc-text">图片预加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案"><span class="toc-number">1.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体实现"><span class="toc-number">1.3.</span> <span class="toc-text">具体实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图片惰性加载"><span class="toc-number">2.</span> <span class="toc-text">图片惰性加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景-1"><span class="toc-number">2.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案-1"><span class="toc-number">2.2.</span> <span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现原理"><span class="toc-number">2.3.</span> <span class="toc-text">实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体实现-1"><span class="toc-number">2.4.</span> <span class="toc-text">具体实现</span></a></li></ol></li></ol>
  
   </div>
 
