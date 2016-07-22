@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-05-23T05:46:37.000Z</updated>
+  <updated>2016-07-22T02:40:22.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -13,6 +13,104 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[浏览器工作原理]]></title>
+    <link href="http://xchb.work/2016/07/21/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/"/>
+    <id>http://xchb.work/2016/07/21/浏览器工作原理/</id>
+    <published>2016-07-21T12:06:49.000Z</published>
+    <updated>2016-07-22T02:40:22.000Z</updated>
+    <content type="html"><![CDATA[<p>整理和收集一下浏览器渲染原理。</p>
+<h2 id="解析和展示html流程">解析和展示html流程</h2><ol>
+<li>首先下载html文件</li>
+<li>解析html，构建dom树</li>
+<li>和css结合生成渲染树</li>
+<li>绘制并展示页面</li>
+</ol>
+<p>图示：<br><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/flow.png" alt="渲染流程"></p>
+<p><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/webkitflow.png" alt="Webkit"></p>
+<p><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/image008.jpg" alt="Gecko"></p>
+<p><a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="external">图片来源:http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/</a></p>
+<h2 id="CSSOM和DOM组合_-&gt;_render_tree_（渲染树）">CSSOM和DOM组合 -&gt; render tree （渲染树）</h2><p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/render-tree-construction.png" alt="combile CSSOM and DOM"><br><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">图片来源：https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction</a></p>
+<h2 id="相关文章：">相关文章：</h2><ol>
+<li><a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="external">浏览器工作原理</a></li>
+<li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="external">How browsers work</a></li>
+<li><a href="https://css-tricks.com/efficiently-rendering-css/" target="_blank" rel="external">EfficientlyRendering CSS</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">Render-tree construction, layout, and paint</a></li>
+<li><a href="http://calendar.perfplanet.com/2011/css-selector-performance-has-changed-for-the-better/" target="_blank" rel="external">CSS Selector Performance has changed! (For the better)</a></li>
+<li><a href="https://dl.dropboxusercontent.com/u/39519/talks/cssperf/index.html" target="_blank" rel="external">CSS PERFORMANCE</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Style_System_Overview" target="_blank" rel="external">Style System Overview</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>整理和收集一下浏览器渲染原理。</p>
+<h2 id="解析和展示html流程">解析和展示html流程</h2><ol>
+<li>首先下载html文件</li>
+<li>解析html，构建dom树</li>
+<li>和css结合生成渲染树</li>
+<li>绘制并展示页面]]>
+    </summary>
+    
+      <category term="Web" scheme="http://xchb.work/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[组件化开发]]></title>
+    <link href="http://xchb.work/2016/05/30/%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/"/>
+    <id>http://xchb.work/2016/05/30/组件化开发/</id>
+    <published>2016-05-30T06:53:17.000Z</published>
+    <updated>2016-06-03T02:42:38.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="参考">参考</h2><ol>
+<li><a href="https://github.com/fouber/blog/issues/10" target="_blank" rel="external">前端工程——基础篇</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="参考">参考</h2><ol>
+<li><a href="https://github.com/fouber/blog/issues/10" target="_blank" rel="external">前端工程——基础篇</a></li>
+</ol>
+]]>
+    </summary>
+    
+      <category term="WEB" scheme="http://xchb.work/tags/WEB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[React-Todo示例]]></title>
+    <link href="http://xchb.work/2016/05/25/React-Todo%E7%A4%BA%E4%BE%8B/"/>
+    <id>http://xchb.work/2016/05/25/React-Todo示例/</id>
+    <published>2016-05-25T12:47:25.000Z</published>
+    <updated>2016-05-26T06:36:14.000Z</updated>
+    <content type="html"><![CDATA[<p>近两天事情较少，准备做一个书单列表，初始阶段和之前看过的Todo基本相似。正好很久没看React，感觉好生疏，准备结合ES6重新写一个React的Todo示例。参考的源码和样式来源于<a href="http://todomvc.com/examples/react/#/" target="_blank" rel="external">todomvc</a></p>
+<a id="more"></a>
+<h3 id="样式">样式</h3><p>直接复用todomvc的，这个样式很简洁，同时该网站又把相关的css都放在同一个css文件中，直接下载下来就可以了。</p>
+<h3 id="源码">源码</h3><p>参考其<a href="https://github.com/tastejs/todomvc/tree/gh-pages/examples/react" target="_blank" rel="external">示例源码</a>,<br>但是由于其源码用的不是ES6，同时用的是IEEF来做的模块化，所以需要改造一下。</p>
+<p>改造点：</p>
+<ol>
+<li>在ES6中，可以直接用<code>class</code>扩展<code>React.Component</code>(注意大写首字母，跳过这个坑)</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import React from 'react';</span><br><span class="line"></span><br><span class="line">export default class TodoFooter extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            <span class="tag">&lt;<span class="title">footer</span> <span class="attribute">className</span>=<span class="value">"footer"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">span</span> <span class="attribute">className</span>=<span class="value">"todo-count"</span>&gt;</span>&#123;this.props.count&#125;<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">className</span>=<span class="value">"filters"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">""</span>&gt;</span>All<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">""</span>&gt;</span>Active<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">""</span>&gt;</span>Complete<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="title">footer</span>&gt;</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个是改造TodoFooter的代码。<br>在其他模块引用时，只需要<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> TodoFooter <span class="keyword">from</span> <span class="string">'./todoFooter.jsx'</span>;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p><code>classNames</code> 模块已经单独抽出来维护了，<a href="https://github.com/JedWatson/classnames" target="_blank" rel="external">classnames的github地址</a></p>
+</li>
+<li><p>ES6中，React不会默认绑定<code>this</code>，所以需要手动绑定一下</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">React</span> from <span class="symbol">'reac</span>t';</span><br><span class="line"><span class="keyword">import</span> classNames from <span class="symbol">'classname</span>s';</span><br><span class="line"></span><br><span class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">TodoItem</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">React</span>.<span class="title">Component</span> &#123;</span></span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            editText: <span class="keyword">this</span>.props.todo.title</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">this</span>.id = <span class="keyword">this</span>.props.itemId;</span><br><span class="line">        <span class="keyword">this</span>.handleSubmit = <span class="keyword">this</span>.handleSubmit.bind(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">this</span>.handleChange = <span class="keyword">this</span>.handleChange.bind(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">this</span>.handleEdit = <span class="keyword">this</span>.handleEdit.bind(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">this</span>.handleKeyDown  = <span class="keyword">this</span>.handleKeyDown.bind(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">this</span>.onToggle = <span class="keyword">this</span>.onToggle.bind(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">this</span>.onDestroy = <span class="keyword">this</span>.onDestroy.bind(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    handleSubmit() &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="keyword">val</span> = <span class="keyword">this</span>.state.editText.trim();</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">val</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.props.onDestroy(<span class="keyword">this</span>.id);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.props.onSave(<span class="keyword">this</span>.id, <span class="keyword">val</span>);</span><br><span class="line">            <span class="keyword">this</span>.setState(&#123;editText: <span class="keyword">val</span>&#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    handleEdit() &#123;</span><br><span class="line">        <span class="keyword">this</span>.props.onEdit(<span class="keyword">this</span>.id);</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;editText: <span class="keyword">this</span>.props.todo.title&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    handleKeyDown(e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e.which === <span class="number">27</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.setState(&#123;editText: <span class="keyword">this</span>.props.todo.title&#125;);</span><br><span class="line">            <span class="keyword">this</span>.props.onCancel(event);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (e.which === <span class="number">13</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.handleSubmit(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    handleChange(e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.props.editing) &#123;</span><br><span class="line">            <span class="keyword">this</span>.setState(&#123;editText: e.target.value&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    onToggle() &#123;</span><br><span class="line">        <span class="keyword">this</span>.props.onToggle(<span class="keyword">this</span>.id);</span><br><span class="line">    &#125;</span><br><span class="line">    onDestroy() &#123;</span><br><span class="line">        <span class="keyword">this</span>.props.onDestroy(<span class="keyword">this</span>.id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;li className=&#123;classNames(&#123;</span><br><span class="line">                completed: <span class="keyword">this</span>.props.todo.completed,</span><br><span class="line">                editing: <span class="keyword">this</span>.props.editing</span><br><span class="line">            &#125;)&#125;</span><br><span class="line">            &gt;</span><br><span class="line">                &lt;div className=<span class="string">"view"</span>&gt;</span><br><span class="line">                    &lt;input</span><br><span class="line">                        className=<span class="string">"toggle"</span></span><br><span class="line">                        <span class="class"><span class="keyword">type</span>=</span><span class="string">"checkbox"</span></span><br><span class="line">                        checked=&#123;<span class="keyword">this</span>.props.todo.completed&#125;</span><br><span class="line">                        onChange=&#123;<span class="keyword">this</span>.onToggle&#125;</span><br><span class="line">                    /&gt;</span><br><span class="line">                    &lt;label onDoubleClick=&#123;<span class="keyword">this</span>.handleEdit&#125;&gt;</span><br><span class="line">                        &#123;<span class="keyword">this</span>.props.todo.title&#125;</span><br><span class="line">                    &lt;/label&gt;</span><br><span class="line">                    &lt;button className=<span class="string">"destroy"</span> onClick=&#123;<span class="keyword">this</span>.onDestroy&#125;&gt;&lt;/button&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                &lt;input</span><br><span class="line">                    ref=<span class="string">"editField"</span></span><br><span class="line">                    className=<span class="string">"edit"</span></span><br><span class="line">                    value=&#123;<span class="keyword">this</span>.state.editText&#125;</span><br><span class="line">                    onBlur=&#123;<span class="keyword">this</span>.handleSubmit&#125;</span><br><span class="line">                    onChange=&#123;<span class="keyword">this</span>.handleChange&#125;</span><br><span class="line">                    onKeyDown=&#123;<span class="keyword">this</span>.handleKeyDown&#125;</span><br><span class="line">                /&gt;</span><br><span class="line">            &lt;/li&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事件传递参数，用<code>bind</code></p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">onClick</span>=<span class="value">&#123;this.props.onFilter.bind(this,</span> <span class="attribute">ALL_TODOS</span>)&#125; <span class="attribute">className</span>=<span class="value">&#123;classNames(&#123;selected:</span> <span class="attribute">active</span> =<span class="value">==</span> <span class="attribute">ALL_TODOS</span>&#125;)&#125;&gt;</span>All<span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>近两天事情较少，准备做一个书单列表，初始阶段和之前看过的Todo基本相似。正好很久没看React，感觉好生疏，准备结合ES6重新写一个React的Todo示例。参考的源码和样式来源于<a href="http://todomvc.com/examples/react/#/">todomvc</a></p>]]>
+    
+    </summary>
+    
+      <category term="React" scheme="http://xchb.work/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[图片加载]]></title>
