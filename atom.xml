@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-07-22T02:40:22.000Z</updated>
+  <updated>2016-07-22T02:41:01.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://xchb.work/2016/07/21/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/"/>
     <id>http://xchb.work/2016/07/21/浏览器工作原理/</id>
     <published>2016-07-21T12:06:49.000Z</published>
-    <updated>2016-07-22T02:40:22.000Z</updated>
+    <updated>2016-07-22T02:41:01.000Z</updated>
     <content type="html"><![CDATA[<p>整理和收集一下浏览器渲染原理。</p>
 <h2 id="解析和展示html流程">解析和展示html流程</h2><ol>
 <li>首先下载html文件</li>
@@ -27,6 +27,7 @@
 <li>和css结合生成渲染树</li>
 <li>绘制并展示页面</li>
 </ol>
+<a id="more"></a>
 <p>图示：<br><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/flow.png" alt="渲染流程"></p>
 <p><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/webkitflow.png" alt="Webkit"></p>
 <p><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/image008.jpg" alt="Gecko"></p>
@@ -48,7 +49,9 @@
 <li>首先下载html文件</li>
 <li>解析html，构建dom树</li>
 <li>和css结合生成渲染树</li>
-<li>绘制并展示页面]]>
+<li>绘制并展示页面</li>
+</ol>]]>
+    
     </summary>
     
       <category term="Web" scheme="http://xchb.work/tags/Web/"/>
