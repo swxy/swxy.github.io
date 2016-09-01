@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xchb.work/2016/09/01/nodejs-web%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81%E7%83%AD%E6%9B%B4%E6%96%B0/</loc>
+    <lastmod>2016-09-01T09:23:48.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xchb.work/event.html</loc>
+    <lastmod>2016-07-25T17:21:01.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xchb.work/2016/07/25/event%E9%82%A3%E4%BA%9B%E4%BA%8B/</loc>
+    <lastmod>2016-07-25T17:12:05.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xchb.work/2016/07/21/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2016-07-22T02:41:01.000Z</lastmod>
   </url>

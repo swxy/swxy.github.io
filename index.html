@@ -7,7 +7,7 @@
     <title>学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
-    <meta name="author" content="木木熊">
+    <meta name="author" content="二哈熊">
     
 
     
@@ -81,11 +81,124 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/09/01/nodejs-web应用代码热更新/" title="nodejs web应用代码热更新" itemprop="url">nodejs web应用代码热更新</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
+		
+  <p class="article-time">
+    <time datetime="2016-09-01T09:23:08.000Z" itemprop="datePublished"> Published 2016-09-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。<br>在fex上看见一个比较另类的解决方案——<a href="http://fex.baidu.com/blog/2015/05/nodejs-hot-swapping/">Node.js Web应用代码热更新的另类思路</a></p>
+<p>在这里简单实现一下来解决开发过程中热启动的问题。</p>
+<p>首先需要重新包装一下nodejs提供的<code>require</code>方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/09/01/nodejs-web应用代码热更新/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/25/event那些事/" title="event那些事" itemprop="url">event那些事</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-25T11:58:42.000Z" itemprop="datePublished"> Published 2016-07-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>遇到一个问题：</p>
+<pre><code><span class="escape">`A</span><span class="escape">`标</span>签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了<span class="escape">`A</span><span class="escape">`标</span>签的跳转。
+</code></pre><p>解决方法：</p>
+<pre><code>加上stopImmediatePropagation才行。当然也可以把<span class="escape">`A</span><span class="escape">`标</span>签的<span class="escape">`h</span>ref<span class="escape">`属</span>性设置为空，通过js来控制跳转，但改动略大些，忽视。
+</code></pre><p>于是正好借此机会整理和收集一下JavaScript中的event事件。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/07/25/event那些事/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JS/">JS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/07/21/浏览器工作原理/" title="浏览器工作原理" itemprop="url">浏览器工作原理</a>
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
     <time datetime="2016-07-21T12:06:49.000Z" itemprop="datePublished"> Published 2016-07-21</time>
@@ -147,7 +260,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
     <time datetime="2016-05-30T06:53:17.000Z" itemprop="datePublished"> Published 2016-05-30</time>
@@ -204,7 +317,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
     <time datetime="2016-05-25T12:47:25.000Z" itemprop="datePublished"> Published 2016-05-25</time>
@@ -260,7 +373,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
     <time datetime="2016-05-23T03:55:34.000Z" itemprop="datePublished"> Published 2016-05-23</time>
@@ -316,7 +429,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
     <time datetime="2016-05-17T04:28:47.000Z" itemprop="datePublished"> Published 2016-05-17</time>
@@ -379,7 +492,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
     <time datetime="2016-03-04T12:18:22.000Z" itemprop="datePublished"> Published 2016-03-04</time>
@@ -440,7 +553,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
     <time datetime="2016-01-28T09:57:15.000Z" itemprop="datePublished"> Published 2016-01-28</time>
@@ -497,7 +610,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
     <time datetime="2015-12-11T09:31:08.000Z" itemprop="datePublished"> Published 2015-12-11</time>
@@ -524,135 +637,6 @@
   <div class="article-tags">
   
   <span></span> <a href="/tags/snippet/">snippet</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/01/Terminal-路径显示/" title="Terminal 路径显示" itemprop="url">Terminal 路径显示</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-01T06:13:37.000Z" itemprop="datePublished"> Published 2015-12-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>查看提示符显示方式：</p>
-<blockquote>
-<p>echo $PS1</p>
-</blockquote>
-<p>修改<code>$PS1</code>，打开文件 <code>~/.bash_profile</code>，增加一条规则，如果有则编辑即可：</p>
-<blockquote>
-<p>export PS1=”\u \w$”</p>
-</blockquote>
-<p>如果需要设置路径颜色，可以修改为：</p>
-<blockquote>
-<p>export PS1=”[\e[33;1m\u@\h: \e[31m\W\e[0m]\$”</p>
-</blockquote>
-<p>保存修改并退出，应用更新：</p>
-<blockquote>
-<p>source ~/.bash_profile</p>
-</blockquote>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/12/01/Terminal-路径显示/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/CentOS/">CentOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/11/10/CentOS-安装nginx/" title="CentOS 安装nginx" itemprop="url">CentOS 安装nginx</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="木木熊" target="_blank" itemprop="author">木木熊</a>
-		
-  <p class="article-time">
-    <time datetime="2015-11-10T00:44:23.000Z" itemprop="datePublished"> Published 2015-11-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
-</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/11/10/CentOS-安装nginx/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/CentOS/">CentOS</a>
   </div>
 
 </div>
@@ -705,6 +689,10 @@
 			
 		
 			
+				<li><a href="/tags/JS/" title="JS">JS<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/CSS/" title="CSS">CSS<sup>2</sup></a></li>
 			
 		
@@ -726,10 +714,6 @@
 		
 			
 				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
 			
 		
 			
@@ -781,7 +765,7 @@
 		<p class="copyright">
 		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
 		
-		<a href="/about" target="_blank" title="木木熊">木木熊</a>
+		<a href="/about" target="_blank" title="二哈熊">二哈熊</a>
 		
 		
 		</p>

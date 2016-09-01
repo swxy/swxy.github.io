@@ -4,15 +4,103 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-07-22T02:41:01.000Z</updated>
+  <updated>2016-09-01T09:23:48.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
-    <name><![CDATA[木木熊]]></name>
+    <name><![CDATA[二哈熊]]></name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[nodejs web应用代码热更新]]></title>
+    <link href="http://xchb.work/2016/09/01/nodejs-web%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81%E7%83%AD%E6%9B%B4%E6%96%B0/"/>
+    <id>http://xchb.work/2016/09/01/nodejs-web应用代码热更新/</id>
+    <published>2016-09-01T09:23:08.000Z</published>
+    <updated>2016-09-01T09:23:48.000Z</updated>
+    <content type="html"><![CDATA[<p>在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。<br>在fex上看见一个比较另类的解决方案——<a href="http://fex.baidu.com/blog/2015/05/nodejs-hot-swapping/" target="_blank" rel="external">Node.js Web应用代码热更新的另类思路</a></p>
+<p>在这里简单实现一下来解决开发过程中热启动的问题。</p>
+<p>首先需要重新包装一下nodejs提供的<code>require</code>方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。</p>
+<a id="more"></a>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// wrapperRequire.js</span></span><br><span class="line"><span class="keyword">const</span> chokidar = <span class="built_in">require</span>(<span class="string">'chokidar'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cleanCache</span>(<span class="params">modulePath</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">module</span> = <span class="built_in">require</span>.cache[modulePath];</span><br><span class="line">    <span class="comment">// remove reference in module.parent</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">module</span>.parent) &#123;</span><br><span class="line">        <span class="built_in">module</span>.parent.children.splice(<span class="built_in">module</span>.parent.children.indexOf(<span class="built_in">module</span>), <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">require</span>.cache[modulePath] = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">watchFile</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> absModulePath = <span class="built_in">require</span>.resolve(obj.modulePath);</span><br><span class="line">    chokidar.watch(absModulePath).on(<span class="string">'all'</span>, (event, path) =&gt; &#123;</span><br><span class="line">        cleanCache(absModulePath);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`file [<span class="subst">$&#123;path&#125;</span>] --&gt; [<span class="subst">$&#123;event&#125;</span>]`</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            obj.name = <span class="built_in">require</span>(obj.modulePath);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(<span class="string">'module update failed'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    !obj.ignore &amp;&amp; watchFile(obj);</span><br><span class="line">    obj.name = <span class="built_in">require</span>(obj.modulePath);</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>由于使用node原生的fs.watch会出现文件变化监听不到的情况（其他一些问题见<a href="https://github.com/paulmillr/chokidar" target="_blank" rel="external">chokidar readme</a>）,<br>所以这里使用<code>chokidar</code>来实现对文件的监听。</p>
+<p>使用<code>wrapperRequire.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> wrapperRequire = <span class="built_in">require</span>(<span class="string">'./require'</span>);</span><br><span class="line"><span class="keyword">let</span> code = wrapperRequire(&#123;modulePath: <span class="string">'./code'</span>, <span class="string">'name'</span>: <span class="string">''</span>&#125;);</span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(code.name);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure></p>
+<p>测试文件 <code>code.js</code><br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span>.exports = <span class="symbol">'hello</span> world';</span><br></pre></td></tr></table></figure></p>
+<p>执行<code>main.js</code>然后更改<code>code.js</code>后也可以展示正确的结果。</p>
+<p>总结一下,以上实现的基础是:</p>
+<ol>
+<li>nodejs可以对require缓存的文件进行清空</li>
+<li>监听文件变化,然后重新require文件</li>
+<li>js函数中传递的Object参数是引用传递</li>
+</ol>
+<p>参考:<br>1.<a href="http://fex.baidu.com/blog/2015/05/nodejs-hot-swapping/" target="_blank" rel="external">Node.js Web应用代码热更新的另类思路</a><br>2.<a href="https://github.com/paulmillr/chokidar" target="_blank" rel="external">chokidar</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。<br>在fex上看见一个比较另类的解决方案——<a href="http://fex.baidu.com/blog/2015/05/nodejs-hot-swapping/">Node.js Web应用代码热更新的另类思路</a></p>
+<p>在这里简单实现一下来解决开发过程中热启动的问题。</p>
+<p>首先需要重新包装一下nodejs提供的<code>require</code>方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。</p>]]>
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[event那些事]]></title>
+    <link href="http://xchb.work/2016/07/25/event%E9%82%A3%E4%BA%9B%E4%BA%8B/"/>
+    <id>http://xchb.work/2016/07/25/event那些事/</id>
+    <published>2016-07-25T11:58:42.000Z</published>
+    <updated>2016-07-25T17:12:05.000Z</updated>
+    <content type="html"><![CDATA[<p>遇到一个问题：</p>
+<pre><code><span class="escape">`A</span><span class="escape">`标</span>签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了<span class="escape">`A</span><span class="escape">`标</span>签的跳转。
+</code></pre><p>解决方法：</p>
+<pre><code>加上stopImmediatePropagation才行。当然也可以把<span class="escape">`A</span><span class="escape">`标</span>签的<span class="escape">`h</span>ref<span class="escape">`属</span>性设置为空，通过js来控制跳转，但改动略大些，忽视。
+</code></pre><p>于是正好借此机会整理和收集一下JavaScript中的event事件。</p>
+<a id="more"></a>
+<h2 id="事件监听方式">事件监听方式</h2><p>js中实现事件监听方式，以<code>click</code>事件为例，可以有直接设置元素的<code>onclick</code>属性：<br>    <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 直接设置元素的onclick属性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>js绑定事件测试按钮1<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'#btn1'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        alert(<span class="string">'js绑定事件方式1'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<pre><code>或者用<span class="code">`addEventListener`</span>监听<span class="code">`click`</span>：
+<span class="xml"><span class="comment"><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 用addEventListener监听click --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">id</span>=<span class="value">"btn2"</span>&gt;</span>js绑定事件测试按钮1<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'#btn2'</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        alert(<span class="string">'js绑定事件方式2'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></span></span>
+
+提到事件绑定，解绑事件也事件当然也可以有，具体请可以查看[<span class="link_label">Demo</span>](<span class="link_url">/event.html</span>)。至于像<span class="code">`attachEvent`</span>这类，这里不多讨论。
+
+比较推荐的绑定方式是<span class="code">`addEventListener`</span>, 这种方式可以给DOM元素添加不止一个事件处理函数，而且可以控制事件在捕获或冒泡阶段触发。
+
+PS：addEventListener可以接受三个参数，其语法是<span class="code">`target.addEventListener(type, listener[, useCapture]);`</span>，第三个参数标识是在捕获阶段触发还是在冒泡阶段，默认值为<span class="code">`false`</span>标识在冒泡阶段触发
+</code></pre><h2 id="事件捕获或冒泡">事件捕获或冒泡</h2><p>这里简要说明一下W3C的事件模型：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">                 |<span class="string"> </span>|<span class="string">  / \</span><br><span class="line">-----------------</span>|<span class="string"> </span>|<span class="string">--</span>|<span class="string"> </span>|<span class="string">-----------------</span><br><span class="line"></span>|<span class="string"> element1       </span>|<span class="string"> </span>|<span class="string">  </span>|<span class="string"> </span>|<span class="string">                </span>|</span><br><span class="line">|<span class="string">   -------------</span>|<span class="string"> </span>|<span class="string">--</span>|<span class="string"> </span>|<span class="string">-----------     </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">element2    \ /  </span>|<span class="string"> </span>|<span class="string">          </span>|<span class="string">     </span>|</span><br><span class="line">|<span class="string">   --------------------------------     </span>|</span><br><span class="line">|<span class="string">        W3C event model                 </span>|</span><br><span class="line">------------------------------------------</span><br></pre></td></tr></table></figure></p>
+<p>假设给元素添加一下事件：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">element1.<span class="function"><span class="title">addEventListener</span><span class="params">(<span class="string">'click'</span>,doSomething2,true)</span></span></span><br><span class="line">element2.<span class="function"><span class="title">addEventListener</span><span class="params">(<span class="string">'click'</span>,doSomething,false)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>当点击element2时，首先会点击事件开始于捕获阶段，触发element1的事件处理函数doSomething2，然后捕获阶段没有可执行的的事件处理函数了，接着开始进入冒泡阶段，触发element2的事件处理函数doSomething。</p>
+<p>其他一些情况请参考<a href="http://www.quirksmode.org/js/events_order.html" target="_blank" rel="external">Event order</a></p>
+<h2 id="事件阻止">事件阻止</h2><p>事件阻止有三个方法： preventDefault，stopPropagation，stopImmediatePropagation。</p>
+<ol>
+<li>preventDefault： 阻止DOM元素的默认行为，例如阻止表单<code>type=&quot;submit&quot;</code>的button或input的提交表单行为。</li>
+<li>stopPropagation： 阻止事件的传播（冒泡）。</li>
+<li>stopImmediatePropagation： 阻止其他事件处理函数执行，并也会阻止事件的传播。</li>
+<li>事件处理函数中使用 <code>return false</code>：效果等价于 preventDefault + stopPropagation (据说是jQuery中实现的，原生JS中并没有什么用，测试环境是chrome 52)。</li>
+</ol>
+<p>具体请查看<a href="/event.html">Demo</a></p>
+<p>PS: 重点不是本文所写，而是以下参考的文章。</p>
+<h2 id="参考">参考</h2><ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener" target="_blank" rel="external">EventTarget.addEventListener</a></li>
+<li><a href="https://codeplanet.io/preventdefault-vs-stoppropagation-vs-stopimmediatepropagation/" target="_blank" rel="external">PREVENTDEFAULT VS. STOPPROPAGATION VS. STOPIMMEDIATEPROPAGATION</a></li>
+<li><a href="http://stackoverflow.com/questions/10712219/remove-onclick-event-from-img-tag" target="_blank" rel="external">Remove onclick event from img tag</a></li>
+<li><a href="http://stackoverflow.com/questions/5302903/jquery-event-stopimmediatepropagation-vs-return-false" target="_blank" rel="external">jquery: event.stopImmediatePropagation() vs return false</a></li>
+<li><a href="http://fuelyourcoding.com/jquery-events-stop-misusing-return-false/" target="_blank" rel="external">jQuery Events: Stop (Mis)Using Return False</a></li>
+<li><a href="http://www.quirksmode.org/js/events_order.html" target="_blank" rel="external">Event order</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>遇到一个问题：</p>
+<pre><code><span class="escape">`A</span><span class="escape">`标</span>签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了<span class="escape">`A</span><span class="escape">`标</span>签的跳转。
+</code></pre><p>解决方法：</p>
+<pre><code>加上stopImmediatePropagation才行。当然也可以把<span class="escape">`A</span><span class="escape">`标</span>签的<span class="escape">`h</span>ref<span class="escape">`属</span>性设置为空，通过js来控制跳转，但改动略大些，忽视。
+</code></pre><p>于是正好借此机会整理和收集一下JavaScript中的event事件。</p>]]>
+    
+    </summary>
+    
+      <category term="JS" scheme="http://xchb.work/tags/JS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[浏览器工作原理]]></title>

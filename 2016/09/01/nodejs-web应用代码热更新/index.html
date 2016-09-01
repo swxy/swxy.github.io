@@ -4,65 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Terminal 路径显示 | 学习是一种信仰</title>
+    <title>nodejs web应用代码热更新 | 学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="二哈熊">
     
 
     
-    <meta name="description" content="查看提示符显示方式：
-
-echo $PS1
-
-修改$PS1，打开文件 ~/.bash_profile，增加一条规则，如果有则编辑即可：
-
-export PS1=”\u \w$”
-
-如果需要设置路径颜色，可以修改为：
-
-export PS1=”[\e[33;1m\u@\h: \e[31m\W\e[0m]\$”
-
-保存修改并退出，应用更新：
-
-source ~/.bash_profile">
+    <meta name="description" content="在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。在fex上看见一个比较另类的解决方案——Node.js Web应用代码热更新的另类思路
+在这里简单实现一下来解决开发过程中热启动的问题。
+首先需要重新包装一下nodejs提供的require方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Terminal 路径显示">
-<meta property="og:url" content="http://xchb.work/2015/12/01/Terminal-路径显示/index.html">
+<meta property="og:title" content="nodejs web应用代码热更新">
+<meta property="og:url" content="http://xchb.work/2016/09/01/nodejs-web应用代码热更新/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="查看提示符显示方式：
-
-echo $PS1
-
-修改$PS1，打开文件 ~/.bash_profile，增加一条规则，如果有则编辑即可：
-
-export PS1=”\u \w$”
-
-如果需要设置路径颜色，可以修改为：
-
-export PS1=”[\e[33;1m\u@\h: \e[31m\W\e[0m]\$”
-
-保存修改并退出，应用更新：
-
-source ~/.bash_profile">
-<meta property="og:updated_time" content="2016-02-23T02:54:19.000Z">
+<meta property="og:description" content="在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。在fex上看见一个比较另类的解决方案——Node.js Web应用代码热更新的另类思路
+在这里简单实现一下来解决开发过程中热启动的问题。
+首先需要重新包装一下nodejs提供的require方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。">
+<meta property="og:updated_time" content="2016-09-01T09:23:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Terminal 路径显示">
-<meta name="twitter:description" content="查看提示符显示方式：
-
-echo $PS1
-
-修改$PS1，打开文件 ~/.bash_profile，增加一条规则，如果有则编辑即可：
-
-export PS1=”\u \w$”
-
-如果需要设置路径颜色，可以修改为：
-
-export PS1=”[\e[33;1m\u@\h: \e[31m\W\e[0m]\$”
-
-保存修改并退出，应用更新：
-
-source ~/.bash_profile">
+<meta name="twitter:title" content="nodejs web应用代码热更新">
+<meta name="twitter:description" content="在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。在fex上看见一个比较另类的解决方案——Node.js Web应用代码热更新的另类思路
+在这里简单实现一下来解决开发过程中热启动的问题。
+首先需要重新包装一下nodejs提供的require方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -122,48 +86,40 @@ source ~/.bash_profile">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/01/Terminal-路径显示/" title="Terminal 路径显示" itemprop="url">Terminal 路径显示</a>
+      <a href="/2016/09/01/nodejs-web应用代码热更新/" title="nodejs web应用代码热更新" itemprop="url">nodejs web应用代码热更新</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-01T06:13:37.000Z" itemprop="datePublished"> Published 2015-12-01</time>
+    <time datetime="2016-09-01T09:23:08.000Z" itemprop="datePublished"> Published 2016-09-01</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>查看提示符显示方式：</p>
-<blockquote>
-<p>echo $PS1</p>
-</blockquote>
-<p>修改<code>$PS1</code>，打开文件 <code>~/.bash_profile</code>，增加一条规则，如果有则编辑即可：</p>
-<blockquote>
-<p>export PS1=”\u \w$”</p>
-</blockquote>
-<p>如果需要设置路径颜色，可以修改为：</p>
-<blockquote>
-<p>export PS1=”[\e[33;1m\u@\h: \e[31m\W\e[0m]\$”</p>
-</blockquote>
-<p>保存修改并退出，应用更新：</p>
-<blockquote>
-<p>source ~/.bash_profile</p>
-</blockquote>
+		<p>在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。<br>在fex上看见一个比较另类的解决方案——<a href="http://fex.baidu.com/blog/2015/05/nodejs-hot-swapping/" target="_blank" rel="external">Node.js Web应用代码热更新的另类思路</a></p>
+<p>在这里简单实现一下来解决开发过程中热启动的问题。</p>
+<p>首先需要重新包装一下nodejs提供的<code>require</code>方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。</p>
 <a id="more"></a>
-<p>附录：<br><code>$PS1</code>符号对应的含义，<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">\a</span>    ASCII 响铃字符（也可以键入 <span class="string">\007）</span>  </span><br><span class="line"><span class="string">\d</span>    <span class="string">"Wed Sep 06"</span> 格式的日期  </span><br><span class="line"><span class="string">\e</span>    ASCII 转义字符（也可以键入 <span class="string">\033）</span></span><br><span class="line"><span class="string">\h</span>    主机名的第一部分（如 <span class="string">"mybox"</span>）</span><br><span class="line"><span class="string">\H</span>    主机的全称（如 <span class="string">"mybox.mydomain.com"</span>）</span><br><span class="line"><span class="string">\j</span>    在此 shell 中通过按 ^Z 挂起的进程数</span><br><span class="line"><span class="string">\l</span>    此 shell 的终端设备名（如 <span class="string">"ttyp4"</span>）</span><br><span class="line"><span class="string">\n</span>    换行符</span><br><span class="line"><span class="string">\r</span>    回车符</span><br><span class="line"><span class="string">\s</span>    shell 的名称（如 <span class="string">"bash"</span>）</span><br><span class="line"><span class="string">\t</span>    <span class="number">24</span> 小时制时间（如 <span class="string">"23:01:01"</span>）</span><br><span class="line"><span class="string">\T</span>    <span class="number">12</span> 小时制时间（如 <span class="string">"11:01:01"</span>）</span><br><span class="line"><span class="string">\@</span>    带有 am/pm 的 <span class="number">12</span> 小时制时间</span><br><span class="line"><span class="string">\u</span>    用户名</span><br><span class="line"><span class="string">\v</span>    bash 的版本（如 <span class="number">2.04</span>）</span><br><span class="line"><span class="string">\V</span>    Bash 版本（包括补丁级别） ?/td&gt;</span><br><span class="line"><span class="string">\w</span>    当前工作目录（如 <span class="string">"/home/drobbins"</span>）</span><br><span class="line"><span class="string">\W</span>    当前工作目录的“基名 (basename)”（如 <span class="string">"drobbins"</span>）</span><br><span class="line"><span class="string">\!</span>    当前命令在历史缓冲区中的位置</span><br><span class="line"><span class="string">\#</span>    命令编号（只要您键入内容，它就会在每次提示时累加）</span><br><span class="line"><span class="string">\$</span>    如果您不是超级用户 (root)，则插入一个 <span class="string">"$"</span>；如果您是超级用户，则显示一个 <span class="string">"#"</span></span><br><span class="line"><span class="string">\xxx</span>  插入一个用三位数 xxx（用零代替未使用的数字，如 <span class="string">"\007"</span>）表示的 ASCII 字符</span><br><span class="line"><span class="string">\\</span>    反斜杠</span><br><span class="line"><span class="string">\[</span>    这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。</span><br><span class="line"><span class="string">\]</span>    这个序列应该出现在非打印字符序列之后。</span><br></pre></td></tr></table></figure></p>
-<p>颜色的表示方法，<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'\e[0m'</span>      no <span class="built_in">color</span></span><br><span class="line"><span class="string">'\e[1;37m'</span>   white</span><br><span class="line"><span class="string">'\e[0;30m'</span>   black</span><br><span class="line"><span class="string">'\e[0;34m'</span>   <span class="built_in">blue</span></span><br><span class="line"><span class="string">'\e[1;34m'</span>   light <span class="built_in">blue</span></span><br><span class="line"><span class="string">'\e[0;32m'</span>   <span class="built_in">green</span></span><br><span class="line"><span class="string">'\e[1;32m'</span>   light <span class="built_in">green</span></span><br><span class="line"><span class="string">'\e[0;36m'</span>   cyan</span><br><span class="line"><span class="string">'\e[1;36m'</span>   light cyan</span><br><span class="line"><span class="string">'\e[0;31m'</span>   <span class="built_in">red</span></span><br><span class="line"><span class="string">'\e[1;31m'</span>   light <span class="built_in">red</span></span><br><span class="line"><span class="string">'\e[0;35m'</span>   purple</span><br><span class="line"><span class="string">'\e[1;35m'</span>   light purple</span><br><span class="line"><span class="string">'\e[0;33m'</span>   brown</span><br><span class="line"><span class="string">'\e[1;33m'</span>   yellow</span><br><span class="line"><span class="string">'\e[0;30m'</span>   gray</span><br><span class="line"><span class="string">'\e[0;37m'</span>   light gray</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// wrapperRequire.js</span></span><br><span class="line"><span class="keyword">const</span> chokidar = <span class="built_in">require</span>(<span class="string">'chokidar'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cleanCache</span>(<span class="params">modulePath</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">module</span> = <span class="built_in">require</span>.cache[modulePath];</span><br><span class="line">    <span class="comment">// remove reference in module.parent</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">module</span>.parent) &#123;</span><br><span class="line">        <span class="built_in">module</span>.parent.children.splice(<span class="built_in">module</span>.parent.children.indexOf(<span class="built_in">module</span>), <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">require</span>.cache[modulePath] = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">watchFile</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> absModulePath = <span class="built_in">require</span>.resolve(obj.modulePath);</span><br><span class="line">    chokidar.watch(absModulePath).on(<span class="string">'all'</span>, (event, path) =&gt; &#123;</span><br><span class="line">        cleanCache(absModulePath);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`file [<span class="subst">$&#123;path&#125;</span>] --&gt; [<span class="subst">$&#123;event&#125;</span>]`</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            obj.name = <span class="built_in">require</span>(obj.modulePath);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(<span class="string">'module update failed'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    !obj.ignore &amp;&amp; watchFile(obj);</span><br><span class="line">    obj.name = <span class="built_in">require</span>(obj.modulePath);</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>由于使用node原生的fs.watch会出现文件变化监听不到的情况（其他一些问题见<a href="https://github.com/paulmillr/chokidar" target="_blank" rel="external">chokidar readme</a>）,<br>所以这里使用<code>chokidar</code>来实现对文件的监听。</p>
+<p>使用<code>wrapperRequire.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> wrapperRequire = <span class="built_in">require</span>(<span class="string">'./require'</span>);</span><br><span class="line"><span class="keyword">let</span> code = wrapperRequire(&#123;modulePath: <span class="string">'./code'</span>, <span class="string">'name'</span>: <span class="string">''</span>&#125;);</span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(code.name);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure></p>
+<p>测试文件 <code>code.js</code><br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span>.exports = <span class="symbol">'hello</span> world';</span><br></pre></td></tr></table></figure></p>
+<p>执行<code>main.js</code>然后更改<code>code.js</code>后也可以展示正确的结果。</p>
+<p>总结一下,以上实现的基础是:</p>
+<ol>
+<li>nodejs可以对require缓存的文件进行清空</li>
+<li>监听文件变化,然后重新require文件</li>
+<li>js函数中传递的Object参数是引用传递</li>
+</ol>
+<p>参考:<br>1.<a href="http://fex.baidu.com/blog/2015/05/nodejs-hot-swapping/" target="_blank" rel="external">Node.js Web应用代码热更新的另类思路</a><br>2.<a href="https://github.com/paulmillr/chokidar" target="_blank" rel="external">chokidar</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/CentOS/">CentOS</a>
-  </div>
 
 </div>
 
@@ -171,7 +127,7 @@ source ~/.bash_profile">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xchb.work/2015/12/01/Terminal-路径显示/" data-title="Terminal 路径显示 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xchb.work/2016/09/01/nodejs-web应用代码热更新/" data-title="nodejs web应用代码热更新 | 学习是一种信仰" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -184,19 +140,11 @@ source ~/.bash_profile">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/12/11/代码片段（JS）/" title="代码片段（JS）">
-  <strong>上一篇：</strong><br/>
-  <span>
-  代码片段（JS）</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/11/10/CentOS-安装nginx/"  title="CentOS 安装nginx">
+<a href="/2016/07/25/event那些事/"  title="event那些事">
  <strong>下一篇：</strong><br/> 
- <span>CentOS 安装nginx
+ <span>event那些事
 </span>
 </a>
 </div>

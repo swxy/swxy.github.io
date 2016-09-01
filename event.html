@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Event那些事Demo</title>
+        <style media="screen">
+            body {
+                padding: 15px 20px;
+            }
+            pre {
+                background-color: #333;
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 5px;
+                max-height: 200px;
+                overflow-y: auto;
+            }
+
+            button {
+                outline: none;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+                background: #fff;
+                color: #333;
+                height: 50px;
+                line-height: 50px;
+                padding: 0 15px;
+                cursor: pointer;
+                transition: all .2s ease;
+            }
+            button:hover {
+                background-color: #ddd;
+                color: #232323;
+            }
+
+            #log {
+                background: rgba(200, 200, 105, .7);
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 5px;
+                width: 300px;
+                height: 300px;
+                overflow-y: auto;
+                position: fixed;
+                right: 28px;
+                top: 20px;
+            }
+
+            .parent {
+                width: 100%;
+                height: 100px;
+                background-color: #d30;
+                overflow: hidden;
+            }
+            .child {
+                width: 60%;
+                margin: 20px auto;
+                height: 60px;
+                background-color: #3d0;
+                overflow: hidden;
+            }
+
+            .child a {
+                text-align: center;
+                margin-top: 20px;
+                display: block;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="log">
+
+        </div>
+        <script>
+            var $log = document.querySelector('#log');
+            var eventType = 'mousewheel';
+            // 火狐是DOMMouseScroll事件
+            // http://www.zhangxinxu.com/wordpress/2015/12/element-scroll-prevent-parent-element-scroll-js/
+            if (document.mozHidden !== undefined) {
+                eventType = 'DOMMouseScroll';
+            }
+            $log.addEventListener(eventType, function(event) {
+                // 一些数据
+                var scrollTop = this.scrollTop,
+                    scrollHeight = this.scrollHeight,
+                    height = this.clientHeight;
+
+                var delta = (event.wheelDelta) ? event.wheelDelta : -(event.detail || 0);
+
+                if ((delta > 0 && scrollTop <= delta) || (delta < 0 && scrollHeight - height - scrollTop <= -1 * delta)) {
+                    // IE浏览器下滚动会跨越边界直接影响父级滚动，因此，临界时候手动边界滚动定位
+                    this.scrollTop = delta > 0? 0: scrollHeight;
+                    // 向上滚 || 向下滚
+                    event.preventDefault();
+                }
+            });
+            window.log = function (txt) {
+                var oldHtml = $log.innerHTML;
+                $log.innerHTML = (oldHtml||'') +  '<p>' + txt + '</p>';
+                $log.scrollTop = $log.scrollHeight;
+            }
+        </script>
+
+        <h1>事件监听</h1>
+        <h2>js绑定事件方式1</h2>
+        <button type="button" id="btn1">js绑定事件测试按钮1</button>
+        <button type="button" id="btn1-unbind">解绑按钮1的click事件</button>
+        <pre>
+var $btn1 = document.querySelector('#btn1');
+$btn1.onclick = function (e) {
+    log('js绑定事件方式1');
+}
+
+document.querySelector('#btn1-unbind').onclick = function (e) {
+    if ($btn1.onclick) {
+        $btn1.onclick = null;
+        log('解绑成功');
+    }
+}
+        </pre>
+        <script>
+            var $btn1 = document.querySelector('#btn1');
+            $btn1.onclick = function (e) {
+                log('js绑定事件方式1');
+            }
+
+            document.querySelector('#btn1-unbind').onclick = function (e) {
+                if ($btn1.onclick) {
+                    $btn1.onclick = null;
+                    log('解绑成功');
+                }
+            }
+        </script>
+        <h2>js绑定事件方式2</h2>
+        <button type="button" id="btn2">js绑定事件测试按钮2</button>
+        <button type="button" id="btn2-unbind">解绑按钮2的click事件</button>
+        <button type="button" id="btn2-unbind-test">我就不信，我得试试</button>
+        <pre>
+var $btn2 = document.querySelector('#btn2');
+var $bnt2Unbind = document.querySelector('#btn2-unbind');
+var btn2EventHandler = function (e) {
+    log('js绑定事件方式2');
+};
+$btn2.addEventListener('click', btn2EventHandler);
+$bnt2Unbind.addEventListener('click', function (e) {
+    $btn2.removeEventListener('click', btn2EventHandler);
+    log('解绑成功，像我这种匿名函数是没法解绑');
+});
+document.querySelector('#btn2-unbind-test').addEventListener('click', function (e) {
+    $bnt2Unbind.removeEventListener('click', function (e) {
+        $btn2.removeEventListener('click', btn2EventHandler);
+        log('解绑成功，像我这种匿名函数是没法解绑');
+    });
+    log('试了也不行，O(∩_∩)O~~');
+});
+        </pre>
+        <script>
+            var $btn2 = document.querySelector('#btn2');
+            var $btn2Unbind = document.querySelector('#btn2-unbind');
+            var btn2EventHandler = function (e) {
+                log('js绑定事件方式2');
+            };
+            $btn2.addEventListener('click', btn2EventHandler);
+            $btn2Unbind.addEventListener('click', function (e) {
+                $btn2.removeEventListener('click', btn2EventHandler);
+                log('解绑成功，像我这种匿名函数是没法解绑');
+            });
+            document.querySelector('#btn2-unbind-test').addEventListener('click', function (e) {
+                $btn2Unbind.removeEventListener('click', function (e) {
+                    $btn2.removeEventListener('click', btn2EventHandler);
+                    log('解绑成功，像我这种匿名函数是没法解绑');
+                });
+                log('试了也不行，O(∩_∩)O~~');
+            });
+        </script>
+
+        <br>
+        <br>
+        <h1>事件阻止</h1>
+        <h2>1. preventDefault</h2>
+        <div id="parent1" class="parent">
+            <div class="child" id="child1">
+                <a id="a1" target="_blank" href="https://www.baidu.com">百度一下（preventDefault）</a>
+            </div>
+        </div>
+        <pre>
+var $ = document.querySelector.bind(document);
+var a1EventHandler = function (e) {
+    e.preventDefault();
+    log('使用preventDefault阻止链接跳转, 双击可以移除该事件哦');
+}
+// 冒泡阶段触发
+$('#a1').addEventListener('click', a1EventHandler, false);
+$('#a1').addEventListener('dblclick', function (e) {
+    this.removeEventListener('click', a1EventHandler);
+    log('已经移除点击事件， 现在可以正常跳转了吧');
+}, false);
+// 捕获阶段触发
+$('#parent1').addEventListener('click', function (e) {
+    log('a1的祖宗，我是红色框,我是在捕获阶段触发的');
+}, true);
+// 冒泡阶段触发
+$('#child1').addEventListener('click', function (e) {
+    log('a1的父元素，我是绿色框,我是在冒泡阶段触发的');
+}, false);
+        </pre>
+        <script>
+            var $ = document.querySelector.bind(document);
+            var a1EventHandler = function (e) {
+                e.preventDefault();
+                log('使用preventDefault阻止链接跳转, 双击可以移除该事件哦');
+            }
+            // 冒泡阶段触发
+            $('#a1').addEventListener('click', a1EventHandler, false);
+            $('#a1').addEventListener('dblclick', function (e) {
+                this.removeEventListener('click', a1EventHandler);
+                log('已经移除点击事件， 现在可以正常跳转了吧');
+            }, false);
+            // 捕获阶段触发
+            $('#parent1').addEventListener('click', function (e) {
+                log('a1的祖宗，我是红色框,我是在捕获阶段触发的');
+            }, true);
+            // 冒泡阶段触发
+            $('#child1').addEventListener('click', function (e) {
+                log('a1的父元素，我是绿色框,我是在冒泡阶段触发的');
+            }, false);
+        </script>
+
+        <h2>2. stopPropagation</h2>
+        <div id="parent2" class="parent">
+            <div class="child" id="child2">
+                <a id="a2" target="_blank" href="https://www.baidu.com">百度一下（stopPropagation）</a>
+            </div>
+        </div>
+        <pre>
+var $ = document.querySelector.bind(document);
+var a1EventHandler = function (e) {
+    e.stopPropagation();
+    log('使用stopPropagation阻止事件冒泡，但是不能阻止默认行为');
+}
+// 冒泡阶段触发
+$('#a2').addEventListener('click', a1EventHandler, false);
+
+$('#a2').addEventListener('click', function (e) {
+    e.stopPropagation();
+    log('使用stopPropagation阻止事件冒泡，测试多次绑定');
+}, false);
+
+// 捕获阶段触发
+$('#parent2').addEventListener('click', function (e) {
+    log('a2的祖宗，我是红色框,我是在捕获阶段触发的');
+}, true);
+// 冒泡阶段触发
+$('#child2').addEventListener('click', function (e) {
+    log('a2的父元素，我是绿色框,我是在冒泡阶段触发的');
+}, false);
+        </pre>
+        <script>
+            var $ = document.querySelector.bind(document);
+            var a1EventHandler = function (e) {
+                e.stopPropagation();
+                log('使用stopPropagation阻止事件冒泡，但是不能阻止默认行为');
+            }
+            // 冒泡阶段触发
+            $('#a2').addEventListener('click', a1EventHandler, false);
+
+            $('#a2').addEventListener('click', function (e) {
+                e.stopPropagation();
+                log('使用stopPropagation阻止事件冒泡，测试多次绑定');
+            }, false);
+
+            // 捕获阶段触发
+            $('#parent2').addEventListener('click', function (e) {
+                log('a2的祖宗，我是红色框,我是在捕获阶段触发的');
+            }, true);
+            // 冒泡阶段触发
+            $('#child2').addEventListener('click', function (e) {
+                log('a2的父元素，我是绿色框,我是在冒泡阶段触发的');
+            }, false);
+        </script>
+
+        <h2>3. stopImmediatePropagation</h2>
+        <div id="parent3" class="parent">
+            <div class="child" id="child3">
+                <a id="a3" target="_blank" href="https://www.baidu.com">百度一下（stopImmediatePropagation）</a>
+            </div>
+        </div>
+        <pre>
+var $ = document.querySelector.bind(document);
+var a1EventHandler = function (e) {
+    e.stopImmediatePropagation();
+    log('使用stopImmediatePropagation阻止该元素的其他点击事件的执行而且也会阻止事件冒泡');
+}
+// 冒泡阶段触发
+$('#a3').addEventListener('click', a1EventHandler, false);
+
+$('#a3').addEventListener('click', function (e) {
+    log('使用stopImmediatePropagation阻止事件冒泡，测试多次绑定');
+}, false);
+
+// 捕获阶段触发
+$('#parent3').addEventListener('click', function (e) {
+    log('a3的祖宗，我是红色框,我是在捕获阶段触发的');
+}, true);
+// 冒泡阶段触发
+$('#child3').addEventListener('click', function (e) {
+    log('a3的父元素，我是绿色框,我是在冒泡阶段触发的');
+}, false);
+        </pre>
+        <script>
+            var $ = document.querySelector.bind(document);
+            var a1EventHandler = function (e) {
+                e.stopImmediatePropagation();
+                log('使用stopImmediatePropagation阻止该元素的其他点击事件的执行而且也会阻止事件冒泡');
+            }
+            // 冒泡阶段触发
+            $('#a3').addEventListener('click', a1EventHandler, false);
+
+            $('#a3').addEventListener('click', function (e) {
+                log('使用stopImmediatePropagation阻止事件冒泡，测试多次绑定');
+            }, false);
+
+            // 捕获阶段触发
+            $('#parent3').addEventListener('click', function (e) {
+                log('a3的祖宗，我是红色框,我是在捕获阶段触发的');
+            }, true);
+            // 冒泡阶段触发
+            $('#child3').addEventListener('click', function (e) {
+                log('a3的父元素，我是绿色框,我是在冒泡阶段触发的');
+            }, false);
+        </script>
+        <h2>4. return false</h2>
+        <div id="parent4" class="parent">
+            <div class="child" id="child4">
+                <a id="a4" target="_blank" href="https://www.baidu.com">百度一下（return false）</a>
+            </div>
+        </div>
+        <pre>
+var $ = document.querySelector.bind(document);
+var a1EventHandler = function (e) {
+    log('使用return false');
+    return false;
+}
+// 冒泡阶段触发
+$('#a4').addEventListener('click', a1EventHandler, false);
+
+$('#a4').addEventListener('click', function (e) {
+    log('使用return false测试多次绑定');
+    return false;
+}, false);
+
+// 捕获阶段触发
+$('#parent4').addEventListener('click', function (e) {
+    log('a4的祖宗，我是红色框,我是在捕获阶段触发的');
+}, true);
+// 冒泡阶段触发
+$('#child4').addEventListener('click', function (e) {
+    log('a4的父元素，我是绿色框,我是在冒泡阶段触发的');
+}, false);
+        </pre>
+        <p>
+            据说 return false 在jQuery中是等价于preventDefault + stopPropagation，有时间再试
+        </p>
+        <script>
+            var $ = document.querySelector.bind(document);
+            var a1EventHandler = function (e) {
+                log('使用return false');
+                return false;
+            }
+            // 冒泡阶段触发
+            $('#a4').addEventListener('click', a1EventHandler, false);
+
+            $('#a4').addEventListener('click', function (e) {
+                log('使用return false测试多次绑定');
+                return false;
+            }, false);
+
+            // 捕获阶段触发
+            $('#parent4').addEventListener('click', function (e) {
+                log('a4的祖宗，我是红色框,我是在捕获阶段触发的');
+            }, true);
+            // 冒泡阶段触发
+            $('#child4').addEventListener('click', function (e) {
+                log('a4的父元素，我是绿色框,我是在冒泡阶段触发的');
+            }, false);
+        </script>
+    </body>
+</html>
