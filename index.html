@@ -81,6 +81,63 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/09/22/angular项目中使用iframe相关问题/" title="angular项目中使用iframe相关问题" itemprop="url">angular项目中使用iframe相关问题</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
+		
+  <p class="article-time">
+    <time datetime="2016-09-22T09:30:34.000Z" itemprop="datePublished"> Published 2016-09-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="iframe高度自适应">iframe高度自适应</h1><p>问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。</p>
+<p>解决方案：自定义一个angular指令，监听iframe的<code>onload</code>事件来获取iframe中内容的高度。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/09/22/angular项目中使用iframe相关问题/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Angular/">Angular</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/09/01/nodejs-web应用代码热更新/" title="nodejs web应用代码热更新" itemprop="url">nodejs web应用代码热更新</a>
   </h1>
   <p class="article-author">By
@@ -108,6 +165,11 @@
     <footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/nodejs/">nodejs</a>
+  </div>
 
 </div>
 
@@ -600,64 +662,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/12/11/代码片段（JS）/" title="代码片段（JS）" itemprop="url">代码片段（JS）</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
-		
-  <p class="article-time">
-    <time datetime="2015-12-11T09:31:08.000Z" itemprop="datePublished"> Published 2015-12-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>#获取随机字符</p>
-<p>###获取26个字母与10个数字之间的随机字符方法<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> randstr</span> = Math.random().toString(<span class="number">36</span>).slice(<span class="number">2</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> len</span> = randstr.length;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> r</span> = randstr.charAt(~~(len*Math.random()))</span><br></pre></td></tr></table></figure></p>
-<p>###获取某一个区间中的随机字符，利用unicode实现<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(<span class="number">0x2200</span> + (<span class="number">0x220f</span> - <span class="number">0x2200</span> + <span class="number">1</span>) * Math.random());</span><br></pre></td></tr></table></figure></p>
-<p>PS: 数字的unicode范围为 0030–0039；英文小写字母的范围为，0061–007a</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/snippet/">snippet</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -685,19 +689,19 @@
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JS/" title="JS">JS<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/CSS/" title="CSS">CSS<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/WEB/" title="WEB">WEB<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JS/" title="JS">JS<sup>2</sup></a></li>
 			
 		
 			
@@ -709,15 +713,19 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+				<li><a href="/tags/Angular/" title="Angular">Angular<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/WEB/" title="WEB">WEB<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 		</ul>

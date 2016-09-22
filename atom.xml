@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-09-01T09:23:48.000Z</updated>
+  <updated>2016-09-22T09:38:08.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -15,11 +15,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[angular项目中使用iframe相关问题]]></title>
+    <link href="http://xchb.work/2016/09/22/angular%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8iframe%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/"/>
+    <id>http://xchb.work/2016/09/22/angular项目中使用iframe相关问题/</id>
+    <published>2016-09-22T09:30:34.000Z</published>
+    <updated>2016-09-22T09:38:08.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="iframe高度自适应">iframe高度自适应</h1><p>问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。</p>
+<p>解决方案：自定义一个angular指令，监听iframe的<code>onload</code>事件来获取iframe中内容的高度。</p>
+<a id="more"></a>
+<p>源码：</p>
+<p>angular 代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义指令</span></span><br><span class="line">App.directive(<span class="string">'iframeOnload'</span>, [<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        scope: &#123;</span><br><span class="line">            callBack: <span class="string">'&amp;iframeOnload'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        link: <span class="function"><span class="keyword">function</span><span class="params">(scope, element, attrs)</span></span>&#123;</span><br><span class="line">            element.on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">                <span class="comment">// 关键是这个</span></span><br><span class="line">                element.height(element.contents().outerHeight());</span><br><span class="line">                <span class="keyword">return</span> scope.callBack();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;&#125;]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">App.controller(<span class="string">'MyController'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$scope</span>)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$scope</span>.iframeLoadedCallBack = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// do stuff</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure></p>
+<p>在DOM中使用<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">ng-controller</span>=<span class="value">"MyController"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">iframe-onload</span>=<span class="value">"iframeLoadedCallBack()"</span> <span class="attribute">src</span>=<span class="value">"..."</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="http://stackoverflow.com/questions/15882326/angular-onload-function-on-an-iframe" target="_blank" rel="external">解决方案来源：Angular, onLoad function on an iFrame</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="iframe高度自适应">iframe高度自适应</h1><p>问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。</p>
+<p>解决方案：自定义一个angular指令，监听iframe的<code>onload</code>事件来获取iframe中内容的高度。</p>]]>
+    
+    </summary>
+    
+      <category term="Angular" scheme="http://xchb.work/tags/Angular/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[nodejs web应用代码热更新]]></title>
     <link href="http://xchb.work/2016/09/01/nodejs-web%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81%E7%83%AD%E6%9B%B4%E6%96%B0/"/>
     <id>http://xchb.work/2016/09/01/nodejs-web应用代码热更新/</id>
     <published>2016-09-01T09:23:08.000Z</published>
-    <updated>2016-09-01T09:23:48.000Z</updated>
+    <updated>2016-09-01T09:25:48.000Z</updated>
     <content type="html"><![CDATA[<p>在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。<br>在fex上看见一个比较另类的解决方案——<a href="http://fex.baidu.com/blog/2015/05/nodejs-hot-swapping/" target="_blank" rel="external">Node.js Web应用代码热更新的另类思路</a></p>
 <p>在这里简单实现一下来解决开发过程中热启动的问题。</p>
 <p>首先需要重新包装一下nodejs提供的<code>require</code>方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。</p>
@@ -43,6 +67,8 @@
 <p>首先需要重新包装一下nodejs提供的<code>require</code>方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。</p>]]>
     
     </summary>
+    
+      <category term="nodejs" scheme="http://xchb.work/tags/nodejs/"/>
     
   </entry>
   
