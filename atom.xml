@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-09-30T03:04:35.000Z</updated>
+  <updated>2016-09-30T03:06:33.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://xchb.work/2016/09/30/nodejs%E4%BD%BF%E7%94%A8shebang/"/>
     <id>http://xchb.work/2016/09/30/nodejs使用shebang/</id>
     <published>2016-09-30T02:19:20.000Z</published>
-    <updated>2016-09-30T03:04:35.000Z</updated>
+    <updated>2016-09-30T03:06:33.000Z</updated>
     <content type="html"><![CDATA[<h1 id="基本含义">基本含义</h1><p><code>shebang</code>也可以称之为<code>hashbang</code>, 代指<code>#!</code>。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。<br>其语法格式是：</p>
 <blockquote>
 <p>#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数</p>
@@ -31,14 +31,12 @@
 <a id="more"></a>
 <h1 id="示例">示例</h1><p>在我的电脑中通过<code>nvm</code>安装了两个node版本。一个是4.4.5版本，一个是6.2.0版本。</p>
 <ol>
-<li>新建一个脚本文件–<code>testShebang</code>，通过<code>shebang</code>指定其默认node版本为4.4.5</li>
-</ol>
+<li><p>新建一个脚本文件–<code>testShebang</code>，通过<code>shebang</code>指定其默认node版本为4.4.5</p>
 <figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#! /Users/baidu/.nvm/versions/node/v4.4.5/bin/node</span></span><br><span class="line"><span class="comment">// 打印node的版本</span></span><br><span class="line">console.log(process.<span class="keyword">version</span>)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>给<code>testShebang</code>添加可执行权限</li>
-</ol>
+</li>
+<li><p>给<code>testShebang</code>添加可执行权限</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod <span class="number">755</span> <span class="built_in">test</span>Shebang</span><br></pre></td></tr></table></figure>
-<ol>
+</li>
 <li><p>切换终端的node版本为6.2.0。</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span><span class="identifier"> </span><span class="title">-v</span></span><br><span class="line">v6.<span class="number">2.0</span></span><br></pre></td></tr></table></figure>
 </li>

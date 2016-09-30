@@ -29,7 +29,7 @@
 
 如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许
 如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
-<meta property="og:updated_time" content="2016-09-30T03:04:35.000Z">
+<meta property="og:updated_time" content="2016-09-30T03:06:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodejs使用shebang">
 <meta name="twitter:description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：
@@ -122,14 +122,12 @@
 <a id="more"></a>
 <h1 id="示例">示例</h1><p>在我的电脑中通过<code>nvm</code>安装了两个node版本。一个是4.4.5版本，一个是6.2.0版本。</p>
 <ol>
-<li>新建一个脚本文件–<code>testShebang</code>，通过<code>shebang</code>指定其默认node版本为4.4.5</li>
-</ol>
+<li><p>新建一个脚本文件–<code>testShebang</code>，通过<code>shebang</code>指定其默认node版本为4.4.5</p>
 <figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#! /Users/baidu/.nvm/versions/node/v4.4.5/bin/node</span></span><br><span class="line"><span class="comment">// 打印node的版本</span></span><br><span class="line">console.log(process.<span class="keyword">version</span>)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>给<code>testShebang</code>添加可执行权限</li>
-</ol>
+</li>
+<li><p>给<code>testShebang</code>添加可执行权限</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod <span class="number">755</span> <span class="built_in">test</span>Shebang</span><br></pre></td></tr></table></figure>
-<ol>
+</li>
 <li><p>切换终端的node版本为6.2.0。</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span><span class="identifier"> </span><span class="title">-v</span></span><br><span class="line">v6.<span class="number">2.0</span></span><br></pre></td></tr></table></figure>
 </li>
