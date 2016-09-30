@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-09-22T09:38:08.000Z</updated>
+  <updated>2016-09-30T03:04:35.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -13,6 +13,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[nodejs使用shebang]]></title>
+    <link href="http://xchb.work/2016/09/30/nodejs%E4%BD%BF%E7%94%A8shebang/"/>
+    <id>http://xchb.work/2016/09/30/nodejs使用shebang/</id>
+    <published>2016-09-30T02:19:20.000Z</published>
+    <updated>2016-09-30T03:04:35.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="基本含义">基本含义</h1><p><code>shebang</code>也可以称之为<code>hashbang</code>, 代指<code>#!</code>。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。<br>其语法格式是：</p>
+<blockquote>
+<p>#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数</p>
+</blockquote>
+<ol>
+<li>如果脚本文件中没有<code>#!</code>这一行，执行时会以系统默认的解释程序允许</li>
+<li>如果<code>#!</code>之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会把文件名及其参数一起作为参数传给那个解释程序去执行。</li>
+</ol>
+<a id="more"></a>
+<h1 id="示例">示例</h1><p>在我的电脑中通过<code>nvm</code>安装了两个node版本。一个是4.4.5版本，一个是6.2.0版本。</p>
+<ol>
+<li>新建一个脚本文件–<code>testShebang</code>，通过<code>shebang</code>指定其默认node版本为4.4.5</li>
+</ol>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#! /Users/baidu/.nvm/versions/node/v4.4.5/bin/node</span></span><br><span class="line"><span class="comment">// 打印node的版本</span></span><br><span class="line">console.log(process.<span class="keyword">version</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>给<code>testShebang</code>添加可执行权限</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod <span class="number">755</span> <span class="built_in">test</span>Shebang</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>切换终端的node版本为6.2.0。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span><span class="identifier"> </span><span class="title">-v</span></span><br><span class="line">v6.<span class="number">2.0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定node执行该文件</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span><span class="identifier"> </span><span class="title">testShebang</span></span><br><span class="line">v6.<span class="number">2.0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接执行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./testShebang</span><br><span class="line">v4<span class="number">.4</span><span class="number">.5</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="参考">参考</h1><ol>
+<li><a href="https://en.wikipedia.org/wiki/Shebang_(Unix" target="_blank" rel="external">wikipedia: Shebang (Unix)</a>)</li>
+<li><a href="https://linux.cn/article-3664-1.html" target="_blank" rel="external">释伴：Linux 上的 Shebang 符号(#!)</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="基本含义">基本含义</h1><p><code>shebang</code>也可以称之为<code>hashbang</code>, 代指<code>#!</code>。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。<br>其语法格式是：</p>
+<blockquote>
+<p>#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数</p>
+</blockquote>
+<ol>
+<li>如果脚本文件中没有<code>#!</code>这一行，执行时会以系统默认的解释程序允许</li>
+<li>如果<code>#!</code>之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会把文件名及其参数一起作为参数传给那个解释程序去执行。</li>
+</ol>]]>
+    
+    </summary>
+    
+      <category term="nodejs" scheme="http://xchb.work/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Angular 小技巧]]></title>
+    <link href="http://xchb.work/2016/09/27/Angular-%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <id>http://xchb.work/2016/09/27/Angular-小技巧/</id>
+    <published>2016-09-27T01:35:35.000Z</published>
+    <updated>2016-09-27T01:38:35.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="1-textarea的placeholder换行">1.<code>textarea</code>的<code>placeholder</code>换行</h1><p>问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。<br>解决方案：使用angular中的数据绑定就可以轻松实现<br><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">textarea</span> <span class="attribute">rows</span>=<span class="value">"6"</span> <span class="attribute">cols</span>=<span class="value">"45"</span> <span class="attribute">placeholder</span>=<span class="value">"</span></span></span><span class="expression">&#123;&#123;'第一行\<span class="variable">n</span>第二行\<span class="variable">n</span>第三行\<span class="variable">n</span>第四行'&#125;&#125;</span><span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">textarea</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="1-textarea的placeholder换行">1.<code>textarea</code>的<code>placeholder</code>换行</h1><p>问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。<br>解]]>
+    </summary>
+    
+      <category term="Angular" scheme="http://xchb.work/tags/Angular/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[angular项目中使用iframe相关问题]]></title>

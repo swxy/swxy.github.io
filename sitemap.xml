@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xchb.work/2016/09/30/nodejs%E4%BD%BF%E7%94%A8shebang/</loc>
+    <lastmod>2016-09-30T03:04:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xchb.work/2016/09/27/Angular-%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2016-09-27T01:38:35.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xchb.work/2016/09/22/angular%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8iframe%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2016-09-22T09:38:08.000Z</lastmod>
   </url>

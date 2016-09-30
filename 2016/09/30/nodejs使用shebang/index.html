@@ -4,26 +4,41 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>hexo上传源文件 | 学习是一种信仰</title>
+    <title>nodejs使用shebang | 学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="二哈熊">
     
 
     
-    <meta name="description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。
-二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
+    <meta name="description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：
+
+#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数
+
+
+如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许
+如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo上传源文件">
-<meta property="og:url" content="http://xchb.work/2016/01/28/hexo上传源文件/index.html">
+<meta property="og:title" content="nodejs使用shebang">
+<meta property="og:url" content="http://xchb.work/2016/09/30/nodejs使用shebang/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。
-二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
-<meta property="og:updated_time" content="2016-02-23T02:53:58.000Z">
+<meta property="og:description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：
+
+#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数
+
+
+如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许
+如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
+<meta property="og:updated_time" content="2016-09-30T03:04:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo上传源文件">
-<meta name="twitter:description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。
-二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
+<meta name="twitter:title" content="nodejs使用shebang">
+<meta name="twitter:description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：
+
+#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数
+
+
+如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许
+如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -83,40 +98,52 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/28/hexo上传源文件/" title="hexo上传源文件" itemprop="url">hexo上传源文件</a>
+      <a href="/2016/09/30/nodejs使用shebang/" title="nodejs使用shebang" itemprop="url">nodejs使用shebang</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
 		
   <p class="article-time">
-    <time datetime="2016-01-28T09:57:15.000Z" itemprop="datePublished"> Published 2016-01-28</time>
+    <time datetime="2016-09-30T02:19:20.000Z" itemprop="datePublished"> Published 2016-09-30</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h1 id="一、背景">一、背景</h1><p>之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。</p>
-<h1 id="二、实现">二、实现</h1><p>上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源，而hexo分支用来管理hexo的源码，即一些markdown文件和主题等，需要设置这个分支为默认分支，以便拷贝仓库代码到本地时更方便。</p>
-<a id="more"></a>
+		<h1 id="基本含义">基本含义</h1><p><code>shebang</code>也可以称之为<code>hashbang</code>, 代指<code>#!</code>。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。<br>其语法格式是：</p>
+<blockquote>
+<p>#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数</p>
+</blockquote>
 <ol>
-<li>把代码仓库拷贝到本地  <code>git clone https://github.com/swxy/swxy.github.io.git</code>, 因为我之前本地已经用了，所以可以忽视这个;</li>
-<li>查看分支 <code>git branch</code>, 如果没有分支则新建一个<code>git remote add origin https://github.com/swxy/swxy.github.io.git</code>, 此时应该会有一个 <strong>master</strong> 分支了。</li>
-<li>新建一个 <strong>hexo</strong> 分支<code>git branch hexo</code> 。</li>
-<li>切换到 <strong>hexo</strong> 分支<code>git checkout hexo</code> 。</li>
-<li>添加源文件<code>git add *</code>, 因为 <code>.gitignore</code> 默认已经把 hexo 编译的文件忽略了，所以可以可以用 <code>git add *</code>。</li>
-<li>然后提交文件的变更 <code>git commit -m &quot;xxx&quot;</code>。</li>
-<li>push变更到远程仓库中<code>git push origin hexo</code> (用hexo分支来管理源码）。</li>
+<li>如果脚本文件中没有<code>#!</code>这一行，执行时会以系统默认的解释程序允许</li>
+<li>如果<code>#!</code>之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会把文件名及其参数一起作为参数传给那个解释程序去执行。</li>
 </ol>
-<h1 id="三、附录">三、附录</h1><h3 id="常见问题收集：">常见问题收集：</h3><ol>
-<li><code>hexo g</code>编译时，出现错误：<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Release/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/default/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Debug/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="示例">示例</h1><p>在我的电脑中通过<code>nvm</code>安装了两个node版本。一个是4.4.5版本，一个是6.2.0版本。</p>
+<ol>
+<li>新建一个脚本文件–<code>testShebang</code>，通过<code>shebang</code>指定其默认node版本为4.4.5</li>
+</ol>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#! /Users/baidu/.nvm/versions/node/v4.4.5/bin/node</span></span><br><span class="line"><span class="comment">// 打印node的版本</span></span><br><span class="line">console.log(process.<span class="keyword">version</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>给<code>testShebang</code>添加可执行权限</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod <span class="number">755</span> <span class="built_in">test</span>Shebang</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>切换终端的node版本为6.2.0。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span><span class="identifier"> </span><span class="title">-v</span></span><br><span class="line">v6.<span class="number">2.0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定node执行该文件</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span><span class="identifier"> </span><span class="title">testShebang</span></span><br><span class="line">v6.<span class="number">2.0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接执行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./testShebang</span><br><span class="line">v4<span class="number">.4</span><span class="number">.5</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>解决方案，安装hexo加上 <code>--no-optional</code>;</p>
-<blockquote>
-<p>npm install hexo –no-optional</p>
-</blockquote>
-<p>解决方案来源<a href="http://www.jianshu.com/p/98e993305653" target="_blank" rel="external">hexo安装问题解决方法</a></p>
+<h1 id="参考">参考</h1><ol>
+<li><a href="https://en.wikipedia.org/wiki/Shebang_(Unix" target="_blank" rel="external">wikipedia: Shebang (Unix)</a>)</li>
+<li><a href="https://linux.cn/article-3664-1.html" target="_blank" rel="external">释伴：Linux 上的 Shebang 符号(#!)</a></li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -125,7 +152,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/hexo/">hexo</a>
+  <span></span> <a href="/tags/nodejs/">nodejs</a>
   </div>
 
 </div>
@@ -134,7 +161,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xchb.work/2016/01/28/hexo上传源文件/" data-title="hexo上传源文件 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xchb.work/2016/09/30/nodejs使用shebang/" data-title="nodejs使用shebang | 学习是一种信仰" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -147,19 +174,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/03/04/一键收藏网址至Github/" title="一键收藏网址至Github">
-  <strong>上一篇：</strong><br/>
-  <span>
-  一键收藏网址至Github</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/12/11/代码片段（JS）/"  title="代码片段（JS）">
+<a href="/2016/09/27/Angular-小技巧/"  title="Angular 小技巧">
  <strong>下一篇：</strong><br/> 
- <span>代码片段（JS）
+ <span>Angular 小技巧
 </span>
 </a>
 </div>
@@ -174,7 +193,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、背景"><span class="toc-number">1.</span> <span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、实现"><span class="toc-number">2.</span> <span class="toc-text">二、实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、附录"><span class="toc-number">3.</span> <span class="toc-text">三、附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见问题收集："><span class="toc-number">3.0.1.</span> <span class="toc-text">常见问题收集：</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本含义"><span class="toc-number">1.</span> <span class="toc-text">基本含义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#示例"><span class="toc-number">2.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
  
   </div>
 
