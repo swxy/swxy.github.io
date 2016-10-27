@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://xchb.work/2016/09/30/nodejs%E4%BD%BF%E7%94%A8shebang/</loc>
-    <lastmod>2016-09-30T03:06:33.000Z</lastmod>
+    <loc>http://xchb.work/2016/10/27/reactjs-%E4%B8%ADrender%E6%8E%A2%E7%B4%A2/</loc>
+    <lastmod>2016-10-27T07:23:41.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://xchb.work/2016/09/27/Angular-%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2016-09-27T01:38:35.000Z</lastmod>
+    <lastmod>2016-10-04T02:50:45.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xchb.work/2016/09/30/nodejs%E4%BD%BF%E7%94%A8shebang/</loc>
+    <lastmod>2016-09-30T03:06:33.000Z</lastmod>
   </url>
   
   <url>

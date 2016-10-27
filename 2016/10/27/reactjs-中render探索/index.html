@@ -1,0 +1,481 @@
+
+ <!DOCTYPE HTML>
+<html lang="default">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>reactjs 中render探索 | 学习是一种信仰</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="二哈熊">
+    
+
+    
+    <meta name="description" content="最近在学习Reactjs，对其生命周期比较感兴趣。用React写项目时，必须得将React组件绑定到页面元素上，一般做法是:
+1ReactDom.render(&amp;lt;App /&amp;gt;, document.getElementById(&apos;#app&apos;));
+这段代码是不是很熟悉，但这里面究竟发生了些什么了？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="reactjs 中render探索">
+<meta property="og:url" content="http://xchb.work/2016/10/27/reactjs-中render探索/index.html">
+<meta property="og:site_name" content="学习是一种信仰">
+<meta property="og:description" content="最近在学习Reactjs，对其生命周期比较感兴趣。用React写项目时，必须得将React组件绑定到页面元素上，一般做法是:
+1ReactDom.render(&amp;lt;App /&amp;gt;, document.getElementById(&apos;#app&apos;));
+这段代码是不是很熟悉，但这里面究竟发生了些什么了？">
+<meta property="og:updated_time" content="2016-10-27T07:23:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="reactjs 中render探索">
+<meta name="twitter:description" content="最近在学习Reactjs，对其生命周期比较感兴趣。用React写项目时，必须得将React组件绑定到页面元素上，一般做法是:
+1ReactDom.render(&amp;lt;App /&amp;gt;, document.getElementById(&apos;#app&apos;));
+这段代码是不是很熟悉，但这里面究竟发生了些什么了？">
+
+    
+    <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/piggy.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/piggy.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/piggy.png" alt="学习是一种信仰" title="学习是一种信仰"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="学习是一种信仰">学习是一种信仰</a></h1>
+				<h2 class="blog-motto">我们终其一生都在摆脱他人的期待，追求自由。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:xchb.work">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/10/27/reactjs-中render探索/" title="reactjs 中render探索" itemprop="url">reactjs 中render探索</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
+		
+  <p class="article-time">
+    <time datetime="2016-10-27T02:09:23.000Z" itemprop="datePublished"> Published 2016-10-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>最近在学习Reactjs，对其生命周期比较感兴趣。用React写项目时，必须得将React组件绑定到页面元素上，一般做法是:</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReactDom.render(&lt;App /&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'#app'</span>));</span><br></pre></td></tr></table></figure>
+<p>这段代码是不是很熟悉，但这里面究竟发生了些什么了？</p>
+<a id="more"></a>
+<p>首先使用<code>npm</code>下载React、ReactDom, 在<code>react/lib</code>目录下有React相关的所有源码，这里为什么不用React的github源码研究了？主要看了一下github上的源码，目录分的太多，而且源码之间的<code>require</code>都没有写具体路径，找相关文件比较费劲，而React的<code>npm</code>模块其实就是github源码build之后代码，变动不大，而且所有代码都再同一个目录下了。有代码之后，就可以开始探索探索了。</p>
+<h2 id="一、找到react-dom模块">一、找到<code>react-dom</code>模块</h2><p>其主要代码为:<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="built_in">require</span>(<span class="string">'react/lib/ReactDOM'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>啥也没干，只是引用和导出了<code>react/lib/ReactDOM</code></p>
+<h2 id="二、找到react模块，查看lib/ReactDOM-js">二、找到<code>react</code>模块，查看<code>lib/ReactDOM.js</code></h2><p>其导出的api有：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> ReactMount = <span class="keyword">require</span>(<span class="string">'./ReactMount'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">var</span> ReactDOM = &#123;</span><br><span class="line">  findDOMNode: findDOMNode,</span><br><span class="line">  render: ReactMount<span class="built_in">.</span>render,</span><br><span class="line">  unmountComponentAtNode: ReactMount<span class="built_in">.</span>unmountComponentAtNode,</span><br><span class="line">  version: ReactVersion,</span><br><span class="line">  <span class="attribute">...</span><span class="built_in">.</span><br><span class="line"></span>&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>这里还是没有干啥，只是简单的组合包装了一下其他模块提供的方法，然后导出。</p>
+<h2 id="三、查看lib/ReactMount-js">三、查看<code>lib/ReactMount.js</code></h2><h3 id="1-_ReactMount-render方法">1. <code>ReactMount.render</code>方法</h3><p>查找<code>render</code>方法：<br><figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Renders a React component into the DOM in the supplied `container`.</span><br><span class="line"> * See https://facebook.github.io/react/docs/top-level-api.html<span class="comment">#reactdom.render</span></span><br><span class="line"> *</span><br><span class="line"> * If the React component was previously rendered into `container`, this will</span><br><span class="line"> * perform an update on it and only mutate the DOM as necessary to reflect the</span><br><span class="line"> * latest React component.</span><br><span class="line"> *</span><br><span class="line"> * @<span class="name">param</span> &#123;ReactElement&#125; <span class="name">nextElement</span> <span class="name">Component</span> <span class="name">element</span> <span class="name">to</span> <span class="name">render</span>.</span><br><span class="line"> * @<span class="name">param</span> &#123;DOMElement&#125; <span class="name">container</span> <span class="name">DOM</span> <span class="name">element</span> <span class="name">to</span> <span class="name">render</span> <span class="name">into</span>.</span><br><span class="line"> * @<span class="name">param</span> &#123;?function&#125; <span class="name">callback</span> <span class="name">function</span> <span class="name">triggered</span> <span class="name">on</span> <span class="name">completion</span></span><br><span class="line"> * @<span class="name">return</span> &#123;ReactComponent&#125; <span class="name">Component</span> <span class="name">instance</span> <span class="name">rendered</span> <span class="name">in</span> `container`.</span><br><span class="line"> */</span><br><span class="line">// render真身</span><br><span class="line">render: function (nextElement, container, callback) &#123;</span><br><span class="line">  return ReactMount._renderSubtreeIntoContainer(null, nextElement, container, callback);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>终于找到这货的真身了。这货主要是渲染一个组件到页面中，如果已经渲染则更新组件。提供了三个参数：</p>
+<ul>
+<li>nextElement: 需要渲染的组件,</li>
+<li>container: 页面元素(就是这个 document.getElementById(‘#app’))</li>
+<li>callback: 完成之后的回调</li>
+</ul>
+<p>具体实现继续往下看<code>ReactMount._renderSubtreeIntoContainer</code>又干了些啥。</p>
+<h3 id="2-_ReactMount-_renderSubtreeIntoContainer方法">2. <code>ReactMount._renderSubtreeIntoContainer</code>方法</h3><p>研究<code>ReactMount._renderSubtreeIntoContainer</code>, 因为这里只关注首次ReactDom.render发生了些什么，<br>可以精简一下源码:<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">_renderSubtreeIntoContainer: function (parentComponent, nextElement, container, callback) &#123;</span><br><span class="line">    <span class="variable"><span class="keyword">var</span> nextWrappedElement</span> = ReactElement(TopLevelWrapper, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, nextElement);</span><br><span class="line">    <span class="variable"><span class="keyword">var</span> nextContext</span> = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回一个documentElement</span></span><br><span class="line">    <span class="variable"><span class="keyword">var</span> reactRootElement</span> = getReactRootElementInContainer(container);</span><br><span class="line">    <span class="comment">// 如果DOM元素已经被渲染过组件了，会有一个data-reactid 如果没有则为空</span></span><br><span class="line">    <span class="variable"><span class="keyword">var</span> containerHasReactMarkup</span> = reactRootElement &amp;&amp; !!internalGetID(reactRootElement);</span><br><span class="line">    <span class="comment">// 标识DOM元素渲染组件是不是React根元素（简单的可以认为是不是 App 组件）</span></span><br><span class="line">    <span class="variable"><span class="keyword">var</span> containerHasNonRootReactChild</span> = hasNonRootReactChild(container);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 首次渲染时，shouldReuseMarkup为false，因为containerHasReactMarkup为false</span></span><br><span class="line">    <span class="variable"><span class="keyword">var</span> shouldReuseMarkup</span> = containerHasReactMarkup &amp;&amp; !containerHasNonRootReactChild;</span><br><span class="line">    <span class="variable"><span class="keyword">var</span> component</span> = ReactMount._renderNewRootComponent(nextWrappedElement,</span><br><span class="line">        container, shouldReuseMarkup, nextContext)._renderedComponent.getPublicInstance();</span><br><span class="line">    <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">      callback.call(component);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> component;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里又引入一下新的新的模块像 <code>ReactElement</code>(其引用的是<code>require(&#39;./ReactElement&#39;)</code>), 和一些其他全局方法。</p>
+<p><code>TopLevelWrapper</code>生成一个唯一的id来标识组件，便于组件更新:<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> topLevelRootCounter = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> TopLevelWrapper = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.rootID = topLevelRootCounter++;</span><br><span class="line">&#125;;</span><br><span class="line">TopLevelWrapper.prototype.isReactComponent = &#123;&#125;;</span><br><span class="line">TopLevelWrapper.prototype.render = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// this.props is actually a ReactElement,</span></span><br><span class="line">  <span class="comment">// 这里对应其实就是 _renderSubtreeIntoContainer 中的 nextElement</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.props;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><code>ReactElement</code>做的就是返回一个<code>element</code>, 其主要代码就是这些：<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="type">ReactElement</span> = function (<span class="keyword">type</span>, key, <span class="keyword">ref</span>, self, source, owner, props) &#123;</span><br><span class="line">  <span class="keyword">var</span> element = &#123;</span><br><span class="line">    // <span class="type">This</span> tag allow us to uniquely identify this <span class="keyword">as</span> a <span class="type">React</span> <span class="type">Element</span></span><br><span class="line">    $$typeof: <span class="type">REACT_ELEMENT_TYPE</span>,</span><br><span class="line"></span><br><span class="line">    // <span class="type">Built</span>-<span class="keyword">in</span> properties that belong on the element</span><br><span class="line">    // <span class="keyword">type</span>保存就是一个 <span class="type">TopLevelWrapper</span> 构造函数</span><br><span class="line">    <span class="keyword">type</span>: <span class="keyword">type</span>,</span><br><span class="line">    key: key,</span><br><span class="line">    <span class="keyword">ref</span>: <span class="keyword">ref</span>,</span><br><span class="line">    // 这里保存的是 nextElement</span><br><span class="line">    props: props,</span><br><span class="line"></span><br><span class="line">    // <span class="type">Record</span> the component responsible <span class="keyword">for</span> creating this element.</span><br><span class="line">    _owner: owner</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> element;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-ReactMount-_renderNewRootComponent方法：">3.<code>ReactMount._renderNewRootComponent</code>方法：</h3><p>附上源码：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">_renderNewRootComponent: <span class="function"><span class="keyword">function</span> <span class="params">(nextElement, container, shouldReuseMarkup, context)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这个nextElement已经是被ReactElement包装过一层的element的了</span></span><br><span class="line">    <span class="comment">// 返回一个将被挂载到DOM元素的ReactNode实例</span></span><br><span class="line">    <span class="keyword">var</span> componentInstance = instantiateReactComponent(nextElement, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 挂载ReactNode到Dom</span></span><br><span class="line">    batchedMountComponentIntoNode(componentInstance, container, shouldReuseMarkup, context);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> componentInstance;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
+<p>该方法关键在于<code>batchedMountComponentIntoNode</code>这个方法，该方法为：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">batchedMountComponentIntoNode</span><span class="params">(componentInstance, container, shouldReuseMarkup, context)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 本来这里有个transaction的，需要传递的，用null代替一下，重点不是这个。</span></span><br><span class="line">  mountComponentIntoNode(componentInstance, container, <span class="literal">null</span>, shouldReuseMarkup, context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>调用具体的挂载ReactNode到Dom元素方法<code>mountComponentIntoNode</code>:<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mountComponentIntoNode</span><span class="params">(wrapperInstance, container, transaction, shouldReuseMarkup, context)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 生成一段html，里面逻辑较多，略过。</span></span><br><span class="line">  <span class="keyword">var</span> markup = ReactReconciler.mountComponent(wrapperInstance, transaction, <span class="literal">null</span>, ReactDOMContainerInfo(wrapperInstance, container), context, <span class="number">0</span> <span class="comment">/* parentDebugID */</span></span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  ReactMount._mountImageIntoNode(markup, container, wrapperInstance, shouldReuseMarkup, transaction);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-ReactMount-_mountImageIntoNode方法">4.<code>ReactMount._mountImageIntoNode</code>方法</h3><p>结局已经很近了，是否看看还有什么花招：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_mountImageIntoNode: <span class="function"><span class="keyword">function</span> <span class="params">(markup, container, instance, shouldReuseMarkup, transaction)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 关键就是设置html</span></span><br><span class="line">    setInnerHTML(container, markup);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后再看看<code>setInnerHTML</code>这个方法都需要干些啥:</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var setInnerHTML = function (<span class="keyword">node</span><span class="identifier"></span><span class="title">, html</span>) &#123;</span><br><span class="line">    <span class="keyword">node</span>.<span class="identifier"></span><span class="title">innerHTML</span> = html;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>聪明的你，看到开头就应该猜中需要使用<code>innerHTML</code>来设置html吧，但是有没有觉得还是没明白ReactDom.render到底都干了些啥。我也还不是不太懂，这里只是探究了一下render的流程。关键点如何转换一个React Component为html标签。待研究。。。</p>
+<h2 id="四、总结">四、总结</h2><p>ReactDom.render执行过程大致为：</p>
+<p>Component -&gt; ReactElement -&gt; ReactNode -&gt; mountComponent -&gt; html markup -&gt; set innerHTML</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/React/">React</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xchb.work/2016/10/27/reactjs-中render探索/" data-title="reactjs 中render探索 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/09/30/nodejs使用shebang/"  title="nodejs使用shebang">
+ <strong>下一篇：</strong><br/> 
+ <span>nodejs使用shebang
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、找到react-dom模块"><span class="toc-number">1.</span> <span class="toc-text">一、找到react-dom模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、找到react模块，查看lib/ReactDOM-js"><span class="toc-number">2.</span> <span class="toc-text">二、找到react模块，查看lib/ReactDOM.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、查看lib/ReactMount-js"><span class="toc-number">3.</span> <span class="toc-text">三、查看lib/ReactMount.js</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_ReactMount-render方法"><span class="toc-number">3.1.</span> <span class="toc-text">1. ReactMount.render方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_ReactMount-_renderSubtreeIntoContainer方法"><span class="toc-number">3.2.</span> <span class="toc-text">2. ReactMount._renderSubtreeIntoContainer方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ReactMount-_renderNewRootComponent方法："><span class="toc-number">3.3.</span> <span class="toc-text">3.ReactMount._renderNewRootComponent方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-ReactMount-_mountImageIntoNode方法"><span class="toc-number">3.4.</span> <span class="toc-text">4.ReactMount._mountImageIntoNode方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、总结"><span class="toc-number">4.</span> <span class="toc-text">四、总结</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Angular/" title="Angular">Angular<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JS/" title="JS">JS<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/snippet/" title="snippet">snippet<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/WEB/" title="WEB">WEB<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 随性而走. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="二哈熊">二哈熊</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
