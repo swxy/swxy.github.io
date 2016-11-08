@@ -81,6 +81,72 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/11/02/为什么需要使用setState来设置state/" title="为什么需要使用setState来设置state" itemprop="url">为什么需要使用setState来设置state</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
+		
+  <p class="article-time">
+    <time datetime="2016-11-02T08:57:30.000Z" itemprop="datePublished"> Published 2016-11-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>看<a href="https://facebook.github.io/react/docs/state-and-lifecycle.html">React官网文档</a>时,提及一段话</p>
+<blockquote>
+<p>Do Not Modify State Directly<br>For example, this will not re-render a component:</p>
+<p>// Wrong<br><figure class="highlight"><figcaption><span>= 'Hello';```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#62; Instead, use setState():&#10;&#10;&#62; // Correct&#10;&#62; ```this.setState(&#123;comment: &#39;Hello&#39;&#125;);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>这里只是提及了一下编程过程如何设置state，然而并没有给出解释：</p>
+<ol>
+<li>为什么使用<code>this.state.comment</code>来设置<code>state</code>中的<code>comment</code>就不会重新渲染一个组件，而使用<code>setState</code>就能？</li>
+<li>如果使用<code>this.state.comment</code>来设置值，能否手动更新组件？</li>
+<li>使用<code>setState</code>设置值时，能否不让组件更新？</li>
+</ol>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/11/02/为什么需要使用setState来设置state/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/React/">React</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/10/27/reactjs-中render探索/" title="reactjs 中render探索" itemprop="url">reactjs 中render探索</a>
   </h1>
   <p class="article-author">By
@@ -602,65 +668,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/05/23/图片加载/" title="图片加载" itemprop="url">图片加载</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="二哈熊" target="_blank" itemprop="author">二哈熊</a>
-		
-  <p class="article-time">
-    <time datetime="2016-05-23T03:55:34.000Z" itemprop="datePublished"> Published 2016-05-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/05/23/图片加载/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/HTML/">HTML</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -681,15 +691,15 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/React/" title="React">React<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>3</sup></a></li>
 			
 		
 			

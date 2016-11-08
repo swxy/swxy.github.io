@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-10-27T07:23:41.000Z</updated>
+  <updated>2016-11-08T02:34:32.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -13,6 +13,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[为什么需要使用setState来设置state]]></title>
+    <link href="http://xchb.work/2016/11/02/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8setState%E6%9D%A5%E8%AE%BE%E7%BD%AEstate/"/>
+    <id>http://xchb.work/2016/11/02/为什么需要使用setState来设置state/</id>
+    <published>2016-11-02T08:57:30.000Z</published>
+    <updated>2016-11-08T02:34:32.000Z</updated>
+    <content type="html"><![CDATA[<p>看<a href="https://facebook.github.io/react/docs/state-and-lifecycle.html" target="_blank" rel="external">React官网文档</a>时,提及一段话</p>
+<blockquote>
+<p>Do Not Modify State Directly<br>For example, this will not re-render a component:</p>
+<p>// Wrong<br><figure class="highlight"><figcaption><span>= 'Hello';```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#62; Instead, use setState():&#10;&#10;&#62; // Correct&#10;&#62; ```this.setState(&#123;comment: &#39;Hello&#39;&#125;);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>这里只是提及了一下编程过程如何设置state，然而并没有给出解释：</p>
+<ol>
+<li>为什么使用<code>this.state.comment</code>来设置<code>state</code>中的<code>comment</code>就不会重新渲染一个组件，而使用<code>setState</code>就能？</li>
+<li>如果使用<code>this.state.comment</code>来设置值，能否手动更新组件？</li>
+<li>使用<code>setState</code>设置值时，能否不让组件更新？</li>
+</ol>
+<a id="more"></a>
+<p>首先我们需要明确的一点React不是一个MVC框架，而主要注重于MVC中的V(view)层。具体可以看官网博客《<a href="https://facebook.github.io/react/blog/2013/06/05/why-react.html" target="_blank" rel="external">Why did we build React?</a>》。<br>可以简单的理解为React做的事情就是根据数据来自动渲染页面，类似于一个前端模板库，但提供使用JSX快速开发，事件处理，组件开发，生命周期等等功能。</p>
+<p>简单了解React之后，是时候看看为什么推荐使用<code>setState</code>来设置值。为了解决这个疑问，写一个简单的demo，方便调试源码：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">React</span>, &#123;<span class="type">Component</span>&#125; from <span class="symbol">'reac</span>t';</span><br><span class="line"><span class="keyword">import</span> <span class="type">ReactDOM</span> from <span class="symbol">'react</span>-dom';</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Component</span> &#123;</span></span><br><span class="line">    state = &#123;</span><br><span class="line">        comment: <span class="symbol">'hell</span>o'</span><br><span class="line">    &#125;;</span><br><span class="line">    constructor ()  &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="comment">// 设置一个全局的变量，方便再console中相关的api修改comment的值</span></span><br><span class="line">        window.app = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (&lt;div&gt;&#123;<span class="keyword">this</span>.state.comment&#125;&lt;/div&gt;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">ReactDOM</span>.render(</span><br><span class="line">  &lt;<span class="type">App</span> /&gt;,</span><br><span class="line">  document.getElementById(<span class="symbol">'roo</span>t')</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>配合webpack-dev-server可以很方便在浏览器中看见页面。</p>
+<p>然后直接在源码中搜索，可以发现在<code>ReactComponent.js</code>(在模块开头的注释中会有 @providesModule ReactComponent)中对<code>setState</code>方法进行了定义：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 移除warning，主要代码如下</span></span><br><span class="line">ReactComponent.prototype.setState = <span class="function"><span class="keyword">function</span> <span class="params">(partialState, callback)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.updater.enqueueSetState(<span class="keyword">this</span>, partialState);</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">callback</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.updater.enqueueCallback(<span class="keyword">this</span>, <span class="keyword">callback</span>, <span class="string">'setState'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>接下来就可以开始debug源码了。<br>中间依次会调用的方法有<code>ReactUpdates.js</code>的<code>enqueueSetState</code>：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">enqueueUpdate</span><span class="params">(component)</span> </span>&#123;</span><br><span class="line">	  <span class="keyword">if</span> (!batchingStrategy.isBatchingUpdates) &#123;</span><br><span class="line">	    batchingStrategy.batchedUpdates(enqueueUpdate, component);</span><br><span class="line">	    <span class="keyword">return</span>;</span><br><span class="line">	  &#125;</span><br><span class="line">      <span class="comment">// 初始的 dirtyComponents=[];</span></span><br><span class="line">	  dirtyComponents.push(component);</span><br><span class="line">	  <span class="keyword">if</span> (component._updateBatchNumber == <span class="literal">null</span>) &#123;</span><br><span class="line">	    component._updateBatchNumber = updateBatchNumber + <span class="number">1</span>;</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里只是把需要变更的值加入到一个设置<code>state</code>的事件队列中，然后会将该组件添加到<code>dirtyComponents</code>中，<br>然后执行一系列优化合并state的值等，最后会执行一个<code>runBatchedUpdates</code>方法(ReactUpdate.js)：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">runBatchedUpdates</span><span class="params">(transaction)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 全局初始化为0</span></span><br><span class="line">  updateBatchNumber++;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> component = dirtyComponents[i];</span><br><span class="line">    ReactReconciler.performUpdateIfNecessary(component, transaction.reconcileTransaction, updateBatchNumber);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来根据diff算法来决定组件是否应该更新到DOM中。</p>
+<p>到这里大致可以明白为何使用<code>setState</code>了，<code>setState</code>包含对组件的更新操作，未完待续。感觉还是很不明白。。。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>看<a href="https://facebook.github.io/react/docs/state-and-lifecycle.html">React官网文档</a>时,提及一段话</p>
+<blockquote>
+<p>Do Not Modify State Directly<br>For example, this will not re-render a component:</p>
+<p>// Wrong<br><figure class="highlight"><figcaption><span>= 'Hello';```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#62; Instead, use setState():&#10;&#10;&#62; // Correct&#10;&#62; ```this.setState(&#123;comment: &#39;Hello&#39;&#125;);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>这里只是提及了一下编程过程如何设置state，然而并没有给出解释：</p>
+<ol>
+<li>为什么使用<code>this.state.comment</code>来设置<code>state</code>中的<code>comment</code>就不会重新渲染一个组件，而使用<code>setState</code>就能？</li>
+<li>如果使用<code>this.state.comment</code>来设置值，能否手动更新组件？</li>
+<li>使用<code>setState</code>设置值时，能否不让组件更新？</li>
+</ol>]]>
+    
+    </summary>
+    
+      <category term="React" scheme="http://xchb.work/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[reactjs 中render探索]]></title>
@@ -727,42 +773,6 @@ nginx -s quit
     </summary>
     
       <category term="CSS" scheme="http://xchb.work/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[WebUploader使用]]></title>
-    <link href="http://xchb.work/2015/08/14/WebUploader%E4%BD%BF%E7%94%A8/"/>
-    <id>http://xchb.work/2015/08/14/WebUploader使用/</id>
-    <published>2015-08-14T12:44:04.000Z</published>
-    <updated>2016-05-17T06:10:17.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="背景">背景</h1><p>最近需要封装一个图片上传组件，需要支持单文件，多文件，LOGO上传等功能，<br>其中LOGO上传需要检测上传图片的尺寸，并且需要支持图片裁切。改组件需要提供统一的UI样式，并有统一的错误提示。<br>该组件基于Webuploader封装。</p>
-<a id="more"></a>
-<h1 id="遇坑&amp;填坑">遇坑&amp;填坑</h1><ul>
-<li><p>由于需要兼容IE9，故需要混合使用flash和H5上传方式，使用flash上传时，给上传按钮绑定 <em>click</em> 事件时，点击按钮不会触发事件 =&gt; 绑定<em>mouseup</em>事件。</p>
-</li>
-<li><p>使用flash上传，如果在上传完成之前隐藏上传按钮，会中断上传。而使用官网提供的解决方案，即给上传按钮添加以下class：</p>
- <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.webuploader-element-invisible</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute <span class="important">!important</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span>)</span></span>; <span class="comment">/* IE6, IE7 */</span></span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<p> 发现IE9不好使 =&gt; 将按钮的<code>position</code>设置为absolute，然后设置一个较大的<code>left</code>属性，同时将父元素的<code>overflow</code>设置为hidden、<code>position</code>设置为relative。</p>
-</li>
-<li><p>由于可以一个上传实例绑定多个上传按钮，当上传时，需要区分是重新上传或直接上传新图片 =&gt; <code>file</code>对象的<code>source</code>属性中有个<code>_refer</code>表示该文件是哪个dom上传的。</p>
-</li>
-<li><p>LOGO上传需要裁切 =&gt; 新注册一个裁切的方法，<a href="https://github.com/fex-team/webuploader/tree/master/examples/cropper" target="_blank" rel="external">Webuploader裁切示例</a></p>
-</li>
-<li><p>虽然WebUploader提供了文件队列管理，但不满足实际要求 =&gt; 自己再造轮子, 源码中检测文件数量的代码</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> uploader = <span class="keyword">this</span>,</span><br><span class="line">    opts = uploader.options,</span><br><span class="line">    count = uploader.count,</span><br><span class="line">    max = <span class="built_in">parseInt</span>( opts.fileNumLimit, <span class="number">10</span> ),</span><br><span class="line">    flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ( !max ) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'beforeFileQueued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> file </span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( count &gt;= max &amp;&amp; flag ) &#123;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.trigger( <span class="string">'error'</span>, <span class="string">'Q_EXCEED_NUM_LIMIT'</span>, max, file );</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">        &#125;, <span class="number">1</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count &gt;= max ? <span class="literal">false</span> : <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'fileQueued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count++;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'fileDequeued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count--;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'reset'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="参考">参考</h1><ol>
-<li><a href="http://fex.baidu.com/webuploader" target="_blank" rel="external">WebUploader的官网</a></li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="背景">背景</h1><p>最近需要封装一个图片上传组件，需要支持单文件，多文件，LOGO上传等功能，<br>其中LOGO上传需要检测上传图片的尺寸，并且需要支持图片裁切。改组件需要提供统一的UI样式，并有统一的错误提示。<br>该组件基于Webuploader封装。</p>]]>
-    
-    </summary>
-    
-      <category term="JS" scheme="http://xchb.work/tags/JS/"/>
     
   </entry>
   
