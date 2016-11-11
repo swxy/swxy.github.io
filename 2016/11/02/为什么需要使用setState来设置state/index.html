@@ -14,7 +14,9 @@
     <meta name="description" content="看React官网文档时,提及一段话
 
 Do Not Modify State DirectlyFor example, this will not re-render a component:
-// Wrong= &apos;Hello&apos;;```1&amp;#10;&amp;#62; Instead, use setState():&amp;#10;&amp;#10;&amp;#62; // Correct&amp;#10;&amp;#62; ```this.s">
+// Wrongthis.state.comment = ‘Hello’;
+Instead, use setState():
+// Correctthis.setState({comment: ‘Hello">
 <meta property="og:type" content="article">
 <meta property="og:title" content="为什么需要使用setState来设置state">
 <meta property="og:url" content="http://xchb.work/2016/11/02/为什么需要使用setState来设置state/index.html">
@@ -22,14 +24,18 @@ Do Not Modify State DirectlyFor example, this will not re-render a component:
 <meta property="og:description" content="看React官网文档时,提及一段话
 
 Do Not Modify State DirectlyFor example, this will not re-render a component:
-// Wrong= &apos;Hello&apos;;```1&amp;#10;&amp;#62; Instead, use setState():&amp;#10;&amp;#10;&amp;#62; // Correct&amp;#10;&amp;#62; ```this.s">
-<meta property="og:updated_time" content="2016-11-08T02:34:32.000Z">
+// Wrongthis.state.comment = ‘Hello’;
+Instead, use setState():
+// Correctthis.setState({comment: ‘Hello">
+<meta property="og:updated_time" content="2016-11-11T12:36:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么需要使用setState来设置state">
 <meta name="twitter:description" content="看React官网文档时,提及一段话
 
 Do Not Modify State DirectlyFor example, this will not re-render a component:
-// Wrong= &apos;Hello&apos;;```1&amp;#10;&amp;#62; Instead, use setState():&amp;#10;&amp;#10;&amp;#62; // Correct&amp;#10;&amp;#62; ```this.s">
+// Wrongthis.state.comment = ‘Hello’;
+Instead, use setState():
+// Correctthis.setState({comment: ‘Hello">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -105,7 +111,9 @@ Do Not Modify State DirectlyFor example, this will not re-render a component:
 		<p>看<a href="https://facebook.github.io/react/docs/state-and-lifecycle.html" target="_blank" rel="external">React官网文档</a>时,提及一段话</p>
 <blockquote>
 <p>Do Not Modify State Directly<br>For example, this will not re-render a component:</p>
-<p>// Wrong<br><figure class="highlight"><figcaption><span>= 'Hello';```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#62; Instead, use setState():&#10;&#10;&#62; // Correct&#10;&#62; ```this.setState(&#123;comment: &#39;Hello&#39;&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>// Wrong<br>this.state.comment = ‘Hello’;</p>
+<p>Instead, use setState():</p>
+<p>// Correct<br>this.setState({comment: ‘Hello’});</p>
 </blockquote>
 <p>这里只是提及了一下编程过程如何设置state，然而并没有给出解释：</p>
 <ol>
@@ -152,6 +160,14 @@ Do Not Modify State DirectlyFor example, this will not re-render a component:
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2016/11/10/网页代理/" title="网页代理">
+  <strong>上一篇：</strong><br/>
+  <span>
+  网页代理</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2016/10/27/reactjs-中render探索/"  title="reactjs 中render探索">
