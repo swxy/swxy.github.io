@@ -4,22 +4,68 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-11-11T13:37:27.000Z</updated>
+  <updated>2016-11-29T12:20:16.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
-    <name><![CDATA[二哈熊]]></name>
+    <name><![CDATA[swxy]]></name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[nodejs mongodb]]></title>
+    <link href="http://xchb.work/2016/11/29/nodejs-mongodb/"/>
+    <id>http://xchb.work/2016/11/29/nodejs-mongodb/</id>
+    <published>2016-11-29T12:01:09.000Z</published>
+    <updated>2016-11-29T12:20:16.000Z</updated>
+    <content type="html"><![CDATA[<p>记录一下nodejs配置mongodb的过程：</p>
+<ol>
+<li><p>mac上安装mongodb:</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>install mongodb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个存在数据目录</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -p ~/<span class="typedef"><span class="keyword">data</span>/db</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod <span class="comment">--dbpath=./data/db</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+</li>
+<li><p>安装nodejs驱动程序mongodb和mongoose</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> mongoose mongodb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接mongodb：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/todo'</span>);</span><br><span class="line"></span><br><span class="line">mongoose.connection.<span class="literal">on</span>(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">&#125;).<span class="literal">on</span>(<span class="string">'open'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'connected'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其他：</p>
+<p>mongodb可视化软件：<a href="https://mongobooster.com/" target="_blank" rel="external">mongobooster</a> 没有找到破解版，而且价格略贵</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>记录一下nodejs配置mongodb的过程：</p>
+<ol>
+<li><p>mac上安装mongodb:</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>install mongodb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个存在数据目录</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -p ~/<span class="typedef"><span class="keyword">data</span>/db</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod <span class="comment">--dbpath=./data/db</span></span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="nodejs" scheme="http://xchb.work/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[网页代理]]></title>
     <link href="http://xchb.work/2016/11/10/%E7%BD%91%E9%A1%B5%E4%BB%A3%E7%90%86/"/>
     <id>http://xchb.work/2016/11/10/网页代理/</id>
     <published>2016-11-10T01:54:04.000Z</published>
-    <updated>2016-11-11T13:37:27.000Z</updated>
+    <updated>2016-11-11T13:37:28.000Z</updated>
     <content type="html"><![CDATA[<p>前端开发时，经常需要用代理工具Charles或者Fiddler来抓包，或修改接口或替换文件或查看提交数据等，都是非常方便。尤其是做移动端开发时，是不是经常得配置host，或者查看页面请求的数据是否正确，相信我，此时使用Charles的远程代理是一件很幸福的事情。</p>
 <p>当我们打开浏览器请求一个页面时候，为什么Charles就能捕获到请求？然而如果chrome使用了<code>SwitchyOmega（配合shadowsocks，翻墙神器）</code>或者类似的代理插件，此时Charles时捕获不到我们发的请求。</p>
 <a id="more"></a>
@@ -763,29 +809,6 @@ nginx -s quit
     </summary>
     
       <category term="CentOS" scheme="http://xchb.work/tags/CentOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[CSS3图标收集和整理]]></title>
-    <link href="http://xchb.work/2015/10/22/CSS3%E5%9B%BE%E6%A0%87%E6%94%B6%E9%9B%86%E5%92%8C%E6%95%B4%E7%90%86/"/>
-    <id>http://xchb.work/2015/10/22/CSS3图标收集和整理/</id>
-    <published>2015-10-22T13:17:36.000Z</published>
-    <updated>2016-02-23T02:53:47.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="CSS3实现后退按钮，从此告别后退图标">CSS3实现后退按钮，从此告别后退图标</h2><p>用CSS3实现的原理是利用伪元素生成一个只有两条边的正方形，然后通过旋转一定角度实现各个方向的箭头图形。</p>
-<h3 id="90度角的箭头图形实现">90度角的箭头图形实现</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.back1</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.back1</span><span class="pseudo">:before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-top</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-left</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">rotate</span>(-<span class="number">45deg</span>)</span></span>;</span><br><span class="line">            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">rotate</span>(-<span class="number">45deg</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h3 id="任意角度的箭头图形">任意角度的箭头图形</h3><p>利用伪元素before和after，根据需要可以将旋转角度适当调整，从而实现任意角度的箭头图形<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.back2</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.back2</span><span class="pseudo">:before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-top</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#0f0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>) <span class="function">rotate</span>(-<span class="number">60deg</span>)</span></span>;</span><br><span class="line">            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>) <span class="function">rotate</span>(-<span class="number">60deg</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.back2</span><span class="pseudo">:after</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-left</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#0f0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">translate</span>(<span class="number">0</span>, <span class="number">20%</span>) <span class="function">rotate</span>(-<span class="number">30deg</span>)</span></span>;</span><br><span class="line">            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(<span class="number">0</span>, <span class="number">20%</span>) <span class="function">rotate</span>(-<span class="number">30deg</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>当然另一种实现方式还是给border设置不同的值来实现角度的不一样。</p>
-<p>ps: 上述的<a href="/back.html">Demo地址</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="CSS3实现后退按钮，从此告别后退图标">CSS3实现后退按钮，从此告别后退图标</h2><p>用CSS3实现的原理是利用伪元素生成一个只有两条边的正方形，然后通过旋转一定角度实现各个方向的箭头图形。</p>
-<h3 id="90度角的箭头图形实现">90度角的箭头图形实现</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.back1</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.back1</span><span class="pseudo">:before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-top</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-left</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">rotate</span>(-<span class="number">45deg</span>)</span></span>;</span><br><span class="line">            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">rotate</span>(-<span class="number">45deg</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>]]>
-    
-    </summary>
-    
-      <category term="CSS" scheme="http://xchb.work/tags/CSS/"/>
     
   </entry>
   

@@ -4,23 +4,50 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Angular 小技巧 | 学习是一种信仰</title>
+    <title>nodejs mongodb | 学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="swxy">
     
 
     
-    <meta name="description" content="1.textarea的placeholder换行问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。解决方案：使用angular中的数据绑定就可以轻松实现1&amp;lt;textarea rows=&quot;6&quot; cols=&quot;45&quot; placeholder=&quot;&amp;#123;&amp;#123;&apos;第一行\n第二行\n第三行\n第四行&apos;&amp;#125;&amp;#125;&quot;&amp;gt;&amp;lt;/textar">
+    <meta name="description" content="记录一下nodejs配置mongodb的过程：
+
+mac上安装mongodb:
+1brew install mongodb
+
+创建一个存在数据目录
+1mkdir -p ~/data/db
+
+在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录
+1mongod --dbpath=./data/db">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular 小技巧">
-<meta property="og:url" content="http://xchb.work/2016/09/27/Angular-小技巧/index.html">
+<meta property="og:title" content="nodejs mongodb">
+<meta property="og:url" content="http://xchb.work/2016/11/29/nodejs-mongodb/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="1.textarea的placeholder换行问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。解决方案：使用angular中的数据绑定就可以轻松实现1&amp;lt;textarea rows=&quot;6&quot; cols=&quot;45&quot; placeholder=&quot;&amp;#123;&amp;#123;&apos;第一行\n第二行\n第三行\n第四行&apos;&amp;#125;&amp;#125;&quot;&amp;gt;&amp;lt;/textar">
-<meta property="og:updated_time" content="2016-10-04T02:50:45.000Z">
+<meta property="og:description" content="记录一下nodejs配置mongodb的过程：
+
+mac上安装mongodb:
+1brew install mongodb
+
+创建一个存在数据目录
+1mkdir -p ~/data/db
+
+在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录
+1mongod --dbpath=./data/db">
+<meta property="og:updated_time" content="2016-11-29T12:20:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular 小技巧">
-<meta name="twitter:description" content="1.textarea的placeholder换行问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。解决方案：使用angular中的数据绑定就可以轻松实现1&amp;lt;textarea rows=&quot;6&quot; cols=&quot;45&quot; placeholder=&quot;&amp;#123;&amp;#123;&apos;第一行\n第二行\n第三行\n第四行&apos;&amp;#125;&amp;#125;&quot;&amp;gt;&amp;lt;/textar">
+<meta name="twitter:title" content="nodejs mongodb">
+<meta name="twitter:description" content="记录一下nodejs配置mongodb的过程：
+
+mac上安装mongodb:
+1brew install mongodb
+
+创建一个存在数据目录
+1mkdir -p ~/data/db
+
+在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录
+1mongod --dbpath=./data/db">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -80,21 +107,40 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/09/27/Angular-小技巧/" title="Angular 小技巧" itemprop="url">Angular 小技巧</a>
+      <a href="/2016/11/29/nodejs-mongodb/" title="nodejs mongodb" itemprop="url">nodejs mongodb</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
 		
   <p class="article-time">
-    <time datetime="2016-09-27T01:35:35.000Z" itemprop="datePublished"> Published 2016-09-27</time>
+    <time datetime="2016-11-29T12:01:09.000Z" itemprop="datePublished"> Published 2016-11-29</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h1 id="1-textarea的placeholder换行">1.<code>textarea</code>的<code>placeholder</code>换行</h1><p>问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。<br>解决方案：使用angular中的数据绑定就可以轻松实现<br><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">textarea</span> <span class="attribute">rows</span>=<span class="value">"6"</span> <span class="attribute">cols</span>=<span class="value">"45"</span> <span class="attribute">placeholder</span>=<span class="value">"</span></span></span><span class="expression">&#123;&#123;'第一行\<span class="variable">n</span>第二行\<span class="variable">n</span>第三行\<span class="variable">n</span>第四行'&#125;&#125;</span><span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">textarea</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>解决方案来源：<a href="http://stackoverflow.com/a/38128759" target="_blank" rel="external">Can you have multiline HTML5 placeholder text in a <textarea>?</textarea></a></p>
+		<p>记录一下nodejs配置mongodb的过程：</p>
+<ol>
+<li><p>mac上安装mongodb:</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>install mongodb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个存在数据目录</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -p ~/<span class="typedef"><span class="keyword">data</span>/db</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod <span class="comment">--dbpath=./data/db</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+</li>
+<li><p>安装nodejs驱动程序mongodb和mongoose</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> mongoose mongodb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接mongodb：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/todo'</span>);</span><br><span class="line"></span><br><span class="line">mongoose.connection.<span class="literal">on</span>(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">&#125;).<span class="literal">on</span>(<span class="string">'open'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'connected'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其他：</p>
+<p>mongodb可视化软件：<a href="https://mongobooster.com/" target="_blank" rel="external">mongobooster</a> 没有找到破解版，而且价格略贵</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -103,7 +149,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Angular/">Angular</a>
+  <span></span> <a href="/tags/nodejs/">nodejs</a>
   </div>
 
 </div>
@@ -112,7 +158,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xchb.work/2016/09/27/Angular-小技巧/" data-title="Angular 小技巧 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xchb.work/2016/11/29/nodejs-mongodb/" data-title="nodejs mongodb | 学习是一种信仰" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -125,19 +171,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/09/30/nodejs使用shebang/" title="nodejs使用shebang">
-  <strong>上一篇：</strong><br/>
-  <span>
-  nodejs使用shebang</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/09/22/angular项目中使用iframe相关问题/"  title="angular项目中使用iframe相关问题">
+<a href="/2016/11/10/网页代理/"  title="网页代理">
  <strong>下一篇：</strong><br/> 
- <span>angular项目中使用iframe相关问题
+ <span>网页代理
 </span>
 </a>
 </div>
@@ -152,7 +190,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-textarea的placeholder换行"><span class="toc-number">1.</span> <span class="toc-text">1.textarea的placeholder换行</span></a></li></ol>
+ 
  
   </div>
 
