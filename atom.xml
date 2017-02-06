@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2016-11-29T12:20:16.000Z</updated>
+  <updated>2017-02-06T13:55:47.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -13,6 +13,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[TCP三步握手]]></title>
+    <link href="http://xchb.work/2017/02/06/TCP%E4%B8%89%E6%AD%A5%E6%8F%A1%E6%89%8B/"/>
+    <id>http://xchb.work/2017/02/06/TCP三步握手/</id>
+    <published>2017-02-06T02:58:35.000Z</published>
+    <updated>2017-02-06T13:55:47.000Z</updated>
+    <content type="html"><![CDATA[<p>探索问题：</p>
+<ol>
+<li>TCP建立连接为什么要三步握手</li>
+<li>建立连接时发送的SEQ, ACK是什么</li>
+</ol>
+<a id="more"></a>
+<h1 id="三步握手">三步握手</h1><p>握手主要原因：在不可靠的网络之上提供可靠的服务。</p>
+<p>在Andrew S.Tanenbaum的经典书籍《计算机网络》第5版的「6.2.2 连接建立」小节有很详细的说明：</p>
+<p>首先，因为网络有可能会出现延迟或者重复数据包的时候，所以在连接的建立时，每个数据包都会有一个序号，以解决如何区分重复数据包的问题。</p>
+<p>然而，这样还是会有问题，《计算机网络》中说的是『数据包的接受者通常不会去保存连接的序号，所以无法区分CONNECTION REQUEST中的初始序号是否和当前连接的序号重复。』我对这句话的理解：</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">HOST1</span>                      <span class="comment">HOST2</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=x)</span>          <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>       </span><br><span class="line"></span><br><span class="line">  <span class="comment">|</span> &lt;<span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=Y)</span>          <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=x</span><span class="string">,</span> <span class="comment">ACK=y</span><span class="literal">+</span><span class="comment">1)</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">|</span> &lt;<span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=y</span><span class="string">,</span> <span class="comment">ACK=x</span><span class="literal">+</span><span class="comment">1)</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span></span><br></pre></td></tr></table></figure>
+<p>此时建立的连接应该是一个，而不是两个，因为所有的连接都是有它们的端点（由TCP的端口加上所在主机的IP地址组成「6.5.4 TCP端的头」小节有介绍）来标识的。第一个请求产生了一个由（x,y）标识的连接，而第二个请求也建立一个这样的连接，实际上只有一个表项，即(x,y)。</p>
+<p>针对上述问题，引入了三步握手协议。这个协议要求在建立连接时，一方需要和另一方确认连接请求是否是当前的。即 A -SYN(SEQ=x)-&gt; B; B -SYN(SEQ=y, ACK=x+1)-&gt;A; A -DATA(SEQ=x+1,ACK=y+1)-&gt; B。</p>
+<p>当然三步握手也不是绝对可靠，因为请求只能保证之前的传输是可靠，但不能预测接下来的也正确，在知乎上看到一个回答可以参考<a href="https://www.zhihu.com/question/24853633" target="_blank" rel="external">TCP 为什么是三次握手，为什么不是两次或四次？</a>, 为了方便阅读，引用至此：</p>
+<blockquote>
+<p>这个问题的本质是, 信道不可靠, 但是通信双发需要就某个问题达成一致. 而要解决这个问题,  无论你在消息中包含什么信息, 三次通信是理论上的最小值. 所以三次握手不是TCP本身的要求, 而是为了满足”在不可靠信道上可靠地传输信息”这一需求所导致的. 请注意这里的本质需求,信道不可靠, 数据传输要可靠. 三次达到了, 那后面你想接着握手也好, 发数据也好, 跟进行可靠信息传输的需求就没关系了. 因此,如果信道是可靠的, 即无论什么时候发出消息, 对方一定能收到, 或者你不关心是否要保证对方收到你的消息, 那就能像UDP那样直接发送消息就可以了.”</p>
+</blockquote>
+<h1 id="字段说明">字段说明</h1><ol>
+<li><p>SEQ，初始序号。在一个时间周期T（互联网比较随意的定为120s，看具体实现）内，这个序号应该是唯一的。</p>
+</li>
+<li><p>ACK, SEQ+1. 表示确认序号SEQ的请求，TCP确认数据包的机制。</p>
+</li>
+</ol>
+<h1 id="参考">参考</h1><ol>
+<li>《计算机网络》 by Andrew S.Tanenbaum</li>
+<li><a href="https://www.zhihu.com/question/24853633" target="_blank" rel="external">TCP 为什么是三次握手，为什么不是两次或四次？</a></li>
+<li><a href="http://blog.csdn.net/wjtxt/article/details/6606022" target="_blank" rel="external">TCP报文到达确认（ACK）机制</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>探索问题：</p>
+<ol>
+<li>TCP建立连接为什么要三步握手</li>
+<li>建立连接时发送的SEQ, ACK是什么</li>
+</ol>]]>
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Socket.io问题分析]]></title>
+    <link href="http://xchb.work/2017/02/03/Socket-io%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/"/>
+    <id>http://xchb.work/2017/02/03/Socket-io问题分析/</id>
+    <published>2017-02-03T07:59:57.000Z</published>
+    <updated>2017-02-03T08:21:17.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="广播数据">广播数据</h2><p>如何向所有的客户端广播数据？</p>
+<ol>
+<li><p>使用io.sockets.emit</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">var <span class="built_in">io</span> = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(server);</span><br><span class="line"><span class="built_in">io</span>.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span><span class="params">(socket)</span></span>&#123;</span><br><span class="line">    <span class="built_in">io</span>.sockets.emit(<span class="string">'new'</span>, &#123;hello: <span class="string">'world'</span>&#125;);      </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用socket.broadcast.emit</p>
+</li>
+</ol>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">var <span class="built_in">io</span> = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(server);</span><br><span class="line"><span class="built_in">io</span>.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span><span class="params">(socket)</span></span>&#123;</span><br><span class="line">    socket.broadcast.emit(<span class="string">'new'</span>, &#123;hello: <span class="string">'world'</span>&#125;);      </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>两种方式区别<code>io.sockets.emit</code>向所有连接的客户端广播数据，而<code>socket.broadcast.emit</code>则向<br>除了该<code>socket</code>自身之外的其他所有广播数据。其实也就是说<br><code>io.sockets.emit</code> = <code>socket.broadcast.emit</code> + <code>socket.emit</code></p>
+<p>因此可以猜测出socket.io内部会保留所有连接的socket。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="广播数据">广播数据</h2><p>如何向所有的客户端广播数据？</p>
+<ol>
+<li><p>使用io.sockets.emit</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><]]>
+    </summary>
+    
+      <category term="JS" scheme="http://xchb.work/tags/JS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[nodejs mongodb]]></title>
@@ -741,70 +816,6 @@ PS：addEventListener可以接受三个参数，其语法是<span class="code">`
 <blockquote>
 <p>source ~/.bash_profile</p>
 </blockquote>]]>
-    
-    </summary>
-    
-      <category term="CentOS" scheme="http://xchb.work/tags/CentOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[CentOS 安装nginx]]></title>
-    <link href="http://xchb.work/2015/11/10/CentOS-%E5%AE%89%E8%A3%85nginx/"/>
-    <id>http://xchb.work/2015/11/10/CentOS-安装nginx/</id>
-    <published>2015-11-10T00:44:23.000Z</published>
-    <updated>2016-02-23T11:53:25.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
-</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
-</code></pre><a id="more"></a>
-<h3 id="nginx常用操作">nginx常用操作</h3><p>启动</p>
-<pre><code>sudo /etc/init.d/nginx <span class="literal">start</span>
-</code></pre><p>关闭</p>
-<pre><code>sudo /etc/init.d/nginx <span class="built_in">stop</span><span class="comment">
-//或者</span>
-nginx -s <span class="built_in">stop</span><span class="comment">
-//或者</span>
-nginx -s quit
-</code></pre><p>重启</p>
-<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx restart</span>
-</code></pre><p>重新载入（修改配置文件之后）</p>
-<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx reload</span>
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
-</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
-</code></pre>]]>
-    
-    </summary>
-    
-      <category term="CentOS" scheme="http://xchb.work/tags/CentOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[CentOS添加新用户]]></title>
-    <link href="http://xchb.work/2015/11/09/CentOS%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%94%A8%E6%88%B7/"/>
-    <id>http://xchb.work/2015/11/09/CentOS添加新用户/</id>
-    <published>2015-11-09T02:16:42.000Z</published>
-    <updated>2016-02-23T02:50:59.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="添加新用户">添加新用户</h3><pre><code><span class="keyword">adduser </span>username
-</code></pre><h3 id="修改新用户密码">修改新用户密码</h3><pre><code><span class="title">passwd</span> username
-</code></pre><a id="more"></a>
-<h3 id="添加sudo权限">添加sudo权限</h3><p>修改权限相关的配置文件，进入<code>/etc</code></p>
-<pre><code><span class="title">vi</span> sudoers
-</code></pre><p>找到以下内容</p>
-<pre><code> <span class="comment">## Allow root to run any commands anywhere</span>
-<span class="keyword">root</span> <span class="literal">ALL</span>=(<span class="literal">ALL</span>) <span class="literal">ALL</span>
-</code></pre><p>新增一行，增加一下内容</p>
-<pre><code><span class="keyword">username</span> <span class="literal">ALL</span>=(<span class="literal">ALL</span>) <span class="literal">ALL</span>
-</code></pre><p>按下<code>esc</code>退出编辑模式，执行以下命令，保存退出</p>
-<pre><code><span class="attribute">:wq</span>
-</code></pre><h3 id="切换到新用户">切换到新用户</h3><pre><code><span class="title">su</span> username
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h3 id="添加新用户">添加新用户</h3><pre><code><span class="keyword">adduser </span>username
-</code></pre><h3 id="修改新用户密码">修改新用户密码</h3><pre><code><span class="title">passwd</span> username
-</code></pre>]]>
     
     </summary>
     

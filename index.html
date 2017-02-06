@@ -81,6 +81,126 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2017/02/06/TCP三步握手/" title="TCP三步握手" itemprop="url">TCP三步握手</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
+		
+  <p class="article-time">
+    <time datetime="2017-02-06T02:58:35.000Z" itemprop="datePublished"> Published 2017-02-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>探索问题：</p>
+<ol>
+<li>TCP建立连接为什么要三步握手</li>
+<li>建立连接时发送的SEQ, ACK是什么</li>
+</ol>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2017/02/06/TCP三步握手/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/02/03/Socket-io问题分析/" title="Socket.io问题分析" itemprop="url">Socket.io问题分析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
+		
+  <p class="article-time">
+    <time datetime="2017-02-03T07:59:57.000Z" itemprop="datePublished"> Published 2017-02-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="广播数据">广播数据</h2><p>如何向所有的客户端广播数据？</p>
+<ol>
+<li><p>使用io.sockets.emit</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">var <span class="built_in">io</span> = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(server);</span><br><span class="line"><span class="built_in">io</span>.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span><span class="params">(socket)</span></span>&#123;</span><br><span class="line">    <span class="built_in">io</span>.sockets.emit(<span class="string">'new'</span>, &#123;hello: <span class="string">'world'</span>&#125;);      </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用socket.broadcast.emit</p>
+</li>
+</ol>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">var <span class="built_in">io</span> = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(server);</span><br><span class="line"><span class="built_in">io</span>.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span><span class="params">(socket)</span></span>&#123;</span><br><span class="line">    socket.broadcast.emit(<span class="string">'new'</span>, &#123;hello: <span class="string">'world'</span>&#125;);      </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>两种方式区别<code>io.sockets.emit</code>向所有连接的客户端广播数据，而<code>socket.broadcast.emit</code>则向<br>除了该<code>socket</code>自身之外的其他所有广播数据。其实也就是说<br><code>io.sockets.emit</code> = <code>socket.broadcast.emit</code> + <code>socket.emit</code></p>
+<p>因此可以猜测出socket.io内部会保留所有连接的socket。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JS/">JS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/11/29/nodejs-mongodb/" title="nodejs mongodb" itemprop="url">nodejs mongodb</a>
   </h1>
   <p class="article-author">By
@@ -552,128 +672,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/07/25/event那些事/" title="event那些事" itemprop="url">event那些事</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
-		
-  <p class="article-time">
-    <time datetime="2016-07-25T11:58:42.000Z" itemprop="datePublished"> Published 2016-07-25</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>遇到一个问题：</p>
-<pre><code><span class="escape">`A</span><span class="escape">`标</span>签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了<span class="escape">`A</span><span class="escape">`标</span>签的跳转。
-</code></pre><p>解决方法：</p>
-<pre><code>加上stopImmediatePropagation才行。当然也可以把<span class="escape">`A</span><span class="escape">`标</span>签的<span class="escape">`h</span>ref<span class="escape">`属</span>性设置为空，通过js来控制跳转，但改动略大些，忽视。
-</code></pre><p>于是正好借此机会整理和收集一下JavaScript中的event事件。</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/07/25/event那些事/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/JS/">JS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/07/21/浏览器工作原理/" title="浏览器工作原理" itemprop="url">浏览器工作原理</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
-		
-  <p class="article-time">
-    <time datetime="2016-07-21T12:06:49.000Z" itemprop="datePublished"> Published 2016-07-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>整理和收集一下浏览器渲染原理。</p>
-<h2 id="解析和展示html流程">解析和展示html流程</h2><ol>
-<li>首先下载html文件</li>
-<li>解析html，构建dom树</li>
-<li>和css结合生成渲染树</li>
-<li>绘制并展示页面</li>
-</ol>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/07/21/浏览器工作原理/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Web/">Web</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -709,7 +707,7 @@
 			
 		
 			
-				<li><a href="/tags/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+				<li><a href="/tags/JS/" title="JS">JS<sup>3</sup></a></li>
 			
 		
 			
@@ -721,7 +719,7 @@
 			
 		
 			
-				<li><a href="/tags/JS/" title="JS">JS<sup>2</sup></a></li>
+				<li><a href="/tags/CSS/" title="CSS">CSS<sup>2</sup></a></li>
 			
 		
 			
@@ -783,7 +781,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
 		
 		<a href="/about" target="_blank" title="swxy">swxy</a>
 		
