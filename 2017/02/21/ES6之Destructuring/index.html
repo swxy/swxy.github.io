@@ -4,26 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>组件化开发 | 学习是一种信仰</title>
+    <title>ES6之Destructuring | 学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="swxy">
     
 
     
-    <meta name="description" content="参考
-前端工程——基础篇">
+    <meta name="description" content="记录不同形式Destructuring导致的不同结果：
+1234567function move1(&amp;#123;x=0, y=0&amp;#125; = &amp;#123;&amp;#125;) &amp;#123;    console.log(x, y)&amp;#125;function move2(&amp;#123;x, y&amp;#125; = &amp;#123;x: 0, y: 0&amp;#125;) &amp;#123;    console.log(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="组件化开发">
-<meta property="og:url" content="http://xchb.work/2016/05/30/组件化开发/index.html">
+<meta property="og:title" content="ES6之Destructuring">
+<meta property="og:url" content="http://xchb.work/2017/02/21/ES6之Destructuring/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="参考
-前端工程——基础篇">
-<meta property="og:updated_time" content="2016-06-03T02:42:38.000Z">
+<meta property="og:description" content="记录不同形式Destructuring导致的不同结果：
+1234567function move1(&amp;#123;x=0, y=0&amp;#125; = &amp;#123;&amp;#125;) &amp;#123;    console.log(x, y)&amp;#125;function move2(&amp;#123;x, y&amp;#125; = &amp;#123;x: 0, y: 0&amp;#125;) &amp;#123;    console.log(">
+<meta property="og:updated_time" content="2017-02-22T04:51:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="组件化开发">
-<meta name="twitter:description" content="参考
-前端工程——基础篇">
+<meta name="twitter:title" content="ES6之Destructuring">
+<meta name="twitter:description" content="记录不同形式Destructuring导致的不同结果：
+1234567function move1(&amp;#123;x=0, y=0&amp;#125; = &amp;#123;&amp;#125;) &amp;#123;    console.log(x, y)&amp;#125;function move2(&amp;#123;x, y&amp;#125; = &amp;#123;x: 0, y: 0&amp;#125;) &amp;#123;    console.log(">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -83,21 +83,42 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/05/30/组件化开发/" title="组件化开发" itemprop="url">组件化开发</a>
+      <a href="/2017/02/21/ES6之Destructuring/" title="ES6之Destructuring" itemprop="url">ES6之Destructuring</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
 		
   <p class="article-time">
-    <time datetime="2016-05-30T06:53:17.000Z" itemprop="datePublished"> Published 2016-05-30</time>
+    <time datetime="2017-02-21T03:08:01.000Z" itemprop="datePublished"> Published 2017-02-21</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h2 id="参考">参考</h2><ol>
-<li><a href="https://github.com/fouber/blog/issues/10" target="_blank" rel="external">前端工程——基础篇</a></li>
+		<p>记录不同形式Destructuring导致的不同结果：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">move1</span><span class="params">(&#123;x=<span class="number">0</span>, y=<span class="number">0</span>&#125; = &#123;&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">function <span class="title">move2</span><span class="params">(&#123;x, y&#125; = &#123;x: <span class="number">0</span>, y: <span class="number">0</span>&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>分别测试以下几种情况：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试输入为空</span></span><br><span class="line">move1();   <span class="comment">// 0 0</span></span><br><span class="line">move2(); <span class="comment">// 0 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试输入&#123;z: 3&#125;</span></span><br><span class="line">move1(&#123;z:<span class="number">3</span>&#125;);   <span class="comment">// 0 0</span></span><br><span class="line">move2(&#123;z:<span class="number">3</span>&#125;); <span class="comment">// undefined undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试输入 &#123;x:1, y: 2&#125;</span></span><br><span class="line">move1(&#123;x:<span class="number">1</span>, y:<span class="number">2</span>&#125;)     <span class="comment">// 1, 2</span></span><br><span class="line">move2(&#123;x:<span class="number">1</span>, y:<span class="number">2</span>&#125;)   <span class="comment">// 1, 2</span></span><br></pre></td></tr></table></figure></p>
+<p>对于<code>move1</code>函数：</p>
+<ol>
+<li>如果输入为空 <code>&#39;&#39;</code>  ==&gt;  <code>{x = 0, y = 0} = {}</code>  ==&gt; <code>x = 0, y = 0</code>;</li>
+<li>输入为 <code>{z: 3}]</code>  ==&gt;  <code>{x = 0, y = 0} = {z: 3}</code>  ==&gt; <code>x = 0, y = 0</code>;</li>
+<li>输入为 <code>{x:1, y: 2}</code> ==&gt; <code>{x = 0, y = 0} = {x: 1, y: 2}</code> ==&gt; <code>x = 1, y = 2</code>;</li>
+</ol>
+<p>对于<code>move2</code>函数：</p>
+<ol>
+<li>如果输入为空 <code>&#39;&#39;</code>  ==&gt;  <code>{x, y} = {x: 0, y: 0}</code>  ==&gt; <code>x = 0, y = 0</code>;</li>
+<li>输入为 <code>{z: 3}]</code>  ==&gt;  <code>{x, y} = {z: 3}</code>  ==&gt; <code>x = undefined, y = undefined</code>;</li>
+<li>输入为 <code>{x:1, y: 2}</code> ==&gt; <code>{x, y} = {x: 1, y: 2}</code> ==&gt; <code>x = 1, y = 2</code>;</li>
+</ol>
+<p>主要区别就是有输入时，如果没有同名属性 <code>{x, y} = {x: 0, y: 0}</code>这种写法取不到默认值。</p>
+<p>ps. 在ES6中如果解构对象时：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let &#123;a, ...b&#125; = &#123;a: <span class="number">1</span>, c: <span class="number">2</span>, d:<span class="number">3</span>&#125;  <span class="comment">// Uncaught SyntaxError: Unexpected token ...</span></span><br></pre></td></tr></table></figure>
+<p>但是在React中使用ES6这种写法却很常见，原因是babel(<a href="http://babeljs.io/repl" target="_blank" rel="external">babel在线编译</a>)增强解构功能，会将这种写法编译为：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> _objectWithoutProperties(obj, keys) &#123;</span><br><span class="line">    var target = &#123;&#125;;</span><br><span class="line">    for (var i in obj) &#123;</span><br><span class="line">        if (keys.indexOf(i) &gt;= <span class="number">0</span>) continue;</span><br><span class="line">        if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;</span><br><span class="line">        target[i] = obj[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return target;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var _a<span class="variable">$c</span><span class="variable">$d</span> = &#123; a: <span class="number">1</span>, c: <span class="number">2</span>, d: <span class="number">3</span> &#125;,</span><br><span class="line">    a = _a<span class="variable">$c</span><span class="variable">$d</span>.a,</span><br><span class="line">    b = _objectWithoutProperties(_a<span class="variable">$c</span><span class="variable">$d</span>, [<span class="string">"a"</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>扩展阅读：</p>
+<ol>
+<li><a href="http://exploringjs.com/es6/ch_destructuring.html" target="_blank" rel="external">Exploring ES6 Destructuring</a></li>
 </ol>
   
 	</div>
@@ -107,7 +128,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/WEB/">WEB</a>
+  <span></span> <a href="/tags/JS/">JS</a>
   </div>
 
 </div>
@@ -116,7 +137,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xchb.work/2016/05/30/组件化开发/" data-title="组件化开发 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xchb.work/2017/02/21/ES6之Destructuring/" data-title="ES6之Destructuring | 学习是一种信仰" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -129,19 +150,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/07/21/浏览器工作原理/" title="浏览器工作原理">
-  <strong>上一篇：</strong><br/>
-  <span>
-  浏览器工作原理</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/05/25/React-Todo示例/"  title="React-Todo示例">
+<a href="/2017/02/20/ES6之Temporal-Dead-Zone/"  title="ES6之Temporal Dead Zone">
  <strong>下一篇：</strong><br/> 
- <span>React-Todo示例
+ <span>ES6之Temporal Dead Zone
 </span>
 </a>
 </div>
@@ -156,7 +169,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.</span> <span class="toc-text">参考</span></a></li></ol>
+ 
  
   </div>
 
@@ -175,19 +188,15 @@
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/JS/" title="JS">JS<sup>5</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/React/" title="React">React<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JS/" title="JS">JS<sup>3</sup></a></li>
 			
 		
 			
@@ -203,10 +212,6 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
@@ -215,7 +220,11 @@
 			
 		
 			
-				<li><a href="/tags/WEB/" title="WEB">WEB<sup>1</sup></a></li>
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
 			
 		
 		</ul>

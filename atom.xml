@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2017-02-06T13:55:47.000Z</updated>
+  <updated>2017-02-22T04:51:46.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -13,6 +13,137 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ES6之Destructuring]]></title>
+    <link href="http://xchb.work/2017/02/21/ES6%E4%B9%8BDestructuring/"/>
+    <id>http://xchb.work/2017/02/21/ES6之Destructuring/</id>
+    <published>2017-02-21T03:08:01.000Z</published>
+    <updated>2017-02-22T04:51:46.000Z</updated>
+    <content type="html"><![CDATA[<p>记录不同形式Destructuring导致的不同结果：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">move1</span><span class="params">(&#123;x=<span class="number">0</span>, y=<span class="number">0</span>&#125; = &#123;&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">function <span class="title">move2</span><span class="params">(&#123;x, y&#125; = &#123;x: <span class="number">0</span>, y: <span class="number">0</span>&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>分别测试以下几种情况：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试输入为空</span></span><br><span class="line">move1();   <span class="comment">// 0 0</span></span><br><span class="line">move2(); <span class="comment">// 0 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试输入&#123;z: 3&#125;</span></span><br><span class="line">move1(&#123;z:<span class="number">3</span>&#125;);   <span class="comment">// 0 0</span></span><br><span class="line">move2(&#123;z:<span class="number">3</span>&#125;); <span class="comment">// undefined undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试输入 &#123;x:1, y: 2&#125;</span></span><br><span class="line">move1(&#123;x:<span class="number">1</span>, y:<span class="number">2</span>&#125;)     <span class="comment">// 1, 2</span></span><br><span class="line">move2(&#123;x:<span class="number">1</span>, y:<span class="number">2</span>&#125;)   <span class="comment">// 1, 2</span></span><br></pre></td></tr></table></figure></p>
+<p>对于<code>move1</code>函数：</p>
+<ol>
+<li>如果输入为空 <code>&#39;&#39;</code>  ==&gt;  <code>{x = 0, y = 0} = {}</code>  ==&gt; <code>x = 0, y = 0</code>;</li>
+<li>输入为 <code>{z: 3}]</code>  ==&gt;  <code>{x = 0, y = 0} = {z: 3}</code>  ==&gt; <code>x = 0, y = 0</code>;</li>
+<li>输入为 <code>{x:1, y: 2}</code> ==&gt; <code>{x = 0, y = 0} = {x: 1, y: 2}</code> ==&gt; <code>x = 1, y = 2</code>;</li>
+</ol>
+<p>对于<code>move2</code>函数：</p>
+<ol>
+<li>如果输入为空 <code>&#39;&#39;</code>  ==&gt;  <code>{x, y} = {x: 0, y: 0}</code>  ==&gt; <code>x = 0, y = 0</code>;</li>
+<li>输入为 <code>{z: 3}]</code>  ==&gt;  <code>{x, y} = {z: 3}</code>  ==&gt; <code>x = undefined, y = undefined</code>;</li>
+<li>输入为 <code>{x:1, y: 2}</code> ==&gt; <code>{x, y} = {x: 1, y: 2}</code> ==&gt; <code>x = 1, y = 2</code>;</li>
+</ol>
+<p>主要区别就是有输入时，如果没有同名属性 <code>{x, y} = {x: 0, y: 0}</code>这种写法取不到默认值。</p>
+<p>ps. 在ES6中如果解构对象时：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let &#123;a, ...b&#125; = &#123;a: <span class="number">1</span>, c: <span class="number">2</span>, d:<span class="number">3</span>&#125;  <span class="comment">// Uncaught SyntaxError: Unexpected token ...</span></span><br></pre></td></tr></table></figure>
+<p>但是在React中使用ES6这种写法却很常见，原因是babel(<a href="http://babeljs.io/repl" target="_blank" rel="external">babel在线编译</a>)增强解构功能，会将这种写法编译为：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> _objectWithoutProperties(obj, keys) &#123;</span><br><span class="line">    var target = &#123;&#125;;</span><br><span class="line">    for (var i in obj) &#123;</span><br><span class="line">        if (keys.indexOf(i) &gt;= <span class="number">0</span>) continue;</span><br><span class="line">        if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;</span><br><span class="line">        target[i] = obj[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return target;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var _a<span class="variable">$c</span><span class="variable">$d</span> = &#123; a: <span class="number">1</span>, c: <span class="number">2</span>, d: <span class="number">3</span> &#125;,</span><br><span class="line">    a = _a<span class="variable">$c</span><span class="variable">$d</span>.a,</span><br><span class="line">    b = _objectWithoutProperties(_a<span class="variable">$c</span><span class="variable">$d</span>, [<span class="string">"a"</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>扩展阅读：</p>
+<ol>
+<li><a href="http://exploringjs.com/es6/ch_destructuring.html" target="_blank" rel="external">Exploring ES6 Destructuring</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>记录不同形式Destructuring导致的不同结果：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">move1</span><span class="params">(&#123;x=<span class="number">0</span>, y=<span class="number">0</span>&#125; = &#123;&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">function <span class="title">move2</span><span class="params">(&#123;x, y&#125; = &#123;x: <span class="number">0</span>, y: <span class="number">0</span>&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="JS" scheme="http://xchb.work/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ES6之Temporal Dead Zone]]></title>
+    <link href="http://xchb.work/2017/02/20/ES6%E4%B9%8BTemporal-Dead-Zone/"/>
+    <id>http://xchb.work/2017/02/20/ES6之Temporal-Dead-Zone/</id>
+    <published>2017-02-20T03:26:08.000Z</published>
+    <updated>2017-02-22T04:48:39.000Z</updated>
+    <content type="html"><![CDATA[<p>在使用ES6时，一般都是推荐使用<code>let, const</code>来定义变量，相对<code>var</code>而言：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">Hoisting</th>
+<th style="text-align:left">Scope</th>
+<th style="text-align:left">Creates global properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">var</td>
+<td style="text-align:left">Declaration</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">let</td>
+<td style="text-align:left">Temporal dead zone</td>
+<td style="text-align:left">Block</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">const</td>
+<td style="text-align:left">Temporal dead zone</td>
+<td style="text-align:left">Block</td>
+<td style="text-align:left">No</td>
+</tr>
+</tbody>
+</table>
+<p><code>Temporal dead zone</code>这个与<code>var</code>的<code>Declaration</code>有什么不一样的地方？</p>
+<a id="more"></a>
+<p>先看一个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var定义的变量提升</span></span><br><span class="line"><span class="built_in">console</span>.log(tmpVar); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> tmpVar = <span class="number">12</span>; <span class="comment">// var定义的变量不是块级作用域</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(tmpVar); <span class="comment">// 12</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// let定义的变量提升</span></span><br><span class="line"><span class="keyword">let</span> tmp = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123; <span class="comment">// 新的作用域 TDZ 开始</span></span><br><span class="line">    <span class="built_in">console</span>.log(tmp);  <span class="comment">// ReferenceError</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> tmp; <span class="comment">// TDZ 结束, `tmp` 被初始化为 undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(tmp); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">    tmp = <span class="number">123</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(tmp); <span class="comment">// 123</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(tmp); <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>可以查看其实<code>TDZ</code>类似于一个视觉的盲区，在作用域中应该意识到变量的存在，但却看不见，更用不了。</p>
+<p>之所以需要<code>TDZ</code>：</p>
+<ol>
+<li>捕获错误： 变量提升本就比较奇怪，也不太符合变量需要定义才能使用的逻辑。</li>
+<li><code>const</code>语义要求： <code>const</code>定义一个不可以变更的常量，只能在定义时赋值，如果存在变量提升和语义不符合。为了保持一致，所以<code>let</code>也有<code>TDZ</code>。</li>
+</ol>
+<h1 id="相关资料">相关资料</h1><ol>
+<li><a href="http://exploringjs.com/es6/ch_variables.html" target="_blank" rel="external">9.4 The temporal dead zone</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在使用ES6时，一般都是推荐使用<code>let, const</code>来定义变量，相对<code>var</code>而言：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">Hoisting</th>
+<th style="text-align:left">Scope</th>
+<th style="text-align:left">Creates global properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">var</td>
+<td style="text-align:left">Declaration</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">let</td>
+<td style="text-align:left">Temporal dead zone</td>
+<td style="text-align:left">Block</td>
+<td style="text-align:left">No</td>
+</tr>
+<tr>
+<td style="text-align:left">const</td>
+<td style="text-align:left">Temporal dead zone</td>
+<td style="text-align:left">Block</td>
+<td style="text-align:left">No</td>
+</tr>
+</tbody>
+</table>
+<p><code>Temporal dead zone</code>这个与<code>var</code>的<code>Declaration</code>有什么不一样的地方？</p>]]>
+    
+    </summary>
+    
+      <category term="JS" scheme="http://xchb.work/tags/JS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[TCP三步握手]]></title>
@@ -173,104 +304,6 @@
   </entry>
   
   <entry>
-    <title><![CDATA[为什么需要使用setState来设置state]]></title>
-    <link href="http://xchb.work/2016/11/02/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8setState%E6%9D%A5%E8%AE%BE%E7%BD%AEstate/"/>
-    <id>http://xchb.work/2016/11/02/为什么需要使用setState来设置state/</id>
-    <published>2016-11-02T08:57:30.000Z</published>
-    <updated>2016-11-11T12:36:03.000Z</updated>
-    <content type="html"><![CDATA[<p>看<a href="https://facebook.github.io/react/docs/state-and-lifecycle.html" target="_blank" rel="external">React官网文档</a>时,提及一段话</p>
-<blockquote>
-<p>Do Not Modify State Directly<br>For example, this will not re-render a component:</p>
-<p>// Wrong<br>this.state.comment = ‘Hello’;</p>
-<p>Instead, use setState():</p>
-<p>// Correct<br>this.setState({comment: ‘Hello’});</p>
-</blockquote>
-<p>这里只是提及了一下编程过程如何设置state，然而并没有给出解释：</p>
-<ol>
-<li>为什么使用<code>this.state.comment</code>来设置<code>state</code>中的<code>comment</code>就不会重新渲染一个组件，而使用<code>setState</code>就能？</li>
-<li>如果使用<code>this.state.comment</code>来设置值，能否手动更新组件？</li>
-<li>使用<code>setState</code>设置值时，能否不让组件更新？</li>
-</ol>
-<a id="more"></a>
-<p>首先我们需要明确的一点React不是一个MVC框架，而主要注重于MVC中的V(view)层。具体可以看官网博客《<a href="https://facebook.github.io/react/blog/2013/06/05/why-react.html" target="_blank" rel="external">Why did we build React?</a>》。<br>可以简单的理解为React做的事情就是根据数据来自动渲染页面，类似于一个前端模板库，但提供使用JSX快速开发，事件处理，组件开发，生命周期等等功能。</p>
-<p>简单了解React之后，是时候看看为什么推荐使用<code>setState</code>来设置值。为了解决这个疑问，写一个简单的demo，方便调试源码：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">React</span>, &#123;<span class="type">Component</span>&#125; from <span class="symbol">'reac</span>t';</span><br><span class="line"><span class="keyword">import</span> <span class="type">ReactDOM</span> from <span class="symbol">'react</span>-dom';</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Component</span> &#123;</span></span><br><span class="line">    state = &#123;</span><br><span class="line">        comment: <span class="symbol">'hell</span>o'</span><br><span class="line">    &#125;;</span><br><span class="line">    constructor ()  &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="comment">// 设置一个全局的变量，方便再console中相关的api修改comment的值</span></span><br><span class="line">        window.app = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (&lt;div&gt;&#123;<span class="keyword">this</span>.state.comment&#125;&lt;/div&gt;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">ReactDOM</span>.render(</span><br><span class="line">  &lt;<span class="type">App</span> /&gt;,</span><br><span class="line">  document.getElementById(<span class="symbol">'roo</span>t')</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<p>配合webpack-dev-server可以很方便在浏览器中看见页面。</p>
-<p>然后直接在源码中搜索，可以发现在<code>ReactComponent.js</code>(在模块开头的注释中会有 @providesModule ReactComponent)中对<code>setState</code>方法进行了定义：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 移除warning，主要代码如下</span></span><br><span class="line">ReactComponent.prototype.setState = <span class="function"><span class="keyword">function</span> <span class="params">(partialState, callback)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.updater.enqueueSetState(<span class="keyword">this</span>, partialState);</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">callback</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.updater.enqueueCallback(<span class="keyword">this</span>, <span class="keyword">callback</span>, <span class="string">'setState'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>接下来就可以开始debug源码了。<br>中间依次会调用的方法有<code>ReactUpdates.js</code>的<code>enqueueSetState</code>：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">enqueueUpdate</span><span class="params">(component)</span> </span>&#123;</span><br><span class="line">	  <span class="keyword">if</span> (!batchingStrategy.isBatchingUpdates) &#123;</span><br><span class="line">	    batchingStrategy.batchedUpdates(enqueueUpdate, component);</span><br><span class="line">	    <span class="keyword">return</span>;</span><br><span class="line">	  &#125;</span><br><span class="line">      <span class="comment">// 初始的 dirtyComponents=[];</span></span><br><span class="line">	  dirtyComponents.push(component);</span><br><span class="line">	  <span class="keyword">if</span> (component._updateBatchNumber == <span class="literal">null</span>) &#123;</span><br><span class="line">	    component._updateBatchNumber = updateBatchNumber + <span class="number">1</span>;</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这里只是把需要变更的值加入到一个设置<code>state</code>的事件队列中，然后会将该组件添加到<code>dirtyComponents</code>中，<br>然后执行一系列优化合并state的值等，最后会执行一个<code>runBatchedUpdates</code>方法(ReactUpdate.js)：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">runBatchedUpdates</span><span class="params">(transaction)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 全局初始化为0</span></span><br><span class="line">  updateBatchNumber++;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> component = dirtyComponents[i];</span><br><span class="line">    ReactReconciler.performUpdateIfNecessary(component, transaction.reconcileTransaction, updateBatchNumber);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接下来根据diff算法来决定组件是否应该更新到DOM中。</p>
-<p>到这里大致可以明白为何使用<code>setState</code>了，<code>setState</code>包含对组件的更新操作，未完待续。感觉还是很不明白。。。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>看<a href="https://facebook.github.io/react/docs/state-and-lifecycle.html">React官网文档</a>时,提及一段话</p>
-<blockquote>
-<p>Do Not Modify State Directly<br>For example, this will not re-render a component:</p>
-<p>// Wrong<br>this.state.comment = ‘Hello’;</p>
-<p>Instead, use setState():</p>
-<p>// Correct<br>this.setState({comment: ‘Hello’});</p>
-</blockquote>
-<p>这里只是提及了一下编程过程如何设置state，然而并没有给出解释：</p>
-<ol>
-<li>为什么使用<code>this.state.comment</code>来设置<code>state</code>中的<code>comment</code>就不会重新渲染一个组件，而使用<code>setState</code>就能？</li>
-<li>如果使用<code>this.state.comment</code>来设置值，能否手动更新组件？</li>
-<li>使用<code>setState</code>设置值时，能否不让组件更新？</li>
-</ol>]]>
-    
-    </summary>
-    
-      <category term="React" scheme="http://xchb.work/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[reactjs 中render探索]]></title>
-    <link href="http://xchb.work/2016/10/27/reactjs-%E4%B8%ADrender%E6%8E%A2%E7%B4%A2/"/>
-    <id>http://xchb.work/2016/10/27/reactjs-中render探索/</id>
-    <published>2016-10-27T02:09:23.000Z</published>
-    <updated>2016-10-27T07:23:41.000Z</updated>
-    <content type="html"><![CDATA[<p>最近在学习Reactjs，对其生命周期比较感兴趣。用React写项目时，必须得将React组件绑定到页面元素上，一般做法是:</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReactDom.render(&lt;App /&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'#app'</span>));</span><br></pre></td></tr></table></figure>
-<p>这段代码是不是很熟悉，但这里面究竟发生了些什么了？</p>
-<a id="more"></a>
-<p>首先使用<code>npm</code>下载React、ReactDom, 在<code>react/lib</code>目录下有React相关的所有源码，这里为什么不用React的github源码研究了？主要看了一下github上的源码，目录分的太多，而且源码之间的<code>require</code>都没有写具体路径，找相关文件比较费劲，而React的<code>npm</code>模块其实就是github源码build之后代码，变动不大，而且所有代码都再同一个目录下了。有代码之后，就可以开始探索探索了。</p>
-<h2 id="一、找到react-dom模块">一、找到<code>react-dom</code>模块</h2><p>其主要代码为:<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="built_in">require</span>(<span class="string">'react/lib/ReactDOM'</span>);</span><br></pre></td></tr></table></figure></p>
-<p>啥也没干，只是引用和导出了<code>react/lib/ReactDOM</code></p>
-<h2 id="二、找到react模块，查看lib/ReactDOM-js">二、找到<code>react</code>模块，查看<code>lib/ReactDOM.js</code></h2><p>其导出的api有：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> ReactMount = <span class="keyword">require</span>(<span class="string">'./ReactMount'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">var</span> ReactDOM = &#123;</span><br><span class="line">  findDOMNode: findDOMNode,</span><br><span class="line">  render: ReactMount<span class="built_in">.</span>render,</span><br><span class="line">  unmountComponentAtNode: ReactMount<span class="built_in">.</span>unmountComponentAtNode,</span><br><span class="line">  version: ReactVersion,</span><br><span class="line">  <span class="attribute">...</span><span class="built_in">.</span><br><span class="line"></span>&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>这里还是没有干啥，只是简单的组合包装了一下其他模块提供的方法，然后导出。</p>
-<h2 id="三、查看lib/ReactMount-js">三、查看<code>lib/ReactMount.js</code></h2><h3 id="1-_ReactMount-render方法">1. <code>ReactMount.render</code>方法</h3><p>查找<code>render</code>方法：<br><figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Renders a React component into the DOM in the supplied `container`.</span><br><span class="line"> * See https://facebook.github.io/react/docs/top-level-api.html<span class="comment">#reactdom.render</span></span><br><span class="line"> *</span><br><span class="line"> * If the React component was previously rendered into `container`, this will</span><br><span class="line"> * perform an update on it and only mutate the DOM as necessary to reflect the</span><br><span class="line"> * latest React component.</span><br><span class="line"> *</span><br><span class="line"> * @<span class="name">param</span> &#123;ReactElement&#125; <span class="name">nextElement</span> <span class="name">Component</span> <span class="name">element</span> <span class="name">to</span> <span class="name">render</span>.</span><br><span class="line"> * @<span class="name">param</span> &#123;DOMElement&#125; <span class="name">container</span> <span class="name">DOM</span> <span class="name">element</span> <span class="name">to</span> <span class="name">render</span> <span class="name">into</span>.</span><br><span class="line"> * @<span class="name">param</span> &#123;?function&#125; <span class="name">callback</span> <span class="name">function</span> <span class="name">triggered</span> <span class="name">on</span> <span class="name">completion</span></span><br><span class="line"> * @<span class="name">return</span> &#123;ReactComponent&#125; <span class="name">Component</span> <span class="name">instance</span> <span class="name">rendered</span> <span class="name">in</span> `container`.</span><br><span class="line"> */</span><br><span class="line">// render真身</span><br><span class="line">render: function (nextElement, container, callback) &#123;</span><br><span class="line">  return ReactMount._renderSubtreeIntoContainer(null, nextElement, container, callback);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
-<p>终于找到这货的真身了。这货主要是渲染一个组件到页面中，如果已经渲染则更新组件。提供了三个参数：</p>
-<ul>
-<li>nextElement: 需要渲染的组件,</li>
-<li>container: 页面元素(就是这个 document.getElementById(‘#app’))</li>
-<li>callback: 完成之后的回调</li>
-</ul>
-<p>具体实现继续往下看<code>ReactMount._renderSubtreeIntoContainer</code>又干了些啥。</p>
-<h3 id="2-_ReactMount-_renderSubtreeIntoContainer方法">2. <code>ReactMount._renderSubtreeIntoContainer</code>方法</h3><p>研究<code>ReactMount._renderSubtreeIntoContainer</code>, 因为这里只关注首次ReactDom.render发生了些什么，<br>可以精简一下源码:<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">_renderSubtreeIntoContainer: function (parentComponent, nextElement, container, callback) &#123;</span><br><span class="line">    <span class="variable"><span class="keyword">var</span> nextWrappedElement</span> = ReactElement(TopLevelWrapper, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, nextElement);</span><br><span class="line">    <span class="variable"><span class="keyword">var</span> nextContext</span> = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回一个documentElement</span></span><br><span class="line">    <span class="variable"><span class="keyword">var</span> reactRootElement</span> = getReactRootElementInContainer(container);</span><br><span class="line">    <span class="comment">// 如果DOM元素已经被渲染过组件了，会有一个data-reactid 如果没有则为空</span></span><br><span class="line">    <span class="variable"><span class="keyword">var</span> containerHasReactMarkup</span> = reactRootElement &amp;&amp; !!internalGetID(reactRootElement);</span><br><span class="line">    <span class="comment">// 标识DOM元素渲染组件是不是React根元素（简单的可以认为是不是 App 组件）</span></span><br><span class="line">    <span class="variable"><span class="keyword">var</span> containerHasNonRootReactChild</span> = hasNonRootReactChild(container);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 首次渲染时，shouldReuseMarkup为false，因为containerHasReactMarkup为false</span></span><br><span class="line">    <span class="variable"><span class="keyword">var</span> shouldReuseMarkup</span> = containerHasReactMarkup &amp;&amp; !containerHasNonRootReactChild;</span><br><span class="line">    <span class="variable"><span class="keyword">var</span> component</span> = ReactMount._renderNewRootComponent(nextWrappedElement,</span><br><span class="line">        container, shouldReuseMarkup, nextContext)._renderedComponent.getPublicInstance();</span><br><span class="line">    <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">      callback.call(component);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> component;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这里又引入一下新的新的模块像 <code>ReactElement</code>(其引用的是<code>require(&#39;./ReactElement&#39;)</code>), 和一些其他全局方法。</p>
-<p><code>TopLevelWrapper</code>生成一个唯一的id来标识组件，便于组件更新:<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> topLevelRootCounter = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> TopLevelWrapper = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.rootID = topLevelRootCounter++;</span><br><span class="line">&#125;;</span><br><span class="line">TopLevelWrapper.prototype.isReactComponent = &#123;&#125;;</span><br><span class="line">TopLevelWrapper.prototype.render = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// this.props is actually a ReactElement,</span></span><br><span class="line">  <span class="comment">// 这里对应其实就是 _renderSubtreeIntoContainer 中的 nextElement</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.props;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p><code>ReactElement</code>做的就是返回一个<code>element</code>, 其主要代码就是这些：<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="type">ReactElement</span> = function (<span class="keyword">type</span>, key, <span class="keyword">ref</span>, self, source, owner, props) &#123;</span><br><span class="line">  <span class="keyword">var</span> element = &#123;</span><br><span class="line">    // <span class="type">This</span> tag allow us to uniquely identify this <span class="keyword">as</span> a <span class="type">React</span> <span class="type">Element</span></span><br><span class="line">    $$typeof: <span class="type">REACT_ELEMENT_TYPE</span>,</span><br><span class="line"></span><br><span class="line">    // <span class="type">Built</span>-<span class="keyword">in</span> properties that belong on the element</span><br><span class="line">    // <span class="keyword">type</span>保存就是一个 <span class="type">TopLevelWrapper</span> 构造函数</span><br><span class="line">    <span class="keyword">type</span>: <span class="keyword">type</span>,</span><br><span class="line">    key: key,</span><br><span class="line">    <span class="keyword">ref</span>: <span class="keyword">ref</span>,</span><br><span class="line">    // 这里保存的是 nextElement</span><br><span class="line">    props: props,</span><br><span class="line"></span><br><span class="line">    // <span class="type">Record</span> the component responsible <span class="keyword">for</span> creating this element.</span><br><span class="line">    _owner: owner</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> element;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-ReactMount-_renderNewRootComponent方法：">3.<code>ReactMount._renderNewRootComponent</code>方法：</h3><p>附上源码：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">_renderNewRootComponent: <span class="function"><span class="keyword">function</span> <span class="params">(nextElement, container, shouldReuseMarkup, context)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这个nextElement已经是被ReactElement包装过一层的element的了</span></span><br><span class="line">    <span class="comment">// 返回一个将被挂载到DOM元素的ReactNode实例</span></span><br><span class="line">    <span class="keyword">var</span> componentInstance = instantiateReactComponent(nextElement, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 挂载ReactNode到Dom</span></span><br><span class="line">    batchedMountComponentIntoNode(componentInstance, container, shouldReuseMarkup, context);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> componentInstance;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
-<p>该方法关键在于<code>batchedMountComponentIntoNode</code>这个方法，该方法为：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">batchedMountComponentIntoNode</span><span class="params">(componentInstance, container, shouldReuseMarkup, context)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 本来这里有个transaction的，需要传递的，用null代替一下，重点不是这个。</span></span><br><span class="line">  mountComponentIntoNode(componentInstance, container, <span class="literal">null</span>, shouldReuseMarkup, context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>调用具体的挂载ReactNode到Dom元素方法<code>mountComponentIntoNode</code>:<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mountComponentIntoNode</span><span class="params">(wrapperInstance, container, transaction, shouldReuseMarkup, context)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 生成一段html，里面逻辑较多，略过。</span></span><br><span class="line">  <span class="keyword">var</span> markup = ReactReconciler.mountComponent(wrapperInstance, transaction, <span class="literal">null</span>, ReactDOMContainerInfo(wrapperInstance, container), context, <span class="number">0</span> <span class="comment">/* parentDebugID */</span></span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  ReactMount._mountImageIntoNode(markup, container, wrapperInstance, shouldReuseMarkup, transaction);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-ReactMount-_mountImageIntoNode方法">4.<code>ReactMount._mountImageIntoNode</code>方法</h3><p>结局已经很近了，是否看看还有什么花招：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_mountImageIntoNode: <span class="function"><span class="keyword">function</span> <span class="params">(markup, container, instance, shouldReuseMarkup, transaction)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 关键就是设置html</span></span><br><span class="line">    setInnerHTML(container, markup);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后再看看<code>setInnerHTML</code>这个方法都需要干些啥:</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var setInnerHTML = function (<span class="keyword">node</span><span class="identifier"></span><span class="title">, html</span>) &#123;</span><br><span class="line">    <span class="keyword">node</span>.<span class="identifier"></span><span class="title">innerHTML</span> = html;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>聪明的你，看到开头就应该猜中需要使用<code>innerHTML</code>来设置html吧，但是有没有觉得还是没明白ReactDom.render到底都干了些啥。我也还不是不太懂，这里只是探究了一下render的流程。关键点如何转换一个React Component为html标签。待研究。。。</p>
-<h2 id="四、总结">四、总结</h2><p>ReactDom.render执行过程大致为：</p>
-<p>Component -&gt; ReactElement -&gt; ReactNode -&gt; mountComponent -&gt; html markup -&gt; set innerHTML</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>最近在学习Reactjs，对其生命周期比较感兴趣。用React写项目时，必须得将React组件绑定到页面元素上，一般做法是:</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReactDom.render(&lt;App /&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'#app'</span>));</span><br></pre></td></tr></table></figure>
-<p>这段代码是不是很熟悉，但这里面究竟发生了些什么了？</p>]]>
-    
-    </summary>
-    
-      <category term="React" scheme="http://xchb.work/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[nodejs使用shebang]]></title>
     <link href="http://xchb.work/2016/09/30/nodejs%E4%BD%BF%E7%94%A8shebang/"/>
     <id>http://xchb.work/2016/09/30/nodejs使用shebang/</id>
@@ -329,9 +362,9 @@
     <link href="http://xchb.work/2016/09/27/Angular-%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     <id>http://xchb.work/2016/09/27/Angular-小技巧/</id>
     <published>2016-09-27T01:35:35.000Z</published>
-    <updated>2016-10-04T02:50:45.000Z</updated>
+    <updated>2017-02-22T04:55:02.000Z</updated>
     <content type="html"><![CDATA[<h1 id="1-textarea的placeholder换行">1.<code>textarea</code>的<code>placeholder</code>换行</h1><p>问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。<br>解决方案：使用angular中的数据绑定就可以轻松实现<br><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">textarea</span> <span class="attribute">rows</span>=<span class="value">"6"</span> <span class="attribute">cols</span>=<span class="value">"45"</span> <span class="attribute">placeholder</span>=<span class="value">"</span></span></span><span class="expression">&#123;&#123;'第一行\<span class="variable">n</span>第二行\<span class="variable">n</span>第三行\<span class="variable">n</span>第四行'&#125;&#125;</span><span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">textarea</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>解决方案来源：<a href="http://stackoverflow.com/a/38128759" target="_blank" rel="external">Can you have multiline HTML5 placeholder text in a <textarea>?</textarea></a></p>
+<p>解决方案来源：<a href="http://stackoverflow.com/a/38128759" target="_blank" rel="external">Can you have multiline HTML5 placeholder text in a textarea?</a></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h1 id="1-textarea的placeholder换行">1.<code>textarea</code>的<code>placeholder</code>换行</h1><p>问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。<br>解]]>
@@ -496,27 +529,6 @@ PS：addEventListener可以接受三个参数，其语法是<span class="code">`
     </summary>
     
       <category term="Web" scheme="http://xchb.work/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[组件化开发]]></title>
-    <link href="http://xchb.work/2016/05/30/%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/"/>
-    <id>http://xchb.work/2016/05/30/组件化开发/</id>
-    <published>2016-05-30T06:53:17.000Z</published>
-    <updated>2016-06-03T02:42:38.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="参考">参考</h2><ol>
-<li><a href="https://github.com/fouber/blog/issues/10" target="_blank" rel="external">前端工程——基础篇</a></li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="参考">参考</h2><ol>
-<li><a href="https://github.com/fouber/blog/issues/10" target="_blank" rel="external">前端工程——基础篇</a></li>
-</ol>
-]]>
-    </summary>
-    
-      <category term="WEB" scheme="http://xchb.work/tags/WEB/"/>
     
   </entry>
   
@@ -816,6 +828,39 @@ PS：addEventListener可以接受三个参数，其语法是<span class="code">`
 <blockquote>
 <p>source ~/.bash_profile</p>
 </blockquote>]]>
+    
+    </summary>
+    
+      <category term="CentOS" scheme="http://xchb.work/tags/CentOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CentOS 安装nginx]]></title>
+    <link href="http://xchb.work/2015/11/10/CentOS-%E5%AE%89%E8%A3%85nginx/"/>
+    <id>http://xchb.work/2015/11/10/CentOS-安装nginx/</id>
+    <published>2015-11-10T00:44:23.000Z</published>
+    <updated>2016-02-23T11:53:25.000Z</updated>
+    <content type="html"><![CDATA[<h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
+</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
+</code></pre><a id="more"></a>
+<h3 id="nginx常用操作">nginx常用操作</h3><p>启动</p>
+<pre><code>sudo /etc/init.d/nginx <span class="literal">start</span>
+</code></pre><p>关闭</p>
+<pre><code>sudo /etc/init.d/nginx <span class="built_in">stop</span><span class="comment">
+//或者</span>
+nginx -s <span class="built_in">stop</span><span class="comment">
+//或者</span>
+nginx -s quit
+</code></pre><p>重启</p>
+<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx restart</span>
+</code></pre><p>重新载入（修改配置文件之后）</p>
+<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx reload</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
+</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
+</code></pre>]]>
     
     </summary>
     

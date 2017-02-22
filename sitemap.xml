@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xchb.work/2016/09/27/Angular-%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2017-02-22T04:55:02.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xchb.work/2017/02/21/ES6%E4%B9%8BDestructuring/</loc>
+    <lastmod>2017-02-22T04:51:46.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xchb.work/2017/02/20/ES6%E4%B9%8BTemporal-Dead-Zone/</loc>
+    <lastmod>2017-02-22T04:48:39.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xchb.work/2017/02/06/TCP%E4%B8%89%E6%AD%A5%E6%8F%A1%E6%89%8B/</loc>
     <lastmod>2017-02-06T13:55:47.000Z</lastmod>
   </url>
@@ -22,23 +37,8 @@
   </url>
   
   <url>
-    <loc>http://xchb.work/2016/11/02/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8setState%E6%9D%A5%E8%AE%BE%E7%BD%AEstate/</loc>
-    <lastmod>2016-11-11T12:36:03.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://xchb.work/gtd.html</loc>
     <lastmod>2016-11-08T02:33:48.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xchb.work/2016/10/27/reactjs-%E4%B8%ADrender%E6%8E%A2%E7%B4%A2/</loc>
-    <lastmod>2016-10-27T07:23:41.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xchb.work/2016/09/27/Angular-%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2016-10-04T02:50:45.000Z</lastmod>
   </url>
   
   <url>
@@ -69,11 +69,6 @@
   <url>
     <loc>http://xchb.work/2016/07/21/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2016-07-22T02:41:01.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xchb.work/2016/05/30/%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2016-06-03T02:42:38.000Z</lastmod>
   </url>
   
   <url>
