@@ -95,10 +95,10 @@
     <div class="article-content">
         
         <p>遇到一个问题：</p>
-<pre><code><span class="escape">`A</span><span class="escape">`标</span>签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了<span class="escape">`A</span><span class="escape">`标</span>签的跳转。
-</code></pre><p>解决方法：</p>
-<pre><code>加上stopImmediatePropagation才行。当然也可以把<span class="escape">`A</span><span class="escape">`标</span>签的<span class="escape">`h</span>ref<span class="escape">`属</span>性设置为空，通过js来控制跳转，但改动略大些，忽视。
-</code></pre><p>于是正好借此机会整理和收集一下JavaScript中的event事件。</p>
+<p><code>A</code>标签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了<code>A</code>标签的跳转。</p>
+<p>解决方法：</p>
+<p>加上stopImmediatePropagation才行。当然也可以把<code>A</code>标签的<code>href</code>属性设置为空，通过js来控制跳转，但改动略大些，忽视。</p>
+<p>于是正好借此机会整理和收集一下JavaScript中的event事件。</p>
         
         
         <p class="article-more-link">

@@ -12,26 +12,26 @@
 
     
     <meta name="description" content="遇到一个问题：
-`A`标签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了`A`标签的跳转。
+A标签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了A标签的跳转。
 解决方法：
-加上stopImmediatePropagation才行。当然也可以把`A`标签的`href`属性设置为空，通过js来控制跳转，但改动略大些，忽视。
+加上stopImmediatePropagation才行。当然也可以把A标签的href属性设置为空，通过js来控制跳转，但改动略大些，忽视。
 于是正好借此机会整理和收集一下JavaScript中的event事件。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="event那些事">
 <meta property="og:url" content="http://xchb.work/2016/07/25/event那些事/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
 <meta property="og:description" content="遇到一个问题：
-`A`标签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了`A`标签的跳转。
+A标签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了A标签的跳转。
 解决方法：
-加上stopImmediatePropagation才行。当然也可以把`A`标签的`href`属性设置为空，通过js来控制跳转，但改动略大些，忽视。
+加上stopImmediatePropagation才行。当然也可以把A标签的href属性设置为空，通过js来控制跳转，但改动略大些，忽视。
 于是正好借此机会整理和收集一下JavaScript中的event事件。">
-<meta property="og:updated_time" content="2016-07-25T17:12:05.000Z">
+<meta property="og:updated_time" content="2017-02-27T13:07:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="event那些事">
 <meta name="twitter:description" content="遇到一个问题：
-`A`标签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了`A`标签的跳转。
+A标签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了A标签的跳转。
 解决方法：
-加上stopImmediatePropagation才行。当然也可以把`A`标签的`href`属性设置为空，通过js来控制跳转，但改动略大些，忽视。
+加上stopImmediatePropagation才行。当然也可以把A标签的href属性设置为空，通过js来控制跳转，但改动略大些，忽视。
 于是正好借此机会整理和收集一下JavaScript中的event事件。">
 
     
@@ -106,21 +106,19 @@
 	<div class="article-content">
 		
 		<p>遇到一个问题：</p>
-<pre><code><span class="escape">`A</span><span class="escape">`标</span>签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了<span class="escape">`A</span><span class="escape">`标</span>签的跳转。
-</code></pre><p>解决方法：</p>
-<pre><code>加上stopImmediatePropagation才行。当然也可以把<span class="escape">`A</span><span class="escape">`标</span>签的<span class="escape">`h</span>ref<span class="escape">`属</span>性设置为空，通过js来控制跳转，但改动略大些，忽视。
-</code></pre><p>于是正好借此机会整理和收集一下JavaScript中的event事件。</p>
+<p><code>A</code>标签跳转前需要做一下登录判断，如果未登录则不让跳转，使用preventDefault发现阻止不了<code>A</code>标签的跳转。</p>
+<p>解决方法：</p>
+<p>加上stopImmediatePropagation才行。当然也可以把<code>A</code>标签的<code>href</code>属性设置为空，通过js来控制跳转，但改动略大些，忽视。</p>
+<p>于是正好借此机会整理和收集一下JavaScript中的event事件。</p>
 <a id="more"></a>
-<h2 id="事件监听方式">事件监听方式</h2><p>js中实现事件监听方式，以<code>click</code>事件为例，可以有直接设置元素的<code>onclick</code>属性：<br>    <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 直接设置元素的onclick属性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>js绑定事件测试按钮1<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'#btn1'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        alert(<span class="string">'js绑定事件方式1'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<pre><code>或者用<span class="code">`addEventListener`</span>监听<span class="code">`click`</span>：
-<span class="xml"><span class="comment"><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 用addEventListener监听click --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">id</span>=<span class="value">"btn2"</span>&gt;</span>js绑定事件测试按钮1<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'#btn2'</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        alert(<span class="string">'js绑定事件方式2'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></span></span>
-
-提到事件绑定，解绑事件也事件当然也可以有，具体请可以查看[<span class="link_label">Demo</span>](<span class="link_url">/event.html</span>)。至于像<span class="code">`attachEvent`</span>这类，这里不多讨论。
-
-比较推荐的绑定方式是<span class="code">`addEventListener`</span>, 这种方式可以给DOM元素添加不止一个事件处理函数，而且可以控制事件在捕获或冒泡阶段触发。
-
-PS：addEventListener可以接受三个参数，其语法是<span class="code">`target.addEventListener(type, listener[, useCapture]);`</span>，第三个参数标识是在捕获阶段触发还是在冒泡阶段，默认值为<span class="code">`false`</span>标识在冒泡阶段触发
-</code></pre><h2 id="事件捕获或冒泡">事件捕获或冒泡</h2><p>这里简要说明一下W3C的事件模型：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">                 |<span class="string"> </span>|<span class="string">  / \</span><br><span class="line">-----------------</span>|<span class="string"> </span>|<span class="string">--</span>|<span class="string"> </span>|<span class="string">-----------------</span><br><span class="line"></span>|<span class="string"> element1       </span>|<span class="string"> </span>|<span class="string">  </span>|<span class="string"> </span>|<span class="string">                </span>|</span><br><span class="line">|<span class="string">   -------------</span>|<span class="string"> </span>|<span class="string">--</span>|<span class="string"> </span>|<span class="string">-----------     </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">element2    \ /  </span>|<span class="string"> </span>|<span class="string">          </span>|<span class="string">     </span>|</span><br><span class="line">|<span class="string">   --------------------------------     </span>|</span><br><span class="line">|<span class="string">        W3C event model                 </span>|</span><br><span class="line">------------------------------------------</span><br></pre></td></tr></table></figure></p>
+<h2 id="事件监听方式">事件监听方式</h2><p>js中实现事件监听方式，以<code>click</code>事件为例，可以有直接设置元素的<code>onclick</code>属性：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 直接设置元素的onclick属性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>js绑定事件测试按钮1<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'#btn1'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        alert(<span class="string">'js绑定事件方式1'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或者用<code>addEventListener</code>监听<code>click</code>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 用addEventListener监听click --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">id</span>=<span class="value">"btn2"</span>&gt;</span>js绑定事件测试按钮1<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'#btn2'</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        alert(<span class="string">'js绑定事件方式2'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>提到事件绑定，解绑事件也事件当然也可以有，具体请可以查看<a href="/event.html">Demo</a>。至于像<code>attachEvent</code>这类，这里不多讨论。</p>
+<p>比较推荐的绑定方式是<code>addEventListener</code>, 这种方式可以给DOM元素添加不止一个事件处理函数，而且可以控制事件在捕获或冒泡阶段触发。</p>
+<p>PS：addEventListener可以接受三个参数，其语法是<code>target.addEventListener(type, listener[, useCapture]);</code>，第三个参数标识是在捕获阶段触发还是在冒泡阶段，默认值为<code>false</code>标识在冒泡阶段触发</p>
+<h2 id="事件捕获或冒泡">事件捕获或冒泡</h2><p>这里简要说明一下W3C的事件模型：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">                 |<span class="string"> </span>|<span class="string">  / \</span><br><span class="line">-----------------</span>|<span class="string"> </span>|<span class="string">--</span>|<span class="string"> </span>|<span class="string">-----------------</span><br><span class="line"></span>|<span class="string"> element1       </span>|<span class="string"> </span>|<span class="string">  </span>|<span class="string"> </span>|<span class="string">                </span>|</span><br><span class="line">|<span class="string">   -------------</span>|<span class="string"> </span>|<span class="string">--</span>|<span class="string"> </span>|<span class="string">-----------     </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">element2    \ /  </span>|<span class="string"> </span>|<span class="string">          </span>|<span class="string">     </span>|</span><br><span class="line">|<span class="string">   --------------------------------     </span>|</span><br><span class="line">|<span class="string">        W3C event model                 </span>|</span><br><span class="line">------------------------------------------</span><br></pre></td></tr></table></figure></p>
 <p>假设给元素添加一下事件：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">element1.<span class="function"><span class="title">addEventListener</span><span class="params">(<span class="string">'click'</span>,doSomething2,true)</span></span></span><br><span class="line">element2.<span class="function"><span class="title">addEventListener</span><span class="params">(<span class="string">'click'</span>,doSomething,false)</span></span></span><br></pre></td></tr></table></figure></p>
 <p>当点击element2时，首先会点击事件开始于捕获阶段，触发element1的事件处理函数doSomething2，然后捕获阶段没有可执行的的事件处理函数了，接着开始进入冒泡阶段，触发element2的事件处理函数doSomething。</p>
 <p>其他一些情况请参考<a href="http://www.quirksmode.org/js/events_order.html" target="_blank" rel="external">Event order</a></p>
