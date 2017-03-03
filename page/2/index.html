@@ -81,6 +81,64 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/09/01/nodejs-web应用代码热更新/" title="nodejs web应用代码热更新" itemprop="url">nodejs web应用代码热更新</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
+		
+  <p class="article-time">
+    <time datetime="2016-09-01T09:23:08.000Z" itemprop="datePublished"> Published 2016-09-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。<br>在fex上看见一个比较另类的解决方案——<a href="http://fex.baidu.com/blog/2015/05/nodejs-hot-swapping/">Node.js Web应用代码热更新的另类思路</a></p>
+<p>在这里简单实现一下来解决开发过程中热启动的问题。</p>
+<p>首先需要重新包装一下nodejs提供的<code>require</code>方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/09/01/nodejs-web应用代码热更新/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/nodejs/">nodejs</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/07/25/event那些事/" title="event那些事" itemprop="url">event那些事</a>
   </h1>
   <p class="article-author">By
@@ -619,64 +677,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/11/10/CentOS-安装nginx/" title="CentOS 安装nginx" itemprop="url">CentOS 安装nginx</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
-		
-  <p class="article-time">
-    <time datetime="2015-11-10T00:44:23.000Z" itemprop="datePublished"> Published 2015-11-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
-</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/11/10/CentOS-安装nginx/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/CentOS/">CentOS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -716,6 +716,10 @@
 			
 		
 			
+				<li><a href="/tags/React/" title="React">React<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Angular/" title="Angular">Angular<sup>2</sup></a></li>
 			
 		
@@ -733,10 +737,6 @@
 		
 			
 				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2017-02-22T04:51:46.000Z</updated>
+  <updated>2017-03-03T06:26:58.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -13,6 +13,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[async-validator使用]]></title>
+    <link href="http://xchb.work/2017/03/02/async-validator%E4%BD%BF%E7%94%A8/"/>
+    <id>http://xchb.work/2017/03/02/async-validator使用/</id>
+    <published>2017-03-02T12:35:35.000Z</published>
+    <updated>2017-03-03T06:26:58.000Z</updated>
+    <content type="html"><![CDATA[<p>使用<code>antd</code>的<code>Form</code>表单组件时，经常涉及到表单检验。不知是不是智商问题，每次写检验规则时都得查文档，有时出错还不知怎么一回事。高冷的文档，简洁的demo，只能自己探索代码，然后结合文档梳理一下。</p>
+<a id="more"></a>
+<h1 id="基本用法">基本用法</h1><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Validator = <span class="built_in">require</span>(<span class="string">'async-validator'</span>);</span><br><span class="line"><span class="keyword">const</span> descriptor = &#123;</span><br><span class="line">  name: &#123;<span class="keyword">type</span>: <span class="string">"string"</span>, required: <span class="literal">true</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> validator = <span class="keyword">new</span> Validator(descriptor);</span><br><span class="line"></span><br><span class="line">validator.validate(&#123;name: <span class="string">"demo"</span>&#125;, (errors, fields) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span>(errors) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(errors);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// success</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>基本流程就是，创建一个验证器，参数是需要验证的字段以及其对应的验证规则，然后调用<code>validate</code>开始验证。</p>
+<h1 id="规则形式">规则形式</h1><p><code>async-validator</code>中定义的校验规则格式有些会有简写，但通过一系列内部判断转化之后，其规则格式基本可以统一为：<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    name: [&#123;<span class="built_in">type</span>: <span class="string">'string'</span>, validator: <span class="function"><span class="keyword">function</span><span class="params">()</span></span> &#123;&#125;, field: <span class="string">'name'</span>&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>必需字段包含<code>type</code>, <code>validator</code>两个字段。如果没有<code>validator</code>函数时，验证时会自动跳过。</p>
+<h2 id="1-_规则是方法">1. 规则是方法</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> descriptor = &#123;</span><br><span class="line">    number: <span class="function"><span class="keyword">function</span> <span class="title">custom</span><span class="params">()</span> </span>&#123;&#125; <span class="comment">// 提供只一个validate方法</span></span><br><span class="line">    <span class="comment">// 也可以是</span></span><br><span class="line">    <span class="comment">// number: [function custom() &#123;&#125;]</span></span><br><span class="line">    <span class="comment">// 或者</span></span><br><span class="line">    <span class="comment">// number: &#123;validator: function custom() &#123;&#125;&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> validator = <span class="keyword">new</span> Validator(descriptor);</span><br><span class="line"></span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+<p>这个规则在验证是会被转化为：<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    number: [&#123;<span class="built_in">type</span>: <span class="string">'string'</span>, validator: <span class="function"><span class="keyword">function</span> <span class="title">custom</span><span class="params">()</span></span> &#123;&#125;, field: <span class="string">'number'</span>&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果规则是方法时，在回调<code>async-validator</code>会注入5个参数 <code>rule, value, callback, source, options</code>:</p>
+<ul>
+<li><code>rule</code>: 当前验证使用的规则</li>
+<li><code>value</code>: 字段的值</li>
+<li><code>callback</code>: 验证完成时的回调函数，参数是<code>null 或者 [] 或者 [new Error(&#39;not valid&#39;)]</code></li>
+<li><code>source</code>: 验证时的所有数据</li>
+<li><code>options</code>: 额外的验证选项，可以包含<code>message</code>来覆盖默认的错误信息</li>
+</ul>
+<h2 id="2-_规则是一个对象">2. 规则是一个对象</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> descriptor = &#123;</span><br><span class="line">  user: &#123;required: <span class="literal">true</span>&#125;  <span class="comment">// user 字段必填</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> validator = <span class="keyword">new</span> Validator(descriptor);</span><br><span class="line"></span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+<p>在验证时会被转化成：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// validators.required 是内部已定义好的检验函数</span></span><br><span class="line"><span class="label">    user:</span> [&#123;<span class="string">type:</span> <span class="string">'string'</span>, <span class="string">required:</span> <span class="literal">true</span>, <span class="string">validator:</span> validators.required, <span class="string">field:</span> <span class="string">'user'</span>&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-_规则是一个数组">3. 规则是一个数组</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> descriptor = &#123;</span><br><span class="line">  email: [&#123;required: <span class="constant">true</span>&#125;, &#123;<span class="keyword">type</span>: <span class="string">'email'</span>&#125;]  <span class="comment">// user 字段必填</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> validator = <span class="built_in">new</span> Validator(descriptor);</span><br><span class="line"></span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+<h2 id="4-_规则包含嵌套">4. 规则包含嵌套</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const descriptor = &#123;</span><br><span class="line">    address: &#123;</span><br><span class="line">      <span class="class"><span class="keyword">type</span>:</span> <span class="symbol">'objec</span>t',</span><br><span class="line">      required: <span class="literal">true</span>,</span><br><span class="line">      fields: &#123;</span><br><span class="line">        province: &#123;</span><br><span class="line">          <span class="class"><span class="keyword">type</span>:</span> <span class="symbol">'strin</span>g',</span><br><span class="line">          required: <span class="literal">true</span>,</span><br><span class="line">          min: <span class="number">4</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        city: &#123;</span><br><span class="line">          <span class="class"><span class="keyword">type</span>:</span> <span class="symbol">'strin</span>g',</span><br><span class="line">          message: <span class="symbol">'custom</span> message',</span><br><span class="line">          min: <span class="number">5</span>,</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const validator = <span class="keyword">new</span> <span class="type">Validator</span>(descriptor);</span><br></pre></td></tr></table></figure>
+<h1 id="type值">type值</h1>]]></content>
+    <summary type="html">
+    <![CDATA[<p>使用<code>antd</code>的<code>Form</code>表单组件时，经常涉及到表单检验。不知是不是智商问题，每次写检验规则时都得查文档，有时出错还不知怎么一回事。高冷的文档，简洁的demo，只能自己探索代码，然后结合文档梳理一下。</p>]]>
+    
+    </summary>
+    
+      <category term="React" scheme="http://xchb.work/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[ES6之Destructuring]]></title>
@@ -826,39 +862,6 @@
 <blockquote>
 <p>source ~/.bash_profile</p>
 </blockquote>]]>
-    
-    </summary>
-    
-      <category term="CentOS" scheme="http://xchb.work/tags/CentOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[CentOS 安装nginx]]></title>
-    <link href="http://xchb.work/2015/11/10/CentOS-%E5%AE%89%E8%A3%85nginx/"/>
-    <id>http://xchb.work/2015/11/10/CentOS-安装nginx/</id>
-    <published>2015-11-10T00:44:23.000Z</published>
-    <updated>2016-02-23T11:53:25.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
-</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
-</code></pre><a id="more"></a>
-<h3 id="nginx常用操作">nginx常用操作</h3><p>启动</p>
-<pre><code>sudo /etc/init.d/nginx <span class="literal">start</span>
-</code></pre><p>关闭</p>
-<pre><code>sudo /etc/init.d/nginx <span class="built_in">stop</span><span class="comment">
-//或者</span>
-nginx -s <span class="built_in">stop</span><span class="comment">
-//或者</span>
-nginx -s quit
-</code></pre><p>重启</p>
-<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx restart</span>
-</code></pre><p>重新载入（修改配置文件之后）</p>
-<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx reload</span>
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
-</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
-</code></pre>]]>
     
     </summary>
     
