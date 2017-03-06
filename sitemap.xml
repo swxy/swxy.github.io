@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xchb.work/about/index.html</loc>
+    <lastmod>2017-03-06T12:53:53.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xchb.work/tangshi.html</loc>
     <lastmod>2017-03-06T12:50:19.000Z</lastmod>
   </url>
@@ -14,11 +19,6 @@
   <url>
     <loc>http://xchb.work/tsdata.js</loc>
     <lastmod>2017-03-03T13:56:48.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xchb.work/about/index.html</loc>
-    <lastmod>2017-02-27T13:17:30.000Z</lastmod>
   </url>
   
   <url>
