@@ -34,20 +34,12 @@
             cursor: pointer;
             text-decoration: none;
         }
-
-        a:link {
-            color: blue;
-        }
-        a:visited {
-            color: purple;
+        .visited {
+            color: #00a854;
         }
         a:hover {
-            color: green;
+            color: #f04134;
         }
-        a:active {
-            color: red;
-        }
-
         #popup {
             position: fixed;
             top: 0;
@@ -84,23 +76,86 @@
     var dataKeys = Object.keys(data);
     var $content = document.querySelector('#content');
     var $popup = document.querySelector('#popup');
+    var visited = setVisited();
+    var colors = ['#999', '#888', '#777', '#666', '#555', '#444', '#333', '#222', '#111'];
     window.addEventListener('DOMContentLoaded', function () {
         domLoaded();
+        setPosition();
         bind();
         detail();
     });
 
     function domLoaded() {
-        var list = dataKeys.map(function (key) {
-            return '<a href="#' + key + '" data-key="' + key + '">' + key + '</a>';
+        var list = dataKeys.map(function (key, idx) {
+            var count = visited[key];
+            var active = count !== undefined ? 'visited' : '';
+            return '<a href="#' + key + '" style="' + getColor(count) + '">'
+                + (idx + 1) + '. ' + key
+                + '</a>';
         }).join('');
         $content.innerHTML = '<h1>唐诗三百首</h1>' + list;
     }
 
+    function getColor(count, color) {
+        if (!count) {
+            return '';
+        }
+        var idx = Math.floor(count / 3);
+        if (idx > 8) {
+            idx = 8;
+        }
+        return color ? colors[idx] : 'color:' + colors[idx];
+    }
+
+    function setPosition() {
+        var scrollPos = localStorage.getItem('scrollPos');
+        if (scrollPos !== undefined) {
+            $content.scrollTop = scrollPos;
+        }
+    }
+
+    function setVisited() {
+        return JSON.parse(localStorage.getItem('visited') || '{}');
+    }
+
+    function saveVisited() {
+        localStorage.setItem('visited', JSON.stringify(visited));
+    }
+
+    function clear() {
+
+    }
+
     function bind () {
-        window.addEventListener("hashchange", function () {
-            console.log('hash change');
+        window.addEventListener('hashchange', function () {
             detail();
+            return true;
+        });
+
+        $content.addEventListener('click', function (e) {
+            var target = e.target;
+            if (target.tagName === 'A') {
+                var key = target.getAttribute('href').replace('#', '');
+                if (!key) {
+                    return;
+                }
+                if (visited[key] !== undefined) {
+                    visited[key] += 1;
+                }
+                else {
+                    visited[key] = 1;
+                }
+                target.style.color = getColor(visited[key], true);
+            }
+        });
+
+        window.addEventListener('pagehide', function () {
+            localStorage.setItem("scrollPos", $content.scrollTop);
+            saveVisited();
+        });
+        window.addEventListener('beforeunload', function () {
+            localStorage.setItem("scrollPos", $content.scrollTop);
+            saveVisited();
         });
     }
 
