@@ -81,6 +81,77 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/12/01/Terminal-路径显示/" title="Terminal 路径显示" itemprop="url">Terminal 路径显示</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-01T06:13:37.000Z" itemprop="datePublished"> Published 2015-12-01</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>查看提示符显示方式：</p>
+<blockquote>
+<p>echo $PS1</p>
+</blockquote>
+<p>修改<code>$PS1</code>，打开文件 <code>~/.bash_profile</code>，增加一条规则，如果有则编辑即可：</p>
+<blockquote>
+<p>export PS1=”\u \w$”</p>
+</blockquote>
+<p>如果需要设置路径颜色，可以修改为：</p>
+<blockquote>
+<p>export PS1=”[\e[33;1m\u@\h: \e[31m\W\e[0m]\$”</p>
+</blockquote>
+<p>保存修改并退出，应用更新：</p>
+<blockquote>
+<p>source ~/.bash_profile</p>
+</blockquote>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/12/01/Terminal-路径显示/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CentOS/">CentOS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/11/10/CentOS-安装nginx/" title="CentOS 安装nginx" itemprop="url">CentOS 安装nginx</a>
   </h1>
   <p class="article-author">By
@@ -385,7 +456,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/JS/" title="JS">JS<sup>5</sup></a></li>
+				<li><a href="/tags/JS/" title="JS">JS<sup>6</sup></a></li>
 			
 		
 			

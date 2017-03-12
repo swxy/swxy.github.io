@@ -4,42 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>浏览器工作原理 | 学习是一种信仰</title>
+    <title>WebStorm之JSCS | 学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="swxy">
     
 
     
-    <meta name="description" content="整理和收集一下浏览器渲染原理。
-解析和展示html流程
-首先下载html文件
-解析html，构建dom树
-和css结合生成渲染树
-绘制并展示页面">
+    <meta name="description" content="在开发代码时，通常需要配置一些额外的代码质量校验工具来保证代码质量，像我们这边使用的就是fecs。因为平常都是用Webstorm来开发，正好fecs有提供这样的插件，用起来却也很方便。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浏览器工作原理">
-<meta property="og:url" content="http://xchb.work/2016/07/21/浏览器工作原理/index.html">
+<meta property="og:title" content="WebStorm之JSCS">
+<meta property="og:url" content="http://xchb.work/2017/03/11/WebStorm之JSCS/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="整理和收集一下浏览器渲染原理。
-解析和展示html流程
-首先下载html文件
-解析html，构建dom树
-和css结合生成渲染树
-绘制并展示页面">
-<meta property="og:image" content="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/flow.png">
-<meta property="og:image" content="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/webkitflow.png">
-<meta property="og:image" content="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/image008.jpg">
-<meta property="og:image" content="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/render-tree-construction.png">
-<meta property="og:updated_time" content="2016-07-22T02:41:01.000Z">
+<meta property="og:description" content="在开发代码时，通常需要配置一些额外的代码质量校验工具来保证代码质量，像我们这边使用的就是fecs。因为平常都是用Webstorm来开发，正好fecs有提供这样的插件，用起来却也很方便。">
+<meta property="og:updated_time" content="2017-03-12T08:50:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浏览器工作原理">
-<meta name="twitter:description" content="整理和收集一下浏览器渲染原理。
-解析和展示html流程
-首先下载html文件
-解析html，构建dom树
-和css结合生成渲染树
-绘制并展示页面">
+<meta name="twitter:title" content="WebStorm之JSCS">
+<meta name="twitter:description" content="在开发代码时，通常需要配置一些额外的代码质量校验工具来保证代码质量，像我们这边使用的就是fecs。因为平常都是用Webstorm来开发，正好fecs有提供这样的插件，用起来却也很方便。">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -99,41 +80,33 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/07/21/浏览器工作原理/" title="浏览器工作原理" itemprop="url">浏览器工作原理</a>
+      <a href="/2017/03/11/WebStorm之JSCS/" title="WebStorm之JSCS" itemprop="url">WebStorm之JSCS</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
 		
   <p class="article-time">
-    <time datetime="2016-07-21T12:06:49.000Z" itemprop="datePublished"> Published 2016-07-21</time>
+    <time datetime="2017-03-11T02:04:26.000Z" itemprop="datePublished"> Published 2017-03-11</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>整理和收集一下浏览器渲染原理。</p>
-<h2 id="解析和展示html流程">解析和展示html流程</h2><ol>
-<li>首先下载html文件</li>
-<li>解析html，构建dom树</li>
-<li>和css结合生成渲染树</li>
-<li>绘制并展示页面</li>
-</ol>
+		<p>在开发代码时，通常需要配置一些额外的代码质量校验工具来保证代码质量，像我们这边使用的就是<a href="http://fecs.baidu.com/" target="_blank" rel="external">fecs</a>。因为平常都是用Webstorm来开发，正好<code>fecs</code>有提供这样的<a href="https://github.com/leeight/Baidu-FE-Code-Style#webstorm" target="_blank" rel="external">插件</a>，用起来却也很方便。</p>
 <a id="more"></a>
-<p>图示：<br><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/flow.png" alt="渲染流程"></p>
-<p><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/webkitflow.png" alt="Webkit"></p>
-<p><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/image008.jpg" alt="Gecko"></p>
-<p><a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="external">图片来源:http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/</a></p>
-<h2 id="CSSOM和DOM组合_-&gt;_render_tree_（渲染树）">CSSOM和DOM组合 -&gt; render tree （渲染树）</h2><p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/render-tree-construction.png" alt="combile CSSOM and DOM"><br><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">图片来源：https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction</a></p>
-<h2 id="相关文章：">相关文章：</h2><ol>
-<li><a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="external">浏览器工作原理</a></li>
-<li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="external">How browsers work</a></li>
-<li><a href="https://css-tricks.com/efficiently-rendering-css/" target="_blank" rel="external">EfficientlyRendering CSS</a></li>
-<li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">Render-tree construction, layout, and paint</a></li>
-<li><a href="http://calendar.perfplanet.com/2011/css-selector-performance-has-changed-for-the-better/" target="_blank" rel="external">CSS Selector Performance has changed! (For the better)</a></li>
-<li><a href="https://dl.dropboxusercontent.com/u/39519/talks/cssperf/index.html" target="_blank" rel="external">CSS PERFORMANCE</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Style_System_Overview" target="_blank" rel="external">Style System Overview</a></li>
+<h1 id="安装">安装</h1><ol>
+<li>把代码下载或者<code>git clone</code>到本地某个目录</li>
+<li>然后全局安装<code>fecs</code>, <code>npm i -g fecs</code></li>
+<li>然后修改jscs的配置, 目录指向下载的<code>Baidu-FE-Code-Style</code>即可</li>
+<li>然后可能还需要指定一个<code>jscs</code>的配置文件，可以在<code>Baidu-FE-Code-Style</code>下新建一个<code>.jscsrc</code>文件，内容随意一个json就行，<code>fecs</code>并不会用到这个配置，我配置的是：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">preset</span>": <span class="value"><span class="string">"airbnb"</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
+<h1 id="原理">原理</h1><p>每次文件文件有变更时，会执行<code>Baidu-FE-Code-Style</code>工程目录下的<code>[bin/jscs](https://github.com/leeight/Baidu-FE-Code-Style/blob/master/bin/jscs)</code>, 最主要的代码:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">spawn</span>(<span class="string">'fecs'</span>,</span><br><span class="line">    [<span class="string">'--silent'</span>, <span class="string">'--reporter=baidu'</span>, <span class="string">'--format=checkstyle'</span>, file],</span><br><span class="line">    &#123;<span class="attribute">stdio</span>: <span class="string">'inherit'</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>即执行全局的fecs命令，<code>--fotmat=checkstyle</code>是指输入符合webstorm规范的xml形式的检测结果，内容大致为：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">checkstyle</span> <span class="attribute">version</span>=<span class="value">"4.3"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">file</span> <span class="attribute">name</span>=<span class="value">"/Users/xxx/project/util.js"</span> <span class="attribute">count</span>=<span class="value">"1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">error</span> <span class="attribute">line</span>=<span class="value">"107"</span> <span class="attribute">column</span>=<span class="value">"24"</span> <span class="attribute">severity</span>=<span class="value">"error"</span> <span class="attribute">source</span>=<span class="value">"fecs"</span> <span class="attribute">message</span>=<span class="value">"  JS021: [强制] 不得省略语句结束的分号。"</span> <span class="attribute">rule</span>=<span class="value">"semi"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">file</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">checkstyle</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>webstorm会根据error标签中的信息展示相关的提示。</p>
+<h1 id="其他">其他</h1><p>由于webstorm只支持给统一设置检测错误提示的颜色，所以这里没有办法根据<code>severity</code>的不用取值,例如<code>error</code>, <code>warning</code>等展示不同的颜色。</p>
+<h1 id="扩展阅读">扩展阅读</h1><p><a href="https://github.com/leeight/Baidu-FE-Code-Style" target="_blank" rel="external">leeight/Baidu-FE-Code-Style</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -142,7 +115,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Web/">Web</a>
+  <span></span> <a href="/tags/JS/">JS</a>
   </div>
 
 </div>
@@ -151,7 +124,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xchb.work/2016/07/21/浏览器工作原理/" data-title="浏览器工作原理 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xchb.work/2017/03/11/WebStorm之JSCS/" data-title="WebStorm之JSCS | 学习是一种信仰" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -164,19 +137,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/07/25/event那些事/" title="event那些事">
-  <strong>上一篇：</strong><br/>
-  <span>
-  event那些事</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/05/25/React-Todo示例/"  title="React-Todo示例">
+<a href="/2017/03/02/async-validator使用/"  title="async-validator使用">
  <strong>下一篇：</strong><br/> 
- <span>React-Todo示例
+ <span>async-validator使用
 </span>
 </a>
 </div>
@@ -191,7 +156,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#解析和展示html流程"><span class="toc-number">1.</span> <span class="toc-text">解析和展示html流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSSOM和DOM组合_->_render_tree_（渲染树）"><span class="toc-number">2.</span> <span class="toc-text">CSSOM和DOM组合 -> render tree （渲染树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关文章："><span class="toc-number">3.</span> <span class="toc-text">相关文章：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原理"><span class="toc-number">2.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展阅读"><span class="toc-number">4.</span> <span class="toc-text">扩展阅读</span></a></li></ol>
  
   </div>
 

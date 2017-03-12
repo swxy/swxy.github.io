@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2017-03-06T12:48:21.000Z</updated>
+  <updated>2017-03-12T08:50:41.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -13,6 +13,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[WebStorm之JSCS]]></title>
+    <link href="http://xchb.work/2017/03/11/WebStorm%E4%B9%8BJSCS/"/>
+    <id>http://xchb.work/2017/03/11/WebStorm之JSCS/</id>
+    <published>2017-03-11T02:04:26.000Z</published>
+    <updated>2017-03-12T08:50:41.000Z</updated>
+    <content type="html"><![CDATA[<p>在开发代码时，通常需要配置一些额外的代码质量校验工具来保证代码质量，像我们这边使用的就是<a href="http://fecs.baidu.com/" target="_blank" rel="external">fecs</a>。因为平常都是用Webstorm来开发，正好<code>fecs</code>有提供这样的<a href="https://github.com/leeight/Baidu-FE-Code-Style#webstorm" target="_blank" rel="external">插件</a>，用起来却也很方便。</p>
+<a id="more"></a>
+<h1 id="安装">安装</h1><ol>
+<li>把代码下载或者<code>git clone</code>到本地某个目录</li>
+<li>然后全局安装<code>fecs</code>, <code>npm i -g fecs</code></li>
+<li>然后修改jscs的配置, 目录指向下载的<code>Baidu-FE-Code-Style</code>即可</li>
+<li>然后可能还需要指定一个<code>jscs</code>的配置文件，可以在<code>Baidu-FE-Code-Style</code>下新建一个<code>.jscsrc</code>文件，内容随意一个json就行，<code>fecs</code>并不会用到这个配置，我配置的是：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">preset</span>": <span class="value"><span class="string">"airbnb"</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="原理">原理</h1><p>每次文件文件有变更时，会执行<code>Baidu-FE-Code-Style</code>工程目录下的<code>[bin/jscs](https://github.com/leeight/Baidu-FE-Code-Style/blob/master/bin/jscs)</code>, 最主要的代码:<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">spawn</span>(<span class="string">'fecs'</span>,</span><br><span class="line">    [<span class="string">'--silent'</span>, <span class="string">'--reporter=baidu'</span>, <span class="string">'--format=checkstyle'</span>, file],</span><br><span class="line">    &#123;<span class="attribute">stdio</span>: <span class="string">'inherit'</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>即执行全局的fecs命令，<code>--fotmat=checkstyle</code>是指输入符合webstorm规范的xml形式的检测结果，内容大致为：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">checkstyle</span> <span class="attribute">version</span>=<span class="value">"4.3"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">file</span> <span class="attribute">name</span>=<span class="value">"/Users/xxx/project/util.js"</span> <span class="attribute">count</span>=<span class="value">"1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">error</span> <span class="attribute">line</span>=<span class="value">"107"</span> <span class="attribute">column</span>=<span class="value">"24"</span> <span class="attribute">severity</span>=<span class="value">"error"</span> <span class="attribute">source</span>=<span class="value">"fecs"</span> <span class="attribute">message</span>=<span class="value">"  JS021: [强制] 不得省略语句结束的分号。"</span> <span class="attribute">rule</span>=<span class="value">"semi"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">file</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">checkstyle</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>webstorm会根据error标签中的信息展示相关的提示。</p>
+<h1 id="其他">其他</h1><p>由于webstorm只支持给统一设置检测错误提示的颜色，所以这里没有办法根据<code>severity</code>的不用取值,例如<code>error</code>, <code>warning</code>等展示不同的颜色。</p>
+<h1 id="扩展阅读">扩展阅读</h1><p><a href="https://github.com/leeight/Baidu-FE-Code-Style" target="_blank" rel="external">leeight/Baidu-FE-Code-Style</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在开发代码时，通常需要配置一些额外的代码质量校验工具来保证代码质量，像我们这边使用的就是<a href="http://fecs.baidu.com/">fecs</a>。因为平常都是用Webstorm来开发，正好<code>fecs</code>有提供这样的<a href="https://github.com/leeight/Baidu-FE-Code-Style#webstorm">插件</a>，用起来却也很方便。</p>]]>
+    
+    </summary>
+    
+      <category term="JS" scheme="http://xchb.work/tags/JS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[async-validator使用]]></title>
@@ -817,56 +847,6 @@
     </summary>
     
       <category term="snippet" scheme="http://xchb.work/tags/snippet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Terminal 路径显示]]></title>
-    <link href="http://xchb.work/2015/12/01/Terminal-%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA/"/>
-    <id>http://xchb.work/2015/12/01/Terminal-路径显示/</id>
-    <published>2015-12-01T06:13:37.000Z</published>
-    <updated>2016-02-23T02:54:19.000Z</updated>
-    <content type="html"><![CDATA[<p>查看提示符显示方式：</p>
-<blockquote>
-<p>echo $PS1</p>
-</blockquote>
-<p>修改<code>$PS1</code>，打开文件 <code>~/.bash_profile</code>，增加一条规则，如果有则编辑即可：</p>
-<blockquote>
-<p>export PS1=”\u \w$”</p>
-</blockquote>
-<p>如果需要设置路径颜色，可以修改为：</p>
-<blockquote>
-<p>export PS1=”[\e[33;1m\u@\h: \e[31m\W\e[0m]\$”</p>
-</blockquote>
-<p>保存修改并退出，应用更新：</p>
-<blockquote>
-<p>source ~/.bash_profile</p>
-</blockquote>
-<a id="more"></a>
-<p>附录：<br><code>$PS1</code>符号对应的含义，<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">\a</span>    ASCII 响铃字符（也可以键入 <span class="string">\007）</span>  </span><br><span class="line"><span class="string">\d</span>    <span class="string">"Wed Sep 06"</span> 格式的日期  </span><br><span class="line"><span class="string">\e</span>    ASCII 转义字符（也可以键入 <span class="string">\033）</span></span><br><span class="line"><span class="string">\h</span>    主机名的第一部分（如 <span class="string">"mybox"</span>）</span><br><span class="line"><span class="string">\H</span>    主机的全称（如 <span class="string">"mybox.mydomain.com"</span>）</span><br><span class="line"><span class="string">\j</span>    在此 shell 中通过按 ^Z 挂起的进程数</span><br><span class="line"><span class="string">\l</span>    此 shell 的终端设备名（如 <span class="string">"ttyp4"</span>）</span><br><span class="line"><span class="string">\n</span>    换行符</span><br><span class="line"><span class="string">\r</span>    回车符</span><br><span class="line"><span class="string">\s</span>    shell 的名称（如 <span class="string">"bash"</span>）</span><br><span class="line"><span class="string">\t</span>    <span class="number">24</span> 小时制时间（如 <span class="string">"23:01:01"</span>）</span><br><span class="line"><span class="string">\T</span>    <span class="number">12</span> 小时制时间（如 <span class="string">"11:01:01"</span>）</span><br><span class="line"><span class="string">\@</span>    带有 am/pm 的 <span class="number">12</span> 小时制时间</span><br><span class="line"><span class="string">\u</span>    用户名</span><br><span class="line"><span class="string">\v</span>    bash 的版本（如 <span class="number">2.04</span>）</span><br><span class="line"><span class="string">\V</span>    Bash 版本（包括补丁级别） ?/td&gt;</span><br><span class="line"><span class="string">\w</span>    当前工作目录（如 <span class="string">"/home/drobbins"</span>）</span><br><span class="line"><span class="string">\W</span>    当前工作目录的“基名 (basename)”（如 <span class="string">"drobbins"</span>）</span><br><span class="line"><span class="string">\!</span>    当前命令在历史缓冲区中的位置</span><br><span class="line"><span class="string">\#</span>    命令编号（只要您键入内容，它就会在每次提示时累加）</span><br><span class="line"><span class="string">\$</span>    如果您不是超级用户 (root)，则插入一个 <span class="string">"$"</span>；如果您是超级用户，则显示一个 <span class="string">"#"</span></span><br><span class="line"><span class="string">\xxx</span>  插入一个用三位数 xxx（用零代替未使用的数字，如 <span class="string">"\007"</span>）表示的 ASCII 字符</span><br><span class="line"><span class="string">\\</span>    反斜杠</span><br><span class="line"><span class="string">\[</span>    这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。</span><br><span class="line"><span class="string">\]</span>    这个序列应该出现在非打印字符序列之后。</span><br></pre></td></tr></table></figure></p>
-<p>颜色的表示方法，<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'\e[0m'</span>      no <span class="built_in">color</span></span><br><span class="line"><span class="string">'\e[1;37m'</span>   white</span><br><span class="line"><span class="string">'\e[0;30m'</span>   black</span><br><span class="line"><span class="string">'\e[0;34m'</span>   <span class="built_in">blue</span></span><br><span class="line"><span class="string">'\e[1;34m'</span>   light <span class="built_in">blue</span></span><br><span class="line"><span class="string">'\e[0;32m'</span>   <span class="built_in">green</span></span><br><span class="line"><span class="string">'\e[1;32m'</span>   light <span class="built_in">green</span></span><br><span class="line"><span class="string">'\e[0;36m'</span>   cyan</span><br><span class="line"><span class="string">'\e[1;36m'</span>   light cyan</span><br><span class="line"><span class="string">'\e[0;31m'</span>   <span class="built_in">red</span></span><br><span class="line"><span class="string">'\e[1;31m'</span>   light <span class="built_in">red</span></span><br><span class="line"><span class="string">'\e[0;35m'</span>   purple</span><br><span class="line"><span class="string">'\e[1;35m'</span>   light purple</span><br><span class="line"><span class="string">'\e[0;33m'</span>   brown</span><br><span class="line"><span class="string">'\e[1;33m'</span>   yellow</span><br><span class="line"><span class="string">'\e[0;30m'</span>   gray</span><br><span class="line"><span class="string">'\e[0;37m'</span>   light gray</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>查看提示符显示方式：</p>
-<blockquote>
-<p>echo $PS1</p>
-</blockquote>
-<p>修改<code>$PS1</code>，打开文件 <code>~/.bash_profile</code>，增加一条规则，如果有则编辑即可：</p>
-<blockquote>
-<p>export PS1=”\u \w$”</p>
-</blockquote>
-<p>如果需要设置路径颜色，可以修改为：</p>
-<blockquote>
-<p>export PS1=”[\e[33;1m\u@\h: \e[31m\W\e[0m]\$”</p>
-</blockquote>
-<p>保存修改并退出，应用更新：</p>
-<blockquote>
-<p>source ~/.bash_profile</p>
-</blockquote>]]>
-    
-    </summary>
-    
-      <category term="CentOS" scheme="http://xchb.work/tags/CentOS/"/>
     
   </entry>
   
