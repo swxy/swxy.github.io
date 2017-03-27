@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2017-03-12T08:50:41.000Z</updated>
+  <updated>2017-03-26T03:06:58.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -13,6 +13,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ES6之Iteration]]></title>
+    <link href="http://xchb.work/2017/03/23/ES6%E4%B9%8BIteration/"/>
+    <id>http://xchb.work/2017/03/23/ES6之Iteration/</id>
+    <published>2017-03-23T03:00:05.000Z</published>
+    <updated>2017-03-26T03:06:58.000Z</updated>
+    <content type="html"><![CDATA[<p>探索问题：</p>
+<ol>
+<li>为什么ES6中数组，字符串等是可迭代的，而对象却是不可迭代？直观感受就是数组和字符串都可以用<code>for...of</code>，而对象却不可以。</li>
+<li>实现一个最小化的迭代器。</li>
+</ol>
+<a id="more"></a>
+<p>JavaScript中可以迭代的两种情景：</p>
+<ol>
+<li>程序层级：检测程序的结构</li>
+<li>数据层级：检测程序中所有的数据</li>
+</ol>
+<p>这两个层级过于抽象，尤其是<code>程序层级</code>，可以借助js中的数组来理解：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dt = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]; <span class="comment">// 数据层</span></span><br><span class="line">dt.func = () =&gt; &#123;&#125;; <span class="comment">// 程序层</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (let i in dt) console.<span class="built_in">log</span>(xs[i]); <span class="comment">// 1, 2, 3, 4, () =&gt; &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (let i of dt) console.<span class="built_in">log</span>(i); <span class="comment">// 1, 2, 3, 4</span></span><br></pre></td></tr></table></figure></p>
+<p>像ES5中的<code>for...in</code>可以检测对象中的所有属性，针对的大多数就是程序层级。为了解决这个问题，ES6中引入了<code>for...of</code>.</p>
+<blockquote>
+<p>那既然可以用<code>for...in</code>遍历对象，为何就不能用<code>for...of</code>了？</p>
+</blockquote>
+<p>如果设计可以迭代对象，也就意味着会混淆上面两个层级，简单的理解就是一个对象不可能仅仅只是像数组一样存储一组数据。如果混合上述两个概念，也就是说可以使用<code>for...of</code>遍历对象，意味着只能遍历对象的数据，而不能遍历其他程序层级的属性，相当于把对象当成一个数据层级来处理，这很可能会破坏代码结构。</p>
+<p>为了解决对象不可以使用<code>for...of</code>遍历的问题，ES6中引入了一个新的概念<code>Map</code>，使用<code>Map</code>创建的key-value对就可以迭代遍历。</p>
+<blockquote>
+<p>当然也可以做一个工具函数，来实现对对象的迭代。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objectEntries</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> propKeys = <span class="built_in">Reflect</span>.ownKeys(obj);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        [<span class="built_in">Symbol</span>.iterator]() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        next() &#123;</span><br><span class="line">            <span class="keyword">if</span> (index &lt; propKeys.length) &#123;</span><br><span class="line">                <span class="keyword">const</span> key = propKeys[index];</span><br><span class="line">                index++;</span><br><span class="line">                <span class="keyword">return</span> &#123; value: [key, obj[key]] &#125;;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123; done: <span class="literal">true</span> &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123; first: <span class="string">'Jane'</span>, last: <span class="string">'Doe'</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [key,value] <span class="keyword">of</span> objectEntries(obj)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span>: <span class="subst">$&#123;value&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// first: Jane</span></span><br><span class="line"><span class="comment">// last: Doe</span></span><br></pre></td></tr></table></figure>
+<p>PS.可以思考一下为什么不扩充在Object原型链上？</p>
+<h1 id="扩展阅读">扩展阅读</h1><ol>
+<li><a href="http://exploringjs.com/es6/ch_iteration.html#sec_plain-objects-not-iterable" target="_blank" rel="external">Plain objects are not iterable</a></li>
+<li><a href="http://stackoverflow.com/a/38777177" target="_blank" rel="external">Why are Objects not Iterable in JavaScript?</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>探索问题：</p>
+<ol>
+<li>为什么ES6中数组，字符串等是可迭代的，而对象却是不可迭代？直观感受就是数组和字符串都可以用<code>for...of</code>，而对象却不可以。</li>
+<li>实现一个最小化的迭代器。</li>
+</ol>]]>
+    
+    </summary>
+    
+      <category term="JS" scheme="http://xchb.work/tags/JS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[WebStorm之JSCS]]></title>
@@ -827,26 +874,6 @@
     </summary>
     
       <category term="hexo" scheme="http://xchb.work/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[代码片段（JS）]]></title>
-    <link href="http://xchb.work/2015/12/11/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%EF%BC%88JS%EF%BC%89/"/>
-    <id>http://xchb.work/2015/12/11/代码片段（JS）/</id>
-    <published>2015-12-11T09:31:08.000Z</published>
-    <updated>2016-01-28T09:13:31.000Z</updated>
-    <content type="html"><![CDATA[<p>#获取随机字符</p>
-<p>###获取26个字母与10个数字之间的随机字符方法<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> randstr</span> = Math.random().toString(<span class="number">36</span>).slice(<span class="number">2</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> len</span> = randstr.length;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> r</span> = randstr.charAt(~~(len*Math.random()))</span><br></pre></td></tr></table></figure></p>
-<p>###获取某一个区间中的随机字符，利用unicode实现<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(<span class="number">0x2200</span> + (<span class="number">0x220f</span> - <span class="number">0x2200</span> + <span class="number">1</span>) * Math.random());</span><br></pre></td></tr></table></figure></p>
-<p>PS: 数字的unicode范围为 0030–0039；英文小写字母的范围为，0061–007a</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>#获取随机字符</p>
-<p>###获取26个字母与10个数字之间的随机字符方法<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</spa]]>
-    </summary>
-    
-      <category term="snippet" scheme="http://xchb.work/tags/snippet/"/>
     
   </entry>
   

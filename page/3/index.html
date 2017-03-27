@@ -81,6 +81,64 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/12/11/代码片段（JS）/" title="代码片段（JS）" itemprop="url">代码片段（JS）</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-11T09:31:08.000Z" itemprop="datePublished"> Published 2015-12-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>#获取随机字符</p>
+<p>###获取26个字母与10个数字之间的随机字符方法<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> randstr</span> = Math.random().toString(<span class="number">36</span>).slice(<span class="number">2</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> len</span> = randstr.length;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> r</span> = randstr.charAt(~~(len*Math.random()))</span><br></pre></td></tr></table></figure></p>
+<p>###获取某一个区间中的随机字符，利用unicode实现<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(<span class="number">0x2200</span> + (<span class="number">0x220f</span> - <span class="number">0x2200</span> + <span class="number">1</span>) * Math.random());</span><br></pre></td></tr></table></figure></p>
+<p>PS: 数字的unicode范围为 0030–0039；英文小写字母的范围为，0061–007a</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/snippet/">snippet</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/12/01/Terminal-路径显示/" title="Terminal 路径显示" itemprop="url">Terminal 路径显示</a>
   </h1>
   <p class="article-author">By
@@ -456,7 +514,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/JS/" title="JS">JS<sup>6</sup></a></li>
+				<li><a href="/tags/JS/" title="JS">JS<sup>7</sup></a></li>
 			
 		
 			
