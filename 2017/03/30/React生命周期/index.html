@@ -4,23 +4,32 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Angular 小技巧 | 学习是一种信仰</title>
+    <title>React生命周期 | 学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="swxy">
     
 
     
-    <meta name="description" content="1.textarea的placeholder换行问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。解决方案：使用angular中的数据绑定就可以轻松实现1&amp;lt;textarea rows=&quot;6&quot; cols=&quot;45&quot; placeholder=&quot;&amp;#123;&amp;#123;&apos;第一行\n第二行\n第三行\n第四行&apos;&amp;#125;&amp;#125;&quot;&amp;gt;&amp;lt;/textar">
+    <meta name="description" content="探索问题：
+
+React生命周期有哪些，各自在什么阶段触发
+哪些阶段可以使用setState">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular 小技巧">
-<meta property="og:url" content="http://xchb.work/2016/09/27/Angular-小技巧/index.html">
+<meta property="og:title" content="React生命周期">
+<meta property="og:url" content="http://xchb.work/2017/03/30/React生命周期/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="1.textarea的placeholder换行问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。解决方案：使用angular中的数据绑定就可以轻松实现1&amp;lt;textarea rows=&quot;6&quot; cols=&quot;45&quot; placeholder=&quot;&amp;#123;&amp;#123;&apos;第一行\n第二行\n第三行\n第四行&apos;&amp;#125;&amp;#125;&quot;&amp;gt;&amp;lt;/textar">
-<meta property="og:updated_time" content="2017-02-22T04:55:02.000Z">
+<meta property="og:description" content="探索问题：
+
+React生命周期有哪些，各自在什么阶段触发
+哪些阶段可以使用setState">
+<meta property="og:updated_time" content="2017-03-30T08:34:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular 小技巧">
-<meta name="twitter:description" content="1.textarea的placeholder换行问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。解决方案：使用angular中的数据绑定就可以轻松实现1&amp;lt;textarea rows=&quot;6&quot; cols=&quot;45&quot; placeholder=&quot;&amp;#123;&amp;#123;&apos;第一行\n第二行\n第三行\n第四行&apos;&amp;#125;&amp;#125;&quot;&amp;gt;&amp;lt;/textar">
+<meta name="twitter:title" content="React生命周期">
+<meta name="twitter:description" content="探索问题：
+
+React生命周期有哪些，各自在什么阶段触发
+哪些阶段可以使用setState">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -80,21 +89,39 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/09/27/Angular-小技巧/" title="Angular 小技巧" itemprop="url">Angular 小技巧</a>
+      <a href="/2017/03/30/React生命周期/" title="React生命周期" itemprop="url">React生命周期</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
 		
   <p class="article-time">
-    <time datetime="2016-09-27T01:35:35.000Z" itemprop="datePublished"> Published 2016-09-27</time>
+    <time datetime="2017-03-30T06:07:08.000Z" itemprop="datePublished"> Published 2017-03-30</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h1 id="1-textarea的placeholder换行">1.<code>textarea</code>的<code>placeholder</code>换行</h1><p>问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。<br>解决方案：使用angular中的数据绑定就可以轻松实现<br><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">textarea</span> <span class="attribute">rows</span>=<span class="value">"6"</span> <span class="attribute">cols</span>=<span class="value">"45"</span> <span class="attribute">placeholder</span>=<span class="value">"</span></span></span><span class="expression">&#123;&#123;'第一行\<span class="variable">n</span>第二行\<span class="variable">n</span>第三行\<span class="variable">n</span>第四行'&#125;&#125;</span><span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">textarea</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>解决方案来源：<a href="http://stackoverflow.com/a/38128759" target="_blank" rel="external">Can you have multiline HTML5 placeholder text in a textarea?</a></p>
+		<p>探索问题：</p>
+<ol>
+<li>React生命周期有哪些，各自在什么阶段触发</li>
+<li>哪些阶段可以使用<code>setState</code></li>
+</ol>
+<a id="more"></a>
+<h1 id="生命周期">生命周期</h1><p>React的生命周期可以分为四个阶段：初始化(initialization)，挂载(mounting)，更新(updating)，销毁(unmounting)</p>
+<h2 id="初始化(initialization)">初始化(initialization)</h2><h3 id="getDefaultProps">getDefaultProps</h3><p>如果没有传递<code>props</code>, 会使用<code>getDefaultProps</code>返回的对象</p>
+<h3 id="getInitialState">getInitialState</h3><p>初始化<code>state</code>，在ES6中可以直接使用<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Input extend Component &#123;</span><br><span class="line">    <span class="constructor"><span class="keyword">constructor</span>(props) </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            txt: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 或者直接赋值</span></span><br><span class="line">    state = &#123;</span><br><span class="line">        txt: <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="挂载(mounting)">挂载(mounting)</h2><h3 id="componentWillUpdate">componentWillUpdate</h3><p>在<code>render</code>之前执行，可以处理一下业务逻辑相关的操作</p>
+<h3 id="render">render</h3><p>首次渲染到DOM中</p>
+<h3 id="componentDidMount">componentDidMount</h3><p>在<code>render</code>之后执行，此时可以获取dom元素，可以初始化一些dom操作相关</p>
+<h2 id="更新(updating)">更新(updating)</h2><h3 id="componentWillReceiveProps">componentWillReceiveProps</h3><p>如果父级组件传递下来的<code>props</code>发生变化时，会被触发</p>
+<h3 id="componentWillUpdate-1">componentWillUpdate</h3><p>可以通过返回值来决定是否需要重新渲染改组件，可以用于做一些性能优化</p>
+<h3 id="render-1">render</h3><p>组件<code>state</code>或者<code>props</code>发生变化时，重新渲染组件</p>
+<h3 id="componentDidUpdate">componentDidUpdate</h3><p>组件状态已经更新到dom上，作用</p>
+<h2 id="销毁(unmounting)">销毁(unmounting)</h2><h1 id="参考">参考</h1><ol>
+<li><a href="http://www.codeceo.com/article/reactjs-life-circle-event.html" target="_blank" rel="external">ReactJS 生命周期、数据流与事件</a></li>
+<li><a href="https://medium.com/react-ecosystem/react-components-lifecycle-ce09239010df" target="_blank" rel="external">React component’s lifecycle</a></li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -103,7 +130,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Angular/">Angular</a>
+  <span></span> <a href="/tags/React/">React</a>
   </div>
 
 </div>
@@ -112,7 +139,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xchb.work/2016/09/27/Angular-小技巧/" data-title="Angular 小技巧 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xchb.work/2017/03/30/React生命周期/" data-title="React生命周期 | 学习是一种信仰" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -126,18 +153,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/09/30/nodejs使用shebang/" title="nodejs使用shebang">
+ <a href="/2017/04/02/React-webpack2环境搭建/" title="React+webpack2环境搭建">
   <strong>上一篇：</strong><br/>
   <span>
-  nodejs使用shebang</span>
+  React+webpack2环境搭建</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/09/22/angular项目中使用iframe相关问题/"  title="angular项目中使用iframe相关问题">
+<a href="/2017/03/23/ES6之Iteration/"  title="ES6之Iteration">
  <strong>下一篇：</strong><br/> 
- <span>angular项目中使用iframe相关问题
+ <span>ES6之Iteration
 </span>
 </a>
 </div>
@@ -152,7 +179,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-textarea的placeholder换行"><span class="toc-number">1.</span> <span class="toc-text">1.textarea的placeholder换行</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#生命周期"><span class="toc-number">1.</span> <span class="toc-text">生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化(initialization)"><span class="toc-number">1.1.</span> <span class="toc-text">初始化(initialization)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#getDefaultProps"><span class="toc-number">1.1.1.</span> <span class="toc-text">getDefaultProps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getInitialState"><span class="toc-number">1.1.2.</span> <span class="toc-text">getInitialState</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挂载(mounting)"><span class="toc-number">1.2.</span> <span class="toc-text">挂载(mounting)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillUpdate"><span class="toc-number">1.2.1.</span> <span class="toc-text">componentWillUpdate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#render"><span class="toc-number">1.2.2.</span> <span class="toc-text">render</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentDidMount"><span class="toc-number">1.2.3.</span> <span class="toc-text">componentDidMount</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新(updating)"><span class="toc-number">1.3.</span> <span class="toc-text">更新(updating)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillReceiveProps"><span class="toc-number">1.3.1.</span> <span class="toc-text">componentWillReceiveProps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillUpdate-1"><span class="toc-number">1.3.2.</span> <span class="toc-text">componentWillUpdate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#render-1"><span class="toc-number">1.3.3.</span> <span class="toc-text">render</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentDidUpdate"><span class="toc-number">1.3.4.</span> <span class="toc-text">componentDidUpdate</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#销毁(unmounting)"><span class="toc-number">1.4.</span> <span class="toc-text">销毁(unmounting)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
  
   </div>
 

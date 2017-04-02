@@ -4,7 +4,7 @@
   <subtitle><![CDATA[我们终其一生都在摆脱他人的期待，追求自由。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://xchb.work/"/>
-  <updated>2017-03-26T03:06:58.000Z</updated>
+  <updated>2017-04-02T03:19:47.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -13,6 +13,85 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[React+webpack2环境搭建]]></title>
+    <link href="http://xchb.work/2017/04/02/React-webpack2%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://xchb.work/2017/04/02/React-webpack2环境搭建/</id>
+    <published>2017-04-02T02:55:18.000Z</published>
+    <updated>2017-04-02T03:19:47.000Z</updated>
+    <content type="html"><![CDATA[<p>记录环境搭建过程中遇到的问题：</p>
+<ol>
+<li><code>No PostCSS Config found in</code></li>
+<li><code>react-hot-loader</code>不更新页面</li>
+</ol>
+<a id="more"></a>
+<ol>
+<li><p><code>No PostCSS Config found in</code><br>使用<code>postcss</code>需要配置一个config文件，但是也可以不使用postcss，所以删除相关配置即可</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">test</span>:<span class="value"> /\.css$/,</span><br><span class="line">    use: [ <span class="string">'style-loader'</span>, <span class="string">'css-loader?modules'</span>, <span class="comment">/*'postcss-loader'*/</span>],</span><br><span class="line"></span></span></span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>react-hot-loader</code>不更新页面<br>对应的<code>index.js</code>为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;AppContainer&#125; <span class="keyword">from</span> <span class="string">'react-hot-loader'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Loop <span class="keyword">from</span> <span class="string">'./loop'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> render = (Component) =&gt; &#123;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="title">AppContainer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">Component</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">AppContainer</span>&gt;</span>,</span><br><span class="line">        document.getElementById('app')</span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">render(Loop);</span><br><span class="line"></span><br><span class="line">// 不更新页面</span><br><span class="line">if (module.hot) &#123;</span><br><span class="line">    module.hot.accept('./loop', () =&gt; &#123;</span><br><span class="line">        render(Loop);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>改为：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">....</span><br><span class="line"><span class="keyword">if</span> (<span class="class"><span class="keyword">module</span>.<span class="title">hot</span>) &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">module</span>.<span class="title">hot</span>.<span class="title">accept</span>();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>或者：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>.hot) &#123;</span><br><span class="line">    <span class="built_in">module</span>.hot.accept(<span class="string">'./loop'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="regexp">//</span> 重新<span class="built_in">require</span></span><br><span class="line">        const NextLoop = <span class="built_in">require</span>(<span class="string">'./loop'</span>).default;</span><br><span class="line">        render(NextLoop);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="教程">教程</h1><ol>
+<li><a href="https://webpack.js.org/guides/hmr-react/" target="_blank" rel="external">Hot Module Replacement - React</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>记录环境搭建过程中遇到的问题：</p>
+<ol>
+<li><code>No PostCSS Config found in</code></li>
+<li><code>react-hot-loader</code>不更新页面</li>
+</ol>]]>
+    
+    </summary>
+    
+      <category term="React" scheme="http://xchb.work/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[React生命周期]]></title>
+    <link href="http://xchb.work/2017/03/30/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://xchb.work/2017/03/30/React生命周期/</id>
+    <published>2017-03-30T06:07:08.000Z</published>
+    <updated>2017-03-30T08:34:03.000Z</updated>
+    <content type="html"><![CDATA[<p>探索问题：</p>
+<ol>
+<li>React生命周期有哪些，各自在什么阶段触发</li>
+<li>哪些阶段可以使用<code>setState</code></li>
+</ol>
+<a id="more"></a>
+<h1 id="生命周期">生命周期</h1><p>React的生命周期可以分为四个阶段：初始化(initialization)，挂载(mounting)，更新(updating)，销毁(unmounting)</p>
+<h2 id="初始化(initialization)">初始化(initialization)</h2><h3 id="getDefaultProps">getDefaultProps</h3><p>如果没有传递<code>props</code>, 会使用<code>getDefaultProps</code>返回的对象</p>
+<h3 id="getInitialState">getInitialState</h3><p>初始化<code>state</code>，在ES6中可以直接使用<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Input extend Component &#123;</span><br><span class="line">    <span class="constructor"><span class="keyword">constructor</span>(props) </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            txt: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 或者直接赋值</span></span><br><span class="line">    state = &#123;</span><br><span class="line">        txt: <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="挂载(mounting)">挂载(mounting)</h2><h3 id="componentWillUpdate">componentWillUpdate</h3><p>在<code>render</code>之前执行，可以处理一下业务逻辑相关的操作</p>
+<h3 id="render">render</h3><p>首次渲染到DOM中</p>
+<h3 id="componentDidMount">componentDidMount</h3><p>在<code>render</code>之后执行，此时可以获取dom元素，可以初始化一些dom操作相关</p>
+<h2 id="更新(updating)">更新(updating)</h2><h3 id="componentWillReceiveProps">componentWillReceiveProps</h3><p>如果父级组件传递下来的<code>props</code>发生变化时，会被触发</p>
+<h3 id="componentWillUpdate-1">componentWillUpdate</h3><p>可以通过返回值来决定是否需要重新渲染改组件，可以用于做一些性能优化</p>
+<h3 id="render-1">render</h3><p>组件<code>state</code>或者<code>props</code>发生变化时，重新渲染组件</p>
+<h3 id="componentDidUpdate">componentDidUpdate</h3><p>组件状态已经更新到dom上，作用</p>
+<h2 id="销毁(unmounting)">销毁(unmounting)</h2><h1 id="参考">参考</h1><ol>
+<li><a href="http://www.codeceo.com/article/reactjs-life-circle-event.html" target="_blank" rel="external">ReactJS 生命周期、数据流与事件</a></li>
+<li><a href="https://medium.com/react-ecosystem/react-components-lifecycle-ce09239010df" target="_blank" rel="external">React component’s lifecycle</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>探索问题：</p>
+<ol>
+<li>React生命周期有哪些，各自在什么阶段触发</li>
+<li>哪些阶段可以使用<code>setState</code></li>
+</ol>]]>
+    
+    </summary>
+    
+      <category term="React" scheme="http://xchb.work/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[ES6之Iteration]]></title>
@@ -788,92 +867,6 @@
     </summary>
     
       <category term="HTML" scheme="http://xchb.work/tags/HTML/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[一键收藏网址至Github]]></title>
-    <link href="http://xchb.work/2016/03/04/%E4%B8%80%E9%94%AE%E6%94%B6%E8%97%8F%E7%BD%91%E5%9D%80%E8%87%B3Github/"/>
-    <id>http://xchb.work/2016/03/04/一键收藏网址至Github/</id>
-    <published>2016-03-04T12:18:22.000Z</published>
-    <updated>2016-03-06T00:43:57.000Z</updated>
-    <content type="html"><![CDATA[<p>在网上看见一个用Ruby On Rail写了一个一键收藏网页文章至github上的文章（<a href="http://www.jianshu.com/p/19d2f3a3b5d8" target="_blank" rel="external">点我查看</a>）,觉得很想法，于是乎，我也想用nodejs写一个。</p>
-<h3 id="功能描述">功能描述</h3><ol>
-<li>chrome扩展，发送当前标签页的标题和网址</li>
-<li>nodejs后端服务器，获取chrome发送的数据，保存至markdown文件中</li>
-<li>定时提交数据至github上</li>
-</ol>
-<a id="more"></a>
-<h3 id="chrome扩展实现">chrome扩展实现</h3><p>chrome扩展实现：</p>
-<ol>
-<li>点击扩展图标时，获取当前标签页的标题和网址，然后将其发送至后端。</li>
-<li>映射该功能至标签页面右键菜单，即生成右键菜单的快捷方式。</li>
-<li>将发送成功的数据保存至本地，防止多次重复提交。</li>
-<li>定时清理保存至浏览器的本地数据，因而chrome的storage是有大小限制的。</li>
-<li>在图标上显示badge，来标识是否发送成功或者发送失败。</li>
-</ol>
-<p>具体实现见(<a href="https://github.com/swxy/bookmarks" target="_blank" rel="external">github源码中markToGithub目录</a>)。</p>
-<h3 id="nodej后端实现">nodej后端实现</h3><p>后端主要实现：</p>
-<ol>
-<li>获取扩展发送的网页标题和网址。</li>
-<li>保存标题和网址至markdown文件中。</li>
-<li>定时提交数据至github上。</li>
-</ol>
-<p>为了可以提交数据至github上，首先需要在github上先建一个项目专门用于存放书签，然后将其复制一份到本地，为了省事，直接在该目录下执行后端代码。</p>
-<p>在保存书签至markdown文件时，按照每月共用一个文件的方式组织，文件名类似于2016-3.md，然后每个文件中，又按照具体的日期倒序排列收藏。这就要求我们在读取文件时，需要一行一行的读取，以便在正确的位置插入数据。</p>
-<p>具体实现见(<a href="https://github.com/swxy/bookmarks" target="_blank" rel="external">github源码中的bookmark.js</a>), 或者见附录。</p>
-<h3 id="附录">附录</h3><p>chrome 扩展的配置文件：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">manifest_version</span>": <span class="value"><span class="number">2</span></span>,</span><br><span class="line">  "<span class="attribute">name</span>": <span class="value"><span class="string">"markToGithub"</span></span>,</span><br><span class="line">  "<span class="attribute">description</span>": <span class="value"><span class="string">"保存书签到github上"</span></span>,</span><br><span class="line">  "<span class="attribute">version</span>": <span class="value"><span class="string">"1.0"</span></span>,</span><br><span class="line">  "<span class="attribute">browser_action</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">default_icon</span>": <span class="value"><span class="string">"book.png"</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">icons</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">16</span>": <span class="value"><span class="string">"book.png"</span></span>,</span><br><span class="line">    "<span class="attribute">24</span>": <span class="value"><span class="string">"book_24.png"</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">background</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">scripts</span>": <span class="value">[<span class="string">"tab.js"</span>]</span>,</span><br><span class="line">    "<span class="attribute">persistent</span>": <span class="value"><span class="literal">false</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">permissions</span>": <span class="value">[</span><br><span class="line">    <span class="string">"activeTab"</span>,</span><br><span class="line">    <span class="string">"contextMenus"</span>,</span><br><span class="line">    <span class="string">"tabs"</span>,</span><br><span class="line">    <span class="string">"http://*/"</span>,</span><br><span class="line">    <span class="string">"storage"</span></span><br><span class="line">  ]</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>后端代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">"use strict"</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>);</span><br><span class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">'querystring'</span>);</span><br><span class="line"><span class="keyword">const</span> spawnSync = <span class="built_in">require</span>(<span class="string">'child_process'</span>).spawnSync;</span><br><span class="line"></span><br><span class="line">http.createServer((req, res) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> urlData = url.parse(req.url);</span><br><span class="line">    <span class="comment">//console.dir(urlData);</span></span><br><span class="line">    <span class="keyword">let</span> queryObj = querystring.parse(urlData.query);</span><br><span class="line">    <span class="built_in">console</span>.dir(queryObj);</span><br><span class="line">    queryObj.title &amp;&amp; queryObj.url &amp;&amp; writeToMarKdownDoc(queryObj);</span><br><span class="line">    res.writeHead(<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>&#125;);</span><br><span class="line">    res.end(<span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">        code: <span class="number">0</span>,</span><br><span class="line">        msg : <span class="string">'success'</span></span><br><span class="line">    &#125;));</span><br><span class="line">&#125;).listen(<span class="number">3175</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeFilename</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fileName = <span class="string">'README.md'</span>;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">if</span> (date.getDate() === <span class="number">1</span>) &#123;</span><br><span class="line">        name = data.getFullYear() + <span class="string">'_'</span> + data.getMonth() + <span class="string">'.md'</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> state = fs.state(name);</span><br><span class="line">            !state.isFile() &amp;&amp; fs.renameSync(fileName, name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (e)&#123;</span><br><span class="line">            fs.renameSync(fileName, name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNewFile</span>(<span class="params">filename</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> fileState = fs.statSync(filename);</span><br><span class="line">        <span class="keyword">let</span> result = fileState.isFile();</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(e);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">writeToFile</span>(<span class="params">filename, data, title</span>) </span>&#123;</span><br><span class="line">    fs.writeFile(filename, data, (err) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="built_in">console</span>.err(err);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'saved '</span> + filename);</span><br><span class="line">        <span class="comment">//pushToGit(title);</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">writeToMarKdownDoc</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fileName = changeFilename();</span><br><span class="line">    <span class="keyword">let</span> data = [];</span><br><span class="line">    <span class="keyword">let</span> inserted = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">if</span> (!isNewFile(fileName)) &#123;</span><br><span class="line">        data.push(<span class="string">`### <span class="subst">$&#123;date.getFullYear()&#125;</span>-<span class="subst">$&#123;date.getMonth()+1&#125;</span>-<span class="subst">$&#123;date.getDate()&#125;</span>&lt;br /&gt;`</span>)</span><br><span class="line">        data.push(<span class="string">`+ [<span class="subst">$&#123;obj.title&#125;</span>](<span class="subst">$&#123;obj.url&#125;</span>)&lt;br /&gt;\n`</span>);</span><br><span class="line">        writeToFile(fileName, data.join(<span class="string">'\n'</span>), obj.title);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> rl = readline.createInterface(&#123;</span><br><span class="line">        input: fs.createReadStream(fileName)</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    rl.on(<span class="string">'line'</span>, (line) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (!inserted &amp;&amp; line.startsWith(<span class="string">'###'</span>)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> data_str = line.match(<span class="regexp">/\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;/</span>)[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">if</span> (date_str &amp;&amp; (<span class="keyword">new</span> <span class="built_in">Date</span>(data_str).getDate() === date.getDate())) &#123;</span><br><span class="line">                data.push(line);</span><br><span class="line">                data.push(<span class="string">`+ [<span class="subst">$&#123;obj.title&#125;</span>](<span class="subst">$&#123;obj.url&#125;</span>)&lt;br /&gt;`</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                data.push(<span class="string">`### <span class="subst">$&#123;date.getFullYear()&#125;</span>-<span class="subst">$&#123;date.getMonth()+1&#125;</span>-<span class="subst">$&#123;date.getDate()&#125;</span>&lt;br /&gt;`</span>)</span><br><span class="line">                data.push(<span class="string">`+ [<span class="subst">$&#123;obj.title&#125;</span>](<span class="subst">$&#123;obj.url&#125;</span>)&lt;br /&gt;\n`</span>);</span><br><span class="line">                data.push(line);</span><br><span class="line">            &#125;</span><br><span class="line">            inserted = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            data.push(line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    rl.on(<span class="string">'close'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (!inserted) &#123; <span class="comment">//新建的文件</span></span><br><span class="line">            data.push(<span class="string">`### <span class="subst">$&#123;date.getFullYear()&#125;</span>-<span class="subst">$&#123;date.getMonth()+1&#125;</span>-<span class="subst">$&#123;date.getDate()&#125;</span>&lt;br /&gt;`</span>)</span><br><span class="line">            data.push(<span class="string">`+ [<span class="subst">$&#123;obj.title&#125;</span>](<span class="subst">$&#123;obj.url&#125;</span>)&lt;br /&gt;\n`</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        writeToFile(fileName, data.join(<span class="string">'\n'</span>), obj.title);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pushToGit</span>(<span class="params">title</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> title = title || <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> cmds = [</span><br><span class="line">        [<span class="string">'git'</span>, [<span class="string">'add'</span>, <span class="string">'.'</span>]],</span><br><span class="line">        [<span class="string">'git'</span>, [<span class="string">'commit'</span>, <span class="string">'-am'</span>, <span class="string">`"add <span class="subst">$&#123;title&#125;</span>"`</span>]],</span><br><span class="line">        [<span class="string">'git'</span>, [<span class="string">'pull'</span>, <span class="string">'--rebase'</span>]],</span><br><span class="line">        [<span class="string">'git'</span>, [<span class="string">'push'</span>, <span class="string">'origin'</span>, <span class="string">'master'</span>]]</span><br><span class="line">    ];</span><br><span class="line">    cmds.forEach((cmd) =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> result = spawnSync(cmd[<span class="number">0</span>], cmd[<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">console</span>.log(result.output.join(<span class="string">'\n'</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'push to github'</span>);</span><br><span class="line">    pushToGit(<span class="keyword">new</span> <span class="built_in">Date</span>().toString());</span><br><span class="line">&#125;, <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'server start at 3175'</span>);</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>在网上看见一个用Ruby On Rail写了一个一键收藏网页文章至github上的文章（<a href="http://www.jianshu.com/p/19d2f3a3b5d8">点我查看</a>）,觉得很想法，于是乎，我也想用nodejs写一个。</p>
-<h3 id="功能描述">功能描述</h3><ol>
-<li>chrome扩展，发送当前标签页的标题和网址</li>
-<li>nodejs后端服务器，获取chrome发送的数据，保存至markdown文件中</li>
-<li>定时提交数据至github上</li>
-</ol>]]>
-    
-    </summary>
-    
-      <category term="nodejs" scheme="http://xchb.work/tags/nodejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[hexo上传源文件]]></title>
-    <link href="http://xchb.work/2016/01/28/hexo%E4%B8%8A%E4%BC%A0%E6%BA%90%E6%96%87%E4%BB%B6/"/>
-    <id>http://xchb.work/2016/01/28/hexo上传源文件/</id>
-    <published>2016-01-28T09:57:15.000Z</published>
-    <updated>2016-02-23T02:53:58.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="一、背景">一、背景</h1><p>之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。</p>
-<h1 id="二、实现">二、实现</h1><p>上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源，而hexo分支用来管理hexo的源码，即一些markdown文件和主题等，需要设置这个分支为默认分支，以便拷贝仓库代码到本地时更方便。</p>
-<a id="more"></a>
-<ol>
-<li>把代码仓库拷贝到本地  <code>git clone https://github.com/swxy/swxy.github.io.git</code>, 因为我之前本地已经用了，所以可以忽视这个;</li>
-<li>查看分支 <code>git branch</code>, 如果没有分支则新建一个<code>git remote add origin https://github.com/swxy/swxy.github.io.git</code>, 此时应该会有一个 <strong>master</strong> 分支了。</li>
-<li>新建一个 <strong>hexo</strong> 分支<code>git branch hexo</code> 。</li>
-<li>切换到 <strong>hexo</strong> 分支<code>git checkout hexo</code> 。</li>
-<li>添加源文件<code>git add *</code>, 因为 <code>.gitignore</code> 默认已经把 hexo 编译的文件忽略了，所以可以可以用 <code>git add *</code>。</li>
-<li>然后提交文件的变更 <code>git commit -m &quot;xxx&quot;</code>。</li>
-<li>push变更到远程仓库中<code>git push origin hexo</code> (用hexo分支来管理源码）。</li>
-</ol>
-<h1 id="三、附录">三、附录</h1><h3 id="常见问题收集：">常见问题收集：</h3><ol>
-<li><code>hexo g</code>编译时，出现错误：<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Release/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/default/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Debug/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>解决方案，安装hexo加上 <code>--no-optional</code>;</p>
-<blockquote>
-<p>npm install hexo –no-optional</p>
-</blockquote>
-<p>解决方案来源<a href="http://www.jianshu.com/p/98e993305653" target="_blank" rel="external">hexo安装问题解决方法</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="一、背景">一、背景</h1><p>之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。</p>
-<h1 id="二、实现">二、实现</h1><p>上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源，而hexo分支用来管理hexo的源码，即一些markdown文件和主题等，需要设置这个分支为默认分支，以便拷贝仓库代码到本地时更方便。</p>]]>
-    
-    </summary>
-    
-      <category term="hexo" scheme="http://xchb.work/tags/hexo/"/>
     
   </entry>
   

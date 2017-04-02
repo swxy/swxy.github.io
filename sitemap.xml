@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xchb.work/2017/04/02/React-webpack2%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2017-04-02T03:19:47.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xchb.work/2017/03/30/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    <lastmod>2017-03-30T08:34:03.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xchb.work/2017/03/23/ES6%E4%B9%8BIteration/</loc>
     <lastmod>2017-03-26T03:06:58.000Z</lastmod>
   </url>
@@ -157,12 +167,12 @@
   </url>
   
   <url>
-    <loc>http://xchb.work/2015/12/11/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%EF%BC%88JS%EF%BC%89/</loc>
+    <loc>http://xchb.work/back.html</loc>
     <lastmod>2016-01-28T09:13:31.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://xchb.work/back.html</loc>
+    <loc>http://xchb.work/2015/12/11/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%EF%BC%88JS%EF%BC%89/</loc>
     <lastmod>2016-01-28T09:13:31.000Z</lastmod>
   </url>
   
