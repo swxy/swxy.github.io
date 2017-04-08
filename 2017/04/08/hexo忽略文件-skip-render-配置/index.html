@@ -4,24 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>CSS3图标收集和整理 | 学习是一种信仰</title>
+    <title>hexo忽略文件(skip_render)配置 | 学习是一种信仰</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="swxy">
     
 
     
-    <meta name="description" content="CSS3实现后退按钮，从此告别后退图标用CSS3实现的原理是利用伪元素生成一个只有两条边的正方形，然后通过旋转一定角度实现各个方向的箭头图形。 90度角的箭头图形实现1234567891011121314.back1 &amp;#123;    position: relative;&amp;#125;.back1:before &amp;#123;    content: &quot;&quot;;    display: inline-">
-<meta name="keywords" content="CSS">
+    <meta name="description" content="需要在source目录下填加一个demo目录放一些示例文件，hexo默认会编译source目录下的所有文件。但demo目录并不需要编译，_config.yml有提供一个配置项skip_render, 官网说明：  skip_render：跳过指定文件的渲染，您可使用glob表达式来匹配路径。  glob表达式链接的是minimatch，说明路径匹配用的应该是minimatch这个npm模块包来完成">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSS3图标收集和整理">
-<meta property="og:url" content="http://xchb.work/2015/10/22/CSS3图标收集和整理/index.html">
+<meta property="og:title" content="hexo忽略文件(skip_render)配置">
+<meta property="og:url" content="http://xchb.work/2017/04/08/hexo忽略文件-skip-render-配置/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="CSS3实现后退按钮，从此告别后退图标用CSS3实现的原理是利用伪元素生成一个只有两条边的正方形，然后通过旋转一定角度实现各个方向的箭头图形。 90度角的箭头图形实现1234567891011121314.back1 &amp;#123;    position: relative;&amp;#125;.back1:before &amp;#123;    content: &quot;&quot;;    display: inline-">
-<meta property="og:updated_time" content="2016-02-23T02:53:47.000Z">
+<meta property="og:description" content="需要在source目录下填加一个demo目录放一些示例文件，hexo默认会编译source目录下的所有文件。但demo目录并不需要编译，_config.yml有提供一个配置项skip_render, 官网说明：  skip_render：跳过指定文件的渲染，您可使用glob表达式来匹配路径。  glob表达式链接的是minimatch，说明路径匹配用的应该是minimatch这个npm模块包来完成">
+<meta property="og:image" content="http://xchb.work/2017/04/08/img/hexo/before.png">
+<meta property="og:image" content="http://xchb.work/2017/04/08/img/hexo/after.png">
+<meta property="og:updated_time" content="2017-04-08T05:07:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CSS3图标收集和整理">
-<meta name="twitter:description" content="CSS3实现后退按钮，从此告别后退图标用CSS3实现的原理是利用伪元素生成一个只有两条边的正方形，然后通过旋转一定角度实现各个方向的箭头图形。 90度角的箭头图形实现1234567891011121314.back1 &amp;#123;    position: relative;&amp;#125;.back1:before &amp;#123;    content: &quot;&quot;;    display: inline-">
+<meta name="twitter:title" content="hexo忽略文件(skip_render)配置">
+<meta name="twitter:description" content="需要在source目录下填加一个demo目录放一些示例文件，hexo默认会编译source目录下的所有文件。但demo目录并不需要编译，_config.yml有提供一个配置项skip_render, 官网说明：  skip_render：跳过指定文件的渲染，您可使用glob表达式来匹配路径。  glob表达式链接的是minimatch，说明路径匹配用的应该是minimatch这个npm模块包来完成">
+<meta name="twitter:image" content="http://xchb.work/2017/04/08/img/hexo/before.png">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -81,25 +84,49 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/10/22/CSS3图标收集和整理/" title="CSS3图标收集和整理" itemprop="url">CSS3图标收集和整理</a>
+      <a href="/2017/04/08/hexo忽略文件-skip-render-配置/" title="hexo忽略文件(skip_render)配置" itemprop="url">hexo忽略文件(skip_render)配置</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
 		
   <p class="article-time">
-    <time datetime="2015-10-22T13:17:36.000Z" itemprop="datePublished"> Published 2015-10-22</time>
+    <time datetime="2017-04-08T04:20:04.000Z" itemprop="datePublished"> Published 2017-04-08</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h2 id="CSS3实现后退按钮，从此告别后退图标"><a href="#CSS3实现后退按钮，从此告别后退图标" class="headerlink" title="CSS3实现后退按钮，从此告别后退图标"></a>CSS3实现后退按钮，从此告别后退图标</h2><p>用CSS3实现的原理是利用伪元素生成一个只有两条边的正方形，然后通过旋转一定角度实现各个方向的箭头图形。</p>
-<h3 id="90度角的箭头图形实现"><a href="#90度角的箭头图形实现" class="headerlink" title="90度角的箭头图形实现"></a>90度角的箭头图形实现</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.back1</span> &#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.back1</span><span class="selector-pseudo">:before</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">    <span class="attribute">width</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">border-top</span>: <span class="number">2px</span> solid <span class="number">#f00</span>;</div><div class="line">    <span class="attribute">border-left</span>: <span class="number">2px</span> solid <span class="number">#f00</span>;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">rotate</span>(-45deg);</div><div class="line">            <span class="attribute">transform</span>: <span class="built_in">rotate</span>(-45deg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<h3 id="任意角度的箭头图形"><a href="#任意角度的箭头图形" class="headerlink" title="任意角度的箭头图形"></a>任意角度的箭头图形</h3><p>利用伪元素before和after，根据需要可以将旋转角度适当调整，从而实现任意角度的箭头图形<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.back2</span> &#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.back2</span><span class="selector-pseudo">:before</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">    <span class="attribute">width</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">border-top</span>: <span class="number">2px</span> solid <span class="number">#0f0</span>;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">translate</span>(0, -20%) <span class="built_in">rotate</span>(-60deg);</div><div class="line">            <span class="attribute">transform</span>: <span class="built_in">translate</span>(0, -20%) <span class="built_in">rotate</span>(-60deg);</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.back2</span><span class="selector-pseudo">:after</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">    <span class="attribute">width</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">border-left</span>: <span class="number">2px</span> solid <span class="number">#0f0</span>;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">translate</span>(0, 20%) <span class="built_in">rotate</span>(-30deg);</div><div class="line">            <span class="attribute">transform</span>: <span class="built_in">translate</span>(0, 20%) <span class="built_in">rotate</span>(-30deg);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当然另一种实现方式还是给border设置不同的值来实现角度的不一样。</p>
-<p>ps: 上述的<a href="/back.html">Demo地址</a></p>
+		<p>需要在<code>source</code>目录下填加一个<code>demo</code>目录放一些示例文件，hexo默认会编译<code>source</code>目录下的所有文件。但demo目录并不需要编译，<code>_config.yml</code>有提供一个配置项<code>skip_render</code>, 官网说明：</p>
+<blockquote>
+<p>skip_render：跳过指定文件的渲染，您可使用<a href="https://github.com/isaacs/minimatch" target="_blank" rel="external">glob表达式</a>来匹配路径。</p>
+</blockquote>
+<p>glob表达式链接的是<code>minimatch</code>，说明路径匹配用的应该是<code>minimatch</code>这个npm模块包来完成的。需要指出的是这里面配置的路径都是相对<code>source</code>目录的。<br><a id="more"></a></p>
+<ol>
+<li><p>如何需要跳过<code>source</code>目录下文件的编译:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 跳过单个文件</span></div><div class="line"><span class="string">skip_render:</span> test.html</div><div class="line"></div><div class="line"><span class="comment">// 跳过所有的html的文件</span></div><div class="line"><span class="string">skip_render:</span> <span class="string">'*.html'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>跳过某一目录下的所有文件:</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">skip_render:</span> test<span class="comment">/*</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>需要跳过某一目录下的所有文件和子目录时：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">skip_render:</span> test<span class="comment">/**</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>跳过多个目录，或者多个文件：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span> 最新版本的hexo，用这个好使</div><div class="line">skip_render: [<span class="string">'*.html'</span>, demo<span class="regexp">/**, test/</span>*]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>看见有人是说是这样，反正我试不管事，可能的版本的原因：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 我试了试，不管事啊。</span></div><div class="line">skip_render:</div><div class="line">    -<span class="ruby"> test1/*.html</span></div><div class="line">    -<span class="ruby"> test2/**</span></div></pre></td></tr></table></figure></p>
+<p>ps：</p>
+<ol>
+<li>如果设置<code>skip_render</code>不起作用，可以先执行<code>hexo clean</code>清除一下缓存。</li>
+<li>如果跳过多个目录编译失败，请尝试更新<code>hexo</code>, 在<code>source</code>同级目录中执行<code>npm update hexo</code></li>
+<li>如果需要查看是否成功跳过编译，可以在编译的时候加上<code>--debug</code>:<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">generate</span> --debug</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>关注打印出来的<code>Rendering xxxx</code> 中的东西。<br>以下是我在<code>skip_render</code>中加入<code>test/*</code>的前后对比：</p>
+<p><img src="../img/hexo/before.png" alt="添加test/*前"></p>
+<p><img src="../img/hexo/after.png" alt="添加test/*后"></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -108,7 +135,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/CSS/">CSS</a>
+  <span></span> <a href="/tags/hexo/">hexo</a>
   </div>
 
 </div>
@@ -117,7 +144,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://xchb.work/2015/10/22/CSS3图标收集和整理/" data-title="CSS3图标收集和整理 | 学习是一种信仰" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xchb.work/2017/04/08/hexo忽略文件-skip-render-配置/" data-title="hexo忽略文件(skip_render)配置 | 学习是一种信仰" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -131,21 +158,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/08/24/CSS居中显示/" title="CSS居中显示">
+ <a href="/2017/04/02/React-webpack2环境搭建/" title="React+webpack2环境搭建">
   <strong>上一篇：</strong><br/>
   <span>
-  CSS居中显示</span>
+  React+webpack2环境搭建</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2015/11/09/CentOS添加新用户/"  title="CentOS添加新用户">
- <strong>下一篇：</strong><br/> 
- <span>CentOS添加新用户
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -157,7 +176,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS3实现后退按钮，从此告别后退图标"><span class="toc-number">1.</span> <span class="toc-text">CSS3实现后退按钮，从此告别后退图标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#90度角的箭头图形实现"><span class="toc-number">1.1.</span> <span class="toc-text">90度角的箭头图形实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#任意角度的箭头图形"><span class="toc-number">1.2.</span> <span class="toc-text">任意角度的箭头图形</span></a></li></ol></li></ol>
+ 
  
   </div>
 

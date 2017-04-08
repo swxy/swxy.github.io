@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xchb.work/"/>
-  <updated>2017-04-02T03:19:47.000Z</updated>
+  <updated>2017-04-08T05:07:21.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -14,6 +14,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo忽略文件(skip_render)配置</title>
+    <link href="http://xchb.work/2017/04/08/hexo%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6-skip-render-%E9%85%8D%E7%BD%AE/"/>
+    <id>http://xchb.work/2017/04/08/hexo忽略文件-skip-render-配置/</id>
+    <published>2017-04-08T04:20:04.000Z</published>
+    <updated>2017-04-08T05:07:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>需要在<code>source</code>目录下填加一个<code>demo</code>目录放一些示例文件，hexo默认会编译<code>source</code>目录下的所有文件。但demo目录并不需要编译，<code>_config.yml</code>有提供一个配置项<code>skip_render</code>, 官网说明：</p>
+<blockquote>
+<p>skip_render：跳过指定文件的渲染，您可使用<a href="https://github.com/isaacs/minimatch" target="_blank" rel="external">glob表达式</a>来匹配路径。</p>
+</blockquote>
+<p>glob表达式链接的是<code>minimatch</code>，说明路径匹配用的应该是<code>minimatch</code>这个npm模块包来完成的。需要指出的是这里面配置的路径都是相对<code>source</code>目录的。<br><a id="more"></a></p>
+<ol>
+<li><p>如何需要跳过<code>source</code>目录下文件的编译:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 跳过单个文件</span></div><div class="line"><span class="string">skip_render:</span> test.html</div><div class="line"></div><div class="line"><span class="comment">// 跳过所有的html的文件</span></div><div class="line"><span class="string">skip_render:</span> <span class="string">'*.html'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>跳过某一目录下的所有文件:</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">skip_render:</span> test<span class="comment">/*</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>需要跳过某一目录下的所有文件和子目录时：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">skip_render:</span> test<span class="comment">/**</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>跳过多个目录，或者多个文件：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span> 最新版本的hexo，用这个好使</div><div class="line">skip_render: [<span class="string">'*.html'</span>, demo<span class="regexp">/**, test/</span>*]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>看见有人是说是这样，反正我试不管事，可能的版本的原因：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 我试了试，不管事啊。</span></div><div class="line">skip_render:</div><div class="line">    -<span class="ruby"> test1/*.html</span></div><div class="line">    -<span class="ruby"> test2/**</span></div></pre></td></tr></table></figure></p>
+<p>ps：</p>
+<ol>
+<li>如果设置<code>skip_render</code>不起作用，可以先执行<code>hexo clean</code>清除一下缓存。</li>
+<li>如果跳过多个目录编译失败，请尝试更新<code>hexo</code>, 在<code>source</code>同级目录中执行<code>npm update hexo</code></li>
+<li>如果需要查看是否成功跳过编译，可以在编译的时候加上<code>--debug</code>:<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">generate</span> --debug</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>关注打印出来的<code>Rendering xxxx</code> 中的东西。<br>以下是我在<code>skip_render</code>中加入<code>test/*</code>的前后对比：</p>
+<p><img src="../img/hexo/before.png" alt="添加test/*前"></p>
+<p><img src="../img/hexo/after.png" alt="添加test/*后"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;需要在&lt;code&gt;source&lt;/code&gt;目录下填加一个&lt;code&gt;demo&lt;/code&gt;目录放一些示例文件，hexo默认会编译&lt;code&gt;source&lt;/code&gt;目录下的所有文件。但demo目录并不需要编译，&lt;code&gt;_config.yml&lt;/code&gt;有提供一个配置项&lt;code&gt;skip_render&lt;/code&gt;, 官网说明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;skip_render：跳过指定文件的渲染，您可使用&lt;a href=&quot;https://github.com/isaacs/minimatch&quot;&gt;glob表达式&lt;/a&gt;来匹配路径。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;glob表达式链接的是&lt;code&gt;minimatch&lt;/code&gt;，说明路径匹配用的应该是&lt;code&gt;minimatch&lt;/code&gt;这个npm模块包来完成的。需要指出的是这里面配置的路径都是相对&lt;code&gt;source&lt;/code&gt;目录的。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://xchb.work/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>React+webpack2环境搭建</title>
@@ -873,85 +927,6 @@
     <summary type="html">
     
       &lt;p&gt;随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="HTML" scheme="http://xchb.work/tags/HTML/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Meta 整理</title>
-    <link href="http://xchb.work/2016/05/17/Meta-%E6%95%B4%E7%90%86/"/>
-    <id>http://xchb.work/2016/05/17/Meta-整理/</id>
-    <published>2016-05-17T04:28:47.000Z</published>
-    <updated>2016-05-17T06:10:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="基本属性值"><a href="#基本属性值" class="headerlink" title="基本属性值"></a>基本属性值</h1><p>meta的意义取决其属性：</p>
-<ol>
-<li>name： 文档级别的元数据，作用于整个页面。</li>
-<li>http-equiv： 程序指令，一般用于告诉服务器页面的一些特殊要求。</li>
-<li>charset： 设置页面的字符</li>
-<li>itemprop: 自定义的元数据</li>
-</ol>
-<p>如果设置了 <code>name</code> 或者 <code>http-equiv</code>，可以用<code>content</code>指定相关的内容</p>
-<a id="more"></a>
-<h1 id="一-name"><a href="#一-name" class="headerlink" title="一 name"></a>一 name</h1><ol>
-<li><p>author: 定义页面的作者</p>
- <figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"author"</span> content=<span class="string">"author name"</span> /&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>description: 页面简短精确的描述，有些浏览器会以此作为收藏时的描述，不超过150字</p>
- <figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"description"</span> content=<span class="string">"descriptions"</span> /&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>keywords：描述页面的关键字, 多个关键字用 逗号分割</p>
- <figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="built_in">name</span>=<span class="string">"keywords"</span> content=<span class="string">"page keyword"</span> /&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>viewport: 窗口视图大小设置，适用于移动端开发。</p>
-<p>content可以包含的属性：</p>
-<ul>
-<li>width: 设置视图大小，数值/device-width</li>
-<li>height： 设置视图高度，数值/device-height</li>
-<li>initial-scale：初始缩放，值在0.0~10.0间</li>
-<li>maximum-scale: 最大缩放比例，值在0.0~10.0间</li>
-<li>minimum-scale: 最小缩放比例，值在0.0~10.0间</li>
-<li>user-scalable: 布尔值，是否允许缩放页面</li>
-</ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="attr">name="viewport"</span> <span class="attr">content="width=device-width,</span> <span class="attr">initial-scale=1,</span> <span class="attr">minimum-scale=1,</span> <span class="attr">maximum-scale=1"&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>format-detection: 格式检测</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;meta  <span class="built_in">name</span>=<span class="string">"format-detection"</span> content=<span class="string">"telephone=no"</span> /&gt;</div><div class="line">&lt;meta  <span class="built_in">name</span>=<span class="string">"format-detection"</span> content=<span class="string">"email=no"</span> /&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="二-http-equiv"><a href="#二-http-equiv" class="headerlink" title="二 http-equiv"></a>二 http-equiv</h1><ol>
-<li><p>refresh: 页面重新加载或者重定向</p>
-<ul>
-<li>如果content只有一个数值，表示隔多少秒重新加载页面</li>
-<li><p>如果content格式是<code>3;url=http://www.baidu.com</code>表示隔3s重定向到百度</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"4"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"3;url=http://www.baidu.com"</span> /&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>default-style: 页面默认样式，content是css的链接，同<code>&lt;link&gt;</code>的<code>href</code>保持一致</p>
-</li>
-</ol>
-<h1 id="三-其他一下meta头"><a href="#三-其他一下meta头" class="headerlink" title="三 其他一下meta头"></a>三 其他一下meta头</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--隐藏状态栏/设置状态栏颜色, content的值为default | black | black-translucent--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="attr">content</span>=<span class="string">"black-translucent"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-title"</span> <span class="attr">content</span>=<span class="string">"标题"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"HandheldFriendly"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 微软的老式浏览器 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"MobileOptimized"</span> <span class="attr">content</span>=<span class="string">"320"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- uc强制竖屏 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"screen-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- QQ强制竖屏 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-orientation"</span> <span class="attr">content</span>=<span class="string">"portrait"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- UC强制全屏 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"full-screen"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- QQ强制全屏 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-fullscreen"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- UC应用模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"browsermode"</span> <span class="attr">content</span>=<span class="string">"application"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- QQ应用模式 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"x5-page-mode"</span> <span class="attr">content</span>=<span class="string">"app"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- windows phone 点击无高光 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-tap-highlight"</span> <span class="attr">content</span>=<span class="string">"no"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span> /&gt;</span></div><div class="line"><span class="comment">&lt;!-- 关于X-UA-Compatible --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=6"</span> &gt;</span><span class="comment">&lt;!-- 使用IE6 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=7"</span> &gt;</span><span class="comment">&lt;!-- 使用IE7 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=8"</span> &gt;</span><span class="comment">&lt;!-- 使用IE8 --&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 转码申明：用百度打开网页可能会对其进行转码（比如贴广告），避免转码可添加如下meta --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-siteapp"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<h1 id="四-参考"><a href="#四-参考" class="headerlink" title="四 参考"></a>四 参考</h1><ol>
-<li><a href="http://get.ftqq.com/6483.get" target="_blank" rel="external">常用meta整理</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-content" target="_blank" rel="external">MDN <meta></a></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;基本属性值&quot;&gt;&lt;a href=&quot;#基本属性值&quot; class=&quot;headerlink&quot; title=&quot;基本属性值&quot;&gt;&lt;/a&gt;基本属性值&lt;/h1&gt;&lt;p&gt;meta的意义取决其属性：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;name： 文档级别的元数据，作用于整个页面。&lt;/li&gt;
-&lt;li&gt;http-equiv： 程序指令，一般用于告诉服务器页面的一些特殊要求。&lt;/li&gt;
-&lt;li&gt;charset： 设置页面的字符&lt;/li&gt;
-&lt;li&gt;itemprop: 自定义的元数据&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;如果设置了 &lt;code&gt;name&lt;/code&gt; 或者 &lt;code&gt;http-equiv&lt;/code&gt;，可以用&lt;code&gt;content&lt;/code&gt;指定相关的内容&lt;/p&gt;
     
     </summary>
     

@@ -78,6 +78,66 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2017/04/08/hexo忽略文件-skip-render-配置/" title="hexo忽略文件(skip_render)配置" itemprop="url">hexo忽略文件(skip_render)配置</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-08T04:20:04.000Z" itemprop="datePublished"> Published 2017-04-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>需要在<code>source</code>目录下填加一个<code>demo</code>目录放一些示例文件，hexo默认会编译<code>source</code>目录下的所有文件。但demo目录并不需要编译，<code>_config.yml</code>有提供一个配置项<code>skip_render</code>, 官网说明：</p>
+<blockquote>
+<p>skip_render：跳过指定文件的渲染，您可使用<a href="https://github.com/isaacs/minimatch">glob表达式</a>来匹配路径。</p>
+</blockquote>
+<p>glob表达式链接的是<code>minimatch</code>，说明路径匹配用的应该是<code>minimatch</code>这个npm模块包来完成的。需要指出的是这里面配置的路径都是相对<code>source</code>目录的。<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2017/04/08/hexo忽略文件-skip-render-配置/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hexo/">hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2017/04/02/React-webpack2环境搭建/" title="React+webpack2环境搭建" itemprop="url">React+webpack2环境搭建</a>
   </h1>
   <p class="article-author">By
@@ -628,71 +688,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/11/29/nodejs-mongodb/" title="nodejs mongodb" itemprop="url">nodejs mongodb</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="swxy" target="_blank" itemprop="author">swxy</a>
-		
-  <p class="article-time">
-    <time datetime="2016-11-29T12:01:09.000Z" itemprop="datePublished"> Published 2016-11-29</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>记录一下nodejs配置mongodb的过程：</p>
-<ol>
-<li><p>mac上安装mongodb:</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>mongodb</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建一个存在数据目录</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">mkdir</span> -p ~/<span class="class"><span class="keyword">data</span>/db</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod <span class="comment">--dbpath=./data/db</span></div></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2016/11/29/nodejs-mongodb/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/nodejs/">nodejs</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -744,7 +739,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
 			
 		
 			
