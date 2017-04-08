@@ -11,19 +11,17 @@
     
 
     
-    <meta name="description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。
-二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
+    <meta name="description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。 二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo上传源文件">
 <meta property="og:url" content="http://xchb.work/2016/01/28/hexo上传源文件/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。
-二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
+<meta property="og:description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。 二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
 <meta property="og:updated_time" content="2016-02-23T02:53:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo上传源文件">
-<meta name="twitter:description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。
-二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
+<meta name="twitter:description" content="一、背景之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。 二、实现上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -35,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -96,8 +94,8 @@
 </header>
 	<div class="article-content">
 		
-		<h1 id="一、背景">一、背景</h1><p>之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。</p>
-<h1 id="二、实现">二、实现</h1><p>上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源，而hexo分支用来管理hexo的源码，即一些markdown文件和主题等，需要设置这个分支为默认分支，以便拷贝仓库代码到本地时更方便。</p>
+		<h1 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h1><p>之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。</p>
+<h1 id="二、实现"><a href="#二、实现" class="headerlink" title="二、实现"></a>二、实现</h1><p>上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源，而hexo分支用来管理hexo的源码，即一些markdown文件和主题等，需要设置这个分支为默认分支，以便拷贝仓库代码到本地时更方便。</p>
 <a id="more"></a>
 <ol>
 <li>把代码仓库拷贝到本地  <code>git clone https://github.com/swxy/swxy.github.io.git</code>, 因为我之前本地已经用了，所以可以忽视这个;</li>
@@ -108,8 +106,8 @@
 <li>然后提交文件的变更 <code>git commit -m &quot;xxx&quot;</code>。</li>
 <li>push变更到远程仓库中<code>git push origin hexo</code> (用hexo分支来管理源码）。</li>
 </ol>
-<h1 id="三、附录">三、附录</h1><h3 id="常见问题收集：">常见问题收集：</h3><ol>
-<li><code>hexo g</code>编译时，出现错误：<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Release/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/default/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br><span class="line">&#123; [<span class="string">Error:</span> Cannot find module <span class="string">'./build/Debug/DTraceProviderBindings'</span>] <span class="string">code:</span> <span class="string">'MODULE_NOT_FOUND'</span> &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三、附录"><a href="#三、附录" class="headerlink" title="三、附录"></a>三、附录</h1><h3 id="常见问题收集："><a href="#常见问题收集：" class="headerlink" title="常见问题收集："></a>常见问题收集：</h3><ol>
+<li><code>hexo g</code>编译时，出现错误：<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123; [Error: Cannot <span class="built_in">find</span> <span class="keyword">module</span> <span class="string">'./build/Release/DTraceProviderBindings'</span>] code: <span class="string">'MODULE_NOT_FOUND'</span> &#125;</div><div class="line">&#123; [Error: Cannot <span class="built_in">find</span> <span class="keyword">module</span> <span class="string">'./build/default/DTraceProviderBindings'</span>] code: <span class="string">'MODULE_NOT_FOUND'</span> &#125;</div><div class="line">&#123; [Error: Cannot <span class="built_in">find</span> <span class="keyword">module</span> <span class="string">'./build/Debug/DTraceProviderBindings'</span>] code: <span class="string">'MODULE_NOT_FOUND'</span> &#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>解决方案，安装hexo加上 <code>--no-optional</code>;</p>
@@ -148,18 +146,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/03/04/一键收藏网址至Github/" title="一键收藏网址至Github">
+ <a href="/2015/12/11/代码片段（JS）/" title="代码片段（JS）">
   <strong>上一篇：</strong><br/>
   <span>
-  一键收藏网址至Github</span>
+  代码片段（JS）</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/11/代码片段（JS）/"  title="代码片段（JS）">
+<a href="/2016/03/04/一键收藏网址至Github/"  title="一键收藏网址至Github">
  <strong>下一篇：</strong><br/> 
- <span>代码片段（JS）
+ <span>一键收藏网址至Github
 </span>
 </a>
 </div>
@@ -197,19 +195,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -221,7 +215,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -229,7 +227,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

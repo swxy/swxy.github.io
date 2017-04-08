@@ -11,25 +11,17 @@
     
 
     
-    <meta name="description" content="探索问题：
-
-为什么ES6中数组，字符串等是可迭代的，而对象却是不可迭代？直观感受就是数组和字符串都可以用for...of，而对象却不可以。
-实现一个最小化的迭代器。">
+    <meta name="description" content="探索问题：  为什么ES6中数组，字符串等是可迭代的，而对象却是不可迭代？直观感受就是数组和字符串都可以用for...of，而对象却不可以。 实现一个最小化的迭代器。">
+<meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6之Iteration">
 <meta property="og:url" content="http://xchb.work/2017/03/23/ES6之Iteration/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="探索问题：
-
-为什么ES6中数组，字符串等是可迭代的，而对象却是不可迭代？直观感受就是数组和字符串都可以用for...of，而对象却不可以。
-实现一个最小化的迭代器。">
+<meta property="og:description" content="探索问题：  为什么ES6中数组，字符串等是可迭代的，而对象却是不可迭代？直观感受就是数组和字符串都可以用for...of，而对象却不可以。 实现一个最小化的迭代器。">
 <meta property="og:updated_time" content="2017-03-26T03:06:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6之Iteration">
-<meta name="twitter:description" content="探索问题：
-
-为什么ES6中数组，字符串等是可迭代的，而对象却是不可迭代？直观感受就是数组和字符串都可以用for...of，而对象却不可以。
-实现一个最小化的迭代器。">
+<meta name="twitter:description" content="探索问题：  为什么ES6中数组，字符串等是可迭代的，而对象却是不可迭代？直观感受就是数组和字符串都可以用for...of，而对象却不可以。 实现一个最小化的迭代器。">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -41,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -113,7 +105,7 @@
 <li>程序层级：检测程序的结构</li>
 <li>数据层级：检测程序中所有的数据</li>
 </ol>
-<p>这两个层级过于抽象，尤其是<code>程序层级</code>，可以借助js中的数组来理解：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dt = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]; <span class="comment">// 数据层</span></span><br><span class="line">dt.func = () =&gt; &#123;&#125;; <span class="comment">// 程序层</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (let i in dt) console.<span class="built_in">log</span>(xs[i]); <span class="comment">// 1, 2, 3, 4, () =&gt; &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (let i of dt) console.<span class="built_in">log</span>(i); <span class="comment">// 1, 2, 3, 4</span></span><br></pre></td></tr></table></figure></p>
+<p>这两个层级过于抽象，尤其是<code>程序层级</code>，可以借助js中的数组来理解：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> dt = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]; <span class="comment">// 数据层</span></div><div class="line">dt.func = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;; <span class="comment">// 程序层</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> dt) <span class="built_in">console</span>.log(xs[i]); <span class="comment">// 1, 2, 3, 4, () =&gt; &#123;&#125;</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> dt) <span class="built_in">console</span>.log(i); <span class="comment">// 1, 2, 3, 4</span></div></pre></td></tr></table></figure></p>
 <p>像ES5中的<code>for...in</code>可以检测对象中的所有属性，针对的大多数就是程序层级。为了解决这个问题，ES6中引入了<code>for...of</code>.</p>
 <blockquote>
 <p>那既然可以用<code>for...in</code>遍历对象，为何就不能用<code>for...of</code>了？</p>
@@ -123,9 +115,9 @@
 <blockquote>
 <p>当然也可以做一个工具函数，来实现对对象的迭代。</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objectEntries</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> propKeys = <span class="built_in">Reflect</span>.ownKeys(obj);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        [<span class="built_in">Symbol</span>.iterator]() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        next() &#123;</span><br><span class="line">            <span class="keyword">if</span> (index &lt; propKeys.length) &#123;</span><br><span class="line">                <span class="keyword">const</span> key = propKeys[index];</span><br><span class="line">                index++;</span><br><span class="line">                <span class="keyword">return</span> &#123; value: [key, obj[key]] &#125;;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123; done: <span class="literal">true</span> &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123; first: <span class="string">'Jane'</span>, last: <span class="string">'Doe'</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [key,value] <span class="keyword">of</span> objectEntries(obj)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span>: <span class="subst">$&#123;value&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// first: Jane</span></span><br><span class="line"><span class="comment">// last: Doe</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">objectEntries</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> propKeys = <span class="built_in">Reflect</span>.ownKeys(obj);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        [<span class="built_in">Symbol</span>.iterator]() &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;,</div><div class="line">        next() &#123;</div><div class="line">            <span class="keyword">if</span> (index &lt; propKeys.length) &#123;</div><div class="line">                <span class="keyword">const</span> key = propKeys[index];</div><div class="line">                index++;</div><div class="line">                <span class="keyword">return</span> &#123; <span class="attr">value</span>: [key, obj[key]] &#125;;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">first</span>: <span class="string">'Jane'</span>, <span class="attr">last</span>: <span class="string">'Doe'</span> &#125;;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [key,value] <span class="keyword">of</span> objectEntries(obj)) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span>: <span class="subst">$&#123;value&#125;</span>`</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Output:</span></div><div class="line"><span class="comment">// first: Jane</span></div><div class="line"><span class="comment">// last: Doe</span></div></pre></td></tr></table></figure>
 <p>PS.可以思考一下为什么不扩充在Object原型链上？</p>
-<h1 id="扩展阅读">扩展阅读</h1><ol>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ol>
 <li><a href="http://exploringjs.com/es6/ch_iteration.html#sec_plain-objects-not-iterable" target="_blank" rel="external">Plain objects are not iterable</a></li>
 <li><a href="http://stackoverflow.com/a/38777177" target="_blank" rel="external">Why are Objects not Iterable in JavaScript?</a></li>
 </ol>
@@ -160,18 +152,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/03/30/React生命周期/" title="React生命周期">
+ <a href="/2017/03/11/WebStorm之JSCS/" title="WebStorm之JSCS">
   <strong>上一篇：</strong><br/>
   <span>
-  React生命周期</span>
+  WebStorm之JSCS</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/03/11/WebStorm之JSCS/"  title="WebStorm之JSCS">
+<a href="/2017/03/30/React生命周期/"  title="React生命周期">
  <strong>下一篇：</strong><br/> 
- <span>WebStorm之JSCS
+ <span>React生命周期
 </span>
 </a>
 </div>
@@ -209,19 +201,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -233,7 +221,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -241,7 +233,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

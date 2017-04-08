@@ -11,19 +11,17 @@
     
 
     
-    <meta name="description" content="安装EPELsudo yum install epel-release
-安装nginxsudo yum install nginx">
+    <meta name="description" content="安装EPELsudo yum install epel-release 安装nginxsudo yum install nginx">
+<meta name="keywords" content="CentOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS 安装nginx">
 <meta property="og:url" content="http://xchb.work/2015/11/10/CentOS-安装nginx/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="安装EPELsudo yum install epel-release
-安装nginxsudo yum install nginx">
+<meta property="og:description" content="安装EPELsudo yum install epel-release 安装nginxsudo yum install nginx">
 <meta property="og:updated_time" content="2016-02-23T11:53:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS 安装nginx">
-<meta name="twitter:description" content="安装EPELsudo yum install epel-release
-安装nginxsudo yum install nginx">
+<meta name="twitter:description" content="安装EPELsudo yum install epel-release 安装nginxsudo yum install nginx">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -35,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -96,21 +94,21 @@
 </header>
 	<div class="article-content">
 		
-		<h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
-</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
+		<h3 id="安装EPEL"><a href="#安装EPEL" class="headerlink" title="安装EPEL"></a>安装EPEL</h3><pre><code>sudo yum install epel-release
+</code></pre><h3 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h3><pre><code>sudo yum install nginx
 </code></pre><a id="more"></a>
-<h3 id="nginx常用操作">nginx常用操作</h3><p>启动</p>
-<pre><code>sudo /etc/init.d/nginx <span class="literal">start</span>
+<h3 id="nginx常用操作"><a href="#nginx常用操作" class="headerlink" title="nginx常用操作"></a>nginx常用操作</h3><p>启动</p>
+<pre><code>sudo /etc/init.d/nginx start
 </code></pre><p>关闭</p>
-<pre><code>sudo /etc/init.d/nginx <span class="built_in">stop</span><span class="comment">
-//或者</span>
-nginx -s <span class="built_in">stop</span><span class="comment">
-//或者</span>
+<pre><code>sudo /etc/init.d/nginx stop
+//或者
+nginx -s stop
+//或者
 nginx -s quit
 </code></pre><p>重启</p>
-<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx restart</span>
+<pre><code>sudo /etc/init.d/nginx restart
 </code></pre><p>重新载入（修改配置文件之后）</p>
-<pre><code>sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx reload</span>
+<pre><code>sudo /etc/init.d/nginx reload
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -142,18 +140,18 @@ nginx -s quit
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/01/Terminal-路径显示/" title="Terminal 路径显示">
+ <a href="/2015/11/09/CentOS添加新用户/" title="CentOS添加新用户">
   <strong>上一篇：</strong><br/>
   <span>
-  Terminal 路径显示</span>
+  CentOS添加新用户</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/11/09/CentOS添加新用户/"  title="CentOS添加新用户">
+<a href="/2015/12/01/Terminal-路径显示/"  title="Terminal 路径显示">
  <strong>下一篇：</strong><br/> 
- <span>CentOS添加新用户
+ <span>Terminal 路径显示
 </span>
 </a>
 </div>
@@ -191,19 +189,15 @@ nginx -s quit
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -215,7 +209,11 @@ nginx -s quit
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -223,7 +221,7 @@ nginx -s quit
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

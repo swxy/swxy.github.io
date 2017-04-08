@@ -11,15 +11,12 @@
     
 
     
-    <meta name="description">
-<meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="学习是一种信仰">
 <meta property="og:url" content="http://xchb.work/page/3/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习是一种信仰">
-<meta name="twitter:description">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -31,7 +28,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -95,7 +92,7 @@
     <div class="article-content">
         
         <p>在网上看见一个用Ruby On Rail写了一个一键收藏网页文章至github上的文章（<a href="http://www.jianshu.com/p/19d2f3a3b5d8">点我查看</a>）,觉得很想法，于是乎，我也想用nodejs写一个。</p>
-<h3 id="功能描述">功能描述</h3><ol>
+<h3 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述"></a>功能描述</h3><ol>
 <li>chrome扩展，发送当前标签页的标题和网址</li>
 <li>nodejs后端服务器，获取chrome发送的数据，保存至markdown文件中</li>
 <li>定时提交数据至github上</li>
@@ -155,8 +152,8 @@
 </header>
     <div class="article-content">
         
-        <h1 id="一、背景">一、背景</h1><p>之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。</p>
-<h1 id="二、实现">二、实现</h1><p>上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源，而hexo分支用来管理hexo的源码，即一些markdown文件和主题等，需要设置这个分支为默认分支，以便拷贝仓库代码到本地时更方便。</p>
+        <h1 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h1><p>之前用hexo和github搭建了一个免费博客。但本地的目录结构有些乱，想调整一下，趁此机会把hexo的源文件和所使用的主题上传到github上，以防需要换电脑时，原始数据丢失。</p>
+<h1 id="二、实现"><a href="#二、实现" class="headerlink" title="二、实现"></a>二、实现</h1><p>上传hexo源文件同时也不和hexo编译后的文件冲突，可以使用一个仓库多个分支的思路。为我们的代码仓库创建两个分支，一个是 master， 一个hexo。master分支用来管理hexo编译之后的静态资源，而hexo分支用来管理hexo的源码，即一些markdown文件和主题等，需要设置这个分支为默认分支，以便拷贝仓库代码到本地时更方便。</p>
         
         
         <p class="article-more-link">
@@ -213,8 +210,8 @@
     <div class="article-content">
         
         <p>#获取随机字符</p>
-<p>###获取26个字母与10个数字之间的随机字符方法<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> randstr</span> = Math.random().toString(<span class="number">36</span>).slice(<span class="number">2</span>);</span><br><span class="line"><span class="variable"><span class="keyword">var</span> len</span> = randstr.length;</span><br><span class="line"><span class="variable"><span class="keyword">var</span> r</span> = randstr.charAt(~~(len*Math.random()))</span><br></pre></td></tr></table></figure></p>
-<p>###获取某一个区间中的随机字符，利用unicode实现<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.fromCharCode(<span class="number">0x2200</span> + (<span class="number">0x220f</span> - <span class="number">0x2200</span> + <span class="number">1</span>) * Math.random());</span><br></pre></td></tr></table></figure></p>
+<p>###获取26个字母与10个数字之间的随机字符方法<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> randstr = Math.<span class="built_in">random</span>().toString(<span class="number">36</span>).slice(<span class="number">2</span>);</div><div class="line"><span class="built_in">var</span> len = randstr.<span class="built_in">length</span>;</div><div class="line"><span class="built_in">var</span> r = randstr.charAt(~~(len*Math.<span class="built_in">random</span>()))</div></pre></td></tr></table></figure></p>
+<p>###获取某一个区间中的随机字符，利用unicode实现<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String.fromCharCode(<span class="number">0x2200</span> + (<span class="number">0x220f</span> - <span class="number">0x2200</span> + <span class="number">1</span>) * Math.random());</div></pre></td></tr></table></figure></p>
 <p>PS: 数字的unicode范围为 0030–0039；英文小写字母的范围为，0061–007a</p>
 
         
@@ -341,8 +338,8 @@
 </header>
     <div class="article-content">
         
-        <h3 id="安装EPEL">安装EPEL</h3><pre><code>sudo yum <span class="operator"><span class="keyword">install</span> epel-<span class="keyword">release</span></span>
-</code></pre><h3 id="安装nginx">安装nginx</h3><pre><code>sudo yum <span class="keyword">install</span> nginx
+        <h3 id="安装EPEL"><a href="#安装EPEL" class="headerlink" title="安装EPEL"></a>安装EPEL</h3><pre><code>sudo yum install epel-release
+</code></pre><h3 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h3><pre><code>sudo yum install nginx
 </code></pre>
         
         
@@ -399,8 +396,8 @@
 </header>
     <div class="article-content">
         
-        <h3 id="添加新用户">添加新用户</h3><pre><code><span class="keyword">adduser </span>username
-</code></pre><h3 id="修改新用户密码">修改新用户密码</h3><pre><code><span class="title">passwd</span> username
+        <h3 id="添加新用户"><a href="#添加新用户" class="headerlink" title="添加新用户"></a>添加新用户</h3><pre><code>adduser username
+</code></pre><h3 id="修改新用户密码"><a href="#修改新用户密码" class="headerlink" title="修改新用户密码"></a>修改新用户密码</h3><pre><code>passwd username
 </code></pre>
         
         
@@ -457,8 +454,8 @@
 </header>
     <div class="article-content">
         
-        <h2 id="CSS3实现后退按钮，从此告别后退图标">CSS3实现后退按钮，从此告别后退图标</h2><p>用CSS3实现的原理是利用伪元素生成一个只有两条边的正方形，然后通过旋转一定角度实现各个方向的箭头图形。</p>
-<h3 id="90度角的箭头图形实现">90度角的箭头图形实现</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.back1</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="class">.back1</span><span class="pseudo">:before</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">12px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-top</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">border-left</span>:<span class="value"> <span class="number">2px</span> solid <span class="hexcolor">#f00</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"> <span class="function">rotate</span>(-<span class="number">45deg</span>)</span></span>;</span><br><span class="line">            <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">rotate</span>(-<span class="number">45deg</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="CSS3实现后退按钮，从此告别后退图标"><a href="#CSS3实现后退按钮，从此告别后退图标" class="headerlink" title="CSS3实现后退按钮，从此告别后退图标"></a>CSS3实现后退按钮，从此告别后退图标</h2><p>用CSS3实现的原理是利用伪元素生成一个只有两条边的正方形，然后通过旋转一定角度实现各个方向的箭头图形。</p>
+<h3 id="90度角的箭头图形实现"><a href="#90度角的箭头图形实现" class="headerlink" title="90度角的箭头图形实现"></a>90度角的箭头图形实现</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.back1</span> &#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.back1</span><span class="selector-pseudo">:before</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">    <span class="attribute">width</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">border-top</span>: <span class="number">2px</span> solid <span class="number">#f00</span>;</div><div class="line">    <span class="attribute">border-left</span>: <span class="number">2px</span> solid <span class="number">#f00</span>;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">rotate</span>(-45deg);</div><div class="line">            <span class="attribute">transform</span>: <span class="built_in">rotate</span>(-45deg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
         
         
         <p class="article-more-link">
@@ -514,8 +511,8 @@
 </header>
     <div class="article-content">
         
-        <p>使用CSS3实现垂直左右居中显示<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">50%</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>)</span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">300px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">200px</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#FDFDFD</span></span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>对应的html为<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"container"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure></p>
+        <p>使用CSS3实现垂直左右居中显示<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.container</span> &#123;</div><div class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%, -50%);</div><div class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">    <span class="attribute">background</span>: <span class="number">#FDFDFD</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对应的html为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"container"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
 <p>最主要是随着浏览器窗口变化，左右上下边距也会自动调整，因而再也不需要通过js来监听windonw的resize事件了。</p>
         
         
@@ -572,7 +569,7 @@
 </header>
     <div class="article-content">
         
-        <h1 id="背景">背景</h1><p>最近需要封装一个图片上传组件，需要支持单文件，多文件，LOGO上传等功能，<br>其中LOGO上传需要检测上传图片的尺寸，并且需要支持图片裁切。改组件需要提供统一的UI样式，并有统一的错误提示。<br>该组件基于Webuploader封装。</p>
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近需要封装一个图片上传组件，需要支持单文件，多文件，LOGO上传等功能，<br>其中LOGO上传需要检测上传图片的尺寸，并且需要支持图片裁切。改组件需要提供统一的UI样式，并有统一的错误提示。<br>该组件基于Webuploader封装。</p>
         
         
         <p class="article-more-link">
@@ -636,19 +633,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -660,7 +653,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -668,7 +665,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

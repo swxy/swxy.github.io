@@ -11,19 +11,17 @@
     
 
     
-    <meta name="description" content="记录不同形式Destructuring导致的不同结果：
-1234567function move1(&amp;#123;x=0, y=0&amp;#125; = &amp;#123;&amp;#125;) &amp;#123;    console.log(x, y)&amp;#125;function move2(&amp;#123;x, y&amp;#125; = &amp;#123;x: 0, y: 0&amp;#125;) &amp;#123;    console.log(">
+    <meta name="description" content="记录不同形式Destructuring导致的不同结果： 1234567function move1(&amp;#123;x=0, y=0&amp;#125; = &amp;#123;&amp;#125;) &amp;#123;    console.log(x, y)&amp;#125;function move2(&amp;#123;x, y&amp;#125; = &amp;#123;x: 0, y: 0&amp;#125;) &amp;#123;    console.log(">
+<meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6之Destructuring">
 <meta property="og:url" content="http://xchb.work/2017/02/21/ES6之Destructuring/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="记录不同形式Destructuring导致的不同结果：
-1234567function move1(&amp;#123;x=0, y=0&amp;#125; = &amp;#123;&amp;#125;) &amp;#123;    console.log(x, y)&amp;#125;function move2(&amp;#123;x, y&amp;#125; = &amp;#123;x: 0, y: 0&amp;#125;) &amp;#123;    console.log(">
+<meta property="og:description" content="记录不同形式Destructuring导致的不同结果： 1234567function move1(&amp;#123;x=0, y=0&amp;#125; = &amp;#123;&amp;#125;) &amp;#123;    console.log(x, y)&amp;#125;function move2(&amp;#123;x, y&amp;#125; = &amp;#123;x: 0, y: 0&amp;#125;) &amp;#123;    console.log(">
 <meta property="og:updated_time" content="2017-02-22T04:51:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6之Destructuring">
-<meta name="twitter:description" content="记录不同形式Destructuring导致的不同结果：
-1234567function move1(&amp;#123;x=0, y=0&amp;#125; = &amp;#123;&amp;#125;) &amp;#123;    console.log(x, y)&amp;#125;function move2(&amp;#123;x, y&amp;#125; = &amp;#123;x: 0, y: 0&amp;#125;) &amp;#123;    console.log(">
+<meta name="twitter:description" content="记录不同形式Destructuring导致的不同结果： 1234567function move1(&amp;#123;x=0, y=0&amp;#125; = &amp;#123;&amp;#125;) &amp;#123;    console.log(x, y)&amp;#125;function move2(&amp;#123;x, y&amp;#125; = &amp;#123;x: 0, y: 0&amp;#125;) &amp;#123;    console.log(">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -35,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -97,9 +95,9 @@
 	<div class="article-content">
 		
 		<p>记录不同形式Destructuring导致的不同结果：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">move1</span><span class="params">(&#123;x=<span class="number">0</span>, y=<span class="number">0</span>&#125; = &#123;&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">function <span class="title">move2</span><span class="params">(&#123;x, y&#125; = &#123;x: <span class="number">0</span>, y: <span class="number">0</span>&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">move1</span>(<span class="params">&#123;x=<span class="number">0</span>, y=<span class="number">0</span>&#125; = &#123;&#125;</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(x, y)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">move2</span>(<span class="params">&#123;x, y&#125; = &#123;x: <span class="number">0</span>, y: <span class="number">0</span>&#125;</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(x, y)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>分别测试以下几种情况：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试输入为空</span></span><br><span class="line">move1();   <span class="comment">// 0 0</span></span><br><span class="line">move2(); <span class="comment">// 0 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试输入&#123;z: 3&#125;</span></span><br><span class="line">move1(&#123;z:<span class="number">3</span>&#125;);   <span class="comment">// 0 0</span></span><br><span class="line">move2(&#123;z:<span class="number">3</span>&#125;); <span class="comment">// undefined undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试输入 &#123;x:1, y: 2&#125;</span></span><br><span class="line">move1(&#123;x:<span class="number">1</span>, y:<span class="number">2</span>&#125;)     <span class="comment">// 1, 2</span></span><br><span class="line">move2(&#123;x:<span class="number">1</span>, y:<span class="number">2</span>&#125;)   <span class="comment">// 1, 2</span></span><br></pre></td></tr></table></figure></p>
+<p>分别测试以下几种情况：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 测试输入为空</span></div><div class="line"><span class="selector-tag">move1</span>();   <span class="comment">// 0 0</span></div><div class="line"><span class="selector-tag">move2</span>(); <span class="comment">// 0 0</span></div><div class="line"></div><div class="line"><span class="comment">// 测试输入&#123;z: 3&#125;</span></div><div class="line"><span class="selector-tag">move1</span>(&#123;<span class="attribute">z</span>:<span class="number">3</span>&#125;);   <span class="comment">// 0 0</span></div><div class="line"><span class="selector-tag">move2</span>(&#123;<span class="attribute">z</span>:<span class="number">3</span>&#125;); <span class="comment">// undefined undefined</span></div><div class="line"></div><div class="line"><span class="comment">// 测试输入 &#123;x:1, y: 2&#125;</span></div><div class="line"><span class="selector-tag">move1</span>(&#123;<span class="attribute">x</span>:<span class="number">1</span>, <span class="attribute">y</span>:<span class="number">2</span>&#125;)     <span class="comment">// 1, 2</span></div><div class="line"><span class="selector-tag">move2</span>(&#123;<span class="attribute">x</span>:<span class="number">1</span>, <span class="attribute">y</span>:<span class="number">2</span>&#125;)   <span class="comment">// 1, 2</span></div></pre></td></tr></table></figure></p>
 <p>对于<code>move1</code>函数：</p>
 <ol>
 <li>如果输入为空 <code>&#39;&#39;</code>  ==&gt;  <code>{x = 0, y = 0} = {}</code>  ==&gt; <code>x = 0, y = 0</code>;</li>
@@ -114,8 +112,8 @@
 </ol>
 <p>主要区别就是有输入时，如果没有同名属性 <code>{x, y} = {x: 0, y: 0}</code>这种写法取不到默认值。</p>
 <p>ps. 在ES6中如果解构对象时：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let &#123;a, ...b&#125; = &#123;a: <span class="number">1</span>, c: <span class="number">2</span>, d:<span class="number">3</span>&#125;  <span class="comment">// Uncaught SyntaxError: Unexpected token ...</span></span><br></pre></td></tr></table></figure>
-<p>但是在React中使用ES6这种写法却很常见，原因是babel(<a href="http://babeljs.io/repl" target="_blank" rel="external">babel在线编译</a>)增强解构功能，会将这种写法编译为：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> _objectWithoutProperties(obj, keys) &#123;</span><br><span class="line">    var target = &#123;&#125;;</span><br><span class="line">    for (var i in obj) &#123;</span><br><span class="line">        if (keys.indexOf(i) &gt;= <span class="number">0</span>) continue;</span><br><span class="line">        if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;</span><br><span class="line">        target[i] = obj[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return target;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var _a<span class="variable">$c</span><span class="variable">$d</span> = &#123; a: <span class="number">1</span>, c: <span class="number">2</span>, d: <span class="number">3</span> &#125;,</span><br><span class="line">    a = _a<span class="variable">$c</span><span class="variable">$d</span>.a,</span><br><span class="line">    b = _objectWithoutProperties(_a<span class="variable">$c</span><span class="variable">$d</span>, [<span class="string">"a"</span>]);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let &#123;<span class="selector-tag">a</span>, ...b&#125; = &#123;<span class="selector-tag">a</span>: <span class="number">1</span>, c: <span class="number">2</span>, d:<span class="number">3</span>&#125;  <span class="comment">// Uncaught SyntaxError: Unexpected token ...</span></div></pre></td></tr></table></figure>
+<p>但是在React中使用ES6这种写法却很常见，原因是babel(<a href="http://babeljs.io/repl" target="_blank" rel="external">babel在线编译</a>)增强解构功能，会将这种写法编译为：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_objectWithoutProperties</span><span class="params">(obj, keys)</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> target = &#123;&#125;;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i in obj) &#123;</div><div class="line">        <span class="keyword">if</span> (keys.indexOf(i) &gt;= <span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">        <span class="keyword">if</span> (!Object.prototype.hasOwnProperty.call(obj, i)) <span class="keyword">continue</span>;</div><div class="line">        target[i] = obj[i];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> target;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> _a$c$d = &#123; a: <span class="number">1</span>, c: <span class="number">2</span>, d: <span class="number">3</span> &#125;,</div><div class="line">    a = _a$c$d.a,</div><div class="line">    b = _objectWithoutProperties(_a$c$d, [<span class="string">"a"</span>]);</div></pre></td></tr></table></figure></p>
 <p>扩展阅读：</p>
 <ol>
 <li><a href="http://exploringjs.com/es6/ch_destructuring.html" target="_blank" rel="external">Exploring ES6 Destructuring</a></li>
@@ -151,18 +149,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/03/02/async-validator使用/" title="async-validator使用">
+ <a href="/2017/02/20/ES6之Temporal-Dead-Zone/" title="ES6之Temporal Dead Zone">
   <strong>上一篇：</strong><br/>
   <span>
-  async-validator使用</span>
+  ES6之Temporal Dead Zone</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/02/20/ES6之Temporal-Dead-Zone/"  title="ES6之Temporal Dead Zone">
+<a href="/2017/03/02/async-validator使用/"  title="async-validator使用">
  <strong>下一篇：</strong><br/> 
- <span>ES6之Temporal Dead Zone
+ <span>async-validator使用
 </span>
 </a>
 </div>
@@ -200,19 +198,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -224,7 +218,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -232,7 +230,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

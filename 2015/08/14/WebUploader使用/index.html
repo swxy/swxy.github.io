@@ -12,6 +12,7 @@
 
     
     <meta name="description" content="背景最近需要封装一个图片上传组件，需要支持单文件，多文件，LOGO上传等功能，其中LOGO上传需要检测上传图片的尺寸，并且需要支持图片裁切。改组件需要提供统一的UI样式，并有统一的错误提示。该组件基于Webuploader封装。">
+<meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebUploader使用">
 <meta property="og:url" content="http://xchb.work/2015/08/14/WebUploader使用/index.html">
@@ -32,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -93,13 +94,13 @@
 </header>
 	<div class="article-content">
 		
-		<h1 id="背景">背景</h1><p>最近需要封装一个图片上传组件，需要支持单文件，多文件，LOGO上传等功能，<br>其中LOGO上传需要检测上传图片的尺寸，并且需要支持图片裁切。改组件需要提供统一的UI样式，并有统一的错误提示。<br>该组件基于Webuploader封装。</p>
+		<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近需要封装一个图片上传组件，需要支持单文件，多文件，LOGO上传等功能，<br>其中LOGO上传需要检测上传图片的尺寸，并且需要支持图片裁切。改组件需要提供统一的UI样式，并有统一的错误提示。<br>该组件基于Webuploader封装。</p>
 <a id="more"></a>
-<h1 id="遇坑&amp;填坑">遇坑&amp;填坑</h1><ul>
+<h1 id="遇坑-amp-填坑"><a href="#遇坑-amp-填坑" class="headerlink" title="遇坑&amp;填坑"></a>遇坑&amp;填坑</h1><ul>
 <li><p>由于需要兼容IE9，故需要混合使用flash和H5上传方式，使用flash上传时，给上传按钮绑定 <em>click</em> 事件时，点击按钮不会触发事件 =&gt; 绑定<em>mouseup</em>事件。</p>
 </li>
 <li><p>使用flash上传，如果在上传完成之前隐藏上传按钮，会中断上传。而使用官网提供的解决方案，即给上传按钮添加以下class：</p>
- <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.webuploader-element-invisible</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute <span class="important">!important</span></span></span>;</span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span>)</span></span>; <span class="comment">/* IE6, IE7 */</span></span><br><span class="line">    <span class="rule"><span class="attribute">clip</span>:<span class="value"> <span class="function">rect</span>(<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>,<span class="number">1px</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.webuploader-element-invisible</span> &#123;</div><div class="line">    <span class="attribute">position</span>: absolute <span class="meta">!important</span>;</div><div class="line">    <span class="attribute">clip</span>: <span class="built_in">rect</span>(1px 1px 1px 1px); <span class="comment">/* IE6, IE7 */</span></div><div class="line">    <span class="attribute">clip</span>: <span class="built_in">rect</span>(1px,1px,1px,1px);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> 发现IE9不好使 =&gt; 将按钮的<code>position</code>设置为absolute，然后设置一个较大的<code>left</code>属性，同时将父元素的<code>overflow</code>设置为hidden、<code>position</code>设置为relative。</p>
 </li>
 <li><p>由于可以一个上传实例绑定多个上传按钮，当上传时，需要区分是重新上传或直接上传新图片 =&gt; <code>file</code>对象的<code>source</code>属性中有个<code>_refer</code>表示该文件是哪个dom上传的。</p>
@@ -107,10 +108,10 @@
 <li><p>LOGO上传需要裁切 =&gt; 新注册一个裁切的方法，<a href="https://github.com/fex-team/webuploader/tree/master/examples/cropper" target="_blank" rel="external">Webuploader裁切示例</a></p>
 </li>
 <li><p>虽然WebUploader提供了文件队列管理，但不满足实际要求 =&gt; 自己再造轮子, 源码中检测文件数量的代码</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> uploader = <span class="keyword">this</span>,</span><br><span class="line">    opts = uploader.options,</span><br><span class="line">    count = uploader.count,</span><br><span class="line">    max = <span class="built_in">parseInt</span>( opts.fileNumLimit, <span class="number">10</span> ),</span><br><span class="line">    flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ( !max ) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'beforeFileQueued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> file </span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( count &gt;= max &amp;&amp; flag ) &#123;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.trigger( <span class="string">'error'</span>, <span class="string">'Q_EXCEED_NUM_LIMIT'</span>, max, file );</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">        &#125;, <span class="number">1</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count &gt;= max ? <span class="literal">false</span> : <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'fileQueued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count++;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'fileDequeued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count--;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">uploader.on( <span class="string">'reset'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uploader = <span class="keyword">this</span>,</div><div class="line">    opts = uploader.options,</div><div class="line">    count = uploader.count,</div><div class="line">    max = <span class="built_in">parseInt</span>( opts.fileNumLimit, <span class="number">10</span> ),</div><div class="line">    flag = <span class="literal">true</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span> ( !max ) &#123;</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">uploader.on( <span class="string">'beforeFileQueued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> file </span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ( count &gt;= max &amp;&amp; flag ) &#123;</div><div class="line">        flag = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">this</span>.trigger( <span class="string">'error'</span>, <span class="string">'Q_EXCEED_NUM_LIMIT'</span>, max, file );</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            flag = <span class="literal">true</span>;</div><div class="line">        &#125;, <span class="number">1</span> );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> count &gt;= max ? <span class="literal">false</span> : <span class="literal">true</span>;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">uploader.on( <span class="string">'fileQueued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    count++;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">uploader.on( <span class="string">'fileDequeued'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    count--;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">uploader.on( <span class="string">'reset'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    count = <span class="number">0</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="参考">参考</h1><ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li><a href="http://fex.baidu.com/webuploader" target="_blank" rel="external">WebUploader的官网</a></li>
 </ol>
   
@@ -143,14 +144,14 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/08/24/CSS居中显示/" title="CSS居中显示">
-  <strong>上一篇：</strong><br/>
-  <span>
-  CSS居中显示</span>
+
+<div class="next">
+<a href="/2015/08/24/CSS居中显示/"  title="CSS居中显示">
+ <strong>下一篇：</strong><br/> 
+ <span>CSS居中显示
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -162,7 +163,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#遇坑&填坑"><span class="toc-number">2.</span> <span class="toc-text">遇坑&填坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#遇坑-amp-填坑"><span class="toc-number">2.</span> <span class="toc-text">遇坑&填坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
  
   </div>
 
@@ -185,19 +186,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -209,7 +206,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -217,7 +218,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

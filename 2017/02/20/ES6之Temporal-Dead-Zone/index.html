@@ -11,109 +11,17 @@
     
 
     
-    <meta name="description" content="在使用ES6时，一般都是推荐使用let, const来定义变量，相对var而言：
-
-
-
-
-Hoisting
-Scope
-Creates global properties
-
-
-
-
-var
-Declaration
-Function
-Yes
-
-
-let
-Temporal dead zone
-Block
-No
-
-
-const
-Temporal dead zone
-Block
-No
-
-
-
-Temporal">
+    <meta name="description" content="在使用ES6时，一般都是推荐使用let, const来定义变量，相对var而言：     Hoisting Scope Creates global properties     var Declaration Function Yes   let Temporal dead zone Block No   const Temporal dead zone Block No    Temporal">
+<meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6之Temporal Dead Zone">
 <meta property="og:url" content="http://xchb.work/2017/02/20/ES6之Temporal-Dead-Zone/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="在使用ES6时，一般都是推荐使用let, const来定义变量，相对var而言：
-
-
-
-
-Hoisting
-Scope
-Creates global properties
-
-
-
-
-var
-Declaration
-Function
-Yes
-
-
-let
-Temporal dead zone
-Block
-No
-
-
-const
-Temporal dead zone
-Block
-No
-
-
-
-Temporal">
+<meta property="og:description" content="在使用ES6时，一般都是推荐使用let, const来定义变量，相对var而言：     Hoisting Scope Creates global properties     var Declaration Function Yes   let Temporal dead zone Block No   const Temporal dead zone Block No    Temporal">
 <meta property="og:updated_time" content="2017-02-22T04:48:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6之Temporal Dead Zone">
-<meta name="twitter:description" content="在使用ES6时，一般都是推荐使用let, const来定义变量，相对var而言：
-
-
-
-
-Hoisting
-Scope
-Creates global properties
-
-
-
-
-var
-Declaration
-Function
-Yes
-
-
-let
-Temporal dead zone
-Block
-No
-
-
-const
-Temporal dead zone
-Block
-No
-
-
-
-Temporal">
+<meta name="twitter:description" content="在使用ES6时，一般都是推荐使用let, const来定义变量，相对var而言：     Hoisting Scope Creates global properties     var Declaration Function Yes   let Temporal dead zone Block No   const Temporal dead zone Block No    Temporal">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -125,7 +33,7 @@ Temporal">
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -219,14 +127,14 @@ Temporal">
 </table>
 <p><code>Temporal dead zone</code>这个与<code>var</code>的<code>Declaration</code>有什么不一样的地方？</p>
 <a id="more"></a>
-<p>先看一个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// var定义的变量提升</span></span><br><span class="line"><span class="built_in">console</span>.log(tmpVar); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> tmpVar = <span class="number">12</span>; <span class="comment">// var定义的变量不是块级作用域</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(tmpVar); <span class="comment">// 12</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// let定义的变量提升</span></span><br><span class="line"><span class="keyword">let</span> tmp = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123; <span class="comment">// 新的作用域 TDZ 开始</span></span><br><span class="line">    <span class="built_in">console</span>.log(tmp);  <span class="comment">// ReferenceError</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> tmp; <span class="comment">// TDZ 结束, `tmp` 被初始化为 undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(tmp); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">    tmp = <span class="number">123</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(tmp); <span class="comment">// 123</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(tmp); <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>先看一个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// var定义的变量提升</span></div><div class="line"><span class="built_in">console</span>.log(tmpVar); <span class="comment">// undefined</span></div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">    <span class="keyword">var</span> tmpVar = <span class="number">12</span>; <span class="comment">// var定义的变量不是块级作用域</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(tmpVar); <span class="comment">// 12</span></div><div class="line"></div><div class="line"><span class="comment">// let定义的变量提升</span></div><div class="line"><span class="keyword">let</span> tmp = <span class="literal">true</span>;</div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123; <span class="comment">// 新的作用域 TDZ 开始</span></div><div class="line">    <span class="built_in">console</span>.log(tmp);  <span class="comment">// ReferenceError</span></div><div class="line"></div><div class="line">    <span class="keyword">let</span> tmp; <span class="comment">// TDZ 结束, `tmp` 被初始化为 undefined</span></div><div class="line">    <span class="built_in">console</span>.log(tmp); <span class="comment">// undefined</span></div><div class="line"></div><div class="line">    tmp = <span class="number">123</span>;</div><div class="line">    <span class="built_in">console</span>.log(tmp); <span class="comment">// 123</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(tmp); <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
 <p>可以查看其实<code>TDZ</code>类似于一个视觉的盲区，在作用域中应该意识到变量的存在，但却看不见，更用不了。</p>
 <p>之所以需要<code>TDZ</code>：</p>
 <ol>
 <li>捕获错误： 变量提升本就比较奇怪，也不太符合变量需要定义才能使用的逻辑。</li>
 <li><code>const</code>语义要求： <code>const</code>定义一个不可以变更的常量，只能在定义时赋值，如果存在变量提升和语义不符合。为了保持一致，所以<code>let</code>也有<code>TDZ</code>。</li>
 </ol>
-<h1 id="相关资料">相关资料</h1><ol>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><ol>
 <li><a href="http://exploringjs.com/es6/ch_variables.html" target="_blank" rel="external">9.4 The temporal dead zone</a></li>
 </ol>
   
@@ -260,18 +168,18 @@ Temporal">
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/02/21/ES6之Destructuring/" title="ES6之Destructuring">
+ <a href="/2017/02/06/TCP三步握手/" title="TCP三步握手">
   <strong>上一篇：</strong><br/>
   <span>
-  ES6之Destructuring</span>
+  TCP三步握手</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/02/06/TCP三步握手/"  title="TCP三步握手">
+<a href="/2017/02/21/ES6之Destructuring/"  title="ES6之Destructuring">
  <strong>下一篇：</strong><br/> 
- <span>TCP三步握手
+ <span>ES6之Destructuring
 </span>
 </a>
 </div>
@@ -309,19 +217,15 @@ Temporal">
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -333,7 +237,11 @@ Temporal">
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -341,7 +249,7 @@ Temporal">
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

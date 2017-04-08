@@ -11,15 +11,12 @@
     
 
     
-    <meta name="description">
-<meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="学习是一种信仰">
 <meta property="og:url" content="http://xchb.work/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习是一种信仰">
-<meta name="twitter:description">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -31,7 +28,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -157,7 +154,7 @@
         <p>探索问题：</p>
 <ol>
 <li>React生命周期有哪些，各自在什么阶段触发</li>
-<li>哪些阶段可以使用<code>setState</code></li>
+<li>哪些阶段可以使用重新设置状态，例如使用<code>setState</code></li>
 </ol>
         
         
@@ -387,7 +384,7 @@
     <div class="article-content">
         
         <p>记录不同形式Destructuring导致的不同结果：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">move1</span><span class="params">(&#123;x=<span class="number">0</span>, y=<span class="number">0</span>&#125; = &#123;&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">function <span class="title">move2</span><span class="params">(&#123;x, y&#125; = &#123;x: <span class="number">0</span>, y: <span class="number">0</span>&#125;)</span> </span>&#123;</span><br><span class="line">    console.<span class="built_in">log</span>(x, y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">move1</span>(<span class="params">&#123;x=<span class="number">0</span>, y=<span class="number">0</span>&#125; = &#123;&#125;</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(x, y)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">move2</span>(<span class="params">&#123;x, y&#125; = &#123;x: <span class="number">0</span>, y: <span class="number">0</span>&#125;</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(x, y)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
         
         
         <p class="article-more-link">
@@ -585,15 +582,15 @@
 </header>
     <div class="article-content">
         
-        <h2 id="广播数据">广播数据</h2><p>如何向所有的客户端广播数据？</p>
+        <h2 id="广播数据"><a href="#广播数据" class="headerlink" title="广播数据"></a>广播数据</h2><p>如何向所有的客户端广播数据？</p>
 <ol>
 <li><p>使用io.sockets.emit</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">var <span class="built_in">io</span> = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(server);</span><br><span class="line"><span class="built_in">io</span>.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span><span class="params">(socket)</span></span>&#123;</span><br><span class="line">    <span class="built_in">io</span>.sockets.emit(<span class="string">'new'</span>, &#123;hello: <span class="string">'world'</span>&#125;);      </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"></div><div class="line"><span class="keyword">var</span> io = <span class="keyword">require</span>(<span class="string">'socket.io'</span>)(server);</div><div class="line">io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span><span class="params">(socket)</span></span>&#123;</div><div class="line">    io.sockets.emit(<span class="string">'new'</span>, &#123;hello: <span class="string">'world'</span>&#125;);      </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用socket.broadcast.emit</p>
 </li>
 </ol>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">var <span class="built_in">io</span> = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(server);</span><br><span class="line"><span class="built_in">io</span>.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span><span class="params">(socket)</span></span>&#123;</span><br><span class="line">    socket.broadcast.emit(<span class="string">'new'</span>, &#123;hello: <span class="string">'world'</span>&#125;);      </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"></div><div class="line"><span class="keyword">var</span> io = <span class="keyword">require</span>(<span class="string">'socket.io'</span>)(server);</div><div class="line">io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span><span class="params">(socket)</span></span>&#123;</div><div class="line">    socket.broadcast.emit(<span class="string">'new'</span>, &#123;hello: <span class="string">'world'</span>&#125;);      </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>两种方式区别<code>io.sockets.emit</code>向所有连接的客户端广播数据，而<code>socket.broadcast.emit</code>则向<br>除了该<code>socket</code>自身之外的其他所有广播数据。其实也就是说<br><code>io.sockets.emit</code> = <code>socket.broadcast.emit</code> + <code>socket.emit</code></p>
 <p>因此可以猜测出socket.io内部会保留所有连接的socket。</p>
 
@@ -653,13 +650,13 @@
         <p>记录一下nodejs配置mongodb的过程：</p>
 <ol>
 <li><p>mac上安装mongodb:</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>install mongodb</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>mongodb</div></pre></td></tr></table></figure>
 </li>
 <li><p>创建一个存在数据目录</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -p ~/<span class="typedef"><span class="keyword">data</span>/db</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">mkdir</span> -p ~/<span class="class"><span class="keyword">data</span>/db</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod <span class="comment">--dbpath=./data/db</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod <span class="comment">--dbpath=./data/db</span></div></pre></td></tr></table></figure>
         
         
         <p class="article-more-link">
@@ -723,19 +720,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -747,7 +740,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -755,7 +752,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

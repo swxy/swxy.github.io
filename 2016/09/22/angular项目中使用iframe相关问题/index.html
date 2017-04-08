@@ -11,19 +11,17 @@
     
 
     
-    <meta name="description" content="iframe高度自适应问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。
-解决方案：自定义一个angular指令，监听iframe的onload事件来获取iframe中内容的高度。">
+    <meta name="description" content="iframe高度自适应问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。 解决方案：自定义一个angular指令，监听iframe的onload事件来获取iframe中内容的高度。">
+<meta name="keywords" content="Angular">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angular项目中使用iframe相关问题">
 <meta property="og:url" content="http://xchb.work/2016/09/22/angular项目中使用iframe相关问题/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="iframe高度自适应问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。
-解决方案：自定义一个angular指令，监听iframe的onload事件来获取iframe中内容的高度。">
+<meta property="og:description" content="iframe高度自适应问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。 解决方案：自定义一个angular指令，监听iframe的onload事件来获取iframe中内容的高度。">
 <meta property="og:updated_time" content="2016-09-22T09:38:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular项目中使用iframe相关问题">
-<meta name="twitter:description" content="iframe高度自适应问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。
-解决方案：自定义一个angular指令，监听iframe的onload事件来获取iframe中内容的高度。">
+<meta name="twitter:description" content="iframe高度自适应问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。 解决方案：自定义一个angular指令，监听iframe的onload事件来获取iframe中内容的高度。">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -35,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -96,12 +94,12 @@
 </header>
 	<div class="article-content">
 		
-		<h1 id="iframe高度自适应">iframe高度自适应</h1><p>问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。</p>
+		<h1 id="iframe高度自适应"><a href="#iframe高度自适应" class="headerlink" title="iframe高度自适应"></a>iframe高度自适应</h1><p>问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。</p>
 <p>解决方案：自定义一个angular指令，监听iframe的<code>onload</code>事件来获取iframe中内容的高度。</p>
 <a id="more"></a>
 <p>源码：</p>
-<p>angular 代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义指令</span></span><br><span class="line">App.directive(<span class="string">'iframeOnload'</span>, [<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        scope: &#123;</span><br><span class="line">            callBack: <span class="string">'&amp;iframeOnload'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        link: <span class="function"><span class="keyword">function</span><span class="params">(scope, element, attrs)</span></span>&#123;</span><br><span class="line">            element.on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">                <span class="comment">// 关键是这个</span></span><br><span class="line">                element.height(element.contents().outerHeight());</span><br><span class="line">                <span class="keyword">return</span> scope.callBack();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;&#125;]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">App.controller(<span class="string">'MyController'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$scope</span>)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$scope</span>.iframeLoadedCallBack = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// do stuff</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure></p>
-<p>在DOM中使用<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">ng-controller</span>=<span class="value">"MyController"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">iframe-onload</span>=<span class="value">"iframeLoadedCallBack()"</span> <span class="attribute">src</span>=<span class="value">"..."</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>angular 代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义指令</span></div><div class="line">App.directive(<span class="string">'iframeOnload'</span>, [<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        scope: &#123;</div><div class="line">            callBack: <span class="string">'&amp;iframeOnload'</span></div><div class="line">        &#125;,</div><div class="line">        link: <span class="function"><span class="keyword">function</span><span class="params">(scope, element, attrs)</span></span>&#123;</div><div class="line">            element.on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">                <span class="comment">// 关键是这个</span></div><div class="line">                element.height(element.contents().outerHeight());</div><div class="line">                <span class="keyword">return</span> scope.callBack();</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;&#125;]);</div><div class="line"></div><div class="line"></div><div class="line">App.controller(<span class="string">'MyController'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span><span class="params">($scope)</span></span>&#123;</div><div class="line"></div><div class="line">    $scope.iframeLoadedCallBack = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="comment">// do stuff</span></div><div class="line">    &#125;</div><div class="line">&#125;]);</div></pre></td></tr></table></figure></p>
+<p>在DOM中使用<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"MyController"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">iframe-onload</span>=<span class="string">"iframeLoadedCallBack()"</span> <span class="attr">src</span>=<span class="string">"..."</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p><a href="http://stackoverflow.com/questions/15882326/angular-onload-function-on-an-iframe" target="_blank" rel="external">解决方案来源：Angular, onLoad function on an iFrame</a></p>
   
 	</div>
@@ -134,18 +132,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/09/27/Angular-小技巧/" title="Angular 小技巧">
+ <a href="/2016/09/01/nodejs-web应用代码热更新/" title="nodejs web应用代码热更新">
   <strong>上一篇：</strong><br/>
   <span>
-  Angular 小技巧</span>
+  nodejs web应用代码热更新</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/09/01/nodejs-web应用代码热更新/"  title="nodejs web应用代码热更新">
+<a href="/2016/09/27/Angular-小技巧/"  title="Angular 小技巧">
  <strong>下一篇：</strong><br/> 
- <span>nodejs web应用代码热更新
+ <span>Angular 小技巧
 </span>
 </a>
 </div>
@@ -183,19 +181,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -207,7 +201,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -215,7 +213,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

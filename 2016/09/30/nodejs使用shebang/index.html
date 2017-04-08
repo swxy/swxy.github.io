@@ -11,34 +11,17 @@
     
 
     
-    <meta name="description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：
-
-#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数
-
-
-如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许
-如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
+    <meta name="description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：  #!interpreter [optional-arg] // 解释程序的绝对路径和可选参数   如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许 如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
+<meta name="keywords" content="nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nodejs使用shebang">
 <meta property="og:url" content="http://xchb.work/2016/09/30/nodejs使用shebang/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：
-
-#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数
-
-
-如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许
-如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
+<meta property="og:description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：  #!interpreter [optional-arg] // 解释程序的绝对路径和可选参数   如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许 如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
 <meta property="og:updated_time" content="2016-09-30T03:06:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodejs使用shebang">
-<meta name="twitter:description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：
-
-#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数
-
-
-如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许
-如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
+<meta name="twitter:description" content="基本含义shebang也可以称之为hashbang, 代指#!。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。其语法格式是：  #!interpreter [optional-arg] // 解释程序的绝对路径和可选参数   如果脚本文件中没有#!这一行，执行时会以系统默认的解释程序允许 如果#!之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -50,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -111,7 +94,7 @@
 </header>
 	<div class="article-content">
 		
-		<h1 id="基本含义">基本含义</h1><p><code>shebang</code>也可以称之为<code>hashbang</code>, 代指<code>#!</code>。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。<br>其语法格式是：</p>
+		<h1 id="基本含义"><a href="#基本含义" class="headerlink" title="基本含义"></a>基本含义</h1><p><code>shebang</code>也可以称之为<code>hashbang</code>, 代指<code>#!</code>。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。<br>其语法格式是：</p>
 <blockquote>
 <p>#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数</p>
 </blockquote>
@@ -120,25 +103,25 @@
 <li>如果<code>#!</code>之后的解释程序是一个可执行文件，那么执行这个脚本时，它就会把文件名及其参数一起作为参数传给那个解释程序去执行。</li>
 </ol>
 <a id="more"></a>
-<h1 id="示例">示例</h1><p>在我的电脑中通过<code>nvm</code>安装了两个node版本。一个是4.4.5版本，一个是6.2.0版本。</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>在我的电脑中通过<code>nvm</code>安装了两个node版本。一个是4.4.5版本，一个是6.2.0版本。</p>
 <ol>
 <li><p>新建一个脚本文件–<code>testShebang</code>，通过<code>shebang</code>指定其默认node版本为4.4.5</p>
-<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#! /Users/baidu/.nvm/versions/node/v4.4.5/bin/node</span></span><br><span class="line"><span class="comment">// 打印node的版本</span></span><br><span class="line">console.log(process.<span class="keyword">version</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#! /Users/baidu/.nvm/versions/node/v4.4.5/bin/node</span></div><div class="line"><span class="comment">// 打印node的版本</span></div><div class="line">console.log(process.<span class="keyword">version</span>)</div></pre></td></tr></table></figure>
 </li>
 <li><p>给<code>testShebang</code>添加可执行权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod <span class="number">755</span> <span class="built_in">test</span>Shebang</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chmod 755 <span class="built_in">test</span>Shebang</div></pre></td></tr></table></figure>
 </li>
 <li><p>切换终端的node版本为6.2.0。</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span><span class="identifier"> </span><span class="title">-v</span></span><br><span class="line">v6.<span class="number">2.0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="keyword">node</span> <span class="title">-v</span></div><div class="line">v6.<span class="number">2.0</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>指定node执行该文件</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span><span class="identifier"> </span><span class="title">testShebang</span></span><br><span class="line">v6.<span class="number">2.0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="keyword">node</span> <span class="title">testShebang</span></div><div class="line">v6.<span class="number">2.0</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>直接执行</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./testShebang</span><br><span class="line">v4<span class="number">.4</span><span class="number">.5</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./testShebang</div><div class="line">v4<span class="number">.4</span><span class="number">.5</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h1 id="参考">参考</h1><ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li><a href="https://en.wikipedia.org/wiki/Shebang_(Unix" target="_blank" rel="external">wikipedia: Shebang (Unix)</a>)</li>
 <li><a href="https://linux.cn/article-3664-1.html" target="_blank" rel="external">释伴：Linux 上的 Shebang 符号(#!)</a></li>
 </ol>
@@ -173,18 +156,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/11/10/网页代理/" title="网页代理">
+ <a href="/2016/09/27/Angular-小技巧/" title="Angular 小技巧">
   <strong>上一篇：</strong><br/>
   <span>
-  网页代理</span>
+  Angular 小技巧</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/09/27/Angular-小技巧/"  title="Angular 小技巧">
+<a href="/2016/11/10/网页代理/"  title="网页代理">
  <strong>下一篇：</strong><br/> 
- <span>Angular 小技巧
+ <span>网页代理
 </span>
 </a>
 </div>
@@ -222,19 +205,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -246,7 +225,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -254,7 +237,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

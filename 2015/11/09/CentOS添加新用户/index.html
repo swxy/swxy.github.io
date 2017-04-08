@@ -11,19 +11,17 @@
     
 
     
-    <meta name="description" content="添加新用户adduser username
-修改新用户密码passwd username">
+    <meta name="description" content="添加新用户adduser username 修改新用户密码passwd username">
+<meta name="keywords" content="CentOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS添加新用户">
 <meta property="og:url" content="http://xchb.work/2015/11/09/CentOS添加新用户/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="添加新用户adduser username
-修改新用户密码passwd username">
+<meta property="og:description" content="添加新用户adduser username 修改新用户密码passwd username">
 <meta property="og:updated_time" content="2016-02-23T02:50:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS添加新用户">
-<meta name="twitter:description" content="添加新用户adduser username
-修改新用户密码passwd username">
+<meta name="twitter:description" content="添加新用户adduser username 修改新用户密码passwd username">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -35,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -96,19 +94,19 @@
 </header>
 	<div class="article-content">
 		
-		<h3 id="添加新用户">添加新用户</h3><pre><code><span class="keyword">adduser </span>username
-</code></pre><h3 id="修改新用户密码">修改新用户密码</h3><pre><code><span class="title">passwd</span> username
+		<h3 id="添加新用户"><a href="#添加新用户" class="headerlink" title="添加新用户"></a>添加新用户</h3><pre><code>adduser username
+</code></pre><h3 id="修改新用户密码"><a href="#修改新用户密码" class="headerlink" title="修改新用户密码"></a>修改新用户密码</h3><pre><code>passwd username
 </code></pre><a id="more"></a>
-<h3 id="添加sudo权限">添加sudo权限</h3><p>修改权限相关的配置文件，进入<code>/etc</code></p>
-<pre><code><span class="title">vi</span> sudoers
+<h3 id="添加sudo权限"><a href="#添加sudo权限" class="headerlink" title="添加sudo权限"></a>添加sudo权限</h3><p>修改权限相关的配置文件，进入<code>/etc</code></p>
+<pre><code>vi sudoers
 </code></pre><p>找到以下内容</p>
-<pre><code> <span class="comment">## Allow root to run any commands anywhere</span>
-<span class="keyword">root</span> <span class="literal">ALL</span>=(<span class="literal">ALL</span>) <span class="literal">ALL</span>
+<pre><code> ## Allow root to run any commands anywhere
+root ALL=(ALL) ALL
 </code></pre><p>新增一行，增加一下内容</p>
-<pre><code><span class="keyword">username</span> <span class="literal">ALL</span>=(<span class="literal">ALL</span>) <span class="literal">ALL</span>
+<pre><code>username ALL=(ALL) ALL
 </code></pre><p>按下<code>esc</code>退出编辑模式，执行以下命令，保存退出</p>
-<pre><code><span class="attribute">:wq</span>
-</code></pre><h3 id="切换到新用户">切换到新用户</h3><pre><code><span class="title">su</span> username
+<pre><code>:wq
+</code></pre><h3 id="切换到新用户"><a href="#切换到新用户" class="headerlink" title="切换到新用户"></a>切换到新用户</h3><pre><code>su username
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -140,18 +138,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/11/10/CentOS-安装nginx/" title="CentOS 安装nginx">
+ <a href="/2015/10/22/CSS3图标收集和整理/" title="CSS3图标收集和整理">
   <strong>上一篇：</strong><br/>
   <span>
-  CentOS 安装nginx</span>
+  CSS3图标收集和整理</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/10/22/CSS3图标收集和整理/"  title="CSS3图标收集和整理">
+<a href="/2015/11/10/CentOS-安装nginx/"  title="CentOS 安装nginx">
  <strong>下一篇：</strong><br/> 
- <span>CSS3图标收集和整理
+ <span>CentOS 安装nginx
 </span>
 </a>
 </div>
@@ -189,19 +187,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -213,7 +207,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -221,7 +219,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

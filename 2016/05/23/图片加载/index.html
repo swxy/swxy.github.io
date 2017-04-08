@@ -12,6 +12,7 @@
 
     
     <meta name="description" content="随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。">
+<meta name="keywords" content="HTML">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图片加载">
 <meta property="og:url" content="http://xchb.work/2016/05/23/图片加载/index.html">
@@ -32,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -95,21 +96,21 @@
 		
 		<p>随着网页内容越来越丰富，页面的图片也越来越多，导致页面加载越来越慢。针对页面的优化，图片加载是一个重点。常见的优化方案有图片预加载，图片惰性加载。或者针对图片格式做一些优化，例如使用webp之类的。这里主要关注图片的加载方式。</p>
 <a id="more"></a>
-<h2 id="图片预加载">图片预加载</h2><h3 id="背景">背景</h3><p>图片的加载速度往往影响着网站整体的用户体验，尤其对于包含大量图片的网站。对图片进行预加载，不失为一个高效的解决方案。</p>
-<h3 id="解决方案">解决方案</h3><p>使用CSS3、JavaScript、Ajax实现图片预加载</p>
-<h3 id="具体实现">具体实现</h3><ol>
+<h2 id="图片预加载"><a href="#图片预加载" class="headerlink" title="图片预加载"></a>图片预加载</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>图片的加载速度往往影响着网站整体的用户体验，尤其对于包含大量图片的网站。对图片进行预加载，不失为一个高效的解决方案。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>使用CSS3、JavaScript、Ajax实现图片预加载</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><ol>
 <li><a href="https://perishablepress.com/3-ways-preload-images-css-javascript-ajax/" target="_blank" rel="external">3 Ways to Preload Images with CSS, JavaScript, or Ajax</a></li>
 <li><a href="http://www.csdn.net/article/2013-10-15/2817187-3-ways-preload-images-css-javascript-ajax" target="_blank" rel="external">利用CSS、JavaScript及Ajax实现图片预加载的三大方法</a></li>
 </ol>
-<h2 id="图片惰性加载">图片惰性加载</h2><h3 id="背景-1">背景</h3><p>页面图片较多，影响加载速度，而且很多时候，页面加载完了，用户却不会滑动到页面最下面，也就是说加载出来的图片，用户更本就没去看，造成资源浪费的同时也使得页面加载变慢。</p>
-<h3 id="解决方案-1">解决方案</h3><p>按需加载图片，如果用户滚动到图片位置，则加载图片。</p>
-<h3 id="实现原理">实现原理</h3><ol>
+<h2 id="图片惰性加载"><a href="#图片惰性加载" class="headerlink" title="图片惰性加载"></a>图片惰性加载</h2><h3 id="背景-1"><a href="#背景-1" class="headerlink" title="背景"></a>背景</h3><p>页面图片较多，影响加载速度，而且很多时候，页面加载完了，用户却不会滑动到页面最下面，也就是说加载出来的图片，用户更本就没去看，造成资源浪费的同时也使得页面加载变慢。</p>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><p>按需加载图片，如果用户滚动到图片位置，则加载图片。</p>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><ol>
 <li>给<code>img</code>标签设置src为一个loading图标，然后把实际的图片地址存储到其他自定义属性中；</li>
 <li>监听页面滚动事件，如果页面滚动到图片区域，则替换src为图片的视觉地址。</li>
 </ol>
 <p>示例：</p>
-<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img data-original=<span class="symbol">'actual</span>.jpg' src=<span class="symbol">'loading</span>.gif'/&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="具体实现-1">具体实现</h3><ol>
+<figure class="highlight sml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;img data-original=<span class="symbol">'actual</span>.jpg' src=<span class="symbol">'loading</span>.gif'/&gt;</div></pre></td></tr></table></figure>
+<h3 id="具体实现-1"><a href="#具体实现-1" class="headerlink" title="具体实现"></a>具体实现</h3><ol>
 <li>参考<a href="http://www.cnblogs.com/zichi/p/5021697.html" target="_blank" rel="external">教你实现图片的惰性加载</a></li>
 <li>使用jQuery的<a href="https://plugins.jquery.com/lazyload/" target="_blank" rel="external">惰性加载库（lazyload）</a>, <a href="https://github.com/tuupola/jquery_lazyload" target="_blank" rel="external">github地址</a></li>
 </ol>
@@ -144,18 +145,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/05/25/React-Todo示例/" title="React-Todo示例">
+ <a href="/2016/05/17/Meta-整理/" title="Meta 整理">
   <strong>上一篇：</strong><br/>
   <span>
-  React-Todo示例</span>
+  Meta 整理</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/05/17/Meta-整理/"  title="Meta 整理">
+<a href="/2016/05/25/React-Todo示例/"  title="React-Todo示例">
  <strong>下一篇：</strong><br/> 
- <span>Meta 整理
+ <span>React-Todo示例
 </span>
 </a>
 </div>
@@ -193,19 +194,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -217,7 +214,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -225,7 +226,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -11,15 +11,12 @@
     
 
     
-    <meta name="description">
-<meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="学习是一种信仰">
 <meta property="og:url" content="http://xchb.work/page/2/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习是一种信仰">
-<meta name="twitter:description">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -31,7 +28,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -146,7 +143,7 @@
 </header>
     <div class="article-content">
         
-        <h1 id="基本含义">基本含义</h1><p><code>shebang</code>也可以称之为<code>hashbang</code>, 代指<code>#!</code>。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。<br>其语法格式是：</p>
+        <h1 id="基本含义"><a href="#基本含义" class="headerlink" title="基本含义"></a>基本含义</h1><p><code>shebang</code>也可以称之为<code>hashbang</code>, 代指<code>#!</code>。一般出现在脚本的第一行，用于在unix系统或类unix系统中指定默认的脚本文件的解释程序。<br>其语法格式是：</p>
 <blockquote>
 <p>#!interpreter [optional-arg] // 解释程序的绝对路径和可选参数</p>
 </blockquote>
@@ -209,7 +206,7 @@
 </header>
     <div class="article-content">
         
-        <h1 id="1-textarea的placeholder换行">1.<code>textarea</code>的<code>placeholder</code>换行</h1><p>问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。<br>解决方案：使用angular中的数据绑定就可以轻松实现<br><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">textarea</span> <span class="attribute">rows</span>=<span class="value">"6"</span> <span class="attribute">cols</span>=<span class="value">"45"</span> <span class="attribute">placeholder</span>=<span class="value">"</span></span></span><span class="expression">&#123;&#123;'第一行\<span class="variable">n</span>第二行\<span class="variable">n</span>第三行\<span class="variable">n</span>第四行'&#125;&#125;</span><span class="xml"><span class="tag"><span class="value">"</span>&gt;</span><span class="tag">&lt;/<span class="title">textarea</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+        <h1 id="1-textarea的placeholder换行"><a href="#1-textarea的placeholder换行" class="headerlink" title="1.textarea的placeholder换行"></a>1.<code>textarea</code>的<code>placeholder</code>换行</h1><p>问题：placeholder中的文本过长，或者需要格式化展示文本时，需要使用多行展示。<br>解决方案：使用angular中的数据绑定就可以轻松实现<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">rows</span>=<span class="string">"6"</span> <span class="attr">cols</span>=<span class="string">"45"</span> <span class="attr">placeholder</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123;'第一行\n第二行\n第三行\n第四行'&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
 <p>解决方案来源：<a href="http://stackoverflow.com/a/38128759" target="_blank" rel="external">Can you have multiline HTML5 placeholder text in a textarea?</a></p>
 
         
@@ -265,7 +262,7 @@
 </header>
     <div class="article-content">
         
-        <h1 id="iframe高度自适应">iframe高度自适应</h1><p>问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。</p>
+        <h1 id="iframe高度自适应"><a href="#iframe高度自适应" class="headerlink" title="iframe高度自适应"></a>iframe高度自适应</h1><p>问题： 在angular项目中需要嵌入第三方页面，通过iframe来实现，但是嵌入的页面高度未知。</p>
 <p>解决方案：自定义一个angular指令，监听iframe的<code>onload</code>事件来获取iframe中内容的高度。</p>
         
         
@@ -441,7 +438,7 @@
     <div class="article-content">
         
         <p>整理和收集一下浏览器渲染原理。</p>
-<h2 id="解析和展示html流程">解析和展示html流程</h2><ol>
+<h2 id="解析和展示html流程"><a href="#解析和展示html流程" class="headerlink" title="解析和展示html流程"></a>解析和展示html流程</h2><ol>
 <li>首先下载html文件</li>
 <li>解析html，构建dom树</li>
 <li>和css结合生成渲染树</li>
@@ -614,7 +611,7 @@
 </header>
     <div class="article-content">
         
-        <h1 id="基本属性值">基本属性值</h1><p>meta的意义取决其属性：</p>
+        <h1 id="基本属性值"><a href="#基本属性值" class="headerlink" title="基本属性值"></a>基本属性值</h1><p>meta的意义取决其属性：</p>
 <ol>
 <li>name： 文档级别的元数据，作用于整个页面。</li>
 <li>http-equiv： 程序指令，一般用于告诉服务器页面的一些特殊要求。</li>
@@ -685,19 +682,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -709,7 +702,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -717,7 +714,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

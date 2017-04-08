@@ -11,22 +11,17 @@
     
 
     
-    <meta name="description" content="在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。在fex上看见一个比较另类的解决方案——Node.js Web应用代码热更新的另类思路
-在这里简单实现一下来解决开发过程中热启动的问题。
-首先需要重新包装一下nodejs提供的require方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。">
+    <meta name="description" content="在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。在fex上看见一个比较另类的解决方案——Node.js Web应用代码热更新的另类思路 在这里简单实现一下来解决开发过程中热启动的问题。 首先需要重新包装一下nodejs提供的require方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。">
+<meta name="keywords" content="nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nodejs web应用代码热更新">
 <meta property="og:url" content="http://xchb.work/2016/09/01/nodejs-web应用代码热更新/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。在fex上看见一个比较另类的解决方案——Node.js Web应用代码热更新的另类思路
-在这里简单实现一下来解决开发过程中热启动的问题。
-首先需要重新包装一下nodejs提供的require方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。">
+<meta property="og:description" content="在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。在fex上看见一个比较另类的解决方案——Node.js Web应用代码热更新的另类思路 在这里简单实现一下来解决开发过程中热启动的问题。 首先需要重新包装一下nodejs提供的require方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。">
 <meta property="og:updated_time" content="2016-09-01T09:25:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodejs web应用代码热更新">
-<meta name="twitter:description" content="在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。在fex上看见一个比较另类的解决方案——Node.js Web应用代码热更新的另类思路
-在这里简单实现一下来解决开发过程中热启动的问题。
-首先需要重新包装一下nodejs提供的require方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。">
+<meta name="twitter:description" content="在用nodejs开发web程序过程中, 每次修改都需要重新启动一下服务, 虽然有pm2,forever等解决方案。在fex上看见一个比较另类的解决方案——Node.js Web应用代码热更新的另类思路 在这里简单实现一下来解决开发过程中热启动的问题。 首先需要重新包装一下nodejs提供的require方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -38,7 +33,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -103,10 +98,10 @@
 <p>在这里简单实现一下来解决开发过程中热启动的问题。</p>
 <p>首先需要重新包装一下nodejs提供的<code>require</code>方法。在require自己写的代码时,同时需要监听文件变化,当文件发生变化时,重新加载模块。</p>
 <a id="more"></a>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// wrapperRequire.js</span></span><br><span class="line"><span class="keyword">const</span> chokidar = <span class="built_in">require</span>(<span class="string">'chokidar'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cleanCache</span>(<span class="params">modulePath</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">module</span> = <span class="built_in">require</span>.cache[modulePath];</span><br><span class="line">    <span class="comment">// remove reference in module.parent</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">module</span>.parent) &#123;</span><br><span class="line">        <span class="built_in">module</span>.parent.children.splice(<span class="built_in">module</span>.parent.children.indexOf(<span class="built_in">module</span>), <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">require</span>.cache[modulePath] = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">watchFile</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> absModulePath = <span class="built_in">require</span>.resolve(obj.modulePath);</span><br><span class="line">    chokidar.watch(absModulePath).on(<span class="string">'all'</span>, (event, path) =&gt; &#123;</span><br><span class="line">        cleanCache(absModulePath);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`file [<span class="subst">$&#123;path&#125;</span>] --&gt; [<span class="subst">$&#123;event&#125;</span>]`</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            obj.name = <span class="built_in">require</span>(obj.modulePath);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(<span class="string">'module update failed'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    !obj.ignore &amp;&amp; watchFile(obj);</span><br><span class="line">    obj.name = <span class="built_in">require</span>(obj.modulePath);</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// wrapperRequire.js</span></div><div class="line"><span class="keyword">const</span> chokidar = <span class="built_in">require</span>(<span class="string">'chokidar'</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cleanCache</span>(<span class="params">modulePath</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> <span class="built_in">module</span> = <span class="built_in">require</span>.cache[modulePath];</div><div class="line">    <span class="comment">// remove reference in module.parent</span></div><div class="line">    <span class="keyword">if</span> (<span class="built_in">module</span>.parent) &#123;</div><div class="line">        <span class="built_in">module</span>.parent.children.splice(<span class="built_in">module</span>.parent.children.indexOf(<span class="built_in">module</span>), <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">require</span>.cache[modulePath] = <span class="literal">null</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">watchFile</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> absModulePath = <span class="built_in">require</span>.resolve(obj.modulePath);</div><div class="line">    chokidar.watch(absModulePath).on(<span class="string">'all'</span>, (event, path) =&gt; &#123;</div><div class="line">        cleanCache(absModulePath);</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">`file [<span class="subst">$&#123;path&#125;</span>] --&gt; [<span class="subst">$&#123;event&#125;</span>]`</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            obj.name = <span class="built_in">require</span>(obj.modulePath);</div><div class="line">        &#125; <span class="keyword">catch</span> (ex) &#123;</div><div class="line">            <span class="built_in">console</span>.error(<span class="string">'module update failed'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">    !obj.ignore &amp;&amp; watchFile(obj);</div><div class="line">    obj.name = <span class="built_in">require</span>(obj.modulePath);</div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>由于使用node原生的fs.watch会出现文件变化监听不到的情况（其他一些问题见<a href="https://github.com/paulmillr/chokidar" target="_blank" rel="external">chokidar readme</a>）,<br>所以这里使用<code>chokidar</code>来实现对文件的监听。</p>
-<p>使用<code>wrapperRequire.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> wrapperRequire = <span class="built_in">require</span>(<span class="string">'./require'</span>);</span><br><span class="line"><span class="keyword">let</span> code = wrapperRequire(&#123;modulePath: <span class="string">'./code'</span>, <span class="string">'name'</span>: <span class="string">''</span>&#125;);</span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(code.name);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure></p>
-<p>测试文件 <code>code.js</code><br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span>.exports = <span class="symbol">'hello</span> world';</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>wrapperRequire.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// main.js</span></div><div class="line"><span class="keyword">const</span> wrapperRequire = <span class="built_in">require</span>(<span class="string">'./require'</span>);</div><div class="line"><span class="keyword">let</span> code = wrapperRequire(&#123;<span class="attr">modulePath</span>: <span class="string">'./code'</span>, <span class="string">'name'</span>: <span class="string">''</span>&#125;);</div><div class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(code.name);</div><div class="line">&#125;, <span class="number">1000</span>);</div></pre></td></tr></table></figure></p>
+<p>测试文件 <code>code.js</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = <span class="string">'hello world'</span>;</div></pre></td></tr></table></figure></p>
 <p>执行<code>main.js</code>然后更改<code>code.js</code>后也可以展示正确的结果。</p>
 <p>总结一下,以上实现的基础是:</p>
 <ol>
@@ -146,18 +141,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/09/22/angular项目中使用iframe相关问题/" title="angular项目中使用iframe相关问题">
+ <a href="/2016/07/25/event那些事/" title="event那些事">
   <strong>上一篇：</strong><br/>
   <span>
-  angular项目中使用iframe相关问题</span>
+  event那些事</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/07/25/event那些事/"  title="event那些事">
+<a href="/2016/09/22/angular项目中使用iframe相关问题/"  title="angular项目中使用iframe相关问题">
  <strong>下一篇：</strong><br/> 
- <span>event那些事
+ <span>angular项目中使用iframe相关问题
 </span>
 </a>
 </div>
@@ -195,19 +190,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -219,7 +210,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -227,7 +222,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -2,178 +2,220 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://xchb.work/2017/04/02/React-webpack2%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2017-04-02T03:19:47.000Z</lastmod>
+    <loc>http://xchb.work/2017/03/30/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    
+    <lastmod>2017-04-05T09:36:16.000Z</lastmod>
+    
   </url>
   
   <url>
-    <loc>http://xchb.work/2017/03/30/React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
-    <lastmod>2017-03-30T08:34:03.000Z</lastmod>
+    <loc>http://xchb.work/2017/04/02/React-webpack2%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    
+    <lastmod>2017-04-02T03:19:47.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2017/03/23/ES6%E4%B9%8BIteration/</loc>
+    
     <lastmod>2017-03-26T03:06:58.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2017/03/11/WebStorm%E4%B9%8BJSCS/</loc>
+    
     <lastmod>2017-03-12T08:50:41.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/about/index.html</loc>
+    
     <lastmod>2017-03-06T12:53:53.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xchb.work/tangshi.html</loc>
-    <lastmod>2017-03-06T12:50:19.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2017/03/02/async-validator%E4%BD%BF%E7%94%A8/</loc>
+    
     <lastmod>2017-03-06T12:48:21.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/tsdata.js</loc>
+    
     <lastmod>2017-03-03T13:56:48.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/07/25/event%E9%82%A3%E4%BA%9B%E4%BA%8B/</loc>
+    
     <lastmod>2017-02-27T13:07:12.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/09/27/Angular-%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+    
     <lastmod>2017-02-22T04:55:02.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2017/02/21/ES6%E4%B9%8BDestructuring/</loc>
+    
     <lastmod>2017-02-22T04:51:46.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2017/02/20/ES6%E4%B9%8BTemporal-Dead-Zone/</loc>
+    
     <lastmod>2017-02-22T04:48:39.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2017/02/06/TCP%E4%B8%89%E6%AD%A5%E6%8F%A1%E6%89%8B/</loc>
+    
     <lastmod>2017-02-06T13:55:47.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2017/02/03/Socket-io%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/</loc>
+    
     <lastmod>2017-02-03T08:21:17.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/11/29/nodejs-mongodb/</loc>
+    
     <lastmod>2016-11-29T12:20:16.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/11/10/%E7%BD%91%E9%A1%B5%E4%BB%A3%E7%90%86/</loc>
+    
     <lastmod>2016-11-11T13:37:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xchb.work/gtd.html</loc>
-    <lastmod>2016-11-08T02:33:48.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/09/30/nodejs%E4%BD%BF%E7%94%A8shebang/</loc>
+    
     <lastmod>2016-09-30T03:06:33.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/09/22/angular%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8iframe%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</loc>
+    
     <lastmod>2016-09-22T09:38:08.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/09/01/nodejs-web%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81%E7%83%AD%E6%9B%B4%E6%96%B0/</loc>
+    
     <lastmod>2016-09-01T09:25:48.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xchb.work/event.html</loc>
-    <lastmod>2016-07-25T17:21:01.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/07/21/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
+    
     <lastmod>2016-07-22T02:41:01.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/05/25/React-Todo%E7%A4%BA%E4%BE%8B/</loc>
+    
     <lastmod>2016-05-26T06:36:14.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/05/23/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/</loc>
+    
     <lastmod>2016-05-23T05:46:37.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2015/08/14/WebUploader%E4%BD%BF%E7%94%A8/</loc>
+    
     <lastmod>2016-05-17T06:10:17.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/05/17/Meta-%E6%95%B4%E7%90%86/</loc>
+    
     <lastmod>2016-05-17T06:10:10.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/03/04/%E4%B8%80%E9%94%AE%E6%94%B6%E8%97%8F%E7%BD%91%E5%9D%80%E8%87%B3Github/</loc>
+    
     <lastmod>2016-03-06T00:43:57.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2015/11/10/CentOS-%E5%AE%89%E8%A3%85nginx/</loc>
+    
     <lastmod>2016-02-23T11:53:25.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2015/12/01/Terminal-%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA/</loc>
+    
     <lastmod>2016-02-23T02:54:19.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2016/01/28/hexo%E4%B8%8A%E4%BC%A0%E6%BA%90%E6%96%87%E4%BB%B6/</loc>
+    
     <lastmod>2016-02-23T02:53:58.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2015/10/22/CSS3%E5%9B%BE%E6%A0%87%E6%94%B6%E9%9B%86%E5%92%8C%E6%95%B4%E7%90%86/</loc>
+    
     <lastmod>2016-02-23T02:53:47.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2015/08/24/CSS%E5%B1%85%E4%B8%AD%E6%98%BE%E7%A4%BA/</loc>
+    
     <lastmod>2016-02-23T02:53:33.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2015/11/09/CentOS%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%94%A8%E6%88%B7/</loc>
+    
     <lastmod>2016-02-23T02:50:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xchb.work/back.html</loc>
-    <lastmod>2016-01-28T09:13:31.000Z</lastmod>
+    
   </url>
   
   <url>
     <loc>http://xchb.work/2015/12/11/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%EF%BC%88JS%EF%BC%89/</loc>
+    
     <lastmod>2016-01-28T09:13:31.000Z</lastmod>
+    
   </url>
   
 </urlset>

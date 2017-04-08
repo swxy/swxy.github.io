@@ -11,25 +11,17 @@
     
 
     
-    <meta name="description" content="记录环境搭建过程中遇到的问题：
-
-No PostCSS Config found in
-react-hot-loader不更新页面">
+    <meta name="description" content="记录环境搭建过程中遇到的问题：  No PostCSS Config found in react-hot-loader不更新页面">
+<meta name="keywords" content="React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React+webpack2环境搭建">
 <meta property="og:url" content="http://xchb.work/2017/04/02/React-webpack2环境搭建/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="记录环境搭建过程中遇到的问题：
-
-No PostCSS Config found in
-react-hot-loader不更新页面">
+<meta property="og:description" content="记录环境搭建过程中遇到的问题：  No PostCSS Config found in react-hot-loader不更新页面">
 <meta property="og:updated_time" content="2017-04-02T03:19:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React+webpack2环境搭建">
-<meta name="twitter:description" content="记录环境搭建过程中遇到的问题：
-
-No PostCSS Config found in
-react-hot-loader不更新页面">
+<meta name="twitter:description" content="记录环境搭建过程中遇到的问题：  No PostCSS Config found in react-hot-loader不更新页面">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -41,7 +33,7 @@ react-hot-loader不更新页面">
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -110,15 +102,15 @@ react-hot-loader不更新页面">
 <a id="more"></a>
 <ol>
 <li><p><code>No PostCSS Config found in</code><br>使用<code>postcss</code>需要配置一个config文件，但是也可以不使用postcss，所以删除相关配置即可</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">test</span>:<span class="value"> /\.css$/,</span><br><span class="line">    use: [ <span class="string">'style-loader'</span>, <span class="string">'css-loader?modules'</span>, <span class="comment">/*'postcss-loader'*/</span>],</span><br><span class="line"></span></span></span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attribute">test</span>: /\.css$/,</div><div class="line">    use: [ <span class="string">'style-loader'</span>, <span class="string">'css-loader?modules'</span>, <span class="comment">/*'postcss-loader'*/</span>],</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>react-hot-loader</code>不更新页面<br>对应的<code>index.js</code>为：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;AppContainer&#125; <span class="keyword">from</span> <span class="string">'react-hot-loader'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Loop <span class="keyword">from</span> <span class="string">'./loop'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> render = (Component) =&gt; &#123;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="title">AppContainer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">Component</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">AppContainer</span>&gt;</span>,</span><br><span class="line">        document.getElementById('app')</span><br><span class="line">    );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">render(Loop);</span><br><span class="line"></span><br><span class="line">// 不更新页面</span><br><span class="line">if (module.hot) &#123;</span><br><span class="line">    module.hot.accept('./loop', () =&gt; &#123;</span><br><span class="line">        render(Loop);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123;AppContainer&#125; <span class="keyword">from</span> <span class="string">'react-hot-loader'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> Loop <span class="keyword">from</span> <span class="string">'./loop'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> render = <span class="function">(<span class="params">Component</span>) =&gt;</span> &#123;</div><div class="line">    ReactDOM.render(</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="name">AppContainer</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">Component</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">AppContainer</span>&gt;</span>,</div><div class="line">        <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>)</div><div class="line">    );</div><div class="line">&#125;;</div><div class="line"></div><div class="line">render(Loop);</div><div class="line"></div><div class="line"><span class="comment">// 不更新页面</span></div><div class="line"><span class="keyword">if</span> (<span class="built_in">module</span>.hot) &#123;</div><div class="line">    <span class="built_in">module</span>.hot.accept(<span class="string">'./loop'</span>, () =&gt; &#123;</div><div class="line">        render(Loop);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>改为：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">....</span><br><span class="line"><span class="keyword">if</span> (<span class="class"><span class="keyword">module</span>.<span class="title">hot</span>) &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">module</span>.<span class="title">hot</span>.<span class="title">accept</span>();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>或者：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">module</span>.hot) &#123;</span><br><span class="line">    <span class="built_in">module</span>.hot.accept(<span class="string">'./loop'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="regexp">//</span> 重新<span class="built_in">require</span></span><br><span class="line">        const NextLoop = <span class="built_in">require</span>(<span class="string">'./loop'</span>).default;</span><br><span class="line">        render(NextLoop);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="教程">教程</h1><ol>
+<p>改为：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">....</div><div class="line"><span class="keyword">if</span> (<span class="keyword">module</span>.hot) &#123;</div><div class="line">    <span class="keyword">module</span>.hot.accept();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>或者：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="built_in">module</span>.hot) &#123;</div><div class="line">    <span class="built_in">module</span>.hot.accept(<span class="string">'./loop'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="regexp">//</span> 重新<span class="built_in">require</span></div><div class="line">        const NextLoop = <span class="built_in">require</span>(<span class="string">'./loop'</span>).<span class="keyword">default</span>;</div><div class="line">        render(NextLoop);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><ol>
 <li><a href="https://webpack.js.org/guides/hmr-react/" target="_blank" rel="external">Hot Module Replacement - React</a></li>
 </ol>
   
@@ -151,14 +143,14 @@ react-hot-loader不更新页面">
 	
 <nav class="article-nav clearfix">
  
-
-<div class="next">
-<a href="/2017/03/30/React生命周期/"  title="React生命周期">
- <strong>下一篇：</strong><br/> 
- <span>React生命周期
-</span>
+ <div class="prev" >
+ <a href="/2017/03/30/React生命周期/" title="React生命周期">
+  <strong>上一篇：</strong><br/>
+  <span>
+  React生命周期</span>
 </a>
 </div>
+
 
 </nav>
 
@@ -193,19 +185,15 @@ react-hot-loader不更新页面">
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -217,7 +205,11 @@ react-hot-loader不更新页面">
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -225,7 +217,7 @@ react-hot-loader不更新页面">
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -11,20 +11,19 @@
     
 
     
-    <meta name="description" content="前端开发时，经常需要用代理工具Charles或者Fiddler来抓包，或修改接口或替换文件或查看提交数据等，都是非常方便。尤其是做移动端开发时，是不是经常得配置host，或者查看页面请求的数据是否正确，相信我，此时使用Charles的远程代理是一件很幸福的事情。
-当我们打开浏览器请求一个页面时候，为什么Charles就能捕获到请求？然而如果chrome使用了SwitchyOmega（配合shado">
+    <meta name="description" content="前端开发时，经常需要用代理工具Charles或者Fiddler来抓包，或修改接口或替换文件或查看提交数据等，都是非常方便。尤其是做移动端开发时，是不是经常得配置host，或者查看页面请求的数据是否正确，相信我，此时使用Charles的远程代理是一件很幸福的事情。 当我们打开浏览器请求一个页面时候，为什么Charles就能捕获到请求？然而如果chrome使用了SwitchyOmega（配合shado">
+<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网页代理">
 <meta property="og:url" content="http://xchb.work/2016/11/10/网页代理/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="前端开发时，经常需要用代理工具Charles或者Fiddler来抓包，或修改接口或替换文件或查看提交数据等，都是非常方便。尤其是做移动端开发时，是不是经常得配置host，或者查看页面请求的数据是否正确，相信我，此时使用Charles的远程代理是一件很幸福的事情。
-当我们打开浏览器请求一个页面时候，为什么Charles就能捕获到请求？然而如果chrome使用了SwitchyOmega（配合shado">
+<meta property="og:description" content="前端开发时，经常需要用代理工具Charles或者Fiddler来抓包，或修改接口或替换文件或查看提交数据等，都是非常方便。尤其是做移动端开发时，是不是经常得配置host，或者查看页面请求的数据是否正确，相信我，此时使用Charles的远程代理是一件很幸福的事情。 当我们打开浏览器请求一个页面时候，为什么Charles就能捕获到请求？然而如果chrome使用了SwitchyOmega（配合shado">
 <meta property="og:image" content="http://xchb.work/img/proxy/network.png">
 <meta property="og:updated_time" content="2016-11-11T13:37:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网页代理">
-<meta name="twitter:description" content="前端开发时，经常需要用代理工具Charles或者Fiddler来抓包，或修改接口或替换文件或查看提交数据等，都是非常方便。尤其是做移动端开发时，是不是经常得配置host，或者查看页面请求的数据是否正确，相信我，此时使用Charles的远程代理是一件很幸福的事情。
-当我们打开浏览器请求一个页面时候，为什么Charles就能捕获到请求？然而如果chrome使用了SwitchyOmega（配合shado">
+<meta name="twitter:description" content="前端开发时，经常需要用代理工具Charles或者Fiddler来抓包，或修改接口或替换文件或查看提交数据等，都是非常方便。尤其是做移动端开发时，是不是经常得配置host，或者查看页面请求的数据是否正确，相信我，此时使用Charles的远程代理是一件很幸福的事情。 当我们打开浏览器请求一个页面时候，为什么Charles就能捕获到请求？然而如果chrome使用了SwitchyOmega（配合shado">
+<meta name="twitter:image" content="http://xchb.work/img/proxy/network.png">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -36,7 +35,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -105,15 +104,15 @@
 <p>我明明没有设置过这个东西啊，看着<code>8888</code>这个端口号好熟悉啊，额，这个不就是Charles代理设置里面默认的端口号嘛。于是好像突然明白了，Charles是通过这个来监听网页请求，然后抓包，然后就可以对请求进行修改请求参数，断点调试等。</p>
 <p>然后再次正常打开Charles，然后正常关闭，果然网页代理设置没有，非chrome浏览器也可以正常联网了。如果打开Charles，手动把代理设置取消，Charles也捕获不了请求了。</p>
 <p>既然Charles可以通过设置网络代理来捕获请求，那是否可以自己写一个服务器也实现同样的功能呢？</p>
-<p>首先创建一个简单的node服务器：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="params">(req, res)</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.url);</span><br><span class="line">    res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</span><br><span class="line">    res.end(<span class="string">'it work'</span>);</span><br><span class="line">&#125;).listen(<span class="number">1338</span>, <span class="string">'127.0.0.1'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server start at 127.0.0.1:1338'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>首先创建一个简单的node服务器：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">const http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"></div><div class="line">http.createServer(<span class="function"><span class="params">(req, res)</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(req.url);</div><div class="line">    res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</div><div class="line">    res.end(<span class="string">'it work'</span>);</div><div class="line">&#125;).listen(<span class="number">1338</span>, <span class="string">'127.0.0.1'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'server start at 127.0.0.1:1338'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>然后启动服务器，顺便设置网络的网页代理为服务器的地址<code>127.0.0.1:1338</code>;接下来访问一个http地址(<a href="http://www.csdn.net/" target="_blank" rel="external">csdn</a>)，因为设置网页代理，当然也可以设置安全网页代理。页面如期待的那样出现了<code>it work</code>。</p>
 <p>代理服务器已经搭建好，但怎么像Charles一样能正常返回请求的页面？</p>
-<p>万事开头难，开头了，其实后面确实也就简单了很多。有疑问，但知道具体想做什么，百度一下，不就什么都知道了嘛。参考<a href="https://imququ.com/post/web-proxy.html" target="_blank" rel="external">HTTP 代理原理及实现（一）</a>修改一下源码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line">http.createServer((req, res) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.url);</span><br><span class="line">    <span class="keyword">const</span> u = url.parse(req.url);</span><br><span class="line">    <span class="keyword">var</span> options = &#123;</span><br><span class="line">        hostname : u.hostname,</span><br><span class="line">        port     : u.port || <span class="number">80</span>,</span><br><span class="line">        path     : u.path,</span><br><span class="line">        method   : req.method,</span><br><span class="line">        headers  : req.headers</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> pReq = http.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">pRes</span>) </span>&#123;</span><br><span class="line">        res.writeHead(pRes.statusCode, pRes.headers);</span><br><span class="line">        pRes.pipe(res);</span><br><span class="line">    &#125;).on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        res.end();</span><br><span class="line">    &#125;);</span><br><span class="line">    req.pipe(pReq);</span><br><span class="line">&#125;).listen(<span class="number">1338</span>, <span class="string">'127.0.0.1'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server start at 127.0.0.1:1338'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>万事开头难，开头了，其实后面确实也就简单了很多。有疑问，但知道具体想做什么，百度一下，不就什么都知道了嘛。参考<a href="https://imququ.com/post/web-proxy.html" target="_blank" rel="external">HTTP 代理原理及实现（一）</a>修改一下源码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line">http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(req.url);</div><div class="line">    <span class="keyword">const</span> u = url.parse(req.url);</div><div class="line">    <span class="keyword">var</span> options = &#123;</div><div class="line">        <span class="attr">hostname</span> : u.hostname,</div><div class="line">        <span class="attr">port</span>     : u.port || <span class="number">80</span>,</div><div class="line">        <span class="attr">path</span>     : u.path,</div><div class="line">        <span class="attr">method</span>   : req.method,</div><div class="line">        <span class="attr">headers</span>  : req.headers</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">var</span> pReq = http.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">pRes</span>) </span>&#123;</div><div class="line">        res.writeHead(pRes.statusCode, pRes.headers);</div><div class="line">        pRes.pipe(res);</div><div class="line">    &#125;).on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        res.end();</div><div class="line">    &#125;);</div><div class="line">    req.pipe(pReq);</div><div class="line">&#125;).listen(<span class="number">1338</span>, <span class="string">'127.0.0.1'</span>, () =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'server start at 127.0.0.1:1338'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>顺利完成http代理，不信你再访问<a href="http://www.csdn.net/" target="_blank" rel="external">csdn</a>试试，没有出现页面就是csdn挂了。至于https的可以参考<a href="https://imququ.com/post/web-proxy.html" target="_blank" rel="external">HTTP 代理原理及实现（一）</a>里面有详细的介绍Http代理相关的知识。</p>
-<p>嗯嗯，http代理完成了，但是还有个问题啊，为什么上面通过解析<code>req.url</code>就能获取请求的目标地址，而自己想写一个脚本访问CSDN：<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = require(<span class="string">"http"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    host: <span class="string">"localhost"</span>,</span><br><span class="line">    port: <span class="number">1338</span>,</span><br><span class="line">    <span class="keyword">method</span>: '<span class="type">GET</span>'</span><br><span class="line">&#125;;</span><br><span class="line">http.request(options, function(res) &#123;</span><br><span class="line">    res.pipe(process.<span class="literal">stdout</span>);</span><br><span class="line">&#125;).<span class="keyword">end</span>();</span><br></pre></td></tr></table></figure></p>
+<p>嗯嗯，http代理完成了，但是还有个问题啊，为什么上面通过解析<code>req.url</code>就能获取请求的目标地址，而自己想写一个脚本访问CSDN：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">    <span class="attr">host</span>: <span class="string">"localhost"</span>,</div><div class="line">    <span class="attr">port</span>: <span class="number">1338</span>,</div><div class="line">    <span class="attr">method</span>: <span class="string">'GET'</span></div><div class="line">&#125;;</div><div class="line">http.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">    res.pipe(process.stdout);</div><div class="line">&#125;).end();</div></pre></td></tr></table></figure></p>
 <p>遍观<a href="https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_http_get_options_callback" target="_blank" rel="external">nodejs官网http.request</a>的可选参数, 都没有提到如何设置。不知道又想不明白，能咋办，上网找呗。</p>
-<p>在stackoverflow上找到了一个解决方案，<a href="http://stackoverflow.com/questions/3862813/how-can-i-use-an-http-proxy-with-node-js-http-client" target="_blank" rel="external">传送–&gt;How can I use an http proxy with node.js http.Client</a>给的方案是设置<code>path</code>:<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = require(<span class="string">"http"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    host: <span class="string">"localhost"</span>,</span><br><span class="line">    port: <span class="number">1338</span>,</span><br><span class="line">    <span class="keyword">method</span>: '<span class="type">GET</span>',</span><br><span class="line">    path: <span class="string">"http://www.csdn.net"</span>,</span><br><span class="line">    headers: &#123;</span><br><span class="line">       <span class="type">Host</span>: <span class="string">"www.csdn.net"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">http.request(options, function(res) &#123;</span><br><span class="line">    res.pipe(process.<span class="literal">stdout</span>);</span><br><span class="line">&#125;).<span class="keyword">end</span>();</span><br></pre></td></tr></table></figure></p>
-<p>仔细想像好像真的是这么回事啊，如果不设置<code>path</code>,服务器默端的<code>req.url</code>就是个<code>/</code>，这个不就是默认的<code>path</code>的值嘛。至于设置<code>headers</code>里面的<code>Host</code>, 如果不设置会默认为<code>localhost:1338</code>，也就是请求的服务器的host，这样获得的是一个403页面，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span><span class="tag">&lt;<span class="title">title</span>&gt;</span>403 Forbidden<span class="tag">&lt;/<span class="title">title</span>&gt;</span><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">bgcolor</span>=<span class="value">"white"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">center</span>&gt;</span><span class="tag">&lt;<span class="title">h1</span>&gt;</span>403 Forbidden<span class="tag">&lt;/<span class="title">h1</span>&gt;</span><span class="tag">&lt;/<span class="title">center</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">hr</span>&gt;</span><span class="tag">&lt;<span class="title">center</span>&gt;</span>nginx<span class="tag">&lt;/<span class="title">center</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在stackoverflow上找到了一个解决方案，<a href="http://stackoverflow.com/questions/3862813/how-can-i-use-an-http-proxy-with-node-js-http-client" target="_blank" rel="external">传送–&gt;How can I use an http proxy with node.js http.Client</a>给的方案是设置<code>path</code>:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">    <span class="attr">host</span>: <span class="string">"localhost"</span>,</div><div class="line">    <span class="attr">port</span>: <span class="number">1338</span>,</div><div class="line">    <span class="attr">method</span>: <span class="string">'GET'</span>,</div><div class="line">    <span class="attr">path</span>: <span class="string">"http://www.csdn.net"</span>,</div><div class="line">    <span class="attr">headers</span>: &#123;</div><div class="line">       <span class="attr">Host</span>: <span class="string">"www.csdn.net"</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">http.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">    res.pipe(process.stdout);</div><div class="line">&#125;).end();</div></pre></td></tr></table></figure></p>
+<p>仔细想像好像真的是这么回事啊，如果不设置<code>path</code>,服务器默端的<code>req.url</code>就是个<code>/</code>，这个不就是默认的<code>path</code>的值嘛。至于设置<code>headers</code>里面的<code>Host</code>, 如果不设置会默认为<code>localhost:1338</code>，也就是请求的服务器的host，这样获得的是一个403页面，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>403 Forbidden<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">bgcolor</span>=<span class="string">"white"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">center</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>403 Forbidden<span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">center</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span><span class="tag">&lt;<span class="name">center</span>&gt;</span>nginx<span class="tag">&lt;/<span class="name">center</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>参考：</p>
 <ol>
 <li><a href="https://imququ.com/post/web-proxy.html" target="_blank" rel="external">HTTP 代理原理及实现（一）</a></li>
@@ -145,18 +144,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/11/29/nodejs-mongodb/" title="nodejs mongodb">
+ <a href="/2016/09/30/nodejs使用shebang/" title="nodejs使用shebang">
   <strong>上一篇：</strong><br/>
   <span>
-  nodejs mongodb</span>
+  nodejs使用shebang</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/09/30/nodejs使用shebang/"  title="nodejs使用shebang">
+<a href="/2016/11/29/nodejs-mongodb/"  title="nodejs mongodb">
  <strong>下一篇：</strong><br/> 
- <span>nodejs使用shebang
+ <span>nodejs mongodb
 </span>
 </a>
 </div>
@@ -194,19 +193,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -218,7 +213,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -226,7 +225,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

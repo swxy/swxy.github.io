@@ -11,43 +11,17 @@
     
 
     
-    <meta name="description" content="记录一下nodejs配置mongodb的过程：
-
-mac上安装mongodb:
-1brew install mongodb
-
-创建一个存在数据目录
-1mkdir -p ~/data/db
-
-在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录
-1mongod --dbpath=./data/db">
+    <meta name="description" content="记录一下nodejs配置mongodb的过程：  mac上安装mongodb: 1brew install mongodb  创建一个存在数据目录 1mkdir -p ~/data/db  在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录 1mongod --dbpath=./data/db">
+<meta name="keywords" content="nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nodejs mongodb">
 <meta property="og:url" content="http://xchb.work/2016/11/29/nodejs-mongodb/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="记录一下nodejs配置mongodb的过程：
-
-mac上安装mongodb:
-1brew install mongodb
-
-创建一个存在数据目录
-1mkdir -p ~/data/db
-
-在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录
-1mongod --dbpath=./data/db">
+<meta property="og:description" content="记录一下nodejs配置mongodb的过程：  mac上安装mongodb: 1brew install mongodb  创建一个存在数据目录 1mkdir -p ~/data/db  在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录 1mongod --dbpath=./data/db">
 <meta property="og:updated_time" content="2016-11-29T12:20:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodejs mongodb">
-<meta name="twitter:description" content="记录一下nodejs配置mongodb的过程：
-
-mac上安装mongodb:
-1brew install mongodb
-
-创建一个存在数据目录
-1mkdir -p ~/data/db
-
-在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录
-1mongod --dbpath=./data/db">
+<meta name="twitter:description" content="记录一下nodejs配置mongodb的过程：  mac上安装mongodb: 1brew install mongodb  创建一个存在数据目录 1mkdir -p ~/data/db  在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录 1mongod --dbpath=./data/db">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -59,7 +33,7 @@ mac上安装mongodb:
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -123,20 +97,20 @@ mac上安装mongodb:
 		<p>记录一下nodejs配置mongodb的过程：</p>
 <ol>
 <li><p>mac上安装mongodb:</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>install mongodb</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>mongodb</div></pre></td></tr></table></figure>
 </li>
 <li><p>创建一个存在数据目录</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mkdir</span> -p ~/<span class="typedef"><span class="keyword">data</span>/db</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">mkdir</span> -p ~/<span class="class"><span class="keyword">data</span>/db</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>在用户根目录运行mongodb，指定数据存在路径为刚刚新建的目录</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod <span class="comment">--dbpath=./data/db</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod <span class="comment">--dbpath=./data/db</span></div></pre></td></tr></table></figure>
 <a id="more"></a>
 </li>
 <li><p>安装nodejs驱动程序mongodb和mongoose</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> mongoose mongodb</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> mongoose mongodb</div></pre></td></tr></table></figure>
 </li>
 <li><p>连接mongodb：</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/todo'</span>);</span><br><span class="line"></span><br><span class="line">mongoose.connection.<span class="literal">on</span>(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err);</span><br><span class="line">&#125;).<span class="literal">on</span>(<span class="string">'open'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'connected'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">const mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</div><div class="line"></div><div class="line">mongoose.connect(<span class="string">'mongodb://localhost/todo'</span>);</div><div class="line"></div><div class="line">mongoose.connection.<span class="literal">on</span>(<span class="string">'error'</span>, err =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.error(err);</div><div class="line">&#125;).<span class="literal">on</span>(<span class="string">'open'</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'connected'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>其他：</p>
@@ -172,18 +146,18 @@ mac上安装mongodb:
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/02/03/Socket-io问题分析/" title="Socket.io问题分析">
+ <a href="/2016/11/10/网页代理/" title="网页代理">
   <strong>上一篇：</strong><br/>
   <span>
-  Socket.io问题分析</span>
+  网页代理</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/11/10/网页代理/"  title="网页代理">
+<a href="/2017/02/03/Socket-io问题分析/"  title="Socket.io问题分析">
  <strong>下一篇：</strong><br/> 
- <span>网页代理
+ <span>Socket.io问题分析
 </span>
 </a>
 </div>
@@ -221,19 +195,15 @@ mac上安装mongodb:
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -245,7 +215,11 @@ mac上安装mongodb:
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -253,7 +227,7 @@ mac上安装mongodb:
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>representing html</title>
+    <script src="./dom.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<button id="add">add item</button>
+<button id="remove">remove item</button>
+<button id="replace">replace item</button>
+<script>
+    window.onload = function (e) {
+        let $root = document.querySelector('#root');
+        let children = [h('li', null, 'item 1'), h('li', null, 'item 2')];
+        let list = h('ul', null, ...children);
+        updateElement($root, list);
+
+        document.body.addEventListener('click', function(e) {
+            let target = e.target;
+            if (target.tagName === 'BUTTON') {
+                let newNode;
+                switch (target.id) {
+                    case 'add':
+                        let idx = children.length + 1;
+                        children.push(h('li', null, 'item ' + idx));
+                        newNode = h('ul', null, ...children);
+                        break;
+                    case 'remove':
+                        children.pop();
+                        newNode = h('ul', null, ...children);
+                        break;
+                    case 'replace':
+                        children.shift();
+                        children.unshift(h('li', null, 'item ' + (+new Date)));
+                        newNode = h('ul', null, ...children);
+                        break;
+                }
+                updateElement($root, newNode, list);
+                list = newNode;
+            }
+        })
+    }
+</script>
+</body>
+</html>

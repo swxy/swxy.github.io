@@ -11,25 +11,17 @@
     
 
     
-    <meta name="description" content="探索问题：
-
-TCP建立连接为什么要三步握手
-建立连接时发送的SEQ, ACK是什么">
+    <meta name="description" content="探索问题：  TCP建立连接为什么要三步握手 建立连接时发送的SEQ, ACK是什么">
+<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP三步握手">
 <meta property="og:url" content="http://xchb.work/2017/02/06/TCP三步握手/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="探索问题：
-
-TCP建立连接为什么要三步握手
-建立连接时发送的SEQ, ACK是什么">
+<meta property="og:description" content="探索问题：  TCP建立连接为什么要三步握手 建立连接时发送的SEQ, ACK是什么">
 <meta property="og:updated_time" content="2017-02-06T13:55:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP三步握手">
-<meta name="twitter:description" content="探索问题：
-
-TCP建立连接为什么要三步握手
-建立连接时发送的SEQ, ACK是什么">
+<meta name="twitter:description" content="探索问题：  TCP建立连接为什么要三步握手 建立连接时发送的SEQ, ACK是什么">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -41,7 +33,7 @@ TCP建立连接为什么要三步握手
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -108,24 +100,24 @@ TCP建立连接为什么要三步握手
 <li>建立连接时发送的SEQ, ACK是什么</li>
 </ol>
 <a id="more"></a>
-<h1 id="三步握手">三步握手</h1><p>握手主要原因：在不可靠的网络之上提供可靠的服务。</p>
+<h1 id="三步握手"><a href="#三步握手" class="headerlink" title="三步握手"></a>三步握手</h1><p>握手主要原因：在不可靠的网络之上提供可靠的服务。</p>
 <p>在Andrew S.Tanenbaum的经典书籍《计算机网络》第5版的「6.2.2 连接建立」小节有很详细的说明：</p>
 <p>首先，因为网络有可能会出现延迟或者重复数据包的时候，所以在连接的建立时，每个数据包都会有一个序号，以解决如何区分重复数据包的问题。</p>
 <p>然而，这样还是会有问题，《计算机网络》中说的是『数据包的接受者通常不会去保存连接的序号，所以无法区分CONNECTION REQUEST中的初始序号是否和当前连接的序号重复。』我对这句话的理解：</p>
-<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">HOST1</span>                      <span class="comment">HOST2</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=x)</span>          <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>       </span><br><span class="line"></span><br><span class="line">  <span class="comment">|</span> &lt;<span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=Y)</span>          <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=x</span><span class="string">,</span> <span class="comment">ACK=y</span><span class="literal">+</span><span class="comment">1)</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">|</span> &lt;<span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=y</span><span class="string">,</span> <span class="comment">ACK=x</span><span class="literal">+</span><span class="comment">1)</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">HOST1</span>                      <span class="comment">HOST2</span></div><div class="line"></div><div class="line">  <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=x)</span>          <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>       </div><div class="line"></div><div class="line">  <span class="comment">|</span> &lt;<span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=Y)</span>          <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span></div><div class="line"></div><div class="line">  <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=x</span><span class="string">,</span> <span class="comment">ACK=y</span><span class="literal">+</span><span class="comment">1)</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span></div><div class="line"></div><div class="line">  <span class="comment">|</span> &lt;<span class="literal">-</span><span class="literal">-</span> <span class="comment">SYN(SEQ=y</span><span class="string">,</span> <span class="comment">ACK=x</span><span class="literal">+</span><span class="comment">1)</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">|</span></div></pre></td></tr></table></figure>
 <p>此时建立的连接应该是一个，而不是两个，因为所有的连接都是有它们的端点（由TCP的端口加上所在主机的IP地址组成「6.5.4 TCP端的头」小节有介绍）来标识的。第一个请求产生了一个由（x,y）标识的连接，而第二个请求也建立一个这样的连接，实际上只有一个表项，即(x,y)。</p>
 <p>针对上述问题，引入了三步握手协议。这个协议要求在建立连接时，一方需要和另一方确认连接请求是否是当前的。即 A -SYN(SEQ=x)-&gt; B; B -SYN(SEQ=y, ACK=x+1)-&gt;A; A -DATA(SEQ=x+1,ACK=y+1)-&gt; B。</p>
 <p>当然三步握手也不是绝对可靠，因为请求只能保证之前的传输是可靠，但不能预测接下来的也正确，在知乎上看到一个回答可以参考<a href="https://www.zhihu.com/question/24853633" target="_blank" rel="external">TCP 为什么是三次握手，为什么不是两次或四次？</a>, 为了方便阅读，引用至此：</p>
 <blockquote>
 <p>这个问题的本质是, 信道不可靠, 但是通信双发需要就某个问题达成一致. 而要解决这个问题,  无论你在消息中包含什么信息, 三次通信是理论上的最小值. 所以三次握手不是TCP本身的要求, 而是为了满足”在不可靠信道上可靠地传输信息”这一需求所导致的. 请注意这里的本质需求,信道不可靠, 数据传输要可靠. 三次达到了, 那后面你想接着握手也好, 发数据也好, 跟进行可靠信息传输的需求就没关系了. 因此,如果信道是可靠的, 即无论什么时候发出消息, 对方一定能收到, 或者你不关心是否要保证对方收到你的消息, 那就能像UDP那样直接发送消息就可以了.”</p>
 </blockquote>
-<h1 id="字段说明">字段说明</h1><ol>
+<h1 id="字段说明"><a href="#字段说明" class="headerlink" title="字段说明"></a>字段说明</h1><ol>
 <li><p>SEQ，初始序号。在一个时间周期T（互联网比较随意的定为120s，看具体实现）内，这个序号应该是唯一的。</p>
 </li>
 <li><p>ACK, SEQ+1. 表示确认序号SEQ的请求，TCP确认数据包的机制。</p>
 </li>
 </ol>
-<h1 id="参考">参考</h1><ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li>《计算机网络》 by Andrew S.Tanenbaum</li>
 <li><a href="https://www.zhihu.com/question/24853633" target="_blank" rel="external">TCP 为什么是三次握手，为什么不是两次或四次？</a></li>
 <li><a href="http://blog.csdn.net/wjtxt/article/details/6606022" target="_blank" rel="external">TCP报文到达确认（ACK）机制</a></li>
@@ -156,18 +148,18 @@ TCP建立连接为什么要三步握手
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/02/20/ES6之Temporal-Dead-Zone/" title="ES6之Temporal Dead Zone">
+ <a href="/2017/02/03/Socket-io问题分析/" title="Socket.io问题分析">
   <strong>上一篇：</strong><br/>
   <span>
-  ES6之Temporal Dead Zone</span>
+  Socket.io问题分析</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/02/03/Socket-io问题分析/"  title="Socket.io问题分析">
+<a href="/2017/02/20/ES6之Temporal-Dead-Zone/"  title="ES6之Temporal Dead Zone">
  <strong>下一篇：</strong><br/> 
- <span>Socket.io问题分析
+ <span>ES6之Temporal Dead Zone
 </span>
 </a>
 </div>
@@ -205,19 +197,15 @@ TCP建立连接为什么要三步握手
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -229,7 +217,11 @@ TCP建立连接为什么要三步握手
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -237,7 +229,7 @@ TCP建立连接为什么要三步握手
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

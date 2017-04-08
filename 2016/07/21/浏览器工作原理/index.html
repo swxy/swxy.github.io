@@ -11,22 +11,13 @@
     
 
     
-    <meta name="description" content="整理和收集一下浏览器渲染原理。
-解析和展示html流程
-首先下载html文件
-解析html，构建dom树
-和css结合生成渲染树
-绘制并展示页面">
+    <meta name="description" content="整理和收集一下浏览器渲染原理。 解析和展示html流程 首先下载html文件 解析html，构建dom树 和css结合生成渲染树 绘制并展示页面">
+<meta name="keywords" content="Web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器工作原理">
 <meta property="og:url" content="http://xchb.work/2016/07/21/浏览器工作原理/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="整理和收集一下浏览器渲染原理。
-解析和展示html流程
-首先下载html文件
-解析html，构建dom树
-和css结合生成渲染树
-绘制并展示页面">
+<meta property="og:description" content="整理和收集一下浏览器渲染原理。 解析和展示html流程 首先下载html文件 解析html，构建dom树 和css结合生成渲染树 绘制并展示页面">
 <meta property="og:image" content="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/flow.png">
 <meta property="og:image" content="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/webkitflow.png">
 <meta property="og:image" content="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/image008.jpg">
@@ -34,12 +25,8 @@
 <meta property="og:updated_time" content="2016-07-22T02:41:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器工作原理">
-<meta name="twitter:description" content="整理和收集一下浏览器渲染原理。
-解析和展示html流程
-首先下载html文件
-解析html，构建dom树
-和css结合生成渲染树
-绘制并展示页面">
+<meta name="twitter:description" content="整理和收集一下浏览器渲染原理。 解析和展示html流程 首先下载html文件 解析html，构建dom树 和css结合生成渲染树 绘制并展示页面">
+<meta name="twitter:image" content="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/flow.png">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -51,7 +38,7 @@
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -113,7 +100,7 @@
 	<div class="article-content">
 		
 		<p>整理和收集一下浏览器渲染原理。</p>
-<h2 id="解析和展示html流程">解析和展示html流程</h2><ol>
+<h2 id="解析和展示html流程"><a href="#解析和展示html流程" class="headerlink" title="解析和展示html流程"></a>解析和展示html流程</h2><ol>
 <li>首先下载html文件</li>
 <li>解析html，构建dom树</li>
 <li>和css结合生成渲染树</li>
@@ -124,8 +111,8 @@
 <p><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/webkitflow.png" alt="Webkit"></p>
 <p><img src="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/image008.jpg" alt="Gecko"></p>
 <p><a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="external">图片来源:http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/</a></p>
-<h2 id="CSSOM和DOM组合_-&gt;_render_tree_（渲染树）">CSSOM和DOM组合 -&gt; render tree （渲染树）</h2><p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/render-tree-construction.png" alt="combile CSSOM and DOM"><br><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">图片来源：https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction</a></p>
-<h2 id="相关文章：">相关文章：</h2><ol>
+<h2 id="CSSOM和DOM组合-gt-render-tree-（渲染树）"><a href="#CSSOM和DOM组合-gt-render-tree-（渲染树）" class="headerlink" title="CSSOM和DOM组合 -&gt; render tree （渲染树）"></a>CSSOM和DOM组合 -&gt; render tree （渲染树）</h2><p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/render-tree-construction.png" alt="combile CSSOM and DOM"><br><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">图片来源：https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction</a></p>
+<h2 id="相关文章："><a href="#相关文章：" class="headerlink" title="相关文章："></a>相关文章：</h2><ol>
 <li><a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="external">浏览器工作原理</a></li>
 <li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="external">How browsers work</a></li>
 <li><a href="https://css-tricks.com/efficiently-rendering-css/" target="_blank" rel="external">EfficientlyRendering CSS</a></li>
@@ -165,18 +152,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/07/25/event那些事/" title="event那些事">
+ <a href="/2016/05/25/React-Todo示例/" title="React-Todo示例">
   <strong>上一篇：</strong><br/>
   <span>
-  event那些事</span>
+  React-Todo示例</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/05/25/React-Todo示例/"  title="React-Todo示例">
+<a href="/2016/07/25/event那些事/"  title="event那些事">
  <strong>下一篇：</strong><br/> 
- <span>React-Todo示例
+ <span>event那些事
 </span>
 </a>
 </div>
@@ -191,7 +178,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#解析和展示html流程"><span class="toc-number">1.</span> <span class="toc-text">解析和展示html流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSSOM和DOM组合_->_render_tree_（渲染树）"><span class="toc-number">2.</span> <span class="toc-text">CSSOM和DOM组合 -> render tree （渲染树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关文章："><span class="toc-number">3.</span> <span class="toc-text">相关文章：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#解析和展示html流程"><span class="toc-number">1.</span> <span class="toc-text">解析和展示html流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSSOM和DOM组合-gt-render-tree-（渲染树）"><span class="toc-number">2.</span> <span class="toc-text">CSSOM和DOM组合 -> render tree （渲染树）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关文章："><span class="toc-number">3.</span> <span class="toc-text">相关文章：</span></a></li></ol>
  
   </div>
 
@@ -214,19 +201,15 @@
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -238,7 +221,11 @@
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -246,7 +233,7 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>

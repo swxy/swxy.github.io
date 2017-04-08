@@ -11,25 +11,17 @@
     
 
     
-    <meta name="description" content="探索问题：
-
-React生命周期有哪些，各自在什么阶段触发
-哪些阶段可以使用setState">
+    <meta name="description" content="探索问题：  React生命周期有哪些，各自在什么阶段触发 哪些阶段可以使用重新设置状态，例如使用setState">
+<meta name="keywords" content="React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React生命周期">
 <meta property="og:url" content="http://xchb.work/2017/03/30/React生命周期/index.html">
 <meta property="og:site_name" content="学习是一种信仰">
-<meta property="og:description" content="探索问题：
-
-React生命周期有哪些，各自在什么阶段触发
-哪些阶段可以使用setState">
-<meta property="og:updated_time" content="2017-03-30T08:34:03.000Z">
+<meta property="og:description" content="探索问题：  React生命周期有哪些，各自在什么阶段触发 哪些阶段可以使用重新设置状态，例如使用setState">
+<meta property="og:updated_time" content="2017-04-05T09:36:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React生命周期">
-<meta name="twitter:description" content="探索问题：
-
-React生命周期有哪些，各自在什么阶段触发
-哪些阶段可以使用setState">
+<meta name="twitter:description" content="探索问题：  React生命周期有哪些，各自在什么阶段触发 哪些阶段可以使用重新设置状态，例如使用setState">
 
     
     <link rel="alternative" href="/atom.xml" title="学习是一种信仰" type="application/atom+xml">
@@ -41,7 +33,7 @@ React生命周期有哪些，各自在什么阶段触发
     <link rel="apple-touch-icon" href="/img/piggy.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/piggy.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
   <body>
@@ -105,20 +97,27 @@ React生命周期有哪些，各自在什么阶段触发
 		<p>探索问题：</p>
 <ol>
 <li>React生命周期有哪些，各自在什么阶段触发</li>
-<li>哪些阶段可以使用<code>setState</code></li>
+<li>哪些阶段可以使用重新设置状态，例如使用<code>setState</code></li>
 </ol>
 <a id="more"></a>
-<h1 id="生命周期">生命周期</h1><p>React的生命周期可以分为四个阶段：初始化(initialization)，挂载(mounting)，更新(updating)，销毁(unmounting)</p>
-<h2 id="初始化(initialization)">初始化(initialization)</h2><h3 id="getDefaultProps">getDefaultProps</h3><p>如果没有传递<code>props</code>, 会使用<code>getDefaultProps</code>返回的对象</p>
-<h3 id="getInitialState">getInitialState</h3><p>初始化<code>state</code>，在ES6中可以直接使用<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Input extend Component &#123;</span><br><span class="line">    <span class="constructor"><span class="keyword">constructor</span>(props) </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            txt: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 或者直接赋值</span></span><br><span class="line">    state = &#123;</span><br><span class="line">        txt: <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="挂载(mounting)">挂载(mounting)</h2><h3 id="componentWillUpdate">componentWillUpdate</h3><p>在<code>render</code>之前执行，可以处理一下业务逻辑相关的操作</p>
-<h3 id="render">render</h3><p>首次渲染到DOM中</p>
-<h3 id="componentDidMount">componentDidMount</h3><p>在<code>render</code>之后执行，此时可以获取dom元素，可以初始化一些dom操作相关</p>
-<h2 id="更新(updating)">更新(updating)</h2><h3 id="componentWillReceiveProps">componentWillReceiveProps</h3><p>如果父级组件传递下来的<code>props</code>发生变化时，会被触发</p>
-<h3 id="componentWillUpdate-1">componentWillUpdate</h3><p>可以通过返回值来决定是否需要重新渲染改组件，可以用于做一些性能优化</p>
-<h3 id="render-1">render</h3><p>组件<code>state</code>或者<code>props</code>发生变化时，重新渲染组件</p>
-<h3 id="componentDidUpdate">componentDidUpdate</h3><p>组件状态已经更新到dom上，作用</p>
-<h2 id="销毁(unmounting)">销毁(unmounting)</h2><h1 id="参考">参考</h1><ol>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>React的生命周期可以分为四个阶段：初始化(initialization)，挂载(mounting)，更新(updating)，销毁(unmounting)</p>
+<h2 id="初始化-initialization"><a href="#初始化-initialization" class="headerlink" title="初始化(initialization)"></a>初始化(initialization)</h2><h3 id="getDefaultProps"><a href="#getDefaultProps" class="headerlink" title="getDefaultProps"></a>getDefaultProps</h3><p>如果没有传递<code>props</code>, 会使用<code>getDefaultProps</code>返回的对象</p>
+<h3 id="getInitialState"><a href="#getInitialState" class="headerlink" title="getInitialState"></a>getInitialState</h3><p>初始化<code>state</code>，在ES6中可以直接使用<br><figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Input extend Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props);</div><div class="line">        this.<span class="keyword">state</span> = &#123;</div><div class="line">            txt: ''</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    // 或者直接赋值</div><div class="line">    <span class="keyword">state</span> = &#123;</div><div class="line">        txt: ''</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="挂载-mounting"><a href="#挂载-mounting" class="headerlink" title="挂载(mounting)"></a>挂载(mounting)</h2><h3 id="componentWillUpdate"><a href="#componentWillUpdate" class="headerlink" title="componentWillUpdate"></a>componentWillUpdate</h3><p>在<code>render</code>之前执行，可以处理一下业务逻辑相关的操作</p>
+<h3 id="render"><a href="#render" class="headerlink" title="render"></a>render</h3><p>首次渲染到DOM中</p>
+<h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h3><p>在<code>render</code>之后执行，此时可以获取dom元素，可以初始化一些dom操作相关</p>
+<h2 id="更新-updating"><a href="#更新-updating" class="headerlink" title="更新(updating)"></a>更新(updating)</h2><h3 id="componentWillReceiveProps"><a href="#componentWillReceiveProps" class="headerlink" title="componentWillReceiveProps"></a>componentWillReceiveProps</h3><p>如果父级组件传递下来的<code>props</code>发生变化时，会被触发</p>
+<h3 id="componentWillUpdate-1"><a href="#componentWillUpdate-1" class="headerlink" title="componentWillUpdate"></a>componentWillUpdate</h3><p>可以通过返回值来决定是否需要重新渲染改组件，可以用于做一些性能优化</p>
+<h3 id="render-1"><a href="#render-1" class="headerlink" title="render"></a>render</h3><p>组件<code>state</code>或者<code>props</code>发生变化时，重新渲染组件</p>
+<h3 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h3><p>组件状态已经更新到dom上，此时可以执行一些dom相关的操作</p>
+<h2 id="销毁-unmounting"><a href="#销毁-unmounting" class="headerlink" title="销毁(unmounting)"></a>销毁(unmounting)</h2><h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h3><p>组件从dom中销毁时会触发，用于执行一些清理</p>
+<h1 id="重设状态"><a href="#重设状态" class="headerlink" title="重设状态"></a>重设状态</h1><p>一般state用于描述组件的状态，而prop表示父级组件传递下来的属性，所以重新设置状态可以分为两种情况：</p>
+<ol>
+<li>改变组件自身的<code>state</code></li>
+<li>改变父级组件的<code>state</code>, 即相当于改变<code>prop</code></li>
+</ol>
+<p>这两种情况都会触发组件的重新渲染，但有些阶段却不允许改变状态，因为会使组件无限渲染</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li><a href="http://www.codeceo.com/article/reactjs-life-circle-event.html" target="_blank" rel="external">ReactJS 生命周期、数据流与事件</a></li>
 <li><a href="https://medium.com/react-ecosystem/react-components-lifecycle-ce09239010df" target="_blank" rel="external">React component’s lifecycle</a></li>
 </ol>
@@ -153,18 +152,18 @@ React生命周期有哪些，各自在什么阶段触发
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/02/React-webpack2环境搭建/" title="React+webpack2环境搭建">
+ <a href="/2017/03/23/ES6之Iteration/" title="ES6之Iteration">
   <strong>上一篇：</strong><br/>
   <span>
-  React+webpack2环境搭建</span>
+  ES6之Iteration</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/03/23/ES6之Iteration/"  title="ES6之Iteration">
+<a href="/2017/04/02/React-webpack2环境搭建/"  title="React+webpack2环境搭建">
  <strong>下一篇：</strong><br/> 
- <span>ES6之Iteration
+ <span>React+webpack2环境搭建
 </span>
 </a>
 </div>
@@ -179,7 +178,7 @@ React生命周期有哪些，各自在什么阶段触发
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#生命周期"><span class="toc-number">1.</span> <span class="toc-text">生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化(initialization)"><span class="toc-number">1.1.</span> <span class="toc-text">初始化(initialization)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#getDefaultProps"><span class="toc-number">1.1.1.</span> <span class="toc-text">getDefaultProps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getInitialState"><span class="toc-number">1.1.2.</span> <span class="toc-text">getInitialState</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挂载(mounting)"><span class="toc-number">1.2.</span> <span class="toc-text">挂载(mounting)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillUpdate"><span class="toc-number">1.2.1.</span> <span class="toc-text">componentWillUpdate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#render"><span class="toc-number">1.2.2.</span> <span class="toc-text">render</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentDidMount"><span class="toc-number">1.2.3.</span> <span class="toc-text">componentDidMount</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新(updating)"><span class="toc-number">1.3.</span> <span class="toc-text">更新(updating)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillReceiveProps"><span class="toc-number">1.3.1.</span> <span class="toc-text">componentWillReceiveProps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillUpdate-1"><span class="toc-number">1.3.2.</span> <span class="toc-text">componentWillUpdate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#render-1"><span class="toc-number">1.3.3.</span> <span class="toc-text">render</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentDidUpdate"><span class="toc-number">1.3.4.</span> <span class="toc-text">componentDidUpdate</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#销毁(unmounting)"><span class="toc-number">1.4.</span> <span class="toc-text">销毁(unmounting)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#生命周期"><span class="toc-number">1.</span> <span class="toc-text">生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化-initialization"><span class="toc-number">1.1.</span> <span class="toc-text">初始化(initialization)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#getDefaultProps"><span class="toc-number">1.1.1.</span> <span class="toc-text">getDefaultProps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getInitialState"><span class="toc-number">1.1.2.</span> <span class="toc-text">getInitialState</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挂载-mounting"><span class="toc-number">1.2.</span> <span class="toc-text">挂载(mounting)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillUpdate"><span class="toc-number">1.2.1.</span> <span class="toc-text">componentWillUpdate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#render"><span class="toc-number">1.2.2.</span> <span class="toc-text">render</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentDidMount"><span class="toc-number">1.2.3.</span> <span class="toc-text">componentDidMount</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新-updating"><span class="toc-number">1.3.</span> <span class="toc-text">更新(updating)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillReceiveProps"><span class="toc-number">1.3.1.</span> <span class="toc-text">componentWillReceiveProps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillUpdate-1"><span class="toc-number">1.3.2.</span> <span class="toc-text">componentWillUpdate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#render-1"><span class="toc-number">1.3.3.</span> <span class="toc-text">render</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#componentDidUpdate"><span class="toc-number">1.3.4.</span> <span class="toc-text">componentDidUpdate</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#销毁-unmounting"><span class="toc-number">1.4.</span> <span class="toc-text">销毁(unmounting)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#componentWillUnmount"><span class="toc-number">1.4.1.</span> <span class="toc-text">componentWillUnmount</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重设状态"><span class="toc-number">2.</span> <span class="toc-text">重设状态</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
  
   </div>
 
@@ -202,19 +201,15 @@ React生命周期有哪些，各自在什么阶段触发
 			
 		
 			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+				<li><a href="/tags/CentOS/" title="CentOS">CentOS<sup>3</sup></a></li>
 			
 		
 			
@@ -226,7 +221,11 @@ React生命周期有哪些，各自在什么阶段触发
 			
 		
 			
-				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+				<li><a href="/tags/HTML/" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
@@ -234,7 +233,7 @@ React生命周期有哪些，各自在什么阶段触发
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
 			
 		
 		</ul>
