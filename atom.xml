@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xchb.work/"/>
-  <updated>2017-04-08T05:07:21.000Z</updated>
+  <updated>2017-04-08T05:12:40.000Z</updated>
   <id>http://xchb.work/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://xchb.work/2017/04/08/hexo%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6-skip-render-%E9%85%8D%E7%BD%AE/"/>
     <id>http://xchb.work/2017/04/08/hexo忽略文件-skip-render-配置/</id>
     <published>2017-04-08T04:20:04.000Z</published>
-    <updated>2017-04-08T05:07:21.000Z</updated>
+    <updated>2017-04-08T05:12:40.000Z</updated>
     
     <content type="html"><![CDATA[<p>需要在<code>source</code>目录下填加一个<code>demo</code>目录放一些示例文件，hexo默认会编译<code>source</code>目录下的所有文件。但demo目录并不需要编译，<code>_config.yml</code>有提供一个配置项<code>skip_render</code>, 官网说明：</p>
 <blockquote>
@@ -50,8 +50,8 @@
 </li>
 </ol>
 <p>关注打印出来的<code>Rendering xxxx</code> 中的东西。<br>以下是我在<code>skip_render</code>中加入<code>test/*</code>的前后对比：</p>
-<p><img src="../img/hexo/before.png" alt="添加test/*前"></p>
-<p><img src="../img/hexo/after.png" alt="添加test/*后"></p>
+<p><img src="/img/hexo/before.png" alt="添加test/*前"></p>
+<p><img src="/img/hexo/after.png" alt="添加test/*后"></p>
 ]]></content>
     
     <summary type="html">
