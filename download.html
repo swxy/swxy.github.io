@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="file" placeholder="file name"> 
+    <button id="convert">保存为JSON文件</button>
+    <hr>
+    <textarea name="" id="json" cols="100" rows="30" placeholder="content"></textarea>
+    <a id="download" style="display:none"></a>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const $ = document.querySelector.bind(document);
+            const $download = $('#download');
+            const $name = $('#file');
+            $('#convert').onclick = (e) => {
+                const json = $('#json').value;
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(json);
+                $download.setAttribute('href', dataStr);
+                $download.setAttribute('download', ($name.value || 'data') +  '.json');
+                $download.click();
+            }
+        })
+    </script>
+</body>
+</html>
