@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<input type="text" id="file" placeholder="文件名">
+<select id="type">
+    <option value="application/json;charset=utf-8">json 格式</option>
+    <option value="text/plain;charset=utf-8">文本数据</option>
+    <option value="image/png;base64">png 图片</option>
+    <option value="image/jpeg;base64">jpeg/jpg 图片</option>
+</select>
+<button id="convert">保存</button>
+<hr>
+<textarea name="" id="json" cols="100" rows="30" placeholder="content"></textarea>
+<a id="download" style="display:none"></a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const $ = document.querySelector.bind(document);
+        const $download = $('#download');
+        const $type = $('#type');
+        const $name = $('#file');
+        const $json = $('#json');
+        $('#convert').onclick = (e) => {
+            console.log('save mime type',$type.value);
+            const json = $json.value;
+            const dataStr = "data:" + ($type.value || '') + "," + encodeURIComponent(json);
+            $download.setAttribute('href', dataStr);
+            $download.setAttribute('download', $name.value || 'data');
+            $download.click();
+        }
+    })
+</script>
+</body>
+</html>
