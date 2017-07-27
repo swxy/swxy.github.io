@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code</title>
+    <style>
+        .con {
+            display: flex;
+        }
+        .left, .right {
+            flex: 1;
+            height: 256px;
+            margin: 10px;
+        }
+        .item {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .item:focus {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+        }
+        button {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            outline: none;
+        }
+        button:hover {
+            color: #333;
+            text-decoration: none;
+            border-color: #adadad;
+            background-color: #e6e6e6;
+        }
+        button[disabled]{
+            cursor: not-allowed;
+            filter: alpha(opacity=65);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            opacity: .65;
+        }
+        .action {
+            margin: 10px;
+        }
+        .row {
+            margin-top: 15px;
+        }
+        label {
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        .history-header {
+            margin-left: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .history {
+            display: block;
+            list-style: none;
+            padding: 0;
+            flex-flow: column wrap;
+            margin: 15px 10px 0;
+            -webkit-column-count: 3;
+            -moz-column-count: 3;
+            column-count: 3;
+            -webkit-column-gap: 0;
+            -moz-column-gap: 0;
+            column-gap: 0;
+            counter-reset: item-counter;
+        }
+        @media (min-width: 400px) {
+            .history { column-count: 2;}
+        }
+        @media (min-width: 900px) {
+            .history { column-count: 3;}
+        }
+        @media (min-width: 1200px) {
+            .history { column-count: 4;}
+        }
+
+        .h-item {
+            border: 1px solid #ccc;
+            width: 256px;
+            position: relative;
+            height: auto;
+            padding: 15px 15px 20px;
+            border-radius: 5px;
+            margin: 0 0 15px;
+            counter-increment: item-counter;
+            box-sizing: border-box;
+            -webkit-column-break-inside: avoid;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            counter-increment: item-counter;
+        }
+        .h-del {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+        .h-del:hover {
+            color: #ff0000;
+        }
+        .h-time {
+            margin: 0 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+            font-size: 20px;
+        }
+        .h-text {
+            white-space: normal;
+            word-spacing: normal;
+            word-break: break-all;
+        }
+        .h-more {
+            background: rgba(150, 150, 150, .2);
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 20px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .h-more:after {
+            content: '⌵';
+            display: inline-block;
+            font-size: 18px;
+            color: #333;
+        }
+        .h-qrcode {
+            margin-top: 15px;
+        }
+        .h-qrcode img {
+            width: 226px;
+        }
+        .preview {
+            background: rgba(0, 0, 0, .8);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: none;
+        }
+        .preview img {
+            width: 500px;
+            height: 500px;
+            display: block;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+<div class="action">
+    <div class="row insert-action">
+        <span>头部插入：</span>
+        <button data-value="bainuo://component?url=">糯米线上Schema</button>
+        <button data-value="bainuo://component?compid=xxx&comppage=xx">糯米组件Schema</button>
+    </div>
+    <div class="row">
+        <span>保存记录：</span>
+        <label for="autoSave"><input type="checkbox" id="autoSave">自动保存</label>
+        <button id="manualSave">保存</button>
+    </div>
+</div>
+<div class="con">
+    <div class="left">
+        <textarea class="item" placeholder="输入文字等, 按回车键或者移除焦点自动生成二维码" id="text"></textarea>
+    </div>
+    <div class="right" id="qrcode">
+    </div>
+</div>
+<h2 class="history-header">历史记录</h2>
+<ul class="history">
+
+</ul>
+<div class="preview">
+</div>
+<script src="//cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script>
+    class Store {
+        constructor(key) {
+            this.key = key;
+            this.data = this.get();
+            this.images = {};
+        }
+        get() {
+            return JSON.parse(window.localStorage.getItem(this.key) || '[]');
+        }
+        set(item, isSync) {
+            let data = {
+                time: +new Date(),
+                text: item,
+                name: ''
+            };
+            this.data.unshift(data);
+            isSync && this.sync();
+            return data;
+        }
+        setName(id, name) {
+            this.data
+                .filter(item => item.time === id)
+                .forEach(item => item.name = name);
+            this.sync();
+        }
+        setImage(key, data) {
+            this.images[key] = data;
+        }
+        getImage(key) {
+            return this.images[key];
+        }
+        delete(id) {
+            id = +id; // 保证是number类型
+            let idx;
+            for (let i = 0, l = this.data.length; i < l; ++i) {
+                if (this.data[i].time === id) {
+                    idx = i;
+                    break;
+                }
+            }
+            if (idx !== undefined) {
+                this.data.splice(idx, 1);
+                this.sync();
+                return true;
+            }
+            return false;
+
+        }
+        sync() {
+            window.localStorage.setItem(this.key, JSON.stringify(this.data));
+        }
+    }
+    const $ = document.querySelector.bind(document);
+    const store = new Store('qrcodekey');
+    let timer; // 设置定时器 如果30s之内 没有操作，则保存到历史记录中
+
+    window.onload = function () {
+        const $txt = $('#text');
+        const qrcode = new QRCode("qrcode");
+        let autoSave = window.localStorage.getItem('autoSave') === 'true';
+
+        renderHistory();
+
+        $txt.addEventListener("blur", function () {
+            makeCode(qrcode, $txt, autoSave);
+        });
+        $txt.addEventListener("keydown", function (e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                makeCode(qrcode, $txt, autoSave);
+                return false;
+            }
+        });
+
+        $('.insert-action').addEventListener('click', (e) => {
+            if (e.target.tagName ==='BUTTON') {
+                const val = e.target.dataset['value'];
+                if (val) {
+                    $txt.value = val + $txt.value;
+                }
+            }
+        });
+
+        const $autoSave = $('#autoSave');
+        const $manualSave = $('#manualSave');
+        if (autoSave) {
+            $autoSave.checked = true;
+            $manualSave.disabled = true;
+        }
+        $autoSave.addEventListener('click', (e) => {
+            autoSave = e.target.checked;
+            $manualSave.disabled = autoSave;
+            window.localStorage.setItem('autoSave', autoSave);
+        });
+        $manualSave.addEventListener('click', (e) => {
+            if (autoSave) {
+                return;
+            }
+            if (!$txt.value) {
+                return ;
+            }
+            let data = store.set($txt.value, true);
+            addHistoryItem(data);
+        });
+
+        const $preview = $('.preview');
+
+        $('.history').addEventListener('click', (e) => {
+            const $target = e.target;
+            const classList = $target.classList;
+            if (classList.contains('h-more')) {
+                // load qrcode
+                let text = $target.dataset['text'];
+                let id = $target.dataset['id'];
+
+                new QRCode($("#temp-" + id), {
+                    text: text,
+                    width: 226,
+                    height: 226
+                });
+                $target.style.display = 'none';
+                return ;
+            }
+            if (classList.contains('h-del')) {
+                // remove
+                store.delete($target.dataset['id']);
+                // 移除节点
+                $target.parentNode.parentNode.removeChild($target.parentNode);
+                return ;
+            }
+
+            if ($target.tagName === 'IMG') {
+                $preview.innerHTML = `<img src="${$target.src}">`;
+                $preview.style.display = 'block';
+            }
+        });
+        $preview.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'IMG') {
+                $preview.style.display = 'none';
+            }
+        })
+    };
+
+    function makeCode (qrcode, $txt, autoSave) {
+        const val = $txt.value;
+        if (!val) {
+            // alert("Input a text");
+            // $txt.focus();
+            console.log('输入内容为空！！！');
+            return;
+        }
+        console.log('需要生成二维码的数据: ', val);
+        qrcode.makeCode(val);
+        if (autoSave) {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                let data = store.set(val, true);
+                addHistoryItem(data);
+                console.log('保存到历史记录中.....');
+            }, 30 * 1000);
+        }
+    }
+
+    const $history = $('.history');
+
+    function renderHistory() {
+        const data = store.data;
+        const html = data.map(renderHistoryItem).join('');
+        $history.innerHTML = html;
+    }
+    function renderHistoryItem(item) {
+        const time = formatTime(item.time);
+        return `<li class="h-item">
+                    <span class="h-del" data-id="${item.time}">x</span>
+                    <p class="h-time">${time}</p>
+                    <div class="h-text">${item.text}</div>
+                    <div class="h-more" data-text="${item.text}" data-id="${item.time}"></div>
+                    <div class="h-qrcode" id="temp-${item.time}"></div>
+                </li>`
+    }
+    function addHistoryItem(item) {
+        $history.innerHTML = renderHistoryItem(item) + $history.innerHTML;
+    }
+    function formatTime(time) {
+        const date = new Date(time);
+        return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    }
+</script>
+</body>
+</html>
