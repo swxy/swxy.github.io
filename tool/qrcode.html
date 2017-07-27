@@ -92,40 +92,23 @@
             display: block;
             list-style: none;
             padding: 0;
-            flex-flow: column wrap;
             margin: 15px 10px 0;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-            column-count: 3;
-            -webkit-column-gap: 0;
-            -moz-column-gap: 0;
-            column-gap: 0;
-            counter-reset: item-counter;
-        }
-        @media (min-width: 400px) {
-            .history { column-count: 2;}
-        }
-        @media (min-width: 900px) {
-            .history { column-count: 3;}
-        }
-        @media (min-width: 1200px) {
-            .history { column-count: 4;}
+            -moz-column-width: 256px;
+            -webkit-column-width: 256px;
+            -moz-column-gap: 20px;
+            -webkit-column-gap: 20px;
         }
 
         .h-item {
             border: 1px solid #ccc;
             width: 256px;
+            display: inline-block;
             position: relative;
             height: auto;
             padding: 15px 15px 20px;
             border-radius: 5px;
             margin: 0 0 15px;
-            counter-increment: item-counter;
             box-sizing: border-box;
-            -webkit-column-break-inside: avoid;
-            page-break-inside: avoid;
-            break-inside: avoid;
-            counter-increment: item-counter;
         }
         .h-del {
             cursor: pointer;
@@ -212,7 +195,7 @@
     <div class="right" id="qrcode">
     </div>
 </div>
-<h2 class="history-header">历史记录</h2>
+<h2 class="history-header">历史记录 <a style="font-size: 14px" href="./qrexport.html">导出</a></h2>
 <ul class="history">
 
 </ul>
