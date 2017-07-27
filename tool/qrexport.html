@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Export</title>
+    <style>
+        .history {
+            display: block;
+            list-style: none;
+            padding: 0;
+            margin: 15px 10px 0;
+            -moz-column-width: 256px;
+            -webkit-column-width: 256px;
+            -moz-column-gap: 20px;
+            -webkit-column-gap: 20px;
+        }
+
+        .h-item {
+            border: 1px solid #ccc;
+            width: 256px;
+            display: inline-block;
+            position: relative;
+            height: auto;
+            padding: 15px 15px 20px;
+            border-radius: 5px;
+            margin: 0 0 15px;
+            box-sizing: border-box;
+        }
+        .h-time {
+            margin: 0 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+            font-size: 20px;
+        }
+        .h-text {
+            white-space: normal;
+            word-spacing: normal;
+            word-break: break-all;
+        }
+        .h-qrcode {
+            margin-top: 15px;
+        }
+        .h-qrcode img {
+            width: 226px;
+        }
+    </style>
+</head>
+<body>
+<ul class="history">
+
+</ul>
+<script src="//cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script>
+    const data = JSON.parse(window.localStorage.getItem('qrcodekey') || '[]');
+    const html = data.map(renderHistoryItem).join('');
+    document.querySelector('.history').innerHTML = html;
+
+    data.forEach((item) => {
+        new QRCode("temp-" + item.time, {
+            text: item.text,
+            width: 226,
+            height: 226
+        });
+    });
+
+
+    function renderHistoryItem(item) {
+        const time = formatTime(item.time);
+        return `<li class="h-item">
+                    <p class="h-time">${time}</p>
+                    <div class="h-text">${item.text}</div>
+                    <div class="h-qrcode" id="temp-${item.time}"></div>
+                </li>`;
+    }
+
+    function formatTime(time) {
+        const date = new Date(time);
+        return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    }
+</script>
+</body>
+</html>
