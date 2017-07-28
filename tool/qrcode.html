@@ -80,6 +80,29 @@
         .row {
             margin-top: 15px;
         }
+        .insert-list p {
+            margin: 10px 50px 10px 0;
+            padding: 10px 20px;
+            min-width: 200px;
+            width: auto;
+            display: inline-block;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-right: none;
+            position: relative;
+        }
+        .insert-list p:after {
+            border-top: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            width: 30px;
+            height: 30px;
+            content: '';
+            position: absolute;
+            right: -16px;
+            top: 5px;
+            display: inline-block;
+            transform: rotate(45deg);
+        }
         label {
             cursor: pointer;
             margin-right: 20px;
@@ -178,9 +201,14 @@
 <body>
 <div class="action">
     <div class="row insert-action">
-        <span>头部插入：</span>
-        <button data-value="bainuo://component?url=">糯米线上Schema</button>
-        <button data-value="bainuo://component?compid=xxx&comppage=xx">糯米组件Schema</button>
+        <div>
+            <span>头部插入：</span>
+            <input type="text" class="item" placeholder="常用输入，可以插入头部" id="common" style="display: inline-block; width: 300px">
+            <button id="addCommon">保存</button>
+        </div>
+        <div class="insert-list">
+
+        </div>
     </div>
     <div class="row">
         <span>保存记录：</span>
@@ -203,6 +231,7 @@
 </div>
 <script src="//cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 <script>
+    // 用于存储二维码历史几率
     class Store {
         constructor(key) {
             this.key = key;
@@ -258,6 +287,7 @@
     const $ = document.querySelector.bind(document);
     const store = new Store('qrcodekey');
     let timer; // 设置定时器 如果30s之内 没有操作，则保存到历史记录中
+    let commonHeader; // 常用
 
     window.onload = function () {
         const $txt = $('#text');
@@ -265,6 +295,7 @@
         let autoSave = window.localStorage.getItem('autoSave') === 'true';
 
         renderHistory();
+        commonHeader = renderCommon();
 
         $txt.addEventListener("blur", function () {
             makeCode(qrcode, $txt, autoSave);
@@ -277,14 +308,6 @@
             }
         });
 
-        $('.insert-action').addEventListener('click', (e) => {
-            if (e.target.tagName ==='BUTTON') {
-                const val = e.target.dataset['value'];
-                if (val) {
-                    $txt.value = val + $txt.value;
-                }
-            }
-        });
 
         const $autoSave = $('#autoSave');
         const $manualSave = $('#manualSave');
@@ -344,6 +367,49 @@
                 $preview.style.display = 'none';
             }
         })
+
+        const $commonHeader = $('#common');
+        $('#addCommon').addEventListener('click', e => {
+           const txt = $commonHeader.value;
+           if (txt && commonHeader.indexOf(txt) === -1) {
+               commonHeader.push(txt);
+               renderCommon(commonHeader);
+               window.localStorage.setItem('commonHeader', JSON.stringify(commonHeader));
+               $commonHeader.value = '';
+           }
+        });
+        $commonHeader.addEventListener('keydown', e => {
+            if (e.keyCode === 13) {
+                const txt = e.target.value;
+                if (txt && commonHeader.indexOf(txt) === -1) {
+                    commonHeader.push(txt);
+                    renderCommon(commonHeader);
+                    window.localStorage.setItem('commonHeader', JSON.stringify(commonHeader));
+                    e.target.value = '';
+                }
+                return false;
+            }
+        })
+        let dbTimer;
+        $('.insert-list').addEventListener('click', e => {
+            const target = e.target;
+            clearTimeout(dbTimer);
+            dbTimer = setTimeout(() => {
+                if (target.tagName === 'P') {
+                    $txt.value = target.innerHTML + $txt.value;
+                }
+            }, 150);
+
+        });
+        $('.insert-list').addEventListener('dblclick', e => {
+            clearTimeout(dbTimer);
+            if (e.target.tagName === 'P') {
+                let idx = commonHeader.indexOf(e.target.innerHTML);
+                commonHeader.splice(idx, 1);
+                e.target.parentNode.removeChild(e.target);
+                window.localStorage.setItem('commonHeader', JSON.stringify(commonHeader));
+            }
+        });
     };
 
     function makeCode (qrcode, $txt, autoSave) {
@@ -389,6 +455,14 @@
     function formatTime(time) {
         const date = new Date(time);
         return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    }
+
+    function renderCommon(total) {
+        const data = total || JSON.parse(window.localStorage.getItem('commonHeader') || '[]');
+        $('.insert-list').innerHTML = data.map(item => {
+            return `<p>${item}</p>`;
+        }).join('');
+        return data;
     }
 </script>
 </body>
