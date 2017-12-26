@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>依赖转换</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .app {
+            display: flex;
+            height: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .left {
+            flex: 1;
+            height: 100%;
+            position: relative;
+        }
+        button {
+            border: none;
+            border-radius: 2px;
+            background-color: #00d6b2;
+            padding: 10px 20px;
+            outline: none;
+        }
+
+        .left textarea {
+            display: block;
+            width: 100%;
+            resize: none;
+            height: 100%;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .right {
+            flex: 1;
+            height: 100%;
+            overflow: auto;
+            padding-left: 20px;
+        }
+
+        .right .header {
+            margin: 5px 0 20px;
+        }
+
+        .right .header span {
+            display: none;
+            color: #0000CC;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <div class="left">
+        <textarea placeholder="输入需要转化的component.json文件" id="txt" cols="30" rows="10"></textarea>
+    </div>
+    <div class="right">
+        <div class="header">
+            <button id="btn">转化</button>
+            <button id="copy">复制结果</button>
+            <span id="tip">已成功复制</span>
+        </div>
+        <pre id="result"></pre>
+    </div>
+</div>
+
+</pre>
+<script>
+    const $txt = document.querySelector('#txt');
+    const $btn = document.querySelector('#btn');
+    const $pre = document.querySelector('#result');
+    const $copy = document.querySelector('#copy');
+    const $tip = document.querySelector('#tip');
+
+    var result;
+
+    $btn.onclick = function () {
+        var value = $txt.value.trim();
+        if (!value) {
+            alert('请输入需要转换的内容');
+            return;
+        }
+        try {
+            value = JSON.parse(value);
+            result = transformDependents(value);
+            $pre.innerHTML = '"dependencies": ' + JSON.stringify(result, null, 4);
+        }
+        catch (e) {
+            alert('出错了：' + JSON.stringify(e.message));
+        }
+    };
+
+    $copy.onclick = function () {
+        copy($pre, function () {
+            $tip.style.display = 'inline-block';
+
+            setTimeout(function () {
+                $tip.style.display = 'none';
+            }, 3000);
+        });
+    };
+
+    $txt.ondrop = function (e) {
+        console.log('on drop', e);
+        e.stopPropagation();
+        e.preventDefault();
+        var files = e.target.files || e.dataTransfer.files;
+
+        // process all File objects
+        // console.log(files);
+        var reader = new FileReader();
+        reader.readAsBinaryString(files[0]);
+        reader.onload = function (e) {
+            //console.log(e.target);
+            $txt.value = e.target.result;
+            // auto transform
+            $btn.click();
+        }
+    };
+    function transformDependents(componentJson, packageJson) {
+        const dependencies = componentJson.dependencies;
+        const gitlab = componentJson.gitlab || {};
+        const dependent = {};
+        dependencies && dependencies.forEach(function (element) {
+            if (!accept(element)) {
+                console.log('address error');
+                return;
+            }
+            const author = RegExp.$1 || gitlab.author;
+            const name = RegExp.$2;
+            const _version = RegExp.$3;
+            const version = _version === 'latest' ? '*' : _version || '*';
+            dependent['@nfe/' + name] = version;
+        });
+        return dependent;
+    }
+
+    function accept(address) {
+        var author = 'gitlab';
+        var reg = /^gitlab\:([0-9a-z\.\-_]+)\/([0-9a-z\.\-_]+)(?:@(.+?))?$/i;
+        var regShort = /^([0-9a-z\.\-_]+)\/([0-9a-z\.\-_]+)(?:@(.+?))?$/i;
+        var regShorter = /^gitlab\:(?:([0-9a-z\.\-_]+)\/)?([0-9a-z\.\-_]+)(?:@(.+?))?$/i;
+        var regShortest = /^(?:gitlab\:)?(?:([0-9a-z\.\-_]+)\/)?([0-9a-z\.\-_]+)(?:@(.+?))?$/i;
+
+        return reg.test(address) ||
+            regShort.test(address) ||
+            author && regShorter.test(address) ||
+            author && regShortest.test(address);
+    }
+
+    function copy (dom, callback) {
+        var range = document.createRange();
+        // 选中需要复制的节点
+        range.selectNode(dom);
+        // 执行选中元素
+        window.getSelection().addRange(range);
+        // 执行 copy 操作
+        var successful = document.execCommand('copy');
+        try {
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('copy is ' + msg);
+            callback && callback();
+        } catch(err) {
+            console.log('Oops, unable to copy');
+        }
+       // 移除选中的元素
+        window.getSelection().removeAllRanges();
+    }
+
+    function drag () {
+
+    }
+</script>
+</body>
+</html>
